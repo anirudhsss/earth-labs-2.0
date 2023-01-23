@@ -7,30 +7,29 @@ import { useCallback } from "react";
 import Web3Modal from 'web3modal';
 import LoadingSpin from "react-loading-spin";
 import { truncate } from '../../utils';
+import data from '../../../test.json';
+import { Xaxis } from "../Xaxis";
 
 export interface UserHomepageProps {
     children?: any;
     onOpenConnectWalletModal: () => void;
-    web3Provider?: any;
-    setWeb3Provider?: any;
+    userWalletAddress?: any;
     loading?: any;
+    logoutWallet?: () => void;
 }
 
 export const UserHomepage = ({
     children,
     onOpenConnectWalletModal,
-    web3Provider,
-    setWeb3Provider,
+    userWalletAddress,
     loading,
+    logoutWallet,
 }: UserHomepageProps) => {
-    const onClickDisconnect = async () => {
-        setWeb3Provider(null);
-    }
 
     const LogoutButton = () => {
         return (
             <div
-                onClick={onClickDisconnect}
+                onClick={logoutWallet}
                 style={{
                     backgroundColor: '#000000',
                     cursor: 'pointer',
@@ -78,31 +77,32 @@ export const UserHomepage = ({
                         padding="0.2rem 2.5rem"
                     >
                         <Typography
-                            text={web3Provider === null ? 'Search' : 'Generate Glyph'}
+                            text={userWalletAddress === null ? 'Search' : 'Generate Glyph'}
                             fontSize="1.4rem"
                         />
                     </Button>
                 </Box>
                 <Box>
-                    {web3Provider === null ?
+                    {userWalletAddress === null ?
                         <Button
-                            backgroundColor="#ffffff"
+                            backgroundColor="transparent"
                             color="#000000"
                             border="0.5px solid rgba(46, 52, 81, 0.58)"
-                            hoverBackgroundColor="#ffffff"
+                            hoverBackgroundColor="transparent"
                             borderRadius="2rem"
-                            padding="0 3rem"
+                            padding="0.3rem 2.5rem"
                             onClick={onOpenConnectWalletModal}
                         >
                             <Typography
                                 text="Connect Wallet"
+                                fontSize="1.3rem"
                             />
                         </Button>
                         : <div style={{
                             display: 'flex',
                         }}>
                             <Typography
-                                text={truncate(web3Provider.provider.selectedAddress, 12)}
+                                text={truncate(userWalletAddress, 12)}
                             />
                             {/* <span style={{ width: '35px' }}>
                                 <img src="/assets/images/earth.svg" />
@@ -112,8 +112,13 @@ export const UserHomepage = ({
                 </Box>
             </Box>
             <Box className={styles.body}>
-                <Box className={styles.lhsBody}>
-
+                <Box
+                    className={styles.lhsBody}
+                >
+                    <Box className={styles.lhsBody1}></Box>
+                    <Box className={styles.lhsBody2}>
+                        <Xaxis />
+                    </Box>
                 </Box>
                 <Box className={styles.rhsBody}>
                     <Box className={styles.mapAndWalletBtn}>
@@ -122,12 +127,12 @@ export const UserHomepage = ({
                             color="white"
                             border="0.5px solid rgba(46, 52, 81, 0.58)"
                             hoverBackgroundColor="#FE7D06"
-                            borderRadius="0.5rem"
-                            padding="0.2rem 1.6rem"
+                            borderRadius="0.6rem"
+                            padding="0.4rem 2.2rem"
                         >
                             <Typography
                                 text="Maps"
-                                fontSize="1.4rem"
+                                fontSize="1.3rem"
                             />
                         </Button>
                         <Button
@@ -135,12 +140,12 @@ export const UserHomepage = ({
                             color="white"
                             border="0.5px solid rgba(46, 52, 81, 0.58)"
                             hoverBackgroundColor="#8A8A8A"
-                            borderRadius="0.5rem"
-                            padding="0 1.2rem"
+                            borderRadius="0.6rem"
+                            padding="0.4rem 2rem"
                         >
                             <Typography
                                 text="Wallet"
-                                fontSize="1.4rem"
+                                fontSize="1.3rem"
                             />
                         </Button>
                     </Box>

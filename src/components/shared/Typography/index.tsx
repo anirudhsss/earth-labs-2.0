@@ -8,6 +8,7 @@ export interface TypographyProps {
     fontWeight?: string;
     width?: string;
     lineHeight?: string;
+    position?: string;
 }
 
 export const Typography = ({
@@ -16,14 +17,16 @@ export const Typography = ({
     fontWeight,
     width,
     lineHeight,
+    position,
 }: TypographyProps) => {
     return (
         <MUITypography
             sx={{
-                fontSize: fontSize || '1.6rem',
+                fontSize: fontSize,
                 fontWeight: fontWeight,
                 width: width,
                 lineHeight: lineHeight,
+                position: position,
             }}>
             {text}
         </MUITypography>

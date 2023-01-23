@@ -21,19 +21,46 @@
 }
 
 .lhsBody {
-    width: 91%;
+    width: 90%;
+    /* border-left: 1px solid black;
+    border-bottom: 1px solid black; */
+    /* height: 86vh; */
+}
+
+.lhsBody1 {
     border-left: 1px solid black;
+    height: 82vh;
+    margin-bottom: -52px;
+}
+
+.lhsBody2 {
+    width: 100%;
+    /* border-bottom: 1px solid #111; */
+    /* height: 10px; */
+    /* display: flex;
+    flex-direction: column;
+    justify-content: flex-start; */
+}
+
+.line {
     border-bottom: 1px solid black;
-    height: 86vh;
+    /* position: relative;
+    top: 41px; */
+}
+
+.imageAsIcon {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
 }
 
 .rhsBody {
-    width: 9%;
+    width: 10%;
     height: 100%;
 }
 
 .mapAndWalletBtn {
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -74,10 +101,4 @@
     background-color: #FFF7EE;
     box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.25);
     display: inline-block;
-}
-
-.imageAsIcon {
-    width: 20px;
-    height: 20px;
-    margin: 10px;
 }

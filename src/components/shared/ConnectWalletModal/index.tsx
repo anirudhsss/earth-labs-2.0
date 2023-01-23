@@ -11,9 +11,15 @@ export interface ConnectWalletModalProps {
     onClose: (value: string) => void;
     open?: any;
     onConnectMetamask?: any;
+    connectWalletConnectWallet?: () => any;
 }
 
-export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: ConnectWalletModalProps) => {
+export const ConnectWalletModal = ({
+    open,
+    onConnectMetamask,
+    onClose,
+    connectWalletConnectWallet,
+}: ConnectWalletModalProps) => {
 
 
     return (
@@ -38,7 +44,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                         <Box className={styles.both}>
                             <Typography
                                 text="Metamask"
-                                fontSize="2rem"
+                                fontSize="1.8rem"
                             />
                             <Button
                                 backgroundColor="transparent"
@@ -48,11 +54,13 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                                 borderRadius="2rem"
                                 padding="0 2rem"
                             >
-                                <Typography text="Connect" />
+                                <Typography text="Connect" fontSize="1.4rem" />
                             </Button>
                         </Box>
                     </Box>
-                    <Box className={styles.walletConnectPage}>
+                    <Box
+                        className={styles.walletConnectPage}
+                    >
                         <Box>
                             <CardMedia
                                 component="img"
@@ -64,7 +72,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                         <Box className={styles.both}>
                             <Typography
                                 text="Coinbase"
-                                fontSize="2rem"
+                                fontSize="1.8rem"
                             />
                             <Button
                                 backgroundColor="transparent"
@@ -74,13 +82,16 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                                 borderRadius="2rem"
                                 padding="0 2rem"
                             >
-                                <Typography text="Connect" />
+                                <Typography text="Connect" fontSize="1.4rem" />
                             </Button>
                         </Box>
                     </Box>
                 </Box>
                 <Box className={styles.bothWallets}>
-                    <Box className={styles.walletConnectPage}>
+                    <Box
+                        className={styles.walletConnectPage}
+                        onClick={connectWalletConnectWallet}
+                    >
                         <Box>
                             <CardMedia
                                 component="img"
@@ -92,7 +103,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                         <Box className={styles.both}>
                             <Typography
                                 text="Wallet Connect"
-                                fontSize="2rem"
+                                fontSize="1.8rem"
                             />
                             <Button
                                 backgroundColor="transparent"
@@ -102,7 +113,10 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                                 borderRadius="2rem"
                                 padding="0 2rem"
                             >
-                                <Typography text="Connect" />
+                                <Typography
+                                    text="Connect"
+                                    fontSize="1.4rem"
+                                />
                             </Button>
                         </Box>
                     </Box>
@@ -118,7 +132,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                         <Box className={styles.both}>
                             <Typography
                                 text="Portis"
-                                fontSize="2rem"
+                                fontSize="1.8rem"
                             />
                             <Button
                                 backgroundColor="transparent"
@@ -128,7 +142,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                                 borderRadius="2rem"
                                 padding="0 2rem"
                             >
-                                <Typography text="Connect" />
+                                <Typography text="Connect" fontSize="1.4rem" />
                             </Button>
                         </Box>
                     </Box>
@@ -146,7 +160,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                         <Box className={styles.both}>
                             <Typography
                                 text="Torus"
-                                fontSize="2rem"
+                                fontSize="1.8rem"
                             />
                             <Button
                                 backgroundColor="transparent"
@@ -156,7 +170,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                                 borderRadius="2rem"
                                 padding="0 2rem"
                             >
-                                <Typography text="Connect" />
+                                <Typography text="Connect" fontSize="1.4rem" />
                             </Button>
                         </Box>
                     </Box>
@@ -172,7 +186,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                         <Box className={styles.both}>
                             <Typography
                                 text="MEW Wallet"
-                                fontSize="2rem"
+                                fontSize="1.8rem"
                             />
                             <Button
                                 backgroundColor="transparent"
@@ -182,7 +196,7 @@ export const ConnectWalletModal = ({ open, onConnectMetamask, onClose }: Connect
                                 borderRadius="2rem"
                                 padding="0 2rem"
                             >
-                                <Typography text="Connect" />
+                                <Typography text="Connect" fontSize="1.4rem" />
                             </Button>
                         </Box>
                     </Box>

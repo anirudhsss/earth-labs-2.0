@@ -1,0 +1,50 @@
+[
+    {
+        "dimension": 20,
+        "month": "Jan"
+    },
+    {
+        "dimension": 25,
+        "month": "Feb"
+    },
+    {
+        "dimension": 15,
+        "month": "Mar"
+    },
+    {
+        "dimension": 20,
+        "month": "Apr"
+    },
+    {
+        "dimension": 30,
+        "month": "May"
+    },
+    {
+        "dimension": 10,
+        "month": "Jun"
+    },
+    {
+        "dimension": 20,
+        "month": "Jul"
+    },
+    {
+        "dimension": 5,
+        "month": "Aug"
+    },
+    {
+        "dimension": 20,
+        "month": "Sep"
+    },
+    {
+        "dimension": 25,
+        "month": "Oct"
+    },
+    {
+        "dimension": 20,
+        "month": "Nov"
+    },
+    {
+        "dimension": 20,
+        "month": "Dec"
+    }
+]
