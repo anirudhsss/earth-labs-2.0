@@ -96,7 +96,7 @@ const App = () => {
     const accountAddress = await etherProviders.send("eth_requestAccounts", []);
     setClaimProcessAndModel(true, CLAIM_PROCESS.CONNECT_WALLET_LOADING);
     const network = await etherProviders.getNetwork();
-    await _getSignatureMessage(accountAddress[0]);
+    // await _getSignatureMessage(accountAddress[0]);
     setUserWalletAddress(accountAddress[0]);
     setChainId(network.chainId);
   }
@@ -136,7 +136,7 @@ const App = () => {
       await provider.enable();
       const walletConnectProvider = new providers.Web3Provider(provider);
       const { accounts, chainId } = provider;
-      await _getSignatureMessage(accounts[0]);
+      // await _getSignatureMessage(accounts[0]);
       setUserWalletAddress(accounts[0]);
       // Subscribe to accounts change
       provider.on("accountsChanged", (accounts: string[]) => { });

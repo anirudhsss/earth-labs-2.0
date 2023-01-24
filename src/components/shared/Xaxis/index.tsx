@@ -1,18 +1,26 @@
-import { Box, Typography } from "@mui/material"
-import { XaxisItems } from "./XaxisItems";
+import { Box } from "@mui/material"
 import data from 'test.json';
+import { XaxisItems } from "./XaxisItems";
+import { useState } from "react";
 
 export interface XaxisProps {
-    // width?: string;
-    // height?: string;
-    // backgroundColor?: string;
 }
 
 export const Xaxis = ({
-    // width,
-    // height,
-    // backgroundColor,
 }: XaxisProps) => {
+    const [backgroundColor, setBackgroundColor] = useState('#FFF7EE');
+    const [hoverElementId, setHoverElementId] = useState(null);
+
+    const onCircleHoverStarts = (elementId: any) => {
+        setHoverElementId(elementId);
+        // setBackgroundColor('#FE7D06');
+    }
+
+    const onCircleHoverEnds = (elementId: any) => {
+        setHoverElementId(null);
+        // setBackgroundColor('#FFF7EE');
+    }
+
     return (
         <>
             <Box sx={{
@@ -22,13 +30,17 @@ export const Xaxis = ({
                 position: 'relative',
                 top: '16px',
             }}>
-                {data.map(({ dimension, month }) => {
+                {data.map(({ id, dimension, month }) => {
                     return (
                         <XaxisItems
-                            width={dimension}
-                            height={dimension}
-                            backgroundColor="#F5F5F5"
+                            key={id}
+                            dimension={dimension}
                             month={month}
+                            backgroundColor={backgroundColor}
+                            hoverElementId={hoverElementId}
+                            onCircleHoverStarts={onCircleHoverStarts}
+                            onCircleHoverEnds={onCircleHoverEnds}
+                            id={id}
                         />
                     )
                 })}
