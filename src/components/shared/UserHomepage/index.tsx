@@ -19,6 +19,7 @@ export interface UserHomepageProps {
 }
 
 const years = ["2020", "2021", "2022", "2023"];
+const CURR = ["0.001 - 0.01 ETH", "0.01 - 0.1 ETH", "0.1 - 1 ETH", "1 - 10 ETH"];
 
 export const UserHomepage = ({
     children,
@@ -29,13 +30,21 @@ export const UserHomepage = ({
 }: UserHomepageProps) => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
+    const openMenu1 = Boolean(anchorEl1);
 
     const onOpenYearMenu = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget);
     }
+    const onOpenYearMenu1 = (e: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl1(e.currentTarget);
+    }
     const onCloseYearMenu = () => {
         setAnchorEl(null);
+    };
+    const onCloseYearMenu1 = () => {
+        setAnchorEl1(null);
     };
 
 
@@ -73,10 +82,19 @@ export const UserHomepage = ({
             {loading && <LoadingSpin />}
             <Box className={styles.header}>
                 <Box className={styles.lhsHeader}>
-                    <Typography
+                    {/* <Typography
                         text="Atlas"
                         fontSize="2rem"
                         fontWeight="500"
+                    /> */}
+                    <img
+                        src='/atlas.jpeg'
+                        alt=""
+                        width="100"
+                        height="40"
+                        style={{
+                            backgroundColor: 'transparent'
+                        }}
                     />
                     <NormalSearchField
 
@@ -124,11 +142,123 @@ export const UserHomepage = ({
                         </div>}
                 </Box>
             </Box>
+
+            <Box className={styles.timeMenuBtn1}>
+                <Button
+                    backgroundColor="#FFF7EE"
+                    hoverBackgroundColor="#FFF7EE"
+                    color="black"
+                    boxShadow="none"
+                    hoverBoxShadow="none"
+                    borderRadius={`${openMenu1 ? '2rem 2rem 0 0' : '2rem'}`}
+                    padding="5px 50px"
+                    width="150px"
+                    display="flex"
+                    justifyContent="space-around"
+                    alignItems="center"
+                    border="1px solid #000"
+                    borderBottom={`${openMenu1 ? '0' : '1px solid #000'}`}
+                    // paddingTop={`${openMenu1 && '0px'}`}
+                    onClick={onOpenYearMenu1}
+                >
+                    <Typography
+                        text="value"
+                        fontSize="13px"
+                        color={`${openMenu1 ? '#FE7D06' : '#000'}`}
+                    />
+                    <img
+                        src={`${openMenu1 ? '/assets/images/orangeTriangle.svg' : '/assets/images/blackTriangle.svg'}`}
+                        alt=""
+                        className={styles.blackTriangle}
+                        style={{
+                            marginTop: '2px'
+                        }}
+                    />
+                </Button>
+                <Menu
+                    anchorEl={anchorEl1}
+                    open={openMenu1}
+                    onClose={onCloseYearMenu1}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    PaperProps={{
+                        elevation: 0,
+                        style: {
+                            width: '150px',
+                            borderRadius: '0 0 20px 20px',
+                            backgroundColor: '#FFF7EE',
+                            border: '1px solid #000',
+                            // marginLeft: '.5px'
+                        },
+
+                    }}
+                >
+                    {CURR.map((year: any) => {
+                        return (
+                            <>
+                                <MenuItem
+                                    onClick={onCloseYearMenu1}
+                                    sx={{
+                                        fontSize: '13px',
+                                        borderBottom: '1px solid black',
+                                        '&:last-child': {
+                                            borderBottom: '0px',
+                                        },
+                                    }}
+                                >{year}</MenuItem>
+                                {/* <Divider
+                                    className={styles.divider}
+                                    style={{
+                                        marginTop: '0px',
+                                        marginBottom: '0px',
+                                    }}
+                                /> */}
+                            </>
+                        )
+                    })}
+                </Menu>
+            </Box>
+
+            <Box style={{
+                width: '5%',
+                marginLeft: '18rem',
+                marginTop: '-2rem',
+                display: 'flex',
+                justifyContent: 'space-between',
+
+            }}>
+                <Typography
+                    text="ETH"
+                    fontSize="13px"
+                    color={`${openMenu1 && '#FE7D06'}`}
+                />
+                <Typography
+                    text=" |"
+                    fontSize="13px"
+                />
+                <Typography
+                    text=" USDC"
+                    fontSize="13px"
+                />
+            </Box>
+
             <Box className={styles.body}>
                 <Box
                     className={styles.lhsBody}
                 >
-                    <Box className={styles.lhsBody1}></Box>
+                    <Box className={styles.lhsBody1}>
+                        <Typography
+                            text="Currently Viewing: 0.185 - 0.95 ETH"
+                            margin="2rem 0 0 2rem"
+                            fontSize="1.2rem"
+                        />
+                    </Box>
                     <Box className={styles.lhsBody2}>
                         <Xaxis />
                     </Box>
@@ -223,22 +353,13 @@ export const UserHomepage = ({
                                     vertical: 'bottom',
                                     horizontal: 'left',
                                 }}
-                                // className={styles.menuItem}
-                                // MenuListProps={{
-                                //     sx: {
-                                //         width: anchorEl && anchorEl.offsetWidth,
-                                //     }
-                                // }}
                                 PaperProps={{
                                     elevation: 0,
                                     style: {
                                         width: '85px',
                                         borderRadius: '20px 20px 0 0',
                                         backgroundColor: '#FFF7EE',
-                                        borderBottom: '0px',
-                                        borderLeft: '1px solid #000',
-                                        borderRight: '1px solid #000',
-                                        borderTop: '1px solid #000',
+                                        border: '1px solid #000',
                                     },
 
                                 }}
@@ -247,17 +368,22 @@ export const UserHomepage = ({
                                     return (
                                         <>
                                             <MenuItem
+                                                onClick={onCloseYearMenu}
                                                 sx={{
                                                     fontSize: '13px',
+                                                    borderBottom: '1px solid black',
+                                                    '&:last-child': {
+                                                        borderBottom: '0px',
+                                                    },
                                                 }}
                                             >{year}</MenuItem>
-                                            <Divider
+                                            {/* <Divider
 
                                                 style={{
                                                     marginTop: '0px',
                                                     marginBottom: '0px',
                                                 }}
-                                            />
+                                            /> */}
                                         </>
                                     )
                                 })}
