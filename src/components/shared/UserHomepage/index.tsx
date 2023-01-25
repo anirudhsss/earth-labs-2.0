@@ -1,9 +1,9 @@
-import { Box, CardMedia, Menu, MenuItem } from "@mui/material"
+import { useCallback, useState } from "react";
+import { Box, CardMedia, Divider, Menu, MenuItem } from "@mui/material"
 import { NormalSearchField } from "../TextField"
 import { Typography } from '../Typography'
 import styles from './styles.module.css';
 import { Button } from '../Button'
-import { useCallback } from "react";
 import Web3Modal from 'web3modal';
 import LoadingSpin from "react-loading-spin";
 import { truncate } from '../../utils';
@@ -18,6 +18,8 @@ export interface UserHomepageProps {
     logoutWallet?: () => void;
 }
 
+const years = ["2020", "2021", "2022", "2023"];
+
 export const UserHomepage = ({
     children,
     onOpenConnectWalletModal,
@@ -25,6 +27,17 @@ export const UserHomepage = ({
     loading,
     logoutWallet,
 }: UserHomepageProps) => {
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const openMenu = Boolean(anchorEl);
+
+    const onOpenYearMenu = (e: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(e.currentTarget);
+    }
+    const onCloseYearMenu = () => {
+        setAnchorEl(null);
+    };
+
 
     const LogoutButton = () => {
         return (
@@ -168,17 +181,87 @@ export const UserHomepage = ({
                             <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter}>
                                 <img src='/assets/images/discord.svg' alt="" className={styles.imageAsIcon} />
                             </a>
-                            {/* <Button>
+                        </Box>
+                        <Box className={styles.timeMenuBtn}>
+                            <Button
+                                backgroundColor="#FFF7EE"
+                                hoverBackgroundColor="#FFF7EE"
+                                color="black"
+                                boxShadow="none"
+                                hoverBoxShadow="none"
+                                borderRadius={`${openMenu ? '0 0 2rem 2rem' : '2rem'}`}
+                                padding="5px 22px"
+                                width="85px"
+                                display="flex"
+                                justifyContent="space-around"
+                                alignItems="center"
+                                border="1px solid #000"
+                                borderTop={`${openMenu ? '0' : '1px solid #000'}`}
+                                paddingTop={`${openMenu && '0px'}`}
+                                onClick={onOpenYearMenu}
+                            >
                                 <Typography
                                     text="time"
+                                    fontSize="13px"
+                                    color={`${openMenu ? '#FE7D06' : '#000'}`}
+                                />
+                                <img
+                                    src={`${openMenu ? '/assets/images/orangeTriangle.svg' : '/assets/images/blackTriangle.svg'}`}
+                                    alt=""
+                                    className={styles.blackTriangle}
                                 />
                             </Button>
-                            <Menu open={false}>
-                                <MenuItem>2020</MenuItem>
-                                <MenuItem>2021</MenuItem>
-                                <MenuItem>2022</MenuItem>
-                                <MenuItem>2023</MenuItem>
-                            </Menu> */}
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={openMenu}
+                                onClose={onCloseYearMenu}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'left',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                // className={styles.menuItem}
+                                // MenuListProps={{
+                                //     sx: {
+                                //         width: anchorEl && anchorEl.offsetWidth,
+                                //     }
+                                // }}
+                                PaperProps={{
+                                    elevation: 0,
+                                    style: {
+                                        width: '85px',
+                                        borderRadius: '20px 20px 0 0',
+                                        backgroundColor: '#FFF7EE',
+                                        borderBottom: '0px',
+                                        borderLeft: '1px solid #000',
+                                        borderRight: '1px solid #000',
+                                        borderTop: '1px solid #000',
+                                    },
+
+                                }}
+                            >
+                                {years.map((year: any) => {
+                                    return (
+                                        <>
+                                            <MenuItem
+                                                sx={{
+                                                    fontSize: '13px',
+                                                }}
+                                            >{year}</MenuItem>
+                                            <Divider
+
+                                                style={{
+                                                    marginTop: '0px',
+                                                    marginBottom: '0px',
+                                                }}
+                                            />
+                                        </>
+                                    )
+                                })}
+                            </Menu>
                         </Box>
                     </Box>
                 </Box>

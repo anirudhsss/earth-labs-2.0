@@ -17,8 +17,16 @@ export interface ButtonProps {
     disabled?: boolean;
     hoverBoxShadow?: string;
     padding?: string;
+    width?: string;
     border?: string;
     size?: string;
+    borderStyle?: string;
+    borderColor?: string;
+    borderTop?: string;
+    paddingTop?: string;
+    display?: string;
+    justifyContent?: string;
+    alignItems?: string;
     children?: any;
 }
 
@@ -36,8 +44,16 @@ export const Button = ({
     hoverBoxShadow,
     disabled = false,
     padding,
+    width,
     border,
     size,
+    borderStyle,
+    borderColor,
+    borderTop,
+    paddingTop,
+    display,
+    justifyContent,
+    alignItems,
     children,
     ...props
 }: ButtonProps) => {
@@ -57,6 +73,14 @@ export const Button = ({
                 margin: margin,
                 padding: padding,
                 border: border,
+                display: display,
+                justifyContent: justifyContent,
+                alignItems: alignItems,
+                width: width,
+                borderStyle: borderStyle,
+                borderColor: borderColor,
+                borderTop: borderTop,
+                paddingTop: paddingTop,
                 '&:hover': {
                     background: hoverBackgroundColor,
                     boxShadow: hoverBoxShadow,
