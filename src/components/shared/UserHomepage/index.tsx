@@ -9,6 +9,7 @@ import LoadingSpin from "react-loading-spin";
 import { truncate } from '../../utils';
 import data from '../../../test.json';
 import { Xaxis } from "../Xaxis";
+import { HexGrid, Layout, Hexagon, Text, Pattern, Path, Hex } from 'react-hexgrid';
 
 export interface UserHomepageProps {
     children?: any;
@@ -88,7 +89,7 @@ export const UserHomepage = ({
                         fontWeight="500"
                     /> */}
                     <img
-                        src='/atlas.jpeg'
+                        src='./assets/images/atlasLogo.png'
                         alt=""
                         width="100"
                         height="40"
@@ -258,6 +259,7 @@ export const UserHomepage = ({
                             margin="2rem 0 0 2rem"
                             fontSize="1.2rem"
                         />
+
                     </Box>
                     <Box className={styles.lhsBody2}>
                         <Xaxis />
