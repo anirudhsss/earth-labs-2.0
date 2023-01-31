@@ -100,7 +100,8 @@
     align-items: flex-end;
 }
 
-.orangeTriangle, .blackTriangle {
+.orangeTriangle,
+.blackTriangle {
     width: 9px;
     height: 9px;
 }
@@ -119,4 +120,33 @@
 
 .lhsBody1Child {
     margin-left: 10px;
+}
+
+.bwText {
+    width: 87rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.glyphContainerParent {
+    width: 80rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.glyphContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.glyphContainer1 {
+    margin-left: -70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }

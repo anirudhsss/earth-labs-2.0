@@ -9,7 +9,8 @@ import LoadingSpin from "react-loading-spin";
 import { truncate } from '../../utils';
 import data from '../../../test.json';
 import { Xaxis } from "../Xaxis";
-import { HexGrid, Layout, Hexagon, Text, Pattern, Path, Hex } from 'react-hexgrid';
+import { Hexgrid } from "../Hexgrid";
+import { Link } from "react-router-dom";
 
 export interface UserHomepageProps {
     children?: any;
@@ -259,7 +260,9 @@ export const UserHomepage = ({
                             margin="2rem 0 0 2rem"
                             fontSize="1.2rem"
                         />
-
+                        <Box className={styles.lhsBody1Child}>
+                            <Hexgrid />
+                        </Box>
                     </Box>
                     <Box className={styles.lhsBody2}>
                         <Xaxis />
@@ -296,12 +299,16 @@ export const UserHomepage = ({
                     </Box>
                     <Box className={styles.allIcons}>
                         <Box className={styles.upperIcons}>
-                            <a className={styles.iconOuter}>
-                                <img src='/assets/images/home.svg' alt="" className={styles.imageAsIcon} />
-                            </a>
-                            <a className={styles.iconOuter}>
-                                <img src='/assets/images/discovery.svg' alt="" className={styles.imageAsIcon} />
-                            </a>
+                            <Link to="/map">
+                                <a className={styles.iconOuter}>
+                                    <img src='/assets/images/home.svg' alt="" className={styles.imageAsIcon} />
+                                </a>
+                            </Link>
+                            <Link to="/discovery">
+                                <a className={styles.iconOuter}>
+                                    <img src='/assets/images/discovery.svg' alt="" className={styles.imageAsIcon} />
+                                </a>
+                            </Link>
                         </Box>
                         <Box className={styles.lowerIcons}>
                             <a className={styles.iconOuter}>

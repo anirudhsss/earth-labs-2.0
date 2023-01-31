@@ -6,6 +6,9 @@ import Web3Modal from 'web3modal';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import { CLAIM_PROCESS } from 'constant';
+import { Discovery } from 'components/Discovery';
+import { Routes, Route } from "react-router-dom"
+
 
 import './App.css';
 
@@ -168,7 +171,34 @@ const App = () => {
 
   return (
     <div className="App">
-      <UserHomepage
+      <Routes>
+        <Route
+          path="/map"
+          element={
+            <UserHomepage
+              onOpenConnectWalletModal={onOpenConnectWalletModal}
+              userWalletAddress={userWalletAddress}
+              loading={loading}
+              logoutWallet={logoutWallet}
+            >
+              <ConnectWalletModal
+                open={open}
+                onClose={onClose}
+                onConnectMetamask={onConnectMetamask}
+                connectWalletConnectWallet={connectWalletConnectWallet}
+              />
+            </UserHomepage>
+          }
+        />
+        <Route
+          path="/discovery"
+          element={
+            <Discovery />
+          }
+        />
+      </Routes>
+      {/* <Discovery /> */}
+      {/* <UserHomepage
         onOpenConnectWalletModal={onOpenConnectWalletModal}
         userWalletAddress={userWalletAddress}
         loading={loading}
@@ -180,7 +210,7 @@ const App = () => {
           onConnectMetamask={onConnectMetamask}
           connectWalletConnectWallet={connectWalletConnectWallet}
         />
-      </UserHomepage>
+      </UserHomepage> */}
     </div>
   );
 }
