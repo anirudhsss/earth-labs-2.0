@@ -5,7 +5,7 @@ import { Typography } from "../Typography";
 import moment from "moment";
 
 export interface XaxisItemsProps {
-    month?: string;
+    month?: any;
     backgroundColor?: string;
     hoverElementId?: number | null;
     onCircleHoverStarts: (month: any) => void;
