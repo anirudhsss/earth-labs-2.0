@@ -1,16 +1,18 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Box, CardMedia, Divider, Menu, MenuItem } from "@mui/material"
-import { NormalSearchField } from "../TextField"
-import { Typography } from '../Typography'
+import { NormalSearchField } from "../shared/TextField"
+import { Typography } from '../shared/Typography'
 import styles from './styles.module.css';
-import { Button } from '../Button'
+import { Button } from '../shared/Button'
 import Web3Modal from 'web3modal';
 import LoadingSpin from "react-loading-spin";
-import { truncate } from '../../utils';
-import data from '../../../test.json';
-import { Xaxis } from "../Xaxis";
-import { Hexgrid } from "../Hexgrid";
+import { truncate } from '../utils';
+// import data from '../../test.json';
+import { Xaxis } from "../shared/Xaxis";
+import { Hexgrid } from "../shared/Hexgrid";
 import { Link } from "react-router-dom";
+import { ApiRequest } from "components/utils";
+import moment from "moment";
 
 export interface UserHomepageProps {
     children?: any;
@@ -18,6 +20,7 @@ export interface UserHomepageProps {
     userWalletAddress?: any;
     loading?: any;
     logoutWallet?: () => void;
+    data?: any;
 }
 
 const years = ["2020", "2021", "2022", "2023"];
@@ -29,12 +32,81 @@ export const UserHomepage = ({
     userWalletAddress,
     loading,
     logoutWallet,
+    data,
 }: UserHomepageProps) => {
 
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
     const openMenu1 = Boolean(anchorEl1);
+    const [data1, setData1] = useState<any>();
+    const [loading1, setLoading1] = useState(true);
+    const [months, setMonths] = useState<any>();
+    const [occurences, setOccurences] = useState<any>();
+    const [matchedMonths, setMatchedMonths] = useState<any>([]);
+
+    useEffect(() => {
+        const info = async () => {
+            const res = await ApiRequest();
+            setData1(res?.data[0].hexes);
+            setLoading1(false);
+        }
+        info();
+    }, [])
+
+    const clamp = (a: number, min = 0, max = 1) => Math.min(max, Math.max(min, a));
+    const invlerp = (x: number, y: number, a: number) => {
+        return clamp((a - x) / (y - x))
+    };
+
+    const onSortingData = (data1: any[] | undefined) => {
+        let arr: any[] = [];
+        let arr2: any[] = [];
+        if (data1) {
+            const arrOfDuration = data1.map((item) => {
+                return Number(moment(item.timestamp).format("MM"));
+            });
+            console.log('arrOfDuration', arrOfDuration)
+            const freqOfDuration = arrOfDuration.reduce((acc: any, item) => {
+                acc[item] = acc[item] ? acc[item] + 1 : 1;
+                return acc;
+            }, {});
+            arr = Object.values(freqOfDuration);
+            arr2 = Object.keys(freqOfDuration);
+        }
+        return [arr, arr2];
+    }
+
+    const myFunc = () => {
+        const test = onSortingData(data1);
+        const arr = test[0];
+        const arr2 = test[1];
+        const min = Math.min(...arr);
+        const max = Math.max(...arr);
+        let arr1: any[] = [];
+        arr.forEach((item: number) => {
+            let val1 = (((35 - 10) * invlerp(min, max, item)) + 10);
+            arr1 = [...arr1, val1]
+        })
+        const arr3: { month: any; dimension: any; noOfGlyphs: any; }[] = [];
+        arr.forEach((_, index) => {
+            arr3.push({
+                month: arr2[index],
+                dimension: arr1[index],
+                noOfGlyphs: arr[index],
+            })
+        })
+        return arr3;
+    };
+
+    const onCircleClicked = (month: any) => {
+        const arrIndexesOfClickedMonths = data1.filter((item: { timestamp: moment.MomentInput; }) => {
+            let monthFromApi = Number(moment(item.timestamp).format("MM"));
+            return monthFromApi === Number(month);
+        });
+        console.log('arrIndexesOfClickedMonths', arrIndexesOfClickedMonths)
+        setMatchedMonths(arrIndexesOfClickedMonths);
+    }
 
     const onOpenYearMenu = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget);
@@ -160,7 +232,6 @@ export const UserHomepage = ({
                     alignItems="center"
                     border="1px solid #000"
                     borderBottom={`${openMenu1 ? '0' : '1px solid #000'}`}
-                    // paddingTop={`${openMenu1 && '0px'}`}
                     onClick={onOpenYearMenu1}
                 >
                     <Typography
@@ -196,7 +267,6 @@ export const UserHomepage = ({
                             borderRadius: '0 0 20px 20px',
                             backgroundColor: '#FFF7EE',
                             border: '1px solid #000',
-                            // marginLeft: '.5px'
                         },
 
                     }}
@@ -214,13 +284,6 @@ export const UserHomepage = ({
                                         },
                                     }}
                                 >{year}</MenuItem>
-                                {/* <Divider
-                                    className={styles.divider}
-                                    style={{
-                                        marginTop: '0px',
-                                        marginBottom: '0px',
-                                    }}
-                                /> */}
                             </>
                         )
                     })}
@@ -254,18 +317,22 @@ export const UserHomepage = ({
                 <Box
                     className={styles.lhsBody}
                 >
-                    <Box className={styles.lhsBody1}>
+                    <Box className={styles.lhsBody1}
+                        style={{ marginBottom: loading1 !== false ? '0px' : '-53px' }}
+                    >
                         <Typography
                             text="Currently Viewing: 0.185 - 0.95 ETH"
                             margin="2rem 0 0 2rem"
                             fontSize="1.2rem"
                         />
                         <Box className={styles.lhsBody1Child}>
-                            <Hexgrid />
+                            <Hexgrid
+                                matchedMonths={matchedMonths}
+                            />
                         </Box>
                     </Box>
                     <Box className={styles.lhsBody2}>
-                        <Xaxis />
+                        <Xaxis data={data} data2={myFunc()} onCircleClicked={onCircleClicked} />
                     </Box>
                 </Box>
                 <Box className={styles.rhsBody}>
@@ -386,13 +453,6 @@ export const UserHomepage = ({
                                                     },
                                                 }}
                                             >{year}</MenuItem>
-                                            {/* <Divider
-
-                                                style={{
-                                                    marginTop: '0px',
-                                                    marginBottom: '0px',
-                                                }}
-                                            /> */}
                                         </>
                                     )
                                 })}

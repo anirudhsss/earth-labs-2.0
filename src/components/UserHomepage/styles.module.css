@@ -26,7 +26,7 @@
 .lhsBody1 {
     border-left: 1px solid black;
     height: 81vh;
-    margin-bottom: -48px;
+    /* margin-bottom: -35px; */
 }
 
 .lhsBody2 {
@@ -95,7 +95,7 @@
 
 .timeMenuBtn {
     height: 13vh;
-    margin-top: 10vh;
+    margin-top: 11vh;
     display: flex;
     align-items: flex-end;
 }

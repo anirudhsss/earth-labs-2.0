@@ -2,15 +2,19 @@ import { useState } from "react";
 import { Box } from "@mui/material"
 import data from 'test.json';
 import { Typography } from "../Typography";
+import moment from "moment";
 
 export interface XaxisItemsProps {
     month?: string;
     backgroundColor?: string;
     hoverElementId?: number | null;
-    onCircleHoverStarts: (id: any) => void;
-    onCircleHoverEnds: (id: any) => void;
+    onCircleHoverStarts: (month: any) => void;
+    onCircleHoverEnds: (month: any) => void;
+    onCircleClicked: (month: any) => void;
     dimension?: number;
-    id?: any;
+    noOfGlyphs?: any;
+    // id?: any;
+    // item?: any;
 }
 
 export const XaxisItems = ({
@@ -20,8 +24,12 @@ export const XaxisItems = ({
     onCircleHoverStarts,
     onCircleHoverEnds,
     dimension,
-    id,
+    noOfGlyphs,
+    onCircleClicked,
+    // id,
+    // item,
 }: XaxisItemsProps) => {
+
     return (
         <Box sx={{
             display: 'flex',
@@ -33,8 +41,8 @@ export const XaxisItems = ({
             <>
                 <Typography
                     fontSize="12px"
-                    color={`${id === hoverElementId && '#FE7D06'}`}
-                    text={`${month} ${id === hoverElementId ? `${dimension}: glyphs` : ''}`}
+                    color={`${month === hoverElementId && '#FE7D06'}`}
+                    text={`${moment().month(month).format("MMM")}${month === hoverElementId ? `: ${noOfGlyphs} hex` : ''}`}
                 />
 
                 <Box sx={{
@@ -42,11 +50,12 @@ export const XaxisItems = ({
                     height: dimension,
                     borderRadius: '50%',
                     border: '1px solid black',
-                    backgroundColor: id === hoverElementId ? '#FE7D06' : '#FFF7EE',
-                    cursor: 'pointer'
+                    backgroundColor: month === hoverElementId ? '#FE7D06' : '#FFF7EE',
+                    cursor: 'pointer',
                 }}
-                    onMouseEnter={() => onCircleHoverStarts(id)}
-                    onMouseLeave={() => onCircleHoverEnds(id)}
+                    onClick={() => onCircleClicked(month)}
+                    onMouseEnter={() => onCircleHoverStarts(month)}
+                    onMouseLeave={() => onCircleHoverEnds(month)}
                 ></Box>
             </>
         </Box>

@@ -1,15 +1,24 @@
 import { Box } from "@mui/material"
-import data from 'test.json';
+import data1 from 'test.json';
 import { XaxisItems } from "./XaxisItems";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ApiRequest } from "components/utils";
+import moment from "moment";
 
 export interface XaxisProps {
+    data?: any,
+    data2?: any,
+    onCircleClicked?: any,
 }
 
 export const Xaxis = ({
+    data,
+    data2,
+    onCircleClicked,
 }: XaxisProps) => {
     const [backgroundColor, setBackgroundColor] = useState('#FFF7EE');
     const [hoverElementId, setHoverElementId] = useState(null);
+    // console.log(onSortingData(data1), typeof (onSortingData(data1)))
 
     const onCircleHoverStarts = (elementId: any) => {
         setHoverElementId(elementId);
@@ -28,19 +37,21 @@ export const Xaxis = ({
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 position: 'relative',
-                top: '16px',
+                top: '17px',
             }}>
-                {data.map(({ id, dimension, month }) => {
+                {data2.map((item: any) => {
                     return (
                         <XaxisItems
-                            key={id}
-                            dimension={dimension}
-                            month={month}
+                            // key={id}
+                            dimension={item.dimension}
+                            month={item.month}
+                            // id={id}
                             backgroundColor={backgroundColor}
                             hoverElementId={hoverElementId}
                             onCircleHoverStarts={onCircleHoverStarts}
                             onCircleHoverEnds={onCircleHoverEnds}
-                            id={id}
+                            noOfGlyphs={item.noOfGlyphs}
+                            onCircleClicked={onCircleClicked}
                         />
                     )
                 })}

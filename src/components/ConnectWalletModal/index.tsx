@@ -1,7 +1,7 @@
 
 import { CardMedia, Dialog, DialogContent, Box, } from "@mui/material";
-import { Button } from '../Button';
-import { Typography } from '../Typography';
+import { Button } from '../shared/Button';
+import { Typography } from '../shared/Typography';
 
 import styles from "./styles.module.css";
 

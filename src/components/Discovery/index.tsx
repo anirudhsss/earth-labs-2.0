@@ -113,36 +113,46 @@ export const Discovery = ({
                         <span className={styles.glyphContainer}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                     </Box>
@@ -168,36 +178,46 @@ export const Discovery = ({
                         <span className={styles.glyphContainer}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                         <span className={styles.glyphContainer1}>
                             <img src="./testImage.png" />
                             <Typography
-                                text="Share  |  Go to Address"
+                                text="Share | View Map | View collection"
                                 fontSize="1rem"
+                                fontWeight="bold"
+                                width="10rem"
                             />
                         </span>
                     </Box>

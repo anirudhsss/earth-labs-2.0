@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ConnectWalletModal } from 'components/shared/ConnectWalletModal'
-import { UserHomepage } from 'components/shared/UserHomepage'
+import { ConnectWalletModal } from 'components/ConnectWalletModal'
+import { UserHomepage } from 'components/UserHomepage'
 import { ethers, providers } from "ethers";
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -8,7 +8,7 @@ import MetaMaskOnboarding from "@metamask/onboarding";
 import { CLAIM_PROCESS } from 'constant';
 import { Discovery } from 'components/Discovery';
 import { Routes, Route } from "react-router-dom"
-
+import { ApiRequest } from 'components/utils';
 
 import './App.css';
 
@@ -36,6 +36,15 @@ const App = () => {
   const [signatureMessage, setSignatureMessage] = useState<any>("");
   const [sessionToken, setSessionToken] = useState<any>();
   const [isWalletConnected, setWalletConnected] = useState(false);
+  const [data, setData] = useState<any>();
+
+  useEffect(() => {
+    const info = async () => {
+      const res = await ApiRequest();
+      setData(res);
+    }
+    info();
+  }, [])
 
   useEffect(() => {
     const w: any = window;
@@ -180,6 +189,7 @@ const App = () => {
               userWalletAddress={userWalletAddress}
               loading={loading}
               logoutWallet={logoutWallet}
+              data={data?.data[0]}
             >
               <ConnectWalletModal
                 open={open}
@@ -197,20 +207,6 @@ const App = () => {
           }
         />
       </Routes>
-      {/* <Discovery /> */}
-      {/* <UserHomepage
-        onOpenConnectWalletModal={onOpenConnectWalletModal}
-        userWalletAddress={userWalletAddress}
-        loading={loading}
-        logoutWallet={logoutWallet}
-      >
-        <ConnectWalletModal
-          open={open}
-          onClose={onClose}
-          onConnectMetamask={onConnectMetamask}
-          connectWalletConnectWallet={connectWalletConnectWallet}
-        />
-      </UserHomepage> */}
     </div>
   );
 }
