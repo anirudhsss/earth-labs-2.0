@@ -133,7 +133,7 @@ const App = () => {
   const _getSignatureMessage = async (
     accountAddress: string
   ): Promise<void> => {
-    console.log('inside', accountAddress)
+
   }
 
   const connectWalletConnectWallet = async () => {
@@ -161,7 +161,7 @@ const App = () => {
 
       // Subscribe to session disconnection
       provider.on("disconnect", (code: number, reason: string) => {
-        // logoutWallet();
+        logoutWallet();
       });
 
     } catch (error) {

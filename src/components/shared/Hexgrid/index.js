@@ -9,10 +9,20 @@ import moment from 'moment'
 
 export const Hexgrid = ({
     matchedMonths,
+    arrOfMonths,
+    arrOfYears,
+    monthOrYear,
+    onDisplayYear,
+    setArrOfYears,
 }) => {
     const [data, setData] = useState();
     const [data1, setData1] = useState();
     const [sortedData, setSortedData] = useState();
+    const whichDuration = monthOrYear === 'year' ? arrOfYears : monthOrYear === 'month' ? arrOfMonths : [];
+
+    useEffect(() => {
+        setArrOfYears(onDisplayYear);
+    }, [data1])
 
     useEffect(() => {
         const info = async () => {
@@ -22,11 +32,7 @@ export const Hexgrid = ({
         }
         info();
     }, [])
-
-    useEffect(() => {
-
-    }, [])
-    console.log('matchedMonths', matchedMonths)
+    
     return (
         <>
             <HexGrid width={1475} height={650} viewBox="-20 -20 100 100">

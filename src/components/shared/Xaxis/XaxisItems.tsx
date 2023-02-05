@@ -1,35 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material"
 import data from 'test.json';
 import { Typography } from "../Typography";
 import moment from "moment";
+import { useLocation } from "react-router-dom";
 
 export interface XaxisItemsProps {
     month?: any;
+    year?: any;
     backgroundColor?: string;
     hoverElementId?: number | null;
     onCircleHoverStarts: (month: any) => void;
     onCircleHoverEnds: (month: any) => void;
     onCircleClicked: (month: any) => void;
+    onDisplayMonth: (year: any) => void;
     dimension?: number;
     noOfGlyphs?: any;
+    clickedElement?: any;
+    monthOrYear?: any;
+    data1?: any;
+    matchedMonths?: any;
+    setMatchedMonths?: any;
+    yearViewEnabled?: any;
+    setYearViewEnabled?: any;
     // id?: any;
     // item?: any;
 }
 
 export const XaxisItems = ({
     backgroundColor,
+    year,
     month,
     hoverElementId,
     onCircleHoverStarts,
     onCircleHoverEnds,
+    onDisplayMonth,
     dimension,
     noOfGlyphs,
     onCircleClicked,
+    clickedElement,
+    monthOrYear,
+    data1,
+    matchedMonths,
+    setMatchedMonths,
+    yearViewEnabled,
+    setYearViewEnabled,
     // id,
     // item,
 }: XaxisItemsProps) => {
+    const location = useLocation();
+    const whichDuration1 = monthOrYear === 'year' ? month : monthOrYear === 'month' ? moment().month(month).format("MMM") : [];
 
+    useEffect(() => {
+        if (monthOrYear === 'year') {
+            const arrIndexesOfClickedMonths = data1.filter((item: { timestamp: moment.MomentInput; }) => {
+                let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
+                return monthFromApi === Number(month);
+            });
+            setMatchedMonths(arrIndexesOfClickedMonths);
+        }
+    }, [data1, yearViewEnabled])
+    console.log('month', month)
     return (
         <Box sx={{
             display: 'flex',
@@ -42,7 +73,7 @@ export const XaxisItems = ({
                 <Typography
                     fontSize="12px"
                     color={`${month === hoverElementId && '#FE7D06'}`}
-                    text={`${moment().month(month).format("MMM")}${month === hoverElementId ? `: ${noOfGlyphs} hex` : ''}`}
+                    text={`${whichDuration1}${month === hoverElementId || month === clickedElement ? `: ${noOfGlyphs} hex` : ''}`}
                 />
 
                 <Box sx={{
@@ -50,10 +81,11 @@ export const XaxisItems = ({
                     height: dimension,
                     borderRadius: '50%',
                     border: '1px solid black',
-                    backgroundColor: month === hoverElementId ? '#FE7D06' : '#FFF7EE',
+                    backgroundColor: ((month === hoverElementId || month === clickedElement) && (!yearViewEnabled)) ? '#FE7D06' : '#FFF7EE',
                     cursor: 'pointer',
                 }}
-                    onClick={() => onCircleClicked(month)}
+                    // onClick={() => onCircleClicked(month)}
+                    onClick={() => { monthOrYear === 'year' ? onDisplayMonth(month) : onCircleClicked(month) }}
                     onMouseEnter={() => onCircleHoverStarts(month)}
                     onMouseLeave={() => onCircleHoverEnds(month)}
                 ></Box>

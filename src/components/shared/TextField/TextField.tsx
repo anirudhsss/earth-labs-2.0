@@ -88,7 +88,14 @@ const TextField: React.FC<TextFieldProps> = ({
                     fontFamily: 'inherit',
                     '& .MuiOutlinedInput-root': {
                         borderRadius: borderRadius,
-                    }
+                    },
+                    input: {
+                        '&::placeholder': {
+                            fontSize: '1.2rem',
+                            color: 'rgba(0, 0, 0, 0.6)',
+                            fontWeight: '700',
+                        }
+                    },
                 }}
                 onChange={onChangeText}
                 value={value}
@@ -98,8 +105,13 @@ const TextField: React.FC<TextFieldProps> = ({
                 }}
                 InputProps={{
                     startAdornment: (
-                        <InputAdornment position="start">
-                            <img src={src} />
+                        <InputAdornment
+                            sx={{
+
+                            }}
+                            position="start"
+                        >
+                            <img src={src} alt="" width="14px" height="14px" />
                         </InputAdornment>
                     ),
                     style: {
