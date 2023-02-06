@@ -82,7 +82,7 @@ export const Discovery = ({
                             hoverBackgroundColor="transparent"
                             borderRadius="2rem"
                             padding="0.3rem 2.5rem"
-                            onClick={onOpenConnectWalletModal}
+                        // onClick={onOpenConnectWalletModal}
                         >
                             <Typography
                                 text="Connect Wallet"
@@ -154,7 +154,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -163,7 +163,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -172,7 +172,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -181,7 +181,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -190,7 +190,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -219,7 +219,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -228,7 +228,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -237,7 +237,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -246,7 +246,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -255,7 +255,7 @@ export const Discovery = ({
                                 <img src="./testImage.png" />
                                 <Typography
                                     text="Share | View Map | View collection"
-                                    fontSize="1rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />

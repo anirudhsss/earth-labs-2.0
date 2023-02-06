@@ -7,7 +7,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import { CLAIM_PROCESS } from 'constant';
 import { Discovery } from 'components/Discovery';
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { ApiRequest } from 'components/utils';
 
 import './App.css';
@@ -206,6 +206,7 @@ const App = () => {
             <Discovery />
           }
         />
+        <Route path="/" element={<Navigate to="/map" replace />} />
       </Routes>
     </div>
   );

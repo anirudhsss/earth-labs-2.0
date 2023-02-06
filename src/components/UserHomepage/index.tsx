@@ -228,7 +228,8 @@ export const UserHomepage = ({
             duration = Object.keys(freqOfDuration);
             noOfTxns = Object.values(freqOfDuration);
             if (duration?.length === 1) {
-                let val1 = ((35 + 10) / 2);
+                // let val1 = ((35 + 10) / 2);
+                let val1 = 35;
                 arrYearPointsOfAxis = [...arrYearPointsOfAxis, val1];
             }
 
