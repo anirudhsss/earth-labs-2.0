@@ -19,6 +19,8 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+<BrowserRouter basename={process.env.PUBLIC_URL} />
+
 root.render(
   <ThemeProvider theme={theme}>
     <BrowserRouter>
