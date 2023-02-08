@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "heading": "Top Digital Art Sales",
+        "glyphs": [
+            { "id": 0, "src": "./testImage.png" },
+            { "id": 0, "src": "./testImage.png" },
+            { "id": 0, "src": "./testImage.png" },
+            { "id": 0, "src": "./testImage.png" },
+            { "id": 0, "src": "./testImage.png" }
+        ]
+    },
+    {
+        "id": 1,
+        "heading": "Biggest Swaps",
+        "glyphs": [
+            { "id": 0, "src": "./testImage.png" },
+            { "id": 0, "src": "./testImage.png" },
+            { "id": 0, "src": "./testImage.png" }
+        ]
+    }
+]

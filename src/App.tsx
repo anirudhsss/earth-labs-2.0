@@ -11,6 +11,7 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import { ApiRequest } from 'components/utils';
 
 import './App.css';
+import { Wallet } from 'components/Wallet';
 
 const providerOptions = {
 
@@ -204,6 +205,12 @@ const App = () => {
           path="/discovery"
           element={
             <Discovery />
+          }
+        />
+        <Route
+          path="/wallet"
+          element={
+            <Wallet />
           }
         />
         <Route path="/" element={<Navigate to="/map" replace />} />

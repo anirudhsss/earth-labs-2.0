@@ -27,16 +27,16 @@ export const Hexgrid = ({
     useEffect(() => {
         const info = async () => {
             const res = await ApiRequest();
-            setData(res);
+            setData(res?.data[0]);
             setData1(res?.data[0].hexes);
         }
         info();
     }, [])
-    
+    // console.log('data', data, data?.layoutHexagonSizeX, data?.layoutHexagonSizeY)
     return (
         <>
-            <HexGrid width={1475} height={650} viewBox="-20 -20 100 100">
-                <Layout size={{ x: 10, y: 10 }} flat={false} spacing={1.1} origin={{ x: 0, y: 0 }}>
+            <HexGrid width={1600} height={650} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
+                <Layout size={{ x: 10, y: 10 }} flat={false} spacing={1.1} origin={{ x: -110, y: -35 }}>
                     {matchedMonths?.map((item) => {
                         // console.log(moment(item.timestamp).format("YYYY"), 'item.timestamp', moment(item.timestamp).format("MM"))
                         return (

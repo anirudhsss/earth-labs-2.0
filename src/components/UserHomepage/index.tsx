@@ -56,7 +56,7 @@ export const UserHomepage = ({
     const [months, setMonths] = useState<any>();
     const [occurences, setOccurences] = useState<any>();
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
-    const [clickedElement, setClickedElement] = useState<any>();
+    const [clickedElement, setClickedElement] = useState<string>('');
     const [currency, setCurrency] = useState<any>()
     const [years, setYears] = useState<any>()
     const [monthOrYear, setmonthOrYear] = useState<any>('');
@@ -73,10 +73,6 @@ export const UserHomepage = ({
         }
         info();
     }, [])
-
-    useEffect(() => {
-
-    }, [location?.state])
 
     const clamp = (a: number, min = 0, max = 1) => Math.min(max, Math.max(min, a)); //0.33
     const invlerp = (x: number, y: number, a: number) => { //0.35
@@ -149,7 +145,7 @@ export const UserHomepage = ({
     // };
 
     const onCircleClicked = (month: any) => {
-        setYearViewEnabled(false);
+        // setYearViewEnabled(false);
         setClickedElement(month);
         const arrIndexesOfClickedMonths = data1.filter((item: { timestamp: moment.MomentInput; }) => {
             let monthFromApi = Number(moment(item.timestamp).format("MM"));
@@ -201,6 +197,7 @@ export const UserHomepage = ({
     };
 
     const onValueMenuItemClicked = (id: number) => {
+        setClickedElement('');
         onCloseYearMenu();
         onDisplayYear();
         setYearViewEnabled(true);
@@ -248,6 +245,7 @@ export const UserHomepage = ({
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
 
     const onDisplayMonth = (year: number) => {
+        setYearViewEnabled(false);
         setmonthOrYear('month');
         if (data1?.length > 0) {
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrMonthPointsOfAxis: any[] = [];
@@ -263,6 +261,7 @@ export const UserHomepage = ({
                 acc[item] = acc[item] ? acc[item] + 1 : 1;
                 return acc;
             }, {});
+
             duration = Object.keys(freqOfDuration);
             noOfTxns = Object.values(freqOfDuration);
             const min = Math.min(...noOfTxns);
@@ -272,7 +271,6 @@ export const UserHomepage = ({
                 let val1 = (((35 - 10) * invlerp(min, max, item)) + 10);
                 arrMonthPointsOfAxis = [...arrMonthPointsOfAxis, val1] //processed count
             })
-
             const arrOfMonths: { month: any; dimension: any; noOfGlyphs: any; }[] = [];
             arrMonthPointsOfAxis.forEach((_, index) => {
                 arrOfMonths.push({
@@ -533,6 +531,8 @@ export const UserHomepage = ({
                                 setYearViewEnabled={setYearViewEnabled}
                                 onCircleHoverStarts={onCircleHoverStarts}
                                 onCircleHoverEnds={onCircleHoverEnds}
+                                hoverElementId={hoverElementId}
+                                backgroundColor={backgroundColor}
                             />
                         </Box>
                     </Box>
@@ -551,19 +551,27 @@ export const UserHomepage = ({
                                     fontSize="1.3rem"
                                 />
                             </Button>
-                            <Button
-                                backgroundColor="#ffffff"
-                                color="#000000"
-                                border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                hoverBackgroundColor="#ffffff"
-                                borderRadius="0.6rem"
-                                padding="0.4rem 2rem"
+                            <Link
+                                to="/wallet"
+                                state={{
+                                    icon: 'wallet',
+                                }}
+                                style={{ textDecoration: 'none', }}
                             >
-                                <Typography
-                                    text="Wallet"
-                                    fontSize="1.3rem"
-                                />
-                            </Button>
+                                <Button
+                                    backgroundColor={`${location?.state?.icon === 'wallet' ? '#FE7D06' : '#FFF7EE'}`}
+                                    color="#000000"
+                                    border="0.5px solid rgba(46, 52, 81, 0.58)"
+                                    hoverBackgroundColor="#ffffff"
+                                    borderRadius="0.6rem"
+                                    padding="0.4rem 2rem"
+                                >
+                                    <Typography
+                                        text="Wallet"
+                                        fontSize="1.3rem"
+                                    />
+                                </Button>
+                            </Link>
                         </Box>
                         <Box className={styles.allIcons}>
                             <Box className={styles.upperIcons}>

@@ -29,6 +29,7 @@ export interface ButtonProps {
     alignItems?: string;
     children?: any;
     borderBottom?: any;
+    textDecoration?: any;
 }
 
 export const Button = ({
@@ -57,6 +58,7 @@ export const Button = ({
     alignItems,
     children,
     borderBottom,
+    textDecoration,
 }: ButtonProps) => {
     return (
         <MUIButton
@@ -83,6 +85,7 @@ export const Button = ({
                 borderTop: borderTop,
                 paddingTop: paddingTop,
                 borderBottom: borderBottom,
+                textDecoration: textDecoration,
                 '&:hover': {
                     background: hoverBackgroundColor,
                     boxShadow: hoverBoxShadow,

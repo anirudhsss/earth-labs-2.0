@@ -23,8 +23,8 @@ export interface XaxisProps {
     setYearViewEnabled?: any;
     backgroundColor?: string;
     hoverElementId?: number | null;
-    onCircleHoverStarts: (month: any) => void;
-    onCircleHoverEnds: (month: any) => void;
+    onCircleHoverStarts: (elementId: any) => void;
+    onCircleHoverEnds: (elementId: any) => void;
 }
 
 export const Xaxis = ({
@@ -54,8 +54,7 @@ export const Xaxis = ({
         setArrOfYears(onDisplayYear);
     }, [data1])
 
-    // const data3 = data2[0];
-    // const data4 = data2[1];
+    //console.log('hoverElementId', hoverElementId)
 
     return (
         <>
