@@ -4,6 +4,7 @@ import { Button } from 'components/shared/Button';
 import { Container } from 'components/shared/Container';
 import { NormalSearchField } from 'components/shared/TextField';
 import { Typography } from 'components/shared/Typography';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 
@@ -15,6 +16,9 @@ export const Wallet = ({
 
 }: WalletProps) => {
     const location = useLocation();
+    const homeLocation = location?.state?.icon === 'home';
+    const walletLocation = location?.state?.icon === 'wallet';
+    const mapsLocation = location?.state?.icon === 'maps';
 
     return (
         <Box sx={{
@@ -319,19 +323,27 @@ export const Wallet = ({
                     </Box>
                     <Box className={styles.rhsBody}>
                         <Box className={styles.mapAndWalletBtn}>
-                            <Button
-                                backgroundColor="#ffffff"
-                                color="#000000"
-                                border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                hoverBackgroundColor="#ffffff"
-                                borderRadius="0.6rem"
-                                padding="0.4rem 2.2rem"
+                            <Link
+                                to="/maps"
+                                state={{
+                                    icon: 'maps',
+                                }}
+                                style={{ textDecoration: 'none', }}
                             >
-                                <Typography
-                                    text="Maps"
-                                    fontSize="1.3rem"
-                                />
-                            </Button>
+                                <Button
+                                    backgroundColor={`${walletLocation ? '#FFF7EE' : '#FE7D06'}`}
+                                    color={`${walletLocation ? '#000' : '#fff'}`}
+                                    border="0.5px solid rgba(46, 52, 81, 0.58)"
+                                    hoverBackgroundColor={`${walletLocation ? '#FFF7EE' : '#FE7D06'}`}
+                                    borderRadius="0.6rem"
+                                    padding="0.4rem 2.2rem"
+                                >
+                                    <Typography
+                                        text="Maps"
+                                        fontSize="1.3rem"
+                                    />
+                                </Button>
+                            </Link>
                             <Link
                                 to="/wallet"
                                 state={{
@@ -340,10 +352,10 @@ export const Wallet = ({
                                 style={{ textDecoration: 'none', }}
                             >
                                 <Button
-                                    backgroundColor={`${location?.state?.icon === 'wallet' ? '#FE7D06' : '#FFF7EE'}`}
-                                    color="#000000"
+                                    backgroundColor={`${(walletLocation) ? '#FE7D06' : '#FFF7EE'}`}
+                                    color={`${walletLocation ? '#fff' : '#000'}`}
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                    hoverBackgroundColor="#ffffff"
+                                    hoverBackgroundColor={`${walletLocation ? '#FE7D06' : '#FFF7EE'}`}
                                     borderRadius="0.6rem"
                                     padding="0.4rem 2rem"
                                     textDecoration="none"
@@ -358,14 +370,14 @@ export const Wallet = ({
                         <Box className={styles.allIcons}>
                             <Box className={styles.upperIcons}>
                                 <Link
-                                    to="/map"
+                                    to="/maps"
                                     state={{
                                         icon: 'home',
                                     }}
                                 >
                                     <span
                                         className={styles.iconOuter}
-                                        style={{ backgroundColor: location?.state?.icon === 'home' ? '#FE7D06' : '#FFF7EE' }}
+                                        style={{ backgroundColor: (homeLocation || mapsLocation || walletLocation) ? '#FE7D06' : '#FFF7EE' }}
                                     >
                                         <img
                                             src='/assets/images/home.svg'

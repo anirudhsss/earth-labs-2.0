@@ -183,7 +183,7 @@ const App = () => {
     <div className="App">
       <Routes>
         <Route
-          path="/map"
+          path="/maps"
           element={
             <UserHomepage
               onOpenConnectWalletModal={onOpenConnectWalletModal}
@@ -213,7 +213,7 @@ const App = () => {
             <Wallet />
           }
         />
-        <Route path="/" element={<Navigate to="/map" replace />} />
+        <Route path="/" element={<Navigate to="/maps" replace />} />
       </Routes>
     </div>
   );

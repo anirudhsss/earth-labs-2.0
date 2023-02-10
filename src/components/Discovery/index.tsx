@@ -294,7 +294,7 @@ export const Discovery = ({
                         <Box className={styles.allIcons}>
                             <Box className={styles.upperIcons}>
                                 <Link
-                                    to="/map"
+                                    to="/maps"
                                     state={{
                                         icon: "home"
                                     }}

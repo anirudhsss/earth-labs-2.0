@@ -46,6 +46,9 @@ export const UserHomepage = ({
     data,
 }: UserHomepageProps) => {
     const location = useLocation();
+    const homeLocation = location?.state?.icon === 'home';
+    const walletLocation = location?.state?.icon === 'wallet';
+    const mapsLocation = location?.state?.icon === 'maps';
     // const { icon } = location?.state;
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
@@ -538,19 +541,27 @@ export const UserHomepage = ({
                     </Box>
                     <Box className={styles.rhsBody}>
                         <Box className={styles.mapAndWalletBtn}>
-                            <Button
-                                backgroundColor="#ffffff"
-                                color="#000000"
-                                border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                hoverBackgroundColor="#ffffff"
-                                borderRadius="0.6rem"
-                                padding="0.4rem 2.2rem"
+                            <Link
+                                to="/maps"
+                                state={{
+                                    icon: 'maps',
+                                }}
+                                style={{ textDecoration: 'none', }}
                             >
-                                <Typography
-                                    text="Maps"
-                                    fontSize="1.3rem"
-                                />
-                            </Button>
+                                <Button
+                                    backgroundColor={`${(mapsLocation || homeLocation) ? '#FE7D06' : '#FFF7EE'}`}
+                                    color={`${(mapsLocation || homeLocation) ? '#fff' : '#000'}`}
+                                    border="0.5px solid rgba(46, 52, 81, 0.58)"
+                                    hoverBackgroundColor={`${(mapsLocation || homeLocation) ? '#FE7D06' : '#FFF7EE'}`}
+                                    borderRadius="0.6rem"
+                                    padding="0.4rem 2.2rem"
+                                >
+                                    <Typography
+                                        text="Maps"
+                                        fontSize="1.3rem"
+                                    />
+                                </Button>
+                            </Link>
                             <Link
                                 to="/wallet"
                                 state={{
@@ -559,10 +570,10 @@ export const UserHomepage = ({
                                 style={{ textDecoration: 'none', }}
                             >
                                 <Button
-                                    backgroundColor={`${location?.state?.icon === 'wallet' ? '#FE7D06' : '#FFF7EE'}`}
-                                    color="#000000"
+                                    backgroundColor={`${(mapsLocation || homeLocation) ? '#FFF7EE' : '#FE7D06'}`}
+                                    color={`${(mapsLocation || homeLocation) ? '#000' : '#fff'}`}
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                    hoverBackgroundColor="#ffffff"
+                                    hoverBackgroundColor={`${(mapsLocation || homeLocation) ? '#FFF7EE' : '#FE7D06'}`}
                                     borderRadius="0.6rem"
                                     padding="0.4rem 2rem"
                                 >
@@ -576,14 +587,14 @@ export const UserHomepage = ({
                         <Box className={styles.allIcons}>
                             <Box className={styles.upperIcons}>
                                 <Link
-                                    to="/map"
+                                    to="/maps"
                                     state={{
                                         icon: 'home',
                                     }}
                                 >
                                     <span
                                         className={styles.iconOuter}
-                                        style={{ backgroundColor: location?.state?.icon === 'home' ? '#FE7D06' : '#FFF7EE' }}
+                                        style={{ backgroundColor: (homeLocation || mapsLocation || walletLocation) ? '#FE7D06' : '#FFF7EE' }}
                                     >
                                         <img
                                             src='/assets/images/home.svg'
