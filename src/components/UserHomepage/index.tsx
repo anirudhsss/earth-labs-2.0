@@ -497,8 +497,16 @@ export const UserHomepage = ({
                         className={styles.lhsBody}
                     >
                         <Box className={styles.lhsBody1}
-                            style={{ marginBottom: loading1 !== false ? '0px' : '-53px' }}
+                            style={{
+                                marginBottom: loading1 !== false ? '0px' : '-53px',
+                                position: 'relative',
+                            }}
                         >
+                            <span style={{
+                                position: 'absolute',
+                                top: '-4px',
+                                left: '-4.5px',
+                            }}>&#8963;</span>
                             <Typography
                                 text="Currently Viewing: 0.185 - 0.95 ETH"
                                 margin="2rem 0 0 2rem"
