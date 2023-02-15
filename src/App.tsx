@@ -80,23 +80,6 @@ const App = () => {
   };
 
   const onConnectMetamask = async () => {
-    // onClose();
-    // try {
-    //   let web3Modal = new Web3Modal({
-    //     cacheProvider: false,
-    //     providerOptions,
-    //   });
-    //   const web3ModalInstance = await web3Modal.connect();
-    //   const web3ModalProvider = new ethers.providers.Web3Provider(web3ModalInstance);
-    //   setLoading(true);
-    //   if (web3ModalProvider) {
-    //     setLoading(false);
-    //     setWeb3Provider(web3ModalProvider);
-    //   }
-    // } catch (error) {
-    //   setLoading(false);
-    //   console.log(error);
-    // }
     const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
     if (!isMobileDevice) {
       if (!_checkIfMetaMaskIsInstalled()) {
@@ -171,6 +154,7 @@ const App = () => {
   };
 
   const logoutWallet = () => {
+    console.log('logoutWallet', logoutWallet)
     setChainId(null);
     setSignatureMessage(null);
     setUserWalletAddress(null);
@@ -181,40 +165,36 @@ const App = () => {
 
   return (
     <div className="App">
-      <Routes>
-        <Route
-          path="/maps"
-          element={
-            <UserHomepage
-              onOpenConnectWalletModal={onOpenConnectWalletModal}
-              userWalletAddress={userWalletAddress}
-              loading={loading}
-              logoutWallet={logoutWallet}
-              data={data?.data[0]}
-            >
-              <ConnectWalletModal
-                open={open}
-                onClose={onClose}
-                onConnectMetamask={onConnectMetamask}
-                connectWalletConnectWallet={connectWalletConnectWallet}
-              />
-            </UserHomepage>
-          }
+      {/* <UserHomepage
+        onOpenConnectWalletModal={onOpenConnectWalletModal}
+        userWalletAddress={userWalletAddress}
+        loading={loading}
+        logoutWallet={logoutWallet}
+        data={data?.data[0]}
+      >
+        <ConnectWalletModal
+          open={open}
+          onClose={onClose}
+          onConnectMetamask={onConnectMetamask}
+          connectWalletConnectWallet={connectWalletConnectWallet}
+        />
+      </UserHomepage> */}
+      {/* }
         />
         <Route
           path="/discovery"
-          element={
-            <Discovery />
-          }
+          element={ */}
+      {/* <Discovery /> */}
+      {/* }
         />
         <Route
           path="/wallet"
-          element={
-            <Wallet />
-          }
+          element={ */}
+      {/* <Wallet /> */}
+      {/* }
         />
         <Route path="/" element={<Navigate to="/maps" replace />} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

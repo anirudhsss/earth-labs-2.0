@@ -4,7 +4,7 @@ import { NormalSearchField } from "../shared/TextField"
 import { Typography } from '../shared/Typography'
 import styles from './styles.module.css';
 import { Button } from '../shared/Button'
-import Web3Modal from 'web3modal';
+
 import LoadingSpin from "react-loading-spin";
 import { truncate } from '../utils';
 // import data from '../../test.json';
@@ -15,13 +15,15 @@ import { ApiRequest } from "components/utils";
 import moment from "moment";
 import { Container } from "components/shared/Container";
 
+import Web3Modal from 'web3modal';
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import MetaMaskOnboarding from "@metamask/onboarding";
+import { CLAIM_PROCESS } from 'constant';
+import { ethers, providers } from "ethers";
+import { ConnectWalletModal } from "components/ConnectWalletModal";
+
 export interface UserHomepageProps {
-    children?: any;
-    onOpenConnectWalletModal: () => void;
-    userWalletAddress?: any;
-    loading?: any;
-    logoutWallet?: () => void;
-    data?: any;
+
 }
 
 const YEARS = [
@@ -38,12 +40,7 @@ const CURR = [
 ]
 
 export const UserHomepage = ({
-    children,
-    onOpenConnectWalletModal,
-    userWalletAddress,
-    loading,
-    logoutWallet,
-    data,
+
 }: UserHomepageProps) => {
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
@@ -67,6 +64,151 @@ export const UserHomepage = ({
     const [yearViewEnabled, setYearViewEnabled] = useState<boolean>(true);
     const [backgroundColor, setBackgroundColor] = useState('#FFF7EE');
     const [hoverElementId, setHoverElementId] = useState(null);
+
+
+    const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const [forwarderOrigin, setForwarderOrigin] = useState(
+        "http://localhost:9010"
+    );
+    const [walletProvider, setWalletProvider] = useState<
+        "METAMASK" | "WALLETCONNECT"
+    >("METAMASK");
+    const [etherProviders, setEtherProvider] = useState<any>();
+    const [claimProcess, setClaimProcess] = useState(
+        CLAIM_PROCESS.CONNECT_WALLET
+    );
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [userWalletAddress, setUserWalletAddress] = useState<any>("");
+    const [chainId, setChainId] = useState<any>(1);
+    const [signatureMessage, setSignatureMessage] = useState<any>("");
+    const [sessionToken, setSessionToken] = useState<any>();
+    const [isWalletConnected, setWalletConnected] = useState(false);
+    const [data, setData] = useState<any>();
+
+    useEffect(() => {
+        const info = async () => {
+            const res = await ApiRequest();
+            setData(res);
+        }
+        info();
+    }, [])
+
+    useEffect(() => {
+        const w: any = window;
+        if (w && w.ethereum) {
+            let provider = new ethers.providers.Web3Provider(w.ethereum);
+            setEtherProvider(provider);
+        }
+    }, []);
+
+    const onOpenConnectWalletModal = useCallback(() => {
+        setOpen(true);
+    }, [open]);
+
+    const onClose = () => {
+        setOpen(false);
+    }
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const setClaimProcessAndModel = (
+        isModalOpen: boolean,
+        claimProcess: string
+    ) => {
+        setModalOpen(isModalOpen);
+        setClaimProcess(claimProcess);
+    };
+
+    const onConnectMetamask = async () => {
+        const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
+        if (!isMobileDevice) {
+            if (!_checkIfMetaMaskIsInstalled()) {
+                _onboardUserForMetaMask();
+                return;
+            }
+        }
+        onClose();
+        setWalletProvider("METAMASK");
+        const accountAddress = await etherProviders.send("eth_requestAccounts", []);
+        setClaimProcessAndModel(true, CLAIM_PROCESS.CONNECT_WALLET_LOADING);
+        const network = await etherProviders.getNetwork();
+        // await _getSignatureMessage(accountAddress[0]);
+        setUserWalletAddress(accountAddress[0]);
+        setChainId(network.chainId);
+    }
+
+    const renderDialogContainers = (claimProcess: string): any => {
+        switch (claimProcess) {
+            case CLAIM_PROCESS.CONNECT_WALLET_LOADING:
+                setLoading(true);
+        }
+    }
+
+    const _onboardUserForMetaMask = () => {
+        const onboarding = new MetaMaskOnboarding({ forwarderOrigin });
+        onboarding.startOnboarding();
+    };
+
+    const _checkIfMetaMaskIsInstalled = (): boolean => {
+        const w: any = window;
+        return Boolean(w.ethereum && w.ethereum.isMetaMask);
+    };
+
+    const _getSignatureMessage = async (
+        accountAddress: string
+    ): Promise<void> => {
+
+    }
+
+    const connectWalletConnectWallet = async () => {
+        onClose();
+        try {
+            const provider = new WalletConnectProvider({
+                infuraId: process.env.REACT_APP_INFURIA_ID, // Required
+                rpc: {
+                    137: "https://rpc-mainnet.maticvigil.com/",
+                },
+            });
+            await provider.enable();
+            const walletConnectProvider = new providers.Web3Provider(provider);
+            const { accounts, chainId } = provider;
+            // await _getSignatureMessage(accounts[0]);
+            setUserWalletAddress(accounts[0]);
+            // Subscribe to accounts change
+            provider.on("accountsChanged", (accounts: string[]) => { });
+
+            // Subscribe to chainId change
+            provider.on("chainChanged", (chainId: number) => { });
+
+            // Subscribe to session connection
+            provider.on("connect", () => { });
+
+            // Subscribe to session disconnection
+            provider.on("disconnect", (code: number, reason: string) => {
+                logoutWallet();
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const logoutWallet = () => {
+        setChainId(null);
+        setSignatureMessage(null);
+        setUserWalletAddress(null);
+        setSessionToken(null);
+        setClaimProcessAndModel(false, CLAIM_PROCESS.CONNECT_WALLET);
+        setWalletConnected(false);
+    };
 
     useEffect(() => {
         const info = async () => {
@@ -356,12 +498,16 @@ export const UserHomepage = ({
                                 fontSize="1.3rem"
                             />
                         </Button>
-                        : <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            width: '14rem'
-                        }}>
+                        :
+                        <div
+                            onClick={logoutWallet}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                width: '14rem'
+                            }}
+                        >
                             {/* <Typography
                                 text={truncate(userWalletAddress, 12)}
                             /> */}
@@ -374,7 +520,7 @@ export const UserHomepage = ({
                                 fontSize="1.4rem"
                             />
                             <Avatar
-                                alt="Remy Sharp"
+                                alt=""
                                 src="/assets/images/avatarTest.jpg"
                                 sx={{
                                     width: 30,
@@ -382,7 +528,8 @@ export const UserHomepage = ({
                                     cursor: 'pointer',
                                 }}
                             />
-                        </div>}
+                        </div>
+                    }
                 </Box>
             </Container>
             {/* </Box> */}
@@ -718,8 +865,15 @@ export const UserHomepage = ({
                         </Box>
                     </Box>
                 </Box>
-                {children}
+
             </Container>
+
+            <ConnectWalletModal
+                open={open}
+                onClose={onClose}
+                onConnectMetamask={onConnectMetamask}
+                connectWalletConnectWallet={connectWalletConnectWallet}
+            />
         </>
     )
 }

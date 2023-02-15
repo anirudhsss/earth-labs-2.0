@@ -5,7 +5,8 @@ import './fonts/DINAlternate-Bold.ttf';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, RouterProvider } from "react-router-dom";
+import { router } from './Routes'
 
 const theme = createTheme({
   typography: {
@@ -19,13 +20,11 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-<BrowserRouter basename={process.env.PUBLIC_URL} />
+{/* <BrowserRouter basename={process.env.PUBLIC_URL} /> */ }
 
 root.render(
   <ThemeProvider theme={theme}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </ThemeProvider>
 );
 
