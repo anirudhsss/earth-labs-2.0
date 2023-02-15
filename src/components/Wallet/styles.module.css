@@ -136,6 +136,11 @@
     align-items: center;
 }
 
+.glyphSize {
+    width: 335px;
+    height: 335px;
+}
+
 .glyphContainer {
     display: flex;
     flex-direction: column;
@@ -144,7 +149,7 @@
 }
 
 .glyphContainer1 {
-    margin-left: -70px;
+    margin-left: -100px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

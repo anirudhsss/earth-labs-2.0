@@ -82,7 +82,7 @@ export const Wallet = ({
                             color='#fff'
                         />
                         <Avatar
-                            alt="Remy Sharp"
+                            alt=""
                             src="/assets/images/avatarTest.jpg"
                             sx={{
                                 width: 30,
@@ -162,7 +162,7 @@ export const Wallet = ({
                             margin: '2rem 0 0 8rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -172,7 +172,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -182,7 +182,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -192,7 +192,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -202,7 +202,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -216,7 +216,7 @@ export const Wallet = ({
                             margin: '5rem 0 0 8rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -226,7 +226,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -236,7 +236,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -246,7 +246,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -256,7 +256,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -270,7 +270,7 @@ export const Wallet = ({
                             margin: '5rem 0 0 8rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -280,7 +280,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -290,7 +290,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -300,7 +300,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
@@ -310,7 +310,7 @@ export const Wallet = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" />
+                                <img src="./testImage.png" width="335" />
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
