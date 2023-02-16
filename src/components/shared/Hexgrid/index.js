@@ -39,7 +39,7 @@ export const Hexgrid = ({
     return (
         <>
             <HexGrid width={1600} height={650} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
-                <Layout size={{ x: 15, y: 15 }} flat={false} spacing={1.1} origin={{ x: -60, y: -35 }}>
+                <Layout size={{ x: 15, y: 15 }} flat={false} spacing={1.1} origin={{ x: -70, y: -35 }}>
                     {matchedMonths?.map((item) => {
                         // console.log(moment(item.timestamp).format("YYYY"), 'item.timestamp', moment(item.timestamp).format("MM"))
                         return (

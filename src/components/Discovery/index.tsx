@@ -127,9 +127,9 @@ export const Discovery = ({
                         <Box sx={{
                             margin: '2rem 0 0 8rem',
                         }}>
-                            <span><img src="./testImage.png" width="335" /></span>
-                            <span style={{ marginLeft: '-100px' }}><img src="./testImage.png" width="335" /></span>
-                            <span style={{ marginLeft: '-100px' }}><img src="./testImage.png" width="335" /></span>
+                            <span><img src="./testImage.png" width="275px" /></span>
+                            <span style={{ marginLeft: '-85px' }}><img src="./testImage.png" width="275px" /></span>
+                            <span style={{ marginLeft: '-85px' }}><img src="./testImage.png" width="275px" /></span>
                         </Box>
                         <Box className={styles.bwText}>
                             <Box>
@@ -151,7 +151,7 @@ export const Discovery = ({
                             margin: '2rem 0 0 8rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -160,7 +160,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -169,7 +169,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -178,7 +178,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -187,7 +187,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -216,7 +216,7 @@ export const Discovery = ({
                             margin: '2rem 0 0 8rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -225,7 +225,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -234,7 +234,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -243,7 +243,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -252,7 +252,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="335" />
+                                <img src="./testImage.png" width="275px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
