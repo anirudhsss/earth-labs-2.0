@@ -93,16 +93,16 @@ export const Xaxis = ({
             </Box>
             <Box sx={{
                 borderBottom: '1px solid black',
-                position: 'relative',
+                // position: 'relative',
             }}>
-                <span
+                {/* <span
                     style={{
                         position: 'absolute',
                         fontSize: '1.5rem',
                         right: '-3px',
                         top: '-5px',
                     }}
-                >&#x2C3;</span>
+                >&#x2C3;</span> */}
             </Box>
         </>
     )

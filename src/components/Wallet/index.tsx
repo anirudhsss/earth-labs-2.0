@@ -336,10 +336,11 @@ export const Wallet = ({
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
                                     hoverBackgroundColor={`${walletLocation ? '#FFF7EE' : '#FE7D06'}`}
                                     borderRadius="0.6rem"
-                                    padding="0.4rem 2.2rem"
+                                    padding="0.4rem 0.2rem"
+                                    width="75px"
                                 >
                                     <Typography
-                                        text="Maps"
+                                        text="My Atlas"
                                         fontSize="1.3rem"
                                     />
                                 </Button>

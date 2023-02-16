@@ -21,6 +21,7 @@ import MetaMaskOnboarding from "@metamask/onboarding";
 import { CLAIM_PROCESS } from 'constant';
 import { ethers, providers } from "ethers";
 import { ConnectWalletModal } from "components/ConnectWalletModal";
+import sample from '../../sample.json';
 
 export interface UserHomepageProps {
 
@@ -213,11 +214,12 @@ export const UserHomepage = ({
     useEffect(() => {
         const info = async () => {
             const res = await ApiRequest();
-            setData1(res?.data[0].hexes);
+            // setData1(res?.data[0].hexes);
+            setData1(sample[0].hexes);
             setLoading1(false);
         }
         info();
-    }, [])
+    }, [sample])
 
     const clamp = (a: number, min = 0, max = 1) => Math.min(max, Math.max(min, a)); //0.33
     const invlerp = (x: number, y: number, a: number) => { //0.35
@@ -544,13 +546,14 @@ export const UserHomepage = ({
                         hoverBoxShadow="none"
                         borderRadius={`${openMenu1 ? '2rem 2rem 0 0' : '2rem'}`}
                         padding="5px 20px"
-                        width="150px"
+                        width={`${(currency?.length > 0 || openMenu1) ? '15rem' : '8.3rem'}`}
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
                         border="1px solid #000"
                         borderBottom={`${openMenu1 ? '0' : '1px solid #000'}`}
                         onClick={onOpenYearMenu1}
+                        height="2.9rem"
                     >
                         {currency?.length > 0 ?
                             <Typography
@@ -709,10 +712,11 @@ export const UserHomepage = ({
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
                                     hoverBackgroundColor={`${(mapsLocation || homeLocation) ? '#FE7D06' : '#FFF7EE'}`}
                                     borderRadius="0.6rem"
-                                    padding="0.4rem 2.2rem"
+                                    padding="0.4rem 0.2rem"
+                                    width="75px"
                                 >
                                     <Typography
-                                        text="Maps"
+                                        text="My Atlas"
                                         fontSize="1.3rem"
                                     />
                                 </Button>
