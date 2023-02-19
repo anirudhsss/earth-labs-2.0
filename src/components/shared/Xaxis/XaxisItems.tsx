@@ -53,9 +53,13 @@ export const XaxisItems = ({
 
     useEffect(() => {
         if (monthOrYear === 'year') {
-            const arrIndexesOfClickedMonths = data1.filter((item: { timestamp: moment.MomentInput; }) => {
+            const arrIndexesOfClickedMonths = data1?.filter((item: {
+                p: number; timestamp: moment.MomentInput;
+            }) => {
                 let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
-                return monthFromApi === Number(month);
+                // console.log('item', item['p'])
+                //return monthFromApi === Number(month);
+                return item?.p === 1
             });
             setMatchedMonths(arrIndexesOfClickedMonths);
         }

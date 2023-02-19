@@ -54,7 +54,7 @@ export const Xaxis = ({
         setArrOfYears(onDisplayYear);
     }, [data1])
 
-    //console.log('hoverElementId', hoverElementId)
+    //console.log('arrOfYears', arrOfYears)
 
     return (
         <>

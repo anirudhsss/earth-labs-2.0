@@ -104,6 +104,14 @@ export const UserHomepage = ({
         }
     }, []);
 
+    // useEffect(() => {
+    //     let pattern = document.getElementById(`PAT-${index}`);
+    //     if (pattern) {
+    //         pattern.setAttribute("width", "100%");
+    //         pattern.setAttribute("height", "100%");
+    //     }
+    // }, []);
+
     const onOpenConnectWalletModal = useCallback(() => {
         setOpen(true);
     }, [open]);
@@ -376,7 +384,6 @@ export const UserHomepage = ({
                 let val1 = 35;
                 arrYearPointsOfAxis = [...arrYearPointsOfAxis, val1];
             }
-
             const arrOfYears: { month: any; dimension: any; noOfGlyphs: any; }[] = [];
             arrYearPointsOfAxis?.forEach((_, index) => {
                 arrOfYears.push({
