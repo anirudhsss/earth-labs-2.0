@@ -22,6 +22,7 @@ export interface XaxisProps {
     yearViewEnabled?: any;
     setYearViewEnabled?: any;
     backgroundColor?: string;
+    loading1?: any;
     hoverElementId?: number | null;
     onCircleHoverStarts: (elementId: any) => void;
     onCircleHoverEnds: (elementId: any) => void;
@@ -47,6 +48,7 @@ export const Xaxis = ({
     hoverElementId,
     onCircleHoverStarts,
     onCircleHoverEnds,
+    loading1,
 }: XaxisProps) => {
     const whichDuration = monthOrYear === 'year' ? arrOfYears : monthOrYear === 'month' ? arrOfMonths : [];
 
@@ -54,7 +56,7 @@ export const Xaxis = ({
         setArrOfYears(onDisplayYear);
     }, [data1])
 
-    //console.log('arrOfYears', arrOfYears)
+    console.log('loading1', loading1)
 
     return (
         <>
@@ -63,6 +65,7 @@ export const Xaxis = ({
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 position: 'relative',
+                zIndex: 99,
                 top: '17px',
             }}>
                 {whichDuration?.map((item: any) => {
@@ -93,6 +96,7 @@ export const Xaxis = ({
             </Box>
             <Box sx={{
                 borderBottom: '1px solid black',
+                marginTop: loading1 === false ? '0' : '53px',
                 // position: 'relative',
             }}>
                 {/* <span

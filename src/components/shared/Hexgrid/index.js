@@ -50,7 +50,7 @@ export const Hexgrid = ({
 
     //console.log('matchedMonths', matchedMonths)
     return (
-        <Box sx={{ width: '1600px', height: '80vh' }}>
+        <Box sx={{ width: '1600px', height: '84vh', position: 'static', zIndex: 100, }}>
             <HexGrid width={'100%'} height={'100%'} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
                 <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={{ x: -60, y: -35 }}>
                     {matchedMonths?.map((item, index) => {

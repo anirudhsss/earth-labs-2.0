@@ -543,7 +543,12 @@ export const UserHomepage = ({
             </Container>
             {/* </Box> */}
 
-            <Container padding="0.5rem 2rem 0 2rem">
+            <Container
+                // padding="0.5rem 2rem 0 2rem"
+                padding="0 2rem"
+                position="relative"
+            >
+
                 <Box className={styles.timeMenuBtn1}>
                     <Button
                         backgroundColor="#FFF7EE"
@@ -627,12 +632,12 @@ export const UserHomepage = ({
                 </Box>
 
                 <Box style={{
-                    width: '5%',
-                    marginLeft: '18rem',
-                    marginTop: '-2rem',
+                    width: '4%',
+                    marginLeft: (currency?.length > 0 || openMenu1) ? '16.5rem' : '10rem',
                     display: 'flex',
                     justifyContent: 'space-between',
-
+                    position: 'absolute',
+                    top: '20px',
                 }}>
                     <Typography
                         text="ETH"
@@ -649,27 +654,42 @@ export const UserHomepage = ({
                     />
                 </Box>
 
+                <Box sx={{
+                    position: 'absolute',
+                    top: '60px',
+                    left: '40px',
+                }}>
+                    <Typography
+                        text="Currently Viewing: 0.185 - 0.95 ETH"
+                        fontSize="1.2rem"
+                    />
+                </Box>
+
                 <Box className={styles.body}>
                     <Box
-                        className={styles.lhsBody}
+                        className={styles.lhsBody1}
+                        style={{
+                            //marginBottom: loading1 !== false ? '-100px' : '0',
+                            position: 'relative',
+                        }}
                     >
-                        <Box className={styles.lhsBody1}
+                        {/* <Box className={styles.lhsBody1}
                             style={{
                                 marginBottom: loading1 !== false ? '0px' : '-53px',
                                 position: 'relative',
                             }}
-                        >
-                            <span style={{
+                        > */}
+                        {/* <span style={{
                                 position: 'absolute',
                                 top: '-4px',
                                 left: '-4.5px',
-                            }}>&#8963;</span>
-                            <Typography
+                            }}>&#8963;</span> */}
+                        {/* <Typography
                                 text="Currently Viewing: 0.185 - 0.95 ETH"
                                 margin="2rem 0 0 2rem"
                                 fontSize="1.2rem"
-                            />
-                            <Box className={styles.lhsBody1Child}>
+                            /> */}
+                        {/* <Box className={styles.lhsBody1Child}>
                                 <Hexgrid
                                     matchedMonths={matchedMonths}
                                     arrOfMonths={arrOfMonths}
@@ -678,9 +698,9 @@ export const UserHomepage = ({
                                     onDisplayYear={onDisplayYear}
                                     setArrOfYears={setArrOfYears}
                                 />
-                            </Box>
-                        </Box>
-                        <Box className={styles.lhsBody2}>
+                            </Box> */}
+                        {/* </Box> */}
+                        {/* <Box className={styles.lhsBody2}>
                             <Xaxis
                                 data={data}
                                 // data2={myFunc()}
@@ -701,6 +721,46 @@ export const UserHomepage = ({
                                 onCircleHoverEnds={onCircleHoverEnds}
                                 hoverElementId={hoverElementId}
                                 backgroundColor={backgroundColor}
+                            />
+                        </Box> */}
+                    </Box>
+                    <Box className={styles.midBody}>
+                        <Box className={styles.lhsBody1Child}>
+                            <Hexgrid
+                                matchedMonths={matchedMonths}
+                                arrOfMonths={arrOfMonths}
+                                arrOfYears={arrOfYears}
+                                monthOrYear={monthOrYear}
+                                onDisplayYear={onDisplayYear}
+                                setArrOfYears={setArrOfYears}
+                            />
+                        </Box>
+                        <Box className={styles.lhsBody2}
+                        // style={{
+                        //     bottom: loading1 === false ? '-53px' : '0',
+                        // }}
+                        >
+                            <Xaxis
+                                data={data}
+                                // data2={myFunc()}
+                                monthOrYear={monthOrYear}
+                                onDisplayYear={onDisplayYear}
+                                onDisplayMonth={onDisplayMonth}
+                                onCircleClicked={onCircleClicked}
+                                clickedElement={clickedElement}
+                                data1={data1}
+                                arrOfMonths={arrOfMonths}
+                                arrOfYears={arrOfYears}
+                                setArrOfYears={setArrOfYears}
+                                matchedMonths={matchedMonths}
+                                setMatchedMonths={setMatchedMonths}
+                                yearViewEnabled={yearViewEnabled}
+                                setYearViewEnabled={setYearViewEnabled}
+                                onCircleHoverStarts={onCircleHoverStarts}
+                                onCircleHoverEnds={onCircleHoverEnds}
+                                hoverElementId={hoverElementId}
+                                backgroundColor={backgroundColor}
+                                loading1={loading1}
                             />
                         </Box>
                     </Box>
@@ -876,7 +936,16 @@ export const UserHomepage = ({
                         </Box>
                     </Box>
                 </Box>
-
+                {/* <Box className={styles.lhsBody1Child}>
+                    <Hexgrid
+                        matchedMonths={matchedMonths}
+                        arrOfMonths={arrOfMonths}
+                        arrOfYears={arrOfYears}
+                        monthOrYear={monthOrYear}
+                        onDisplayYear={onDisplayYear}
+                        setArrOfYears={setArrOfYears}
+                    />
+                </Box> */}
             </Container>
 
             <ConnectWalletModal

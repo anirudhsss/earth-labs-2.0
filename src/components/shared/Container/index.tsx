@@ -9,6 +9,8 @@ export interface ContainerProps {
     width?: string;
     borderBottom?: string;
     children?: any;
+    position?: any;
+    height?: any;
 }
 
 export const Container = ({
@@ -19,6 +21,8 @@ export const Container = ({
     width,
     borderBottom,
     children,
+    position,
+    height,
 }: ContainerProps) => {
 
 
@@ -31,6 +35,8 @@ export const Container = ({
                 width: width,
                 borderBottom: borderBottom,
                 padding: padding,
+                position: position,
+                height: height,
             }}
         >
             {children}
