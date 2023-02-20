@@ -46,10 +46,10 @@ export const Discovery = ({
                     /> */}
                     <span style={{ marginLeft: '5px' }}>
                         <img
-                            src='./assets/images/atlasLogo.png'
+                            src='./assets/images/light_atlas.svg'
                             alt=""
-                            width="100"
-                            height="40"
+                            width="75"
+                            height="32"
                             style={{
                                 backgroundColor: 'transparent'
                             }}

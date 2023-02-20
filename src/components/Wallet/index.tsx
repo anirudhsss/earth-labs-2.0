@@ -22,12 +22,12 @@ export const Wallet = ({
 
     return (
         <Box sx={{
-            backgroundColor: 'rgba(28, 34, 61, 0.96)',
+            backgroundColor: '#1C223D',
 
         }}
         >
             <Container
-                padding="1.5rem 2rem 1.5rem 0"
+                padding="1rem 2rem 1rem 0"
                 display='flex'
                 justifyContent='space-between'
                 alignItems='center'
@@ -36,21 +36,21 @@ export const Wallet = ({
             >
                 <Box className={styles.lhsHeader}>
                     <span style={{ marginLeft: '15px' }}>
-                        {/* <img
-                            src='./assets/images/atlasLogo.png'
+                        <img
+                            src='./assets/images/dark_atlas.svg'
                             alt=""
                             width="100"
                             height="40"
                             style={{
                                 backgroundColor: 'transparent'
                             }}
-                        /> */}
+                        />
 
-                        <Typography
+                        {/* <Typography
                             text="Atlas"
                             fontSize='2rem'
                             color='#ffffff'
-                        />
+                        /> */}
                     </span>
                 </Box>
                 <Box>
