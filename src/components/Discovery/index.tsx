@@ -68,7 +68,7 @@ export const Discovery = ({
                         margin="0 0 0 1rem"
                     >
                         <Typography
-                            text={userWalletAddress === null ? 'Search' : 'Generate Glyph'}
+                            text={userWalletAddress === null ? 'Search' : 'Search'}
                             fontSize="1.4rem"
                         />
                     </Button>
