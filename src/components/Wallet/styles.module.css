@@ -123,7 +123,7 @@
 }
 
 .bwText {
-    width: 80rem;
+    width: 100rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

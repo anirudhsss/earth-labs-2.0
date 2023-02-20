@@ -27,7 +27,7 @@ export const Wallet = ({
         }}
         >
             <Container
-                padding="0.5rem 2rem 0.5rem 0"
+                padding="1.5rem 2rem 1.5rem 0"
                 display='flex'
                 justifyContent='space-between'
                 alignItems='center'
@@ -106,54 +106,58 @@ export const Wallet = ({
                         }}>
                             <Typography
                                 text="Atlas Wallet"
-                                fontSize='2rem'
+                                fontSize='2.5rem'
                                 color='#ffffff'
                             />
                             <Button
                                 borderRadius="20px"
-                                padding="5px 30px"
+                                padding="3px 25px"
                                 backgroundColor='#fff'
                                 hoverBackgroundColor='#fff'
+                                width='150px'
                             >
                                 <Typography
                                     text="Coins & FTs"
-                                    fontSize='1.2rem'
+                                    fontSize='1.4rem'
                                     color='#000'
                                 />
                             </Button>
                             <Button
                                 borderRadius="20px"
-                                padding="5px 30px"
+                                padding="3px 25px"
                                 backgroundColor='#fff'
                                 hoverBackgroundColor='#fff'
+                                width='150px'
                             >
                                 <Typography
                                     text="Collectibles"
-                                    fontSize='1.2rem'
+                                    fontSize='1.4rem'
                                     color='#000'
                                 />
                             </Button>
                             <Button
                                 borderRadius="20px"
-                                padding="5px 30px"
+                                padding="3px 25px"
                                 backgroundColor='#fff'
                                 hoverBackgroundColor='#fff'
+                                width='150px'
                             >
                                 <Typography
                                     text="POAPs & Badges"
-                                    fontSize='1.2rem'
+                                    fontSize='1.4rem'
                                     color='#000'
                                 />
                             </Button>
                             <Button
                                 borderRadius="20px"
-                                padding="5px 30px"
+                                padding="3px 25px"
                                 backgroundColor='#fff'
                                 hoverBackgroundColor='#fff'
+                                width='150px'
                             >
                                 <Typography
                                     text="Content"
-                                    fontSize='1.2rem'
+                                    fontSize='1.4rem'
                                     color='#000'
                                 />
                             </Button>
@@ -166,7 +170,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -176,7 +180,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -186,7 +190,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -196,7 +200,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -206,7 +210,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -220,7 +224,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -230,7 +234,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -240,7 +244,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -250,7 +254,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -260,7 +264,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -274,7 +278,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -284,7 +288,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -294,7 +298,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -304,7 +308,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -314,7 +318,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.1rem"
+                                    fontSize="1.3rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
