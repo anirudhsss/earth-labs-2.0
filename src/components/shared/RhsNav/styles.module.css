@@ -1,0 +1,65 @@
+.rhsBody {
+    width: 10%;
+    height: 100%;
+}
+
+.mapAndWalletBtn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.allIcons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}.upperIcons {
+    width: 100%;
+    height: 11vh;
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.lowerIcons {
+    width: 100%;
+    height: 16vh;
+    margin-top: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.iconOuter {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    /* background-color: #FFF7EE; */
+    box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.25);
+    display: inline-block;
+}
+
+.timeMenuBtn {
+    height: 13vh;
+    margin-top: 10vh;
+    display: flex;
+    align-items: flex-end;
+}
+
+.imageAsIcon {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+
+.blackTriangle {
+    width: 9px;
+    height: 9px;
+}

@@ -8,6 +8,8 @@ import { ApiRequest, truncate } from "components/utils";
 import { ImageList1 } from "components/shared/ImageList";
 import { Link, useLocation } from "react-router-dom";
 import { Container } from "components/shared/Container";
+import { Header } from "components/shared/Header";
+import { RhsNav } from "components/shared/RhsNav";
 
 export interface DiscoveryProps {
     userWalletAddress?: any;
@@ -17,6 +19,10 @@ export const Discovery = ({
     userWalletAddress,
 }: DiscoveryProps) => {
     const location = useLocation();
+    const homeLocation = location?.state?.icon === 'home';
+    const walletLocation = location?.state?.icon === 'wallet';
+    const mapsLocation = location?.state?.icon === 'maps';
+    const discoveryLocation = location?.state?.icon === 'discovery';
     // const { icon } = location?.state;
     const [data, setData] = useState<any>();
 
@@ -30,94 +36,12 @@ export const Discovery = ({
 
     return (
         <>
-            <Container
-                padding="0.5rem 2rem 0.5rem 0"
-                display='flex'
-                justifyContent='space-between'
-                alignItems='center'
-                width='100%'
-                borderBottom='0.5px solid #000000'
-            >
-                <Box className={styles.lhsHeader}>
-                    {/* <Typography
-                        text="Atlas"
-                        fontSize="2rem"
-                        fontWeight="500"
-                    /> */}
-                    <span style={{ marginLeft: '5px' }}>
-                        <img
-                            src='./assets/images/light_atlas.svg'
-                            alt=""
-                            width="75"
-                            height="32"
-                            style={{
-                                backgroundColor: 'transparent'
-                            }}
-                        />
-                    </span>
-                    <NormalSearchField
-
-                    />
-                    <Button
-                        backgroundColor="#FE7D06"
-                        color="white"
-                        border="0.5px solid rgba(46, 52, 81, 0.58)"
-                        hoverBackgroundColor="#FE7D06"
-                        borderRadius="2rem"
-                        padding="0.2rem 2.5rem"
-                        margin="0 0 0 1rem"
-                    >
-                        <Typography
-                            text={userWalletAddress === null ? 'Search' : 'Search'}
-                            fontSize="1.4rem"
-                        />
-                    </Button>
-                </Box>
-                <Box>
-                    {userWalletAddress === null ?
-                        <Button
-                            backgroundColor="transparent"
-                            color="#000000"
-                            border="0.5px solid rgba(46, 52, 81, 0.58)"
-                            hoverBackgroundColor="transparent"
-                            borderRadius="2rem"
-                            padding="0.3rem 2.5rem"
-                        // onClick={onOpenConnectWalletModal}
-                        >
-                            <Typography
-                                text="Connect Wallet"
-                                fontSize="1.3rem"
-                            />
-                        </Button>
-                        : <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            width: '14rem'
-                        }}>
-                            {/* <Typography
-                                text={truncate(userWalletAddress, 12)}
-                            /> */}
-                            {/* <span style={{ width: '35px' }}>
-                                <img src="/assets/images/earth.svg" />
-                            </span> */}
-                            {/* <LogoutButton /> */}
-                            <Typography
-                                text="Allen.earth.eth"
-                                fontSize="1.4rem"
-                            />
-                            <Avatar
-                                alt="Remy Sharp"
-                                src="/assets/images/avatarTest.jpg"
-                                sx={{
-                                    width: 30,
-                                    height: 30,
-                                    cursor: 'pointer',
-                                }}
-                            />
-                        </div>}
-                </Box>
-            </Container>
+            <Header
+                homeLocation={homeLocation}
+                walletLocation={walletLocation}
+                mapsLocation={mapsLocation}
+                discoveryLocation={discoveryLocation}
+            />
 
             <Container padding="0.5rem 2rem 0 2rem">
                 <Box className={styles.body}>
@@ -125,13 +49,13 @@ export const Discovery = ({
                         className={styles.lhsBody}
                     >
                         <Box sx={{
-                            margin: '2rem 0 0 8rem',
+                            margin: '2rem 0 0 23rem',
                         }}>
-                            <span><img src="./testImage.png" width="275px" /></span>
-                            <span style={{ marginLeft: '-85px' }}><img src="./testImage.png" width="275px" /></span>
-                            <span style={{ marginLeft: '-85px' }}><img src="./testImage.png" width="275px" /></span>
+                            <span><img src="./testImage.png" width="250px" /></span>
+                            <span style={{ marginLeft: '-80px' }}><img src="./testImage.png" width="250px" /></span>
+                            <span style={{ marginLeft: '-80px' }}><img src="./testImage.png" width="250px" /></span>
                         </Box>
-                        <Box className={styles.bwText}>
+                        <Box className={styles.bwText} sx={{ marginLeft: '16rem' }}>
                             <Box>
                                 <Typography
                                     text="Top Digital Art Sales"
@@ -148,10 +72,10 @@ export const Discovery = ({
                             </Box>
                         </Box>
                         <Box className={styles.glyphContainerParent} sx={{
-                            margin: '2rem 0 0 8rem',
+                            margin: '2rem 0 0 23rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -160,7 +84,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -169,7 +93,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -178,7 +102,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -187,7 +111,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -196,7 +120,7 @@ export const Discovery = ({
                                 />
                             </span>
                         </Box>
-                        <Box className={styles.bwText} sx={{ marginTop: '3rem', }}>
+                        <Box className={styles.bwText} sx={{ marginTop: '3rem', marginLeft: '16rem' }}>
                             <Box>
                                 <Typography
                                     text="Biggest Swaps"
@@ -213,10 +137,10 @@ export const Discovery = ({
                             </Box>
                         </Box>
                         <Box className={styles.glyphContainerParent} sx={{
-                            margin: '2rem 0 0 8rem',
+                            margin: '2rem 0 0 23rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -225,7 +149,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -234,7 +158,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -243,7 +167,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -252,7 +176,7 @@ export const Discovery = ({
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="275px" />
+                                <img src="./testImage.png" width="250px" />
                                 <Typography
                                     text="Share | View Map | View collection"
                                     fontSize="1.1rem"
@@ -262,87 +186,9 @@ export const Discovery = ({
                             </span>
                         </Box>
                     </Box>
-                    <Box className={styles.rhsBody}>
-                        {/* <Box className={styles.mapAndWalletBtn}>
-                            <Button
-                                backgroundColor="#ffffff"
-                                color="#000000"
-                                border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                hoverBackgroundColor="#ffffff"
-                                borderRadius="0.6rem"
-                                padding="0.4rem 2.2rem"
-                            >
-                                <Typography
-                                    text="Maps"
-                                    fontSize="1.3rem"
-                                />
-                            </Button>
-                            <Button
-                                backgroundColor="#ffffff"
-                                color="#000000"
-                                border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                hoverBackgroundColor="#ffffff"
-                                borderRadius="0.6rem"
-                                padding="0.4rem 2rem"
-                            >
-                                <Typography
-                                    text="Wallet"
-                                    fontSize="1.3rem"
-                                />
-                            </Button>
-                        </Box> */}
-                        <Box className={styles.allIcons}>
-                            <Box className={styles.upperIcons}>
-                                <Link
-                                    to="/maps"
-                                    state={{
-                                        icon: "home"
-                                    }}
-                                >
-                                    <span
-                                        className={styles.iconOuter}
-                                        style={{ backgroundColor: location?.state?.icon === 'home' ? '#FE7D06' : '#FFF7EE' }}
-                                    >
-                                        <img
-                                            src='/assets/images/home.svg'
-                                            alt=""
-                                            className={styles.imageAsIcon}
-                                        // onClick={() => onIconsClick('home')}
-                                        />
-                                    </span>
-                                </Link>
-                                <Link
-                                    to="/discovery"
-                                    state={{
-                                        icon: "discovery"
-                                    }}
-                                >
-                                    <span
-                                        className={styles.iconOuter}
-                                        style={{ backgroundColor: location?.state?.icon === 'discovery' ? '#FE7D06' : '#FFF7EE' }}
-                                    >
-                                        <img
-                                            src='/assets/images/discovery.svg'
-                                            alt=""
-                                            className={styles.imageAsIcon}
-                                        // onClick={() => onIconsClick('discovery')}
-                                        />
-                                    </span>
-                                </Link>
-                            </Box>
-                            <Box className={styles.lowerIcons}>
-                                <a className={styles.iconOuter}>
-                                    <img src='/assets/images/help.svg' alt="" className={styles.imageAsIcon} />
-                                </a>
-                                <a href="https://twitter.com/dotearth_" target="_blank" className={styles.iconOuter}>
-                                    <img src='/assets/images/twitter.svg' alt="" className={styles.imageAsIcon} />
-                                </a>
-                                <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter}>
-                                    <img src='/assets/images/discord.svg' alt="" className={styles.imageAsIcon} />
-                                </a>
-                            </Box>
-                        </Box>
-                    </Box>
+                    <RhsNav
+
+                    />
                 </Box>
             </Container>
         </>

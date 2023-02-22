@@ -31,6 +31,7 @@ export interface ButtonProps {
     borderBottom?: any;
     textDecoration?: any;
     height?: any;
+    // onClick?; any;
 }
 
 export const Button = ({
@@ -94,7 +95,6 @@ export const Button = ({
                     boxShadow: hoverBoxShadow,
                 }
             }}
-
         >
             {children}
         </MUIButton>

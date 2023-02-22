@@ -22,6 +22,10 @@ import { CLAIM_PROCESS } from 'constant';
 import { ethers, providers } from "ethers";
 import { ConnectWalletModal } from "components/ConnectWalletModal";
 import sample from '../../sample.json';
+import { Header } from "components/shared/Header";
+import { RhsNav } from "components/shared/RhsNav";
+import { ModalDialog } from "components/shared/ModalDialog";
+import { Wallet } from "components/Wallet";
 
 export interface UserHomepageProps {
 
@@ -33,21 +37,31 @@ const YEARS = [
     { id: 2, value: '2019' },
     { id: 3, value: '2020' },
 ]
-const CURR = [
+const ETH = [
     { id: 0, value: '0.001 - 0.01 ETH' },
     { id: 1, value: '0.01 - 0.1 ETH' },
     { id: 2, value: '0.1 - 1 ETH' },
     { id: 3, value: '1 - 10 ETH' },
 ]
+const USDC = [
+    { id: 0, value: '< $500 USDC' },
+    { id: 1, value: '$500 - $1000 USDC' },
+    { id: 2, value: '$1000 - $5000 USDC' },
+    { id: 3, value: '$5000 - $10,000 USDC' },
+    { id: 4, value: '> $10,000 USDC' },
+]
 
 export const UserHomepage = ({
 
 }: UserHomepageProps) => {
+    const [eth, setEth] = useState(ETH);
+    const [usdc, setUsdc] = useState(USDC);
+    const [currName, setCurrName] = useState('ETH');
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
     const walletLocation = location?.state?.icon === 'wallet';
     const mapsLocation = location?.state?.icon === 'maps';
-    // const { icon } = location?.state;
+    const discoveryLocation = location?.state?.icon === 'discovery';
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
@@ -58,7 +72,7 @@ export const UserHomepage = ({
     const [occurences, setOccurences] = useState<any>();
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
     const [clickedElement, setClickedElement] = useState<string>('');
-    const [currency, setCurrency] = useState<any>()
+    const [currency, setCurrency] = useState<any>([])
     const [years, setYears] = useState<any>()
     const [monthOrYear, setmonthOrYear] = useState<any>('');
     const [arrOfYears, setArrOfYears] = useState<any>([]);
@@ -87,6 +101,8 @@ export const UserHomepage = ({
     const [sessionToken, setSessionToken] = useState<any>();
     const [isWalletConnected, setWalletConnected] = useState(false);
     const [data, setData] = useState<any>();
+    const [openWalletModal, setOpenWalletModal] = useState(false);
+    const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
 
     useEffect(() => {
         const info = async () => {
@@ -103,14 +119,6 @@ export const UserHomepage = ({
             setEtherProvider(provider);
         }
     }, []);
-
-    // useEffect(() => {
-    //     let pattern = document.getElementById(`PAT-${index}`);
-    //     if (pattern) {
-    //         pattern.setAttribute("width", "100%");
-    //         pattern.setAttribute("height", "100%");
-    //     }
-    // }, []);
 
     const onOpenConnectWalletModal = useCallback(() => {
         setOpen(true);
@@ -234,71 +242,6 @@ export const UserHomepage = ({
         return clamp((a - x) / (y - x))
     };
 
-    // const onSortingData = (data1: any[] | undefined) => {
-    //     let arr: any[] = [];
-    //     let arr2: any[] = [];
-    //     let arrValOfYear: any[] = [];
-    //     let arrKeyOfYear: any[] = [];
-    //     if (data1) {
-    //         const arrOfMonths = data1.map((item) => {
-    //             return Number(moment(item.timestamp).format("MM"));
-    //         });
-    //         const arrOfYears = data1.map((item) => {
-    //             return Number(moment(item.timestamp).format("YYYY"));
-    //         });
-    //         const freqOfMonths = arrOfMonths.reduce((acc: any, item) => {
-    //             acc[item] = acc[item] ? acc[item] + 1 : 1;
-    //             return acc;
-    //         }, {});
-    //         const freqOfYears = arrOfYears.reduce((acc: any, item) => {
-    //             acc[item] = acc[item] ? acc[item] + 1 : 1;
-    //             return acc;
-    //         }, {});
-    //         arrValOfYear = Object.values(freqOfYears)
-    //         arrKeyOfYear = Object.keys(freqOfYears)
-    //         arr = Object.values(freqOfMonths);
-    //         arr2 = Object.keys(freqOfMonths);
-    //     }
-    //     return [arr, arr2, arrValOfYear, arrKeyOfYear];
-    // }
-
-    // const myFunc = () => {
-    //     const test = onSortingData(data1);
-    //     const arr = test[0]; //original month value count
-    //     const arr2 = test[1]; //original month key count
-    //     const arrValOfYear = test[2];
-    //     const arrKeyOfYear = test[3];
-    //     const min = Math.min(...arr);
-    //     const max = Math.max(...arr);
-    //     let arrYearPointsOfAxis: any[] = [];
-    //     if (arrValOfYear?.length === 1) {
-    //         let val1 = ((35 + 10) / 2);
-    //         arrYearPointsOfAxis = [...arrYearPointsOfAxis, val1];
-    //     }
-    //     let arr1: any[] = [];
-    //     arr.forEach((item: number) => {
-    //         let val1 = (((35 - 10) * invlerp(min, max, item)) + 10);
-    //         arr1 = [...arr1, val1] //processed count
-    //     })
-    //     const arr3: { month: any; dimension: any; noOfGlyphs: any; }[] = [];
-    //     arr.forEach((_, index) => {
-    //         arr3.push({
-    //             month: arr2[index],//original month key count
-    //             dimension: arr1[index],//processed count
-    //             noOfGlyphs: arr[index],//original month value count
-    //         })
-    //     })
-    //     const arr3OfYear: any[] = [];
-    //     arrValOfYear?.forEach((_, index) => {
-    //         arr3OfYear.push({
-    //             month: arrKeyOfYear[index], //its year, not month
-    //             dimension: arrYearPointsOfAxis[index],
-    //             noOfGlyphs: arrValOfYear[index],
-    //         })
-    //     })
-    //     return [arr3, arr3OfYear];
-    // };
-
     const onCircleClicked = (month: any) => {
         // setYearViewEnabled(false);
         setClickedElement(month);
@@ -313,6 +256,7 @@ export const UserHomepage = ({
         setAnchorEl(e.currentTarget);
     }
     const onOpenYearMenu1 = (e: React.MouseEvent<HTMLElement>) => {
+        console.log('anchorEl1', anchorEl1)
         setAnchorEl1(e.currentTarget);
     }
     const onCloseYearMenu = () => {
@@ -362,7 +306,7 @@ export const UserHomepage = ({
 
     const onValueMenuItemClicked1 = (id: number) => {
         onCloseYearMenu1();
-        const selectedItem = CURR.filter((item) => item.id === id);
+        const selectedItem = chosenCurrency.filter((item: any) => item.id === id);
         setCurrency(selectedItem);
     }
 
@@ -445,103 +389,34 @@ export const UserHomepage = ({
         setHoverElementId(null);
     }
 
+    const onWalletBtnClickOpen = () => {
+        setOpenWalletModal(true);
+    }
+
+    const onWalletBtnClickClose = () => {
+        setOpenWalletModal(false);
+    }
+
+    const onChosingCurrency = (currency: any) => {
+        if (currency === 'ETH') {
+            setCurrName('ETH');
+            setCurrency([]);
+            setChosenCurrency(eth);
+        } else if (currency === 'USDC') {
+            setCurrName('USDC');
+            setCurrency([]);
+            setChosenCurrency(usdc);
+        }
+    }
+
     return (
         <>
-            {/* <Box className={styles.header}> */}
-            <Container
-                padding="0.5rem 2rem 0.5rem 0"
-                display='flex'
-                justifyContent='space-between'
-                alignItems='center'
-                width='100%'
-                borderBottom='0.5px solid #000000'
-            >
-                <Box className={styles.lhsHeader}>
-                    {/* <Typography
-                        text="Atlas"
-                        fontSize="2rem"
-                        fontWeight="500"
-                    /> */}
-                    <span style={{ marginLeft: '5px' }}>
-                        <img
-                            src='./assets/images/light_atlas.svg'
-                            alt=""
-                            width="75"
-                            height="32"
-                            style={{
-                                backgroundColor: 'transparent'
-                            }}
-                        />
-                    </span>
-                    <NormalSearchField
-
-                    />
-                    <Button
-                        backgroundColor="#FE7D06"
-                        color="white"
-                        border="0.5px solid rgba(46, 52, 81, 0.58)"
-                        hoverBackgroundColor="#FE7D06"
-                        borderRadius="2rem"
-                        padding="0.2rem 2.5rem"
-                        margin="0 0 0 1rem"
-                    >
-                        <Typography
-                            text={userWalletAddress === null ? 'Search' : 'Search'}
-                            fontSize="1.4rem"
-                        />
-                    </Button>
-                </Box>
-                <Box>
-                    {userWalletAddress === null ?
-                        <Button
-                            backgroundColor="transparent"
-                            color="#000000"
-                            border="0.5px solid rgba(46, 52, 81, 0.58)"
-                            hoverBackgroundColor="transparent"
-                            borderRadius="2rem"
-                            padding="0.3rem 2.5rem"
-                            onClick={onOpenConnectWalletModal}
-                        >
-                            <Typography
-                                text="Connect Wallet"
-                                fontSize="1.3rem"
-                            />
-                        </Button>
-                        :
-                        <div
-                            onClick={logoutWallet}
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                width: '14rem'
-                            }}
-                        >
-                            {/* <Typography
-                                text={truncate(userWalletAddress, 12)}
-                            /> */}
-                            {/* <span style={{ width: '35px' }}>
-                                <img src="/assets/images/earth.svg" />
-                            </span> */}
-                            {/* <LogoutButton /> */}
-                            <Typography
-                                text="Allen.earth.eth"
-                                fontSize="1.4rem"
-                            />
-                            <Avatar
-                                alt=""
-                                src="/assets/images/avatarTest.jpg"
-                                sx={{
-                                    width: 30,
-                                    height: 30,
-                                    cursor: 'pointer',
-                                }}
-                            />
-                        </div>
-                    }
-                </Box>
-            </Container>
-            {/* </Box> */}
+            <Header
+                homeLocation={homeLocation}
+                walletLocation={walletLocation}
+                mapsLocation={mapsLocation}
+                discoveryLocation={discoveryLocation}
+            />
 
             <Container
                 // padding="0.5rem 2rem 0 2rem"
@@ -557,7 +432,7 @@ export const UserHomepage = ({
                         boxShadow="none"
                         hoverBoxShadow="none"
                         borderRadius={`${openMenu1 ? '2rem 2rem 0 0' : '2rem'}`}
-                        padding="5px 20px"
+                        padding="5px"
                         width={`${(currency?.length > 0 || openMenu1) ? '15rem' : '8.3rem'}`}
                         display="flex"
                         justifyContent="center"
@@ -611,7 +486,7 @@ export const UserHomepage = ({
 
                         }}
                     >
-                        {CURR.map((item) => {
+                        {chosenCurrency.map((item: any) => {
                             return (
                                 <>
                                     <MenuItem
@@ -638,20 +513,32 @@ export const UserHomepage = ({
                     justifyContent: 'space-between',
                     position: 'absolute',
                     top: '20px',
+                    zIndex: '101',
                 }}>
-                    <Typography
-                        text="ETH"
-                        fontSize="13px"
-                        color={`${openMenu1 && '#FE7D06'}`}
-                    />
+                    <span
+                        style={{ cursor: 'pointer', }}
+                        onClick={() => onChosingCurrency('ETH')}
+                    >
+                        <Typography
+                            text="ETH"
+                            fontSize="13px"
+                            color={`${currName === 'ETH' ? '#FE7D06' : '#000'}`}
+                        />
+                    </span>
                     <Typography
                         text=" |"
                         fontSize="13px"
                     />
-                    <Typography
-                        text=" USDC"
-                        fontSize="13px"
-                    />
+                    <span
+                        style={{ cursor: 'pointer', }}
+                        onClick={() => onChosingCurrency('USDC')}
+                    >
+                        <Typography
+                            text=" USDC"
+                            fontSize="13px"
+                            color={`${currName === 'USDC' ? '#FE7D06' : '#000'}`}
+                        />
+                    </span>
                 </Box>
 
                 <Box sx={{
@@ -659,10 +546,12 @@ export const UserHomepage = ({
                     top: '60px',
                     left: '40px',
                 }}>
-                    <Typography
-                        text="Currently Viewing: 0.185 - 0.95 ETH"
-                        fontSize="1.2rem"
-                    />
+                    {currency?.length > 0 &&
+                        <Typography
+                            text={`Currently Viewing: ${currency[0].value}`}
+                            fontSize="1.2rem"
+                        />
+                    }
                 </Box>
 
                 <Box className={styles.body}>
@@ -725,227 +614,48 @@ export const UserHomepage = ({
                         </Box> */}
                     </Box>
                     <Box className={styles.midBody}>
-                        <Box className={styles.lhsBody1Child}>
-                            <Hexgrid
-                                matchedMonths={matchedMonths}
-                                arrOfMonths={arrOfMonths}
-                                arrOfYears={arrOfYears}
-                                monthOrYear={monthOrYear}
-                                onDisplayYear={onDisplayYear}
-                                setArrOfYears={setArrOfYears}
-                            />
-                        </Box>
-                        <Box className={styles.lhsBody2}
-                        // style={{
-                        //     bottom: loading1 === false ? '-53px' : '0',
-                        // }}
-                        >
-                            <Xaxis
-                                data={data}
-                                // data2={myFunc()}
-                                monthOrYear={monthOrYear}
-                                onDisplayYear={onDisplayYear}
-                                onDisplayMonth={onDisplayMonth}
-                                onCircleClicked={onCircleClicked}
-                                clickedElement={clickedElement}
-                                data1={data1}
-                                arrOfMonths={arrOfMonths}
-                                arrOfYears={arrOfYears}
-                                setArrOfYears={setArrOfYears}
-                                matchedMonths={matchedMonths}
-                                setMatchedMonths={setMatchedMonths}
-                                yearViewEnabled={yearViewEnabled}
-                                setYearViewEnabled={setYearViewEnabled}
-                                onCircleHoverStarts={onCircleHoverStarts}
-                                onCircleHoverEnds={onCircleHoverEnds}
-                                hoverElementId={hoverElementId}
-                                backgroundColor={backgroundColor}
-                                loading1={loading1}
-                            />
-                        </Box>
+                        <Hexgrid
+                            matchedMonths={matchedMonths}
+                            arrOfMonths={arrOfMonths}
+                            arrOfYears={arrOfYears}
+                            monthOrYear={monthOrYear}
+                            onDisplayYear={onDisplayYear}
+                            setArrOfYears={setArrOfYears}
+                        />
+                        <Xaxis
+                            data={data}
+                            // data2={myFunc()}
+                            monthOrYear={monthOrYear}
+                            onDisplayYear={onDisplayYear}
+                            onDisplayMonth={onDisplayMonth}
+                            onCircleClicked={onCircleClicked}
+                            clickedElement={clickedElement}
+                            data1={data1}
+                            arrOfMonths={arrOfMonths}
+                            arrOfYears={arrOfYears}
+                            setArrOfYears={setArrOfYears}
+                            matchedMonths={matchedMonths}
+                            setMatchedMonths={setMatchedMonths}
+                            yearViewEnabled={yearViewEnabled}
+                            setYearViewEnabled={setYearViewEnabled}
+                            onCircleHoverStarts={onCircleHoverStarts}
+                            onCircleHoverEnds={onCircleHoverEnds}
+                            hoverElementId={hoverElementId}
+                            backgroundColor={backgroundColor}
+                            loading1={loading1}
+                        />
                     </Box>
-                    <Box className={styles.rhsBody}>
-                        <Box className={styles.mapAndWalletBtn}>
-                            <Link
-                                to="/maps"
-                                state={{
-                                    icon: 'maps',
-                                }}
-                                style={{ textDecoration: 'none', }}
-                            >
-                                <Button
-                                    backgroundColor={`${(mapsLocation || homeLocation) ? '#FE7D06' : '#FFF7EE'}`}
-                                    color={`${(mapsLocation || homeLocation) ? '#fff' : '#000'}`}
-                                    border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                    hoverBackgroundColor={`${(mapsLocation || homeLocation) ? '#FE7D06' : '#FFF7EE'}`}
-                                    borderRadius="0.6rem"
-                                    padding="0.4rem 0.2rem"
-                                    width="75px"
-                                >
-                                    <Typography
-                                        text="My Atlas"
-                                        fontSize="1.3rem"
-                                    />
-                                </Button>
-                            </Link>
-                            <Link
-                                to="/wallet"
-                                state={{
-                                    icon: 'wallet',
-                                }}
-                                style={{ textDecoration: 'none', }}
-                            >
-                                <Button
-                                    backgroundColor={`${(mapsLocation || homeLocation) ? '#FFF7EE' : '#FE7D06'}`}
-                                    color={`${(mapsLocation || homeLocation) ? '#000' : '#fff'}`}
-                                    border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                    hoverBackgroundColor={`${(mapsLocation || homeLocation) ? '#FFF7EE' : '#FE7D06'}`}
-                                    borderRadius="0.6rem"
-                                    padding="0.4rem 2rem"
-                                >
-                                    <Typography
-                                        text="Wallet"
-                                        fontSize="1.3rem"
-                                    />
-                                </Button>
-                            </Link>
-                        </Box>
-                        <Box className={styles.allIcons}>
-                            <Box className={styles.upperIcons}>
-                                <Link
-                                    to="/maps"
-                                    state={{
-                                        icon: 'home',
-                                    }}
-                                >
-                                    <span
-                                        className={styles.iconOuter}
-                                        style={{ backgroundColor: (homeLocation || mapsLocation || walletLocation) ? '#FE7D06' : '#FFF7EE' }}
-                                    >
-                                        <img
-                                            src='/assets/images/home.svg'
-                                            alt=""
-                                            className={styles.imageAsIcon}
-                                        />
-                                    </span>
-                                </Link>
-                                <Link
-                                    to="/discovery"
-                                    state={{
-                                        icon: 'discovery',
-                                    }}
-                                >
-                                    <span
-                                        className={styles.iconOuter}
-                                        style={{ backgroundColor: location?.state?.icon === 'discovery' ? '#FE7D06' : '#FFF7EE' }}
-                                    >
-                                        <img
-                                            src='/assets/images/discovery.svg'
-                                            alt=""
-                                            className={styles.imageAsIcon}
-                                        />
-                                    </span>
-                                </Link>
-                            </Box>
-                            <Box className={styles.lowerIcons}>
-                                <a className={styles.iconOuter}>
-                                    <img src='/assets/images/help.svg' alt="" className={styles.imageAsIcon} />
-                                </a>
-                                <a href="https://twitter.com/dotearth_" target="_blank" className={styles.iconOuter}>
-                                    <img src='/assets/images/twitter.svg' alt="" className={styles.imageAsIcon} />
-                                </a>
-                                <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter}>
-                                    <img src='/assets/images/discord.svg' alt="" className={styles.imageAsIcon} />
-                                </a>
-                            </Box>
-                            <Box className={styles.timeMenuBtn}>
-                                <Button
-                                    backgroundColor="#FFF7EE"
-                                    hoverBackgroundColor="#FFF7EE"
-                                    color="black"
-                                    boxShadow="none"
-                                    hoverBoxShadow="none"
-                                    borderRadius={`${openMenu ? '0 0 2rem 2rem' : '2rem'}`}
-                                    padding="5px 22px"
-                                    width="85px"
-                                    display="flex"
-                                    justifyContent="space-around"
-                                    alignItems="center"
-                                    border="1px solid #000"
-                                    borderTop={`${openMenu ? '0' : '1px solid #000'}`}
-                                    paddingTop={`${openMenu && '0px'}`}
-                                    onClick={onOpenYearMenu}
-                                >
-                                    {years?.length > 0 ?
-                                        <Typography
-                                            text={`${years[0].value}`}
-                                            fontSize="13px"
-                                            color={`${openMenu ? '#FE7D06' : '#000'}`}
-                                        />
-                                        : <Typography
-                                            text="time"
-                                            fontSize="13px"
-                                            color={`${openMenu ? '#FE7D06' : '#000'}`}
-                                        />}
-                                    <img
-                                        src={`${openMenu ? '/assets/images/orangeTriangle.svg' : '/assets/images/blackTriangle.svg'}`}
-                                        alt=""
-                                        className={styles.blackTriangle}
-                                    />
-                                </Button>
-                                <Menu
-                                    anchorEl={anchorEl}
-                                    open={openMenu}
-                                    onClose={onCloseYearMenu}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'left',
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-                                    PaperProps={{
-                                        elevation: 0,
-                                        style: {
-                                            width: '85px',
-                                            borderRadius: '20px 20px 0 0',
-                                            backgroundColor: '#FFF7EE',
-                                            border: '1px solid #000',
-                                        },
-
-                                    }}
-                                >
-                                    {arrOfYears?.map((item: any) => {
-                                        return (
-                                            <MenuItem
-                                                key={item.month}
-                                                onClick={() => onValueMenuItemClicked(item.month)}
-                                                sx={{
-                                                    fontSize: '13px',
-                                                    borderBottom: '1px solid black',
-                                                    '&:last-child': {
-                                                        borderBottom: '0px',
-                                                    },
-                                                }}
-                                            >{item.month}</MenuItem>
-                                        )
-                                    })}
-                                </Menu>
-                            </Box>
-                        </Box>
-                    </Box>
-                </Box>
-                {/* <Box className={styles.lhsBody1Child}>
-                    <Hexgrid
-                        matchedMonths={matchedMonths}
-                        arrOfMonths={arrOfMonths}
+                    <RhsNav
+                        openMenu={openMenu}
+                        onOpenYearMenu={onOpenYearMenu}
+                        years={years}
+                        anchorEl={anchorEl}
+                        onCloseYearMenu={onCloseYearMenu}
                         arrOfYears={arrOfYears}
-                        monthOrYear={monthOrYear}
-                        onDisplayYear={onDisplayYear}
-                        setArrOfYears={setArrOfYears}
+                        onValueMenuItemClicked={onValueMenuItemClicked}
+                        onWalletBtnClickOpen={onWalletBtnClickOpen}
                     />
-                </Box> */}
+                </Box>
             </Container>
 
             <ConnectWalletModal
@@ -954,6 +664,18 @@ export const UserHomepage = ({
                 onConnectMetamask={onConnectMetamask}
                 connectWalletConnectWallet={connectWalletConnectWallet}
             />
+
+            <ModalDialog
+                fullScreen="fullScreen"
+                openWalletModal={openWalletModal}
+                onWalletBtnClickClose={onWalletBtnClickClose}
+            // TransitionComponent={Transition}
+            >
+                <Wallet
+                    openWalletModal={openWalletModal}
+                    onWalletBtnClickClose={onWalletBtnClickClose}
+                />
+            </ModalDialog>
         </>
     )
 }
