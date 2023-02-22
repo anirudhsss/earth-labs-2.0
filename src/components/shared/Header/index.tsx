@@ -37,26 +37,32 @@ export const Header = ({
                     padding: openWalletModal && '5px 0'
                 }}
             >
-                <span style={{ margin: '0 15px' }}>
-                    {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal && <img
-                        src='./assets/images/light_atlas.svg'
-                        alt=""
-                        width="75"
-                        height="32"
-                        style={{
-                            backgroundColor: 'transparent'
-                        }}
-                    />}
-                    {openWalletModal && <img
-                        src='./assets/images/dark_atlas.svg'
-                        alt=""
-                        width="100"
-                        height="40"
-                        style={{
-                            backgroundColor: 'transparent'
-                        }}
-                    />}
-                </span>
+                {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal &&
+                    <span style={{ margin: '0 15px' }}>
+                        <img
+                            src='./assets/images/light_atlas.svg'
+                            alt=""
+                            width="75"
+                            height="32"
+                            style={{
+                                backgroundColor: 'transparent'
+                            }}
+                        />
+                    </span>
+                }
+                {openWalletModal &&
+                    <span style={{ margin: '0 15px 0 8px' }}>
+                        <img
+                            src='./assets/images/dark_atlas.svg'
+                            alt=""
+                            width="95"
+                            height="40"
+                            style={{
+                                backgroundColor: 'transparent'
+                            }}
+                        />
+                    </span>
+                }
                 {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal && <NormalSearchField
 
                 />}
