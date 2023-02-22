@@ -230,12 +230,12 @@ export const UserHomepage = ({
     useEffect(() => {
         const info = async () => {
             const res = await ApiRequest();
-            // setData1(res?.data[0].hexes);
-            setData1(sample[0].hexes);
+            setData1(res?.data[0].hexes);
+            //setData1(sample[0].hexes);
             setLoading1(false);
         }
         info();
-    }, [sample])
+    }, [])
 
     const clamp = (a: number, min = 0, max = 1) => Math.min(max, Math.max(min, a)); //0.33
     const invlerp = (x: number, y: number, a: number) => { //0.35

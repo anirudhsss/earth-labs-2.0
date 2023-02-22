@@ -58,8 +58,8 @@ export const XaxisItems = ({
             }) => {
                 let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
                 // console.log('item', item['p'])
-                //return monthFromApi === Number(month);
-                return item?.p === 1
+                return monthFromApi === Number(month);
+                // return item?.p === 1
             });
             setMatchedMonths(arrIndexesOfClickedMonths);
         }
