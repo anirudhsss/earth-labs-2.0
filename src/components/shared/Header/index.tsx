@@ -34,7 +34,7 @@ export const Header = ({
             <Box
                 className={styles.lhsHeader}
                 sx={{
-                    padding: walletLocation && '5px 0'
+                    padding: openWalletModal && '5px 0'
                 }}
             >
                 <span style={{ margin: '0 15px' }}>
