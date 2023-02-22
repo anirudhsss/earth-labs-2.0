@@ -622,28 +622,30 @@ export const UserHomepage = ({
                             onDisplayYear={onDisplayYear}
                             setArrOfYears={setArrOfYears}
                         />
-                        <Xaxis
-                            data={data}
-                            // data2={myFunc()}
-                            monthOrYear={monthOrYear}
-                            onDisplayYear={onDisplayYear}
-                            onDisplayMonth={onDisplayMonth}
-                            onCircleClicked={onCircleClicked}
-                            clickedElement={clickedElement}
-                            data1={data1}
-                            arrOfMonths={arrOfMonths}
-                            arrOfYears={arrOfYears}
-                            setArrOfYears={setArrOfYears}
-                            matchedMonths={matchedMonths}
-                            setMatchedMonths={setMatchedMonths}
-                            yearViewEnabled={yearViewEnabled}
-                            setYearViewEnabled={setYearViewEnabled}
-                            onCircleHoverStarts={onCircleHoverStarts}
-                            onCircleHoverEnds={onCircleHoverEnds}
-                            hoverElementId={hoverElementId}
-                            backgroundColor={backgroundColor}
-                            loading1={loading1}
-                        />
+                        <Box className={styles.lhsBody2}>
+                            <Xaxis
+                                data={data}
+                                // data2={myFunc()}
+                                monthOrYear={monthOrYear}
+                                onDisplayYear={onDisplayYear}
+                                onDisplayMonth={onDisplayMonth}
+                                onCircleClicked={onCircleClicked}
+                                clickedElement={clickedElement}
+                                data1={data1}
+                                arrOfMonths={arrOfMonths}
+                                arrOfYears={arrOfYears}
+                                setArrOfYears={setArrOfYears}
+                                matchedMonths={matchedMonths}
+                                setMatchedMonths={setMatchedMonths}
+                                yearViewEnabled={yearViewEnabled}
+                                setYearViewEnabled={setYearViewEnabled}
+                                onCircleHoverStarts={onCircleHoverStarts}
+                                onCircleHoverEnds={onCircleHoverEnds}
+                                hoverElementId={hoverElementId}
+                                backgroundColor={backgroundColor}
+                                loading1={loading1}
+                            />
+                        </Box>
                     </Box>
                     <RhsNav
                         openMenu={openMenu}

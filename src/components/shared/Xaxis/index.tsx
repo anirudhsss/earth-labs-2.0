@@ -67,7 +67,7 @@ export const Xaxis = ({
                 position: 'relative',
                 zIndex: 99,
                 top: '17px',
-                width: '91vw',
+                // width: '91vw',
             }}>
                 {whichDuration?.map((item: any) => {
                     return (
