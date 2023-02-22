@@ -52,7 +52,7 @@ export const Hexgrid = ({
     return (
         <Box sx={{ width: '1474px', height: '84vh', position: 'static', zIndex: 100, }}>
             <HexGrid width={'100%'} height={'100%'} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
-                <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={{ x: -60, y: -30 }}>
+                <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={{ x: -53, y: -26 }}>
                     {matchedMonths?.map((item, index) => {
                         let pattern = document.getElementById(`PAT-${index}`);
                         if (pattern) {
