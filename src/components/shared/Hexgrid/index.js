@@ -52,7 +52,7 @@ export const Hexgrid = ({
     return (
         <Box sx={{ width: '1474px', height: '84vh', position: 'static', zIndex: 100, }}>
             <HexGrid width={'100%'} height={'100%'} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
-                <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={{ x: -53, y: -26 }}>
+                <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={{ x: -53, y: -27 }}>
                     {matchedMonths?.map((item, index) => {
                         // let pattern = document.getElementById(`PAT-${index}`);
                         // if (pattern) {
@@ -60,7 +60,6 @@ export const Hexgrid = ({
                         //     pattern.setAttribute("height", "100%");
                         // }
                         // console.log(moment(item.timestamp).format("YYYY"), 'item.timestamp', moment(item.timestamp).format("MM"))
-                        console.log('item.fillURL', item.fillURL)
                         return (
                             <Fragment>
                                 <Hexagon 

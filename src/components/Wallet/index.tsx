@@ -50,7 +50,7 @@ export const Wallet = ({
                 openWalletModal={openWalletModal}
             />
 
-            <Container padding="0.5rem 2rem 0 2rem">
+            <Container padding="0rem 2rem 0 2rem">
                 <Box className={styles.body}>
                     <Box
                         className={styles.lhsBody}
