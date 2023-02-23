@@ -28,16 +28,17 @@
     border-left: 1px solid black;
     height: 83.8vh;
     margin-top: 55.5px;
+    margin-left: 38px;
 }
 
 .lhsBody2 {
-    width: 91vw;
+    width: 88vw;
     /* position: static;
     z-index: 99; */
 }
 
 .midBody {
-    width: 90%;
+    width: 88%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -56,7 +57,7 @@
 }
 
 .rhsBody {
-    width: 10%;
+    width: 8%;
     height: 100%;
 }
 
