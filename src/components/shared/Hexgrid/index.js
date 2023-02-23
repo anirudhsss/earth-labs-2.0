@@ -54,12 +54,13 @@ export const Hexgrid = ({
             <HexGrid width={'100%'} height={'100%'} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
                 <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={{ x: -53, y: -26 }}>
                     {matchedMonths?.map((item, index) => {
-                        let pattern = document.getElementById(`PAT-${index}`);
-                        if (pattern) {
-                            pattern.setAttribute("width", "100%");
-                            pattern.setAttribute("height", "100%");
-                        }
+                        // let pattern = document.getElementById(`PAT-${index}`);
+                        // if (pattern) {
+                        //     pattern.setAttribute("width", "100%");
+                        //     pattern.setAttribute("height", "100%");
+                        // }
                         // console.log(moment(item.timestamp).format("YYYY"), 'item.timestamp', moment(item.timestamp).format("MM"))
+                        console.log('item.fillURL', item.fillURL)
                         return (
                             <Fragment>
                                 <Hexagon 
