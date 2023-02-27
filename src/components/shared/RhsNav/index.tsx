@@ -15,6 +15,8 @@ export interface RhsNavProps {
     onWalletBtnClickOpen?: any;
     onWalletBtnClickClose?: any;
     openWalletModal?: any;
+    onMoveHexes?: any;
+    coordinates?: any;
 }
 
 export const RhsNav = ({
@@ -28,6 +30,8 @@ export const RhsNav = ({
     onWalletBtnClickOpen,
     onWalletBtnClickClose,
     openWalletModal,
+    onMoveHexes,
+    coordinates,
 }: RhsNavProps) => {
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
@@ -89,6 +93,36 @@ export const RhsNav = ({
                 }
             </Box>
             <Box className={styles.allIcons}>
+                <Box className={styles.arrowsToNavigate}>
+                    <div style={{
+                        cursor: 'pointer', fontSize: '30px', position: 'absolute', top: '16px', left: '9px'
+                    }}
+
+                    >
+                        <div onClick={() => onMoveHexes('left')}>&#8592;</div>
+                    </div>
+                    <div style={{
+                        cursor: 'pointer', fontSize: '30px', position: 'absolute', left: '30px',
+                    }}
+
+                    >
+                        <div onClick={() => onMoveHexes('up')}>&#8593;</div>
+                    </div>
+                    <div style={{
+                        cursor: 'pointer', fontSize: '30px', position: 'absolute', top: '30px', left: '30px',
+                    }}
+
+                    >
+                        <div onClick={() => onMoveHexes('down')}>&#8595;</div>
+                    </div>
+                    <div style={{
+                        cursor: 'pointer', fontSize: '30px', position: 'absolute', top: '16px', left: '39px',
+                    }}
+
+                    >
+                        <div onClick={() => onMoveHexes('right')}>&#8594;</div>
+                    </div>
+                </Box>
                 <Box className={styles.upperIcons}>
                     <Link
                         to="/maps"

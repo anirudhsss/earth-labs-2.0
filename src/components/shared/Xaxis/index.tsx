@@ -56,8 +56,6 @@ export const Xaxis = ({
         setArrOfYears(onDisplayYear);
     }, [data1])
 
-
-
     return (
         <>
             <Box sx={{

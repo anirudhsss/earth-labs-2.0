@@ -103,6 +103,10 @@ export const UserHomepage = ({
     const [data, setData] = useState<any>();
     const [openWalletModal, setOpenWalletModal] = useState(false);
     const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
+    const [coordinates, setCoordinates] = useState<any>({
+        x: -53,
+        y: -27,
+    })
 
     useEffect(() => {
         const info = async () => {
@@ -409,6 +413,18 @@ export const UserHomepage = ({
         }
     }
 
+    const onMoveHexes = (param: any) => {
+        if (param === 'left') {
+            setCoordinates({ x: coordinates.x - 10, y: coordinates.y, })
+        } else if (param === 'up') {
+            setCoordinates({ x: coordinates.x, y: coordinates.y - 10, })
+        } else if (param === 'down') {
+            setCoordinates({ x: coordinates.x, y: coordinates.y + 10, })
+        } else if (param === 'right') {
+            setCoordinates({ x: coordinates.x + 10, y: coordinates.y, })
+        }
+    }
+
     return (
         <>
             <Header
@@ -621,6 +637,7 @@ export const UserHomepage = ({
                             monthOrYear={monthOrYear}
                             onDisplayYear={onDisplayYear}
                             setArrOfYears={setArrOfYears}
+                            coordinates={coordinates}
                         />
                         <Box className={styles.lhsBody2}>
                             <Xaxis
@@ -656,6 +673,8 @@ export const UserHomepage = ({
                         arrOfYears={arrOfYears}
                         onValueMenuItemClicked={onValueMenuItemClicked}
                         onWalletBtnClickOpen={onWalletBtnClickOpen}
+                        onMoveHexes={onMoveHexes}
+                        coordinates={coordinates}
                     />
                 </Box>
             </Container>
