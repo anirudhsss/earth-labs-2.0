@@ -93,7 +93,7 @@ export const RhsNav = ({
                 }
             </Box>
             <Box className={styles.allIcons}>
-                <Box className={styles.arrowsToNavigate}>
+                {(mapsLocation || homeLocation) && !openWalletModal && <Box className={styles.arrowsToNavigate}>
                     <div style={{
                         cursor: 'pointer', fontSize: '30px', position: 'absolute', top: '16px', left: '9px'
                     }}
@@ -122,7 +122,7 @@ export const RhsNav = ({
                     >
                         <div onClick={() => onMoveHexes('right')}>&#8594;</div>
                     </div>
-                </Box>
+                </Box>}
                 <Box className={styles.upperIcons}>
                     <Link
                         to="/maps"
