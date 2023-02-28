@@ -57,15 +57,35 @@ export const Xaxis = ({
     }, [data1])
 
     return (
-        <>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            //position: 'relative',
+        }}>
+            <Box sx={{
+                borderBottom: '1px solid black',
+                //marginTop: loading1 === false ? '0' : '53px',
+                width: '88vw',
+                // position: 'relative',
+            }}>
+                {/* <span
+                    style={{
+                        position: 'absolute',
+                        fontSize: '1.5rem',
+                        right: '-3px',
+                        top: '-5px',
+                    }}
+                >&#x2C3;</span> */}
+            </Box>
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-around',
                 alignItems: 'center',
                 position: 'relative',
-                zIndex: 99,
-                top: '17px',
-                // width: '91vw',
+                zIndex: 101,
+                bottom: '35px',
+                width: '88vw',
             }}>
                 {whichDuration?.map((item: any) => {
                     return (
@@ -92,21 +112,31 @@ export const Xaxis = ({
                         />
                     )
                 })}
-            </Box>
-            <Box sx={{
-                borderBottom: '1px solid black',
-                marginTop: loading1 === false ? '0' : '53px',
-                // position: 'relative',
-            }}>
-                {/* <span
-                    style={{
-                        position: 'absolute',
-                        fontSize: '1.5rem',
-                        right: '-3px',
-                        top: '-5px',
+                {/* <Box
+                    sx={{
+                        width: '35px',
+                        height: '35px',
+                        borderRadius: '50%',
+                        border: '1px solid black',
+                        backgroundColor: '#FE7D06',
+                        cursor: 'pointer',
                     }}
-                >&#x2C3;</span> */}
+                >
+
+                </Box>
+                <Box
+                    sx={{
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: '50%',
+                        border: '1px solid black',
+                        backgroundColor: '#FE7D06',
+                        cursor: 'pointer',
+                    }}
+                >
+
+                </Box> */}
             </Box>
-        </>
+        </Box>
     )
 }

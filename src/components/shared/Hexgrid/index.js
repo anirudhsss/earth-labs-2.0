@@ -51,17 +51,34 @@ export const Hexgrid = ({
 
     
     return (
-        <Box sx={{ width: '1440px', height: '84vh', position: 'static', zIndex: 100, }}>
+        <Box sx={{ width: '1440px', height: '86vh',
+            //  position: 'absolute', 
+        zIndex: 100, }}>
+            <Box sx={{
+                position: 'absolute',
+                marginRight: '184px',
+                top: 3,
+                bottom: 55,
+                left: 1400,
+                right: 0,
+                background: 'linear-gradient(90deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
+                zIndex: 98,
+            }}></Box>
+            <Box sx={{
+                position: 'absolute',
+                marginBottom: '650px',
+                top: 0,
+                bottom: 55,
+                left: 57,
+                right: 183,
+                background: 'linear-gradient(0deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
+                zIndex: 98,
+            }}></Box>
             <HexGrid width={'100%'} height={'100%'} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
                 <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={coordinates}>
                     {matchedMonths?.map((item, index) => {
-                        // let pattern = document.getElementById(`PAT-${index}`);
-                        // if (pattern) {
-                        //     pattern.setAttribute("width", "100%");
-                        //     pattern.setAttribute("height", "100%");
-                        // }
-                        // console.log(moment(item.timestamp).format("YYYY"), 'item.timestamp', moment(item.timestamp).format("MM"))
                         return (
+                            <>
                             <Fragment>
                                 <Hexagon 
                                     q={item.q} 
@@ -76,10 +93,31 @@ export const Hexgrid = ({
                                     size={{ x: 13, y: 13 }} 
                                 />
                             </Fragment>
+                            </>
                         )
                     })}
                 </Layout>
             </HexGrid>
+            <Box sx={{
+                position: 'absolute',
+                marginTop: '650px',
+                top: 0,
+                bottom: 55,
+                left: 57,
+                right: 183,
+                background: 'linear-gradient(180deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
+                zIndex: 98,
+            }}></Box>
+            <Box sx={{
+                position: 'absolute',
+                marginLeft: '56px',
+                top: 3,
+                bottom: 55,
+                left: 0,
+                right: 1540,
+                background: 'linear-gradient(270deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
+                zIndex: 98,
+            }}></Box>
         </Box>
     )
 }

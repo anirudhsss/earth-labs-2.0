@@ -27,6 +27,7 @@ import { RhsNav } from "components/shared/RhsNav";
 import { ModalDialog } from "components/shared/ModalDialog";
 import { Wallet } from "components/Wallet";
 import axios from "axios";
+import { Yaxis } from "components/shared/Yaxis";
 
 export interface UserHomepageProps {
 
@@ -106,7 +107,7 @@ export const UserHomepage = ({
     const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
     const [coordinates, setCoordinates] = useState<any>({
         x: -53,
-        y: -27,
+        y: -37,
     })
     const [ethToUsdc, setEthToUsdc] = useState<any>();
     const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();
@@ -447,15 +448,19 @@ export const UserHomepage = ({
 
     return (
         <>
-            <Header
-                homeLocation={homeLocation}
-                walletLocation={walletLocation}
-                mapsLocation={mapsLocation}
-                discoveryLocation={discoveryLocation}
-            />
+            <Box
+            // sx={{ height: '8vh', }}
+            >
+                <Header
+                    homeLocation={homeLocation}
+                    walletLocation={walletLocation}
+                    mapsLocation={mapsLocation}
+                    discoveryLocation={discoveryLocation}
+                />
+            </Box>
 
             <Container
-                // padding="0.5rem 2rem 0 2rem"
+                // height="92vh"
                 padding="0 2rem"
                 position="relative"
             >
@@ -580,6 +585,7 @@ export const UserHomepage = ({
 
                 <Box sx={{
                     position: 'absolute',
+                    zIndex: 101,
                     top: '22px',
                     left: '190px',
                     marginLeft: (currency?.length > 0 || openMenu1) ? '11rem' : '2rem',
@@ -663,67 +669,21 @@ export const UserHomepage = ({
                             position: 'relative',
                         }}
                     >
-                        {/* <Box className={styles.lhsBody1}
-                            style={{
-                                marginBottom: loading1 !== false ? '0px' : '-53px',
-                                position: 'relative',
-                            }}
-                        > */}
-                        {/* <span style={{
-                                position: 'absolute',
-                                top: '-4px',
-                                left: '-4.5px',
-                            }}>&#8963;</span> */}
-                        {/* <Typography
-                                text="Currently Viewing: 0.185 - 0.95 ETH"
-                                margin="2rem 0 0 2rem"
-                                fontSize="1.2rem"
-                            /> */}
-                        {/* <Box className={styles.lhsBody1Child}>
-                                <Hexgrid
-                                    matchedMonths={matchedMonths}
-                                    arrOfMonths={arrOfMonths}
-                                    arrOfYears={arrOfYears}
-                                    monthOrYear={monthOrYear}
-                                    onDisplayYear={onDisplayYear}
-                                    setArrOfYears={setArrOfYears}
-                                />
-                            </Box> */}
-                        {/* </Box> */}
-                        {/* <Box className={styles.lhsBody2}>
-                            <Xaxis
-                                data={data}
-                                // data2={myFunc()}
-                                monthOrYear={monthOrYear}
-                                onDisplayYear={onDisplayYear}
-                                onDisplayMonth={onDisplayMonth}
-                                onCircleClicked={onCircleClicked}
-                                clickedElement={clickedElement}
-                                data1={data1}
-                                arrOfMonths={arrOfMonths}
-                                arrOfYears={arrOfYears}
-                                setArrOfYears={setArrOfYears}
-                                matchedMonths={matchedMonths}
-                                setMatchedMonths={setMatchedMonths}
-                                yearViewEnabled={yearViewEnabled}
-                                setYearViewEnabled={setYearViewEnabled}
-                                onCircleHoverStarts={onCircleHoverStarts}
-                                onCircleHoverEnds={onCircleHoverEnds}
-                                hoverElementId={hoverElementId}
-                                backgroundColor={backgroundColor}
-                            />
-                        </Box> */}
+                        <Yaxis />
                     </Box>
                     <Box className={styles.midBody}>
-                        <Hexgrid
-                            matchedMonths={matchedMonths}
-                            arrOfMonths={arrOfMonths}
-                            arrOfYears={arrOfYears}
-                            monthOrYear={monthOrYear}
-                            onDisplayYear={onDisplayYear}
-                            setArrOfYears={setArrOfYears}
-                            coordinates={coordinates}
-                        />
+                        <Box className={styles.midBody1}>
+                            <Hexgrid
+                                matchedMonths={matchedMonths}
+                                arrOfMonths={arrOfMonths}
+                                arrOfYears={arrOfYears}
+                                monthOrYear={monthOrYear}
+                                onDisplayYear={onDisplayYear}
+                                setArrOfYears={setArrOfYears}
+                                coordinates={coordinates}
+                            />
+                            <div className={styles.grad1}></div>
+                        </Box>
                         <Box className={styles.lhsBody2}>
                             <Xaxis
                                 data={data}
