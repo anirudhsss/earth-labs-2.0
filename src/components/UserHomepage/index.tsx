@@ -432,13 +432,13 @@ export const UserHomepage = ({
     }, [])
 
     const onEthToUsdcConversion = async () => {
+        const yesterday = moment().subtract(1, 'days').format("DD-MM-YYYY");
         const response1 = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=0')
-        const response2 = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=27-02-2023&localization=false');
+        const response2 = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=' + yesterday + '&localization=false');
         if (Boolean(response1) && Boolean(response2)) {
             const ethToUsdcToday = response1?.data?.ethereum?.usd;
             setEthToUsdc(ethToUsdcToday);
             const ethToUsdcYesterday = response2?.data?.market_data?.current_price?.usd;
-            console.log(ethToUsdcToday, ethToUsdcYesterday)
             const difference = ethToUsdcToday - ethToUsdcYesterday;
             const percent = Math.round((difference / ethToUsdcToday) / 100);
             setEthToUsdcYvsTPercent(percent);
