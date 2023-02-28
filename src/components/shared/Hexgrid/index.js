@@ -54,7 +54,7 @@ export const Hexgrid = ({
         <Box sx={{ width: '1440px', height: '86vh',
             //  position: 'absolute', 
         zIndex: 100, }}>
-            <Box sx={{
+            {/* <Box sx={{
                 position: 'absolute',
                 marginRight: '184px',
                 top: 3,
@@ -73,7 +73,7 @@ export const Hexgrid = ({
                 right: 183,
                 background: 'linear-gradient(0deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
                 zIndex: 98,
-            }}></Box>
+            }}></Box> */}
             <HexGrid width={'100%'} height={'100%'} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
                 <Layout size={{ x: 12.5, y: 12.5 }} flat={false} spacing={1.1} origin={coordinates}>
                     {matchedMonths?.map((item, index) => {
@@ -98,7 +98,7 @@ export const Hexgrid = ({
                     })}
                 </Layout>
             </HexGrid>
-            <Box sx={{
+            {/* <Box sx={{
                 position: 'absolute',
                 marginTop: '650px',
                 top: 0,
@@ -117,7 +117,7 @@ export const Hexgrid = ({
                 right: 1540,
                 background: 'linear-gradient(270deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
                 zIndex: 98,
-            }}></Box>
+            }}></Box> */}
         </Box>
     )
 }
