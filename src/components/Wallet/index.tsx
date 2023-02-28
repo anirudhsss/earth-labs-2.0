@@ -72,7 +72,7 @@ export const Wallet = ({
                             >
                                 <Typography
                                     text="Coins & FTs"
-                                    fontSize='1.4rem'
+                                    fontSize='1.3rem'
                                     color='#000'
                                 />
                             </Button>
@@ -85,7 +85,7 @@ export const Wallet = ({
                             >
                                 <Typography
                                     text="Collectibles"
-                                    fontSize='1.4rem'
+                                    fontSize='1.3rem'
                                     color='#000'
                                 />
                             </Button>
@@ -94,11 +94,11 @@ export const Wallet = ({
                                 padding="3px 25px"
                                 backgroundColor='#fff'
                                 hoverBackgroundColor='#fff'
-                                width='150px'
+                                width='160px'
                             >
                                 <Typography
                                     text="POAPs & Badges"
-                                    fontSize='1.4rem'
+                                    fontSize='1.3rem'
                                     color='#000'
                                 />
                             </Button>
@@ -111,7 +111,7 @@ export const Wallet = ({
                             >
                                 <Typography
                                     text="Content"
-                                    fontSize='1.4rem'
+                                    fontSize='1.3rem'
                                     color='#000'
                                 />
                             </Button>
@@ -124,7 +124,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -134,7 +134,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -144,7 +144,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -154,7 +154,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -164,7 +164,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -178,7 +178,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -188,7 +188,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -198,7 +198,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -208,7 +208,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -218,7 +218,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -232,7 +232,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -242,7 +242,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -252,7 +252,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -262,7 +262,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
@@ -272,7 +272,7 @@ export const Wallet = ({
                                 <Typography
                                     text="view activities >"
                                     color='#ffffff'
-                                    fontSize="1.3rem"
+                                    fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />

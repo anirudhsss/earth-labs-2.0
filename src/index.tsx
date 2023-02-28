@@ -1,18 +1,50 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createTheme, ThemeProvider } from '@mui/material';
-import './fonts/DINAlternate-Bold.ttf';
+import DINAlternateBold from './fonts/DINAlternate-Bold.ttf';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, RouterProvider } from "react-router-dom";
 import { router } from './Routes'
 
+const dinAlternateBold = {
+  fontFamily: 'DINAlternateBold',
+  fontStyle: 'normal',
+  fontDisplay: 'swap',
+  fontWeight: 700,
+  src: `
+    local('DINAlternate'),
+    local('DINAlternate-Bold'),
+    url(${DINAlternateBold}) format('truetype')
+  `,
+};
+
 const theme = createTheme({
   typography: {
+    htmlFontSize: 10,
     fontFamily: [
-      'DINAlternate-Bold',
+      'dinAlternateBold',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
     ].join(','),
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        '@global': {
+          '@font-face': [dinAlternateBold],
+      },
+      `
+    },
   },
 });
 

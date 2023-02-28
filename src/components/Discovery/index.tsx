@@ -61,13 +61,14 @@ export const Discovery = ({
                                     text="Top Digital Art Sales"
                                     margin='3rem 0 0 12rem'
                                     fontSize="2.5rem"
+                                    fontWeight="bold"
                                 />
                             </Box>
                             <Box>
                                 <Typography
                                     text="show more >"
                                     margin='3rem 0 0 12rem'
-                                    fontSize="1.4rem"
+                                    fontSize="1.1rem"
                                 />
                             </Box>
                         </Box>
@@ -126,13 +127,14 @@ export const Discovery = ({
                                     text="Biggest Swaps"
                                     margin='3rem 0 0 12rem'
                                     fontSize="2.5rem"
+                                    fontWeight="bold"
                                 />
                             </Box>
                             <Box>
                                 <Typography
                                     text="show more >"
                                     margin='3rem 0 0 12rem'
-                                    fontSize="1.4rem"
+                                    fontSize="1.1rem"
                                 />
                             </Box>
                         </Box>
