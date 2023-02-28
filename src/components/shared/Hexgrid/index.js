@@ -31,13 +31,13 @@ export const Hexgrid = ({
     useEffect(() => {
         const info = async () => {
             const res = await ApiRequest();
-            // setData(res?.data[0]);
-            // setData1(res?.data[0].hexes);
-            setData(sample[0]);
-            setData1(sample[0].hexes);
+            setData(res?.data[0]);
+            setData1(res?.data[0].hexes);
+            // setData(sample[0]);
+            // setData1(sample[0].hexes);
         }
         info();
-    }, [sample])
+    }, [])
 
     useEffect(() => {
         matchedMonths?.map((item, index) => {
