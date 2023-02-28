@@ -469,7 +469,7 @@ export const UserHomepage = ({
                         hoverBoxShadow="none"
                         borderRadius={`${openMenu1 ? '2rem 2rem 0 0' : '2rem'}`}
                         padding="5px"
-                        width={`${(currency?.length > 0 || openMenu1) ? '15rem' : '8.3rem'}`}
+                        width={`${(currency?.length > 0 || openMenu1) ? '17rem' : '8.3rem'}`}
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
@@ -514,7 +514,7 @@ export const UserHomepage = ({
                         PaperProps={{
                             elevation: 0,
                             style: {
-                                width: '150px',
+                                width: '17rem',
                                 borderRadius: '0 0 20px 20px',
                                 backgroundColor: '#FFF7EE',
                                 border: '1px solid #000',
@@ -544,7 +544,7 @@ export const UserHomepage = ({
 
                 <Box style={{
                     width: '4%',
-                    marginLeft: (currency?.length > 0 || openMenu1) ? '16.5rem' : '10rem',
+                    marginLeft: (currency?.length > 0 || openMenu1) ? '19rem' : '10rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     position: 'absolute',
@@ -564,6 +564,7 @@ export const UserHomepage = ({
                     <Typography
                         text=" |"
                         fontSize="13px"
+                        margin="0 5px"
                     />
                     <span
                         style={{ cursor: 'pointer', }}
@@ -578,10 +579,10 @@ export const UserHomepage = ({
                 </Box>
 
                 <Box sx={{
-                    position: 'relative',
+                    position: 'absolute',
                     top: '22px',
                     left: '190px',
-                    marginLeft: (currency?.length > 0 || openMenu1) ? '6em' : 0,
+                    marginLeft: (currency?.length > 0 || openMenu1) ? '11rem' : '2rem',
                 }}>
                     <span>
                         <img
