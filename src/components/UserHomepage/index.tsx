@@ -26,6 +26,7 @@ import { Header } from "components/shared/Header";
 import { RhsNav } from "components/shared/RhsNav";
 import { ModalDialog } from "components/shared/ModalDialog";
 import { Wallet } from "components/Wallet";
+import axios from "axios";
 
 export interface UserHomepageProps {
 
@@ -107,6 +108,8 @@ export const UserHomepage = ({
         x: -53,
         y: -27,
     })
+    const [ethToUsdc, setEthToUsdc] = useState<any>();
+    const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();
 
     useEffect(() => {
         const info = async () => {
@@ -260,7 +263,6 @@ export const UserHomepage = ({
         setAnchorEl(e.currentTarget);
     }
     const onOpenYearMenu1 = (e: React.MouseEvent<HTMLElement>) => {
-        console.log('anchorEl1', anchorEl1)
         setAnchorEl1(e.currentTarget);
     }
     const onCloseYearMenu = () => {
@@ -425,6 +427,26 @@ export const UserHomepage = ({
         }
     }
 
+    useEffect(() => {
+        onEthToUsdcConversion();
+    }, [])
+
+    useEffect(() => {
+        onEthToUsdcConversionForYesterdayVsToday();
+    }, [])
+
+    const onEthToUsdcConversion = async () => {
+        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=0')
+        setEthToUsdc(response?.data.ethereum.usd);
+    }
+
+    const onEthToUsdcConversionForYesterdayVsToday = async () => {
+        const response = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=27-02-2023&localization=false')
+        const a = ethToUsdc - response?.data.market_data.current_price.usd;
+        const percent = Math.round((a / ethToUsdc) * 100);
+        setEthToUsdcYvsTPercent(percent);
+    }
+
     return (
         <>
             <Header
@@ -553,6 +575,69 @@ export const UserHomepage = ({
                             text=" USDC"
                             fontSize="13px"
                             color={`${currName === 'USDC' ? '#FE7D06' : '#000'}`}
+                        />
+                    </span>
+                </Box>
+
+                <Box sx={{
+                    position: 'relative',
+                    top: '22px',
+                    left: '190px',
+                }}>
+                    <span>
+                        <img
+                            src={'./assets/images/ethereum_logo.svg'}
+                            alt=''
+                            style={{
+                                position: 'absolute',
+                                width: '18px',
+                                height: '16px'
+                            }}
+                        />
+                    </span>
+                    <span style={{
+                        position: 'absolute',
+                        top: '2px',
+                        left: '20px',
+                        fontSize: '12px',
+                        fontWeight: 'bold',
+                    }}>=</span>
+                    <span style={{
+                        position: 'absolute',
+                        top: '-1px',
+                        left: '32px',
+                    }}>
+                        <Typography
+                            text={'$' + ethToUsdc}
+                            fontSize='13px'
+                            fontWeight='bold'
+                        />
+                    </span>
+                    <span style={{
+                        position: 'absolute',
+                        top: '4px',
+                        left: '76px',
+                    }}>
+                        <img
+                            src={'./assets/images/redDownArrow.svg'}
+                            alt=''
+                            style={{
+                                position: 'absolute',
+                                width: '12px',
+                                height: '12px',
+                            }}
+                        />
+                    </span>
+                    <span style={{
+                        position: 'absolute',
+                        top: '1px',
+                        left: '86px',
+                    }}>
+                        <Typography
+                            text={ethToUsdcYvsTPercent + '%'}
+                            fontSize='9px'
+                            fontWeight='bold'
+                            color="#EA1313"
                         />
                     </span>
                 </Box>

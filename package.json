@@ -27,6 +27,7 @@
     "@web3modal/ethereum": "^2.0.0-rc.3",
     "@web3modal/react": "^2.0.0-rc.3",
     "axios": "^1.2.6",
+    "coingecko-api": "^1.0.10",
     "ethers": "^5.7.2",
     "moment": "^2.29.4",
     "react": "^18.2.0",
