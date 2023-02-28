@@ -102,7 +102,7 @@ export const Hexgrid = ({
                 position: 'absolute',
                 marginTop: '650px',
                 top: 0,
-                bottom: 55,
+                bottom: 54,
                 left: 57,
                 right: 183,
                 background: 'linear-gradient(180deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
