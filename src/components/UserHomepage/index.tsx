@@ -581,6 +581,7 @@ export const UserHomepage = ({
                     position: 'relative',
                     top: '22px',
                     left: '190px',
+                    marginLeft: (currency?.length > 0 || openMenu1) ? '6em' : 0,
                 }}>
                     <span>
                         <img
