@@ -107,7 +107,7 @@ export const UserHomepage = ({
     const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
     const [coordinates, setCoordinates] = useState<any>({
         x: -53,
-        y: -37,
+        y: -31,
     })
     const [ethToUsdc, setEthToUsdc] = useState<any>();
     const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();

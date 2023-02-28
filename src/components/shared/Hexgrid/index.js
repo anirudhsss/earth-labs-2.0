@@ -75,7 +75,7 @@ export const Hexgrid = ({
                 zIndex: 98,
             }}></Box>
             <HexGrid width={'100%'} height={'100%'} viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}>
-                <Layout size={{ x: 13, y: 13 }} flat={false} spacing={1.1} origin={coordinates}>
+                <Layout size={{ x: 12.5, y: 12.5 }} flat={false} spacing={1.1} origin={coordinates}>
                     {matchedMonths?.map((item, index) => {
                         return (
                             <>
@@ -90,7 +90,7 @@ export const Hexgrid = ({
                                 <Pattern 
                                     id={`PAT-${index}`}
                                     link={item.fillURL} 
-                                    size={{ x: 13, y: 13 }} 
+                                    size={{ x: 12.5, y: 12.5 }} 
                                 />
                             </Fragment>
                             </>
