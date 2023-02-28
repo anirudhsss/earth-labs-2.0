@@ -431,20 +431,18 @@ export const UserHomepage = ({
         onEthToUsdcConversion();
     }, [])
 
-    useEffect(() => {
-        onEthToUsdcConversionForYesterdayVsToday();
-    }, [])
-
     const onEthToUsdcConversion = async () => {
-        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=0')
-        setEthToUsdc(response?.data.ethereum.usd);
-    }
-
-    const onEthToUsdcConversionForYesterdayVsToday = async () => {
-        const response = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=27-02-2023&localization=false')
-        const a = ethToUsdc - response?.data.market_data.current_price.usd;
-        const percent = Math.round((a / ethToUsdc) * 100);
-        setEthToUsdcYvsTPercent(percent);
+        const response1 = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=0')
+        const response2 = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=27-02-2023&localization=false');
+        if (Boolean(response1) && Boolean(response2)) {
+            const ethToUsdcToday = response1?.data?.ethereum?.usd;
+            setEthToUsdc(ethToUsdcToday);
+            const ethToUsdcYesterday = response2?.data?.market_data?.current_price?.usd;
+            console.log(ethToUsdcToday, ethToUsdcYesterday)
+            const difference = ethToUsdcToday - ethToUsdcYesterday;
+            const percent = Math.round((difference / ethToUsdcToday) / 100);
+            setEthToUsdcYvsTPercent(percent);
+        }
     }
 
     return (
