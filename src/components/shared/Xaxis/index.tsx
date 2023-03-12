@@ -26,6 +26,9 @@ export interface XaxisProps {
     hoverElementId?: number | null;
     onCircleHoverStarts: (elementId: any) => void;
     onCircleHoverEnds: (elementId: any) => void;
+    range?: any;
+    setChosenData?: any;
+    chosenData?: any;
 }
 
 export const Xaxis = ({
@@ -49,13 +52,13 @@ export const Xaxis = ({
     onCircleHoverStarts,
     onCircleHoverEnds,
     loading1,
+    range,
+    setChosenData,
+    chosenData,
 }: XaxisProps) => {
-    const whichDuration = monthOrYear === 'year' ? arrOfYears : monthOrYear === 'month' ? arrOfMonths : [];
 
-    useEffect(() => {
-        setArrOfYears(onDisplayYear);
-    }, [data1])
-
+    const whichDuration = monthOrYear === '' ? arrOfYears : (monthOrYear === 'year' || monthOrYear === 'month') ? arrOfMonths : [];
+    // console.log('whichDuration', whichDuration)
     return (
         <Box sx={{
             display: 'flex',
@@ -109,6 +112,9 @@ export const Xaxis = ({
                             setMatchedMonths={setMatchedMonths}
                             yearViewEnabled={yearViewEnabled}
                             setYearViewEnabled={setYearViewEnabled}
+                            range={range}
+                            setChosenData={setChosenData}
+                            chosenData={chosenData}
                         />
                     )
                 })}

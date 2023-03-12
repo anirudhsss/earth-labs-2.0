@@ -154,7 +154,6 @@ const App = () => {
   };
 
   const logoutWallet = () => {
-    console.log('logoutWallet', logoutWallet)
     setChainId(null);
     setSignatureMessage(null);
     setUserWalletAddress(null);

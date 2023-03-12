@@ -23,8 +23,9 @@ export interface XaxisItemsProps {
     setMatchedMonths?: any;
     yearViewEnabled?: any;
     setYearViewEnabled?: any;
-    // id?: any;
-    // item?: any;
+    range?: any;
+    setChosenData?: any;
+    chosenData?: any;
 }
 
 export const XaxisItems = ({
@@ -45,25 +46,12 @@ export const XaxisItems = ({
     setMatchedMonths,
     yearViewEnabled,
     setYearViewEnabled,
-    // id,
-    // item,
+    range,
+    setChosenData,
+    chosenData,
 }: XaxisItemsProps) => {
     const location = useLocation();
-    const whichDuration1 = monthOrYear === 'year' ? month : monthOrYear === 'month' ? moment().month(month - 1).format("MMM") : [];
-
-    useEffect(() => {
-        if (monthOrYear === 'year') {
-            const arrIndexesOfClickedMonths = data1?.filter((item: {
-                p: number; timestamp: moment.MomentInput;
-            }) => {
-                let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
-                // console.log('item', item['p'])
-                return monthFromApi === Number(month);
-                // return item?.p === 1
-            });
-            setMatchedMonths(arrIndexesOfClickedMonths);
-        }
-    }, [data1, yearViewEnabled])
+    const whichDuration1 = monthOrYear === '' ? month : (monthOrYear === 'year' || monthOrYear === 'month') ? moment().month(month - 1).format("MMM") : [];
 
     return (
         <Box sx={{
@@ -88,8 +76,7 @@ export const XaxisItems = ({
                     backgroundColor: (month === hoverElementId || month === clickedElement) ? '#FE7D06' : '#FFF7EE',
                     cursor: 'pointer',
                 }}
-                    // onClick={() => onCircleClicked(month)}
-                    onClick={() => { monthOrYear === 'year' ? onDisplayMonth(month) : onCircleClicked(month) }}
+                    onClick={() => { monthOrYear === '' ? onDisplayMonth(month) : onCircleClicked(month) }}
                     onMouseEnter={() => onCircleHoverStarts(month)}
                     onMouseLeave={() => onCircleHoverEnds(month)}
                 ></Box>

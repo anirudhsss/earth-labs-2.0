@@ -28,6 +28,7 @@ import { ModalDialog } from "components/shared/ModalDialog";
 import { Wallet } from "components/Wallet";
 import axios from "axios";
 import { Yaxis } from "components/shared/Yaxis";
+import { AnyAaaaRecord } from "dns";
 
 export interface UserHomepageProps {
 
@@ -49,8 +50,8 @@ const USDC = [
     { id: 0, value: '< $500 USDC' },
     { id: 1, value: '$500 - $1000 USDC' },
     { id: 2, value: '$1000 - $5000 USDC' },
-    { id: 3, value: '$5000 - $10,000 USDC' },
-    { id: 4, value: '> $10,000 USDC' },
+    { id: 3, value: '$5000 - $10000 USDC' },
+    { id: 4, value: '> $10000 USDC' },
 ]
 
 export const UserHomepage = ({
@@ -73,7 +74,7 @@ export const UserHomepage = ({
     const [months, setMonths] = useState<any>();
     const [occurences, setOccurences] = useState<any>();
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
-    const [clickedElement, setClickedElement] = useState<string>('');
+    const [clickedElement, setClickedElement] = useState<any>();
     const [currency, setCurrency] = useState<any>([])
     const [years, setYears] = useState<any>()
     const [monthOrYear, setmonthOrYear] = useState<any>('');
@@ -111,6 +112,12 @@ export const UserHomepage = ({
     })
     const [ethToUsdc, setEthToUsdc] = useState<any>();
     const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();
+    const [yAxisItems, setYAxisItems] = useState<any>([]);
+    const [chosenData, setChosenData] = useState([]);
+    const [range, setRange] = useState(false);
+    const [newChosenData, setNewChosenData] = useState<any>(false);
+    const [lowerRange, setLowerRange] = useState<any>();
+    const [higherRange, setHigherRange] = useState<any>();
 
     useEffect(() => {
         const info = async () => {
@@ -249,15 +256,28 @@ export const UserHomepage = ({
     const invlerp = (x: number, y: number, a: number) => { //0.35
         return clamp((a - x) / (y - x))
     };
-
+    const [abcd, setAbcd] = useState([]);
+    const [abcd1, setAbcd1] = useState([]);
     const onCircleClicked = (month: any) => {
+        setCurrency([]);
+        setYAxisItems([]);
+        setYAxisItemClicked(null);
+        setYAxisItemHovered(null);
         // setYearViewEnabled(false);
         setClickedElement(month);
-        const arrIndexesOfClickedMonths = data1.filter((item: { timestamp: moment.MomentInput; }) => {
+        let monthOrYear = 'month';
+        setmonthOrYear('month');
+        // if (monthOrYear === 'month' && !range) {
+        //     setChosenData(data1);
+        // } else if ((monthOrYear === 'month') && range) {
+
+        // }
+        const arrIndexesOfClickedMonths = abcd?.filter((item: { timestamp: moment.MomentInput; }) => {
             let monthFromApi = Number(moment(item.timestamp).format("MM"));
             return monthFromApi === Number(month);
         });
         setMatchedMonths(arrIndexesOfClickedMonths);
+        setAbcd1(arrIndexesOfClickedMonths);
     }
 
     const onOpenYearMenu = (e: React.MouseEvent<HTMLElement>) => {
@@ -303,25 +323,170 @@ export const UserHomepage = ({
     };
 
     const onValueMenuItemClicked = (id: number) => {
-        setClickedElement('');
+        setClickedElement(null);
+        setCurrency([]);
+        setYAxisItems([]);
+        setYAxisItemClicked(null);
         onCloseYearMenu();
         onDisplayYear();
-        setYearViewEnabled(true);
+        setMatchedMonths([]);
+        // setYearViewEnabled(true);
         const selectedItem = YEARS.filter((item) => item.id === id);
         setYears(selectedItem);
     }
-
+    const [selectedItem1, setSelectedItem1] = useState<any>();
     const onValueMenuItemClicked1 = (id: number) => {
         onCloseYearMenu1();
         const selectedItem = chosenCurrency.filter((item: any) => item.id === id);
+        setSelectedItem1(selectedItem[0].value);
+        testFunc(selectedItem[0].value)
         setCurrency(selectedItem);
     }
+    const [testData, setTestData] = useState([]);
+
+    const testFunc = (selectedItem1: any) => {
+        let range = false;
+        setRange(true);
+        range = true;
+        let lowerRange = 0, higherRange = 0;
+        if (range) {
+            const b = selectedItem1.split(' ');
+            if (b[b.length - 1] === 'ETH') {
+                lowerRange = Number(b[0]);
+                higherRange = Number(b[2]);
+            } else if (b[b.length - 1] === 'USDC') {
+                if (b[0] === '<') {
+                    lowerRange = 0;
+                    const newB = b[1].substr(1);
+                    higherRange = Number(newB);
+                } else if (b[0] === '>') {
+                    const newB = b[1].substr(1);
+                    lowerRange = Number(newB);
+                    higherRange = 20000;
+                } else {
+                    lowerRange = Number(b[0].substr(1));
+                    higherRange = Number(b[2].substr(1));
+                }
+            }
+        }
+        if (lowerRange > 0 && higherRange > 0) {
+            let c = higherRange - lowerRange;
+            let d = c / 4;
+            let d1 = Number((lowerRange + d).toFixed(3));
+            let d2 = Number((d1 + d).toFixed(3));
+            let d3 = Number((d2 + d).toFixed(3));
+            const lengthsArr: any[] = [];
+            setLowerRange(lowerRange);
+            setHigherRange(higherRange);
+            lengthsArr.push(testFunc2(lowerRange, d1))
+            lengthsArr.push(testFunc2(d1, d2))
+            lengthsArr?.push(testFunc2(d2, d3))
+            lengthsArr.push(testFunc2(d3, higherRange))
+            let data2: any = [];
+            if (monthOrYear === 'year') {
+                data2 = abcd;
+            } else if (monthOrYear === 'month') {
+                data2 = abcd1;
+            }
+            const arr = data2?.filter((item: any) => {
+                return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+            })
+            let processedArrays: any[] = [];
+            let processedArrays1: any[] = [];
+            // setTestData(arr);
+            setMatchedMonths(arr);
+            processedArrays1 = lengthsArr?.map((item: any) => {
+                return processedArrays1.concat(item[0])
+            })
+            processedArrays = processedArrays1.flat();
+            const processedInput = lengthsArr?.map((item: any) => item[0].length);
+            const min = Math.min(...processedInput);
+            const max = Math.max(...processedInput);
+            const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
+            let arrOfInterest: any = [];
+            processedInput.forEach((item: any) => {
+                let val1 = Math.round(((35 - 10) * invlerp(min, max, item)) + 10);
+                arrOfInterest = [...arrOfInterest, val1]
+            })
+            let yAxisItems: any = [];
+            arrOfInterest.forEach((_: any, index: number) => {
+                yAxisItems.push({
+                    id: index,
+                    range: rangeArr[index],
+                    dimension: arrOfInterest[index],
+                    noOfGlyphs: processedInput[index],
+                })
+            })
+            setRange(false);
+            setYAxisItems(yAxisItems);
+        }
+    }
+
+    const testFunc2 = (lowerRange: any, higherRange: any) => {
+        let data2: any = [];
+        if (monthOrYear === 'year') {
+            data2 = abcd;
+        } else if (monthOrYear === 'month') {
+            data2 = abcd1;
+        }
+        const arr = data2?.filter((item: any) => {
+            return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+        })
+        return [arr, lowerRange, higherRange];
+    }
+    const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
+    const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
+    const onYAxisItemClicked = (id: any, range: any) => {
+        let lowerRange = 0, higherRange = 0;
+        const b = range.split(' ');
+        lowerRange = Number(b[0]);
+        higherRange = Number(b[2]);
+        let data2: any = [];
+        let idd = Number(id);
+        setYAxisItemClicked(idd);
+        if (monthOrYear === 'year') {
+            data2 = abcd;
+        } else if (monthOrYear === 'month') {
+            data2 = abcd1;
+        }
+        const arr = data2?.filter((item: any) => {
+            return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+        })
+        // setTestData(arr);
+        setMatchedMonths(arr);
+    }
+
+    const onYAxisItemHoverOn = (id: any) => {
+        setYAxisItemHovered(id);
+    }
+
+    const onYAxisItemHoverOff = (id: any) => {
+        setYAxisItemHovered(null);
+    }
+
+    useEffect(() => {
+        onDisplayYear();
+    }, [])
 
     const onDisplayYear = () => {
-        setmonthOrYear('year');
-        if (data1?.length > 0) {
+        setmonthOrYear('');
+    }
+
+    useEffect(() => {
+        if (monthOrYear === '') {
+            anotherFunc1();
+        }
+    }, [chosenData, data1, matchedMonths]);
+
+    const anotherFunc1 = () => {
+        if (monthOrYear === '' && !range) {
+            setChosenData(data1);
+        } else if ((monthOrYear === '') && range) {
+            setChosenData(matchedMonths);
+        }
+        if (chosenData?.length > 0) {
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrYearPointsOfAxis: any[] = [];
-            arrOfDuration = data1.map((item: any) => {
+            arrOfDuration = chosenData.map((item: any) => {
                 return Number(moment(item.timestamp).format("YYYY"));
             });
             freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
@@ -343,20 +508,47 @@ export const UserHomepage = ({
                     noOfGlyphs: noOfTxns[index],
                 });
             })
-            return arrOfYears;
+            // return arrOfYears;
+            setArrOfYears(arrOfYears);
         }
     }
 
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
 
+    const [someYear, setSomeYear] = useState<any>();
+
     const onDisplayMonth = (year: number) => {
+        setCurrency([]);
+        setSomeYear(year);
         setYearViewEnabled(false);
-        setmonthOrYear('month');
-        if (data1?.length > 0) {
+        // if (matchedMonths === 0) {
+        setChosenData(data1);
+        // } else if (matchedMonths > 0) {
+        //     setChosenData(matchedMonths);
+        // }
+        if (chosenData?.length > 0) {
+            const arrIndexesOfClickedYears = chosenData?.filter((item: { timestamp: moment.MomentInput; }) => {
+                let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
+                return monthFromApi === Number(year);
+            });
+            setMatchedMonths(arrIndexesOfClickedYears);
+            setAbcd(arrIndexesOfClickedYears);
+        }
+        setmonthOrYear('year');
+    }
+
+    useEffect(() => {
+        if (monthOrYear === 'year') {
+            anotherFunc2(someYear);
+        }
+    }, [chosenData, data1, matchedMonths]);
+
+    const anotherFunc2 = (someYear: any) => {
+        if (chosenData?.length > 0) {
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrMonthPointsOfAxis: any[] = [];
-            arrOfDuration = data1.map((item: any) => {
+            arrOfDuration = chosenData.map((item: any) => {
                 // return Number(moment(item.timestamp).format("YYYY")) == year ? Number(moment(item.timestamp).format("MM")) : undefined;
-                if (Number(moment(item.timestamp).format("YYYY")) == year) {
+                if (Number(moment(item.timestamp).format("YYYY")) == someYear) {
                     return Number(moment(item.timestamp).format("MM"));
                 } else {
                     return undefined;
@@ -366,7 +558,6 @@ export const UserHomepage = ({
                 acc[item] = acc[item] ? acc[item] + 1 : 1;
                 return acc;
             }, {});
-
             duration = Object.keys(freqOfDuration);
             noOfTxns = Object.values(freqOfDuration);
             const min = Math.min(...noOfTxns);
@@ -405,6 +596,7 @@ export const UserHomepage = ({
     }
 
     const onChosingCurrency = (currency: any) => {
+        setRange(false);
         if (currency === 'ETH') {
             setCurrName('ETH');
             setCurrency([]);
@@ -427,25 +619,37 @@ export const UserHomepage = ({
             setCoordinates({ x: coordinates.x + 10, y: coordinates.y, })
         }
     }
-
+    const [difference, setDifference] = useState<string>('');
     useEffect(() => {
         onEthToUsdcConversion();
-    }, [])
+    }, [difference])
 
     const onEthToUsdcConversion = async () => {
         const yesterday = moment().subtract(1, 'days').format("DD-MM-YYYY");
         const response1 = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=0')
         const response2 = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=' + yesterday + '&localization=false');
-        if (Boolean(response1) && Boolean(response2)) {
-            const ethToUsdcToday = response1?.data?.ethereum?.usd;
+        if (response1 !== undefined && response2 !== undefined) {
+            let ethToUsdcToday;
+            // if (response1?.data?.ethereum?.usd !== undefined) {
+            ethToUsdcToday = response1?.data?.ethereum?.usd;
+            // }
             setEthToUsdc(ethToUsdcToday);
-            const ethToUsdcYesterday = response2?.data?.market_data?.current_price?.usd;
-            const difference = ethToUsdcToday - ethToUsdcYesterday;
-            const percent = Math.round((difference / ethToUsdcToday) / 100);
+            let ethToUsdcYesterday;
+            // if (response2?.data?.market_data?.current_price?.usd) {
+            ethToUsdcYesterday = response2?.data?.market_data?.current_price?.usd;
+            // }
+            const difference1 = ethToUsdcToday - ethToUsdcYesterday;
+            if (difference1 <= 0) {
+                setDifference('increment');
+            } else {
+                setDifference('decrement')
+            }
+            const difference2 = Math.abs(difference1)
+            const percent = Math.round((difference2 / ethToUsdcToday) * 100);
             setEthToUsdcYvsTPercent(percent);
         }
     }
-
+    //console.log('monthOrYear', monthOrYear)
     return (
         <>
             <Box
@@ -482,6 +686,7 @@ export const UserHomepage = ({
                         borderBottom={`${openMenu1 ? '0' : '1px solid #000'}`}
                         onClick={onOpenYearMenu1}
                         height="2.9rem"
+                        disabled={monthOrYear === ''}
                     >
                         {currency?.length > 0 ?
                             <Typography
@@ -631,6 +836,7 @@ export const UserHomepage = ({
                                 position: 'absolute',
                                 width: '12px',
                                 height: '12px',
+                                transform: difference === 'decrement' ? '' : 'rotate(180deg)',
                             }}
                         />
                     </span>
@@ -651,7 +857,7 @@ export const UserHomepage = ({
                 <Box sx={{
                     position: 'absolute',
                     top: '60px',
-                    left: '40px',
+                    left: '70px',
                 }}>
                     {currency?.length > 0 &&
                         <Typography
@@ -663,13 +869,21 @@ export const UserHomepage = ({
 
                 <Box className={styles.body}>
                     <Box
-                        className={styles.lhsBody1}
+                        // className={styles.lhsBody1}
                         style={{
                             //marginBottom: loading1 !== false ? '-100px' : '0',
-                            position: 'relative',
+                            // position: 'relative',
+                            marginLeft: (yAxisItems?.length > 0) ? '0rem' : '3.6rem',
                         }}
                     >
-                        <Yaxis />
+                        <Yaxis
+                            yAxisItems={yAxisItems}
+                            onYAxisItemClicked={onYAxisItemClicked}
+                            yAxisItemClicked={yAxisItemClicked}
+                            onYAxisItemHoverOn={onYAxisItemHoverOn}
+                            onYAxisItemHoverOff={onYAxisItemHoverOff}
+                            yAxisItemHovered={yAxisItemHovered}
+                        />
                     </Box>
                     <Box className={styles.midBody}>
                         <Box className={styles.midBody1}>
@@ -681,6 +895,9 @@ export const UserHomepage = ({
                                 onDisplayYear={onDisplayYear}
                                 setArrOfYears={setArrOfYears}
                                 coordinates={coordinates}
+                                loading1={loading1}
+                                chosenData={chosenData}
+                                testData={testData}
                             />
                             <div className={styles.grad1}></div>
                         </Box>
@@ -706,6 +923,9 @@ export const UserHomepage = ({
                                 hoverElementId={hoverElementId}
                                 backgroundColor={backgroundColor}
                                 loading1={loading1}
+                                range={range}
+                                setChosenData={setChosenData}
+                                chosenData={chosenData}
                             />
                         </Box>
                     </Box>
@@ -720,6 +940,8 @@ export const UserHomepage = ({
                         onWalletBtnClickOpen={onWalletBtnClickOpen}
                         onMoveHexes={onMoveHexes}
                         coordinates={coordinates}
+                        loading1={loading1}
+                        monthOrYear={monthOrYear}
                     />
                 </Box>
             </Container>

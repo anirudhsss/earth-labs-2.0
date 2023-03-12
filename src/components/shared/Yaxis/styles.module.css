@@ -1,6 +1,7 @@
 .container {
     display: flex;
     justify-content: space-around;
+    /* width: 130px; */
 }
 
 .groupOfCircles {
@@ -11,16 +12,27 @@
     position: relative;
     z-index: 101;
     left: 18px;
+    height: 78.8vh;
+    margin-top: 61px;
 }
+
+/* .circle {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+} */
 
 .circle1 {
     width: 35px;
     height: 35px;
     border-radius: 50%;
     border: 1px solid black;
-    background-color: #FE7D06;
+    /* background-color: #FFF7EE; */
     cursor: pointer;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* .circle1::after {
@@ -30,14 +42,14 @@
     display: inline-block;
 } */
 
-.circle2 {
+/* .circle2 {
     width: 10px;
     height: 10px;
     border-radius: 50%;
     border: 1px solid black;
-    background-color: #FE7D06;
+    background-color: #fe7d06;
     cursor: pointer;
-}
+} */
 
 .line {
     border-left: 1px solid black;

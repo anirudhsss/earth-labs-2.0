@@ -17,6 +17,8 @@ export interface RhsNavProps {
     openWalletModal?: any;
     onMoveHexes?: any;
     coordinates?: any;
+    loading1?: any;
+    monthOrYear?: any;
 }
 
 export const RhsNav = ({
@@ -32,6 +34,8 @@ export const RhsNav = ({
     openWalletModal,
     onMoveHexes,
     coordinates,
+    loading1,
+    monthOrYear,
 }: RhsNavProps) => {
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
@@ -190,6 +194,7 @@ export const RhsNav = ({
                                 borderTop={`${openMenu ? '0' : '1px solid #000'}`}
                                 paddingTop={`${openMenu && '0px'}`}
                                 onClick={onOpenYearMenu}
+                                disabled={monthOrYear === ''}
                             >
                                 {years?.length > 0 ?
                                     <Typography
