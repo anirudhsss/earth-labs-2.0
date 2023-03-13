@@ -844,6 +844,7 @@ export const UserHomepage = ({
                         position: 'absolute',
                         top: '1px',
                         left: '86px',
+                        marginTop: difference === 'decrement' ? '0' : '5px',
                     }}>
                         <Typography
                             text={ethToUsdcYvsTPercent + '%'}
