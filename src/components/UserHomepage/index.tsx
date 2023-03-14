@@ -718,7 +718,8 @@ export const UserHomepage = ({
                             alt=""
                             className={styles.blackTriangle}
                             style={{
-                                marginTop: '2px'
+                                marginTop: '2px',
+                                transform: openMenu1 ? 'rotate(180deg)' : '',
                             }}
                         />
                     </Button>

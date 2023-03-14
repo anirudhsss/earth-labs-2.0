@@ -203,6 +203,9 @@ export const RhsNav = ({
                                     src={`${openMenu ? '/assets/images/orangeTriangle.svg' : '/assets/images/blackTriangle.svg'}`}
                                     alt=""
                                     className={styles.blackTriangle}
+                                    style={{
+                                        transform: openMenu ? '' : 'rotate(180deg)',
+                                    }}
                                 />
                             </Button>
                             <Menu
