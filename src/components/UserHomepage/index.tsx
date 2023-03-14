@@ -592,6 +592,7 @@ export const UserHomepage = ({
     }
 
     const onWalletBtnClickClose = () => {
+        console.log('inside')
         setOpenWalletModal(false);
     }
 
@@ -660,6 +661,9 @@ export const UserHomepage = ({
                     walletLocation={walletLocation}
                     mapsLocation={mapsLocation}
                     discoveryLocation={discoveryLocation}
+                    openWalletModal={openWalletModal}
+                    onWalletBtnClickOpen={onWalletBtnClickOpen}
+                    onWalletBtnClickClose={onWalletBtnClickClose}
                 />
             </Box>
 

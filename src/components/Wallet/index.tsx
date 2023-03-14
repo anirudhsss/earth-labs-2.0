@@ -48,6 +48,7 @@ export const Wallet = ({
                 mapsLocation={mapsLocation}
                 discoveryLocation={discoveryLocation}
                 openWalletModal={openWalletModal}
+                onWalletBtnClickClose={onWalletBtnClickClose}
             />
 
             <Container padding="0rem 2rem 0 2rem">

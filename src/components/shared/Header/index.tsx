@@ -1,4 +1,5 @@
 import { Avatar, Box } from "@mui/material"
+import { Link } from "react-router-dom"
 import { Button } from "../Button"
 import { Container } from "../Container"
 import { NormalSearchField } from "../TextField"
@@ -11,6 +12,8 @@ export interface HeaderProps {
     mapsLocation?: any;
     discoveryLocation?: any;
     openWalletModal?: any;
+    onWalletBtnClickOpen?: any;
+    onWalletBtnClickClose?: any;
 }
 
 export const Header = ({
@@ -19,6 +22,8 @@ export const Header = ({
     mapsLocation,
     discoveryLocation,
     openWalletModal,
+    onWalletBtnClickOpen,
+    onWalletBtnClickClose,
 }: HeaderProps) => {
 
 
@@ -105,9 +110,61 @@ export const Header = ({
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        width: '14rem'
+                        width: '32rem'
                     }}
                 >
+
+                    <Box className={styles.mapAndWalletBtn}>
+                        {(mapsLocation || homeLocation || walletLocation) &&
+                            <>
+                                <Link
+                                    to="/maps"
+                                    state={{
+                                        icon: 'maps',
+                                    }}
+                                    style={{ textDecoration: 'none', }}
+                                >
+                                    <Button
+                                        backgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                        color={`${(openWalletModal) ? '#000' : '#fff'}`}
+                                        border="0.5px solid rgba(46, 52, 81, 0.58)"
+                                        hoverBackgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                        borderRadius="0.6rem"
+                                        padding="0.4rem 0.2rem"
+                                        width="75px"
+                                        onClick={onWalletBtnClickClose}
+                                    >
+                                        <Typography
+                                            text="My Atlas"
+                                            fontSize="1.3rem"
+                                        />
+                                    </Button>
+                                </Link>
+                                {/* <Link
+                            to="/wallet"
+                            state={{
+                                icon: 'wallet',
+                            }}
+                            style={{ textDecoration: 'none', }}
+                        > */}
+                                <Button
+                                    backgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                    color={`${(openWalletModal) ? '#fff' : '#000'}`}
+                                    border="0.5px solid rgba(46, 52, 81, 0.58)"
+                                    hoverBackgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                    borderRadius="0.6rem"
+                                    padding="0.4rem 2rem"
+                                    onClick={onWalletBtnClickOpen}
+                                >
+                                    <Typography
+                                        text="Wallet"
+                                        fontSize="1.3rem"
+                                    />
+                                </Button>
+                                {/* </Link> */}
+                            </>
+                        }
+                    </Box>
                     {/* <Typography
                                 text={truncate(userWalletAddress, 12)}
                             /> */}

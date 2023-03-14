@@ -45,7 +45,7 @@ export const RhsNav = ({
 
     return (
         <Box className={styles.rhsBody}>
-            <Box className={styles.mapAndWalletBtn}>
+            {/* <Box className={styles.mapAndWalletBtn}>
                 {(mapsLocation || homeLocation || walletLocation) &&
                     <>
                         <Link
@@ -71,13 +71,6 @@ export const RhsNav = ({
                                 />
                             </Button>
                         </Link>
-                        {/* <Link
-                            to="/wallet"
-                            state={{
-                                icon: 'wallet',
-                            }}
-                            style={{ textDecoration: 'none', }}
-                        > */}
                         <Button
                             backgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
                             color={`${(openWalletModal) ? '#fff' : '#000'}`}
@@ -92,10 +85,9 @@ export const RhsNav = ({
                                 fontSize="1.3rem"
                             />
                         </Button>
-                        {/* </Link> */}
                     </>
                 }
-            </Box>
+            </Box> */}
             <Box className={styles.allIcons}>
                 {(mapsLocation || homeLocation) && !openWalletModal && <Box className={styles.arrowsToNavigate}>
                     <div style={{
