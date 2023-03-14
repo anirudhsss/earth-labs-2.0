@@ -327,6 +327,7 @@ export const UserHomepage = ({
         setCurrency([]);
         setYAxisItems([]);
         setYAxisItemClicked(null);
+        setYAxisItemHovered(null);
         onCloseYearMenu();
         onDisplayYear();
         setMatchedMonths([]);
@@ -336,6 +337,9 @@ export const UserHomepage = ({
     }
     const [selectedItem1, setSelectedItem1] = useState<any>();
     const onValueMenuItemClicked1 = (id: number) => {
+        setYAxisItems([]);
+        setYAxisItemClicked(null);
+        setYAxisItemHovered(null);
         onCloseYearMenu1();
         const selectedItem = chosenCurrency.filter((item: any) => item.id === id);
         setSelectedItem1(selectedItem[0].value);
@@ -356,7 +360,7 @@ export const UserHomepage = ({
                 higherRange = Number(b[2]);
             } else if (b[b.length - 1] === 'USDC') {
                 if (b[0] === '<') {
-                    lowerRange = 0;
+                    lowerRange = 50;
                     const newB = b[1].substr(1);
                     higherRange = Number(newB);
                 } else if (b[0] === '>') {
@@ -592,7 +596,6 @@ export const UserHomepage = ({
     }
 
     const onWalletBtnClickClose = () => {
-        console.log('inside')
         setOpenWalletModal(false);
     }
 
@@ -602,10 +605,16 @@ export const UserHomepage = ({
             setCurrName('ETH');
             setCurrency([]);
             setChosenCurrency(eth);
+            setYAxisItems([]);
+            setYAxisItemClicked(null);
+            setYAxisItemHovered(null);
         } else if (currency === 'USDC') {
             setCurrName('USDC');
             setCurrency([]);
             setChosenCurrency(usdc);
+            setYAxisItems([]);
+            setYAxisItemClicked(null);
+            setYAxisItemHovered(null);
         }
     }
 
