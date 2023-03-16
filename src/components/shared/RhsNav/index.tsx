@@ -146,7 +146,10 @@ export const RhsNav = ({
                     >
                         <span
                             className={styles.iconOuter}
-                            style={{ backgroundColor: discoveryLocation ? '#FE7D06' : '#FFF7EE' }}
+                            style={{
+                                backgroundColor: discoveryLocation ? '#FE7D06' : '#FFF7EE',
+                                marginTop: '1rem',
+                            }}
                         >
                             <img
                                 src='/assets/images/discovery.svg'
@@ -160,10 +163,10 @@ export const RhsNav = ({
                     <a className={styles.iconOuter} style={{ backgroundColor: '#fff' }}>
                         <img src='/assets/images/help.svg' alt="" className={styles.imageAsIcon} />
                     </a>
-                    <a href="https://twitter.com/dotearth_" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#fff' }}>
+                    <a href="https://twitter.com/dotearth_" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#fff', marginTop: '1rem', }}>
                         <img src='/assets/images/twitter.svg' alt="" className={styles.imageAsIcon} />
                     </a>
-                    <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#fff' }}>
+                    <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#fff', marginTop: '1rem', }}>
                         <img src='/assets/images/discord.svg' alt="" className={styles.imageAsIcon} />
                     </a>
                 </Box>
