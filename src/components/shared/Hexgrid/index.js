@@ -72,7 +72,7 @@ export const Hexgrid = ({
     <Box
       sx={{
         width: "1440px",
-        height: "86vh",
+        height: "84vh",
         //  position: 'absolute',
         zIndex: 100,
       }}
