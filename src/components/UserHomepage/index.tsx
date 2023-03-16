@@ -663,7 +663,7 @@ export const UserHomepage = ({
     return (
         <>
             <Box
-            // sx={{ height: '8vh', }}
+                sx={{ height: '7.6vh', }}
             >
                 <Header
                     homeLocation={homeLocation}

@@ -35,6 +35,7 @@ export const Header = ({
             alignItems='center'
             width='100%'
             borderBottom='0.5px solid #000000'
+            height='7.6vh'
         >
             <Box
                 className={styles.lhsHeader}
