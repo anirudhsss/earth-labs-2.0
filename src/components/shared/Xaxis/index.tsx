@@ -70,16 +70,16 @@ export const Xaxis = ({
                 borderBottom: '1px solid black',
                 //marginTop: loading1 === false ? '0' : '53px',
                 width: '88vw',
-                // position: 'relative',
+                position: 'relative',
             }}>
-                {/* <span
+                <span
                     style={{
                         position: 'absolute',
                         fontSize: '1.5rem',
                         right: '-3px',
                         top: '-5px',
                     }}
-                >&#x2C3;</span> */}
+                >&#x2C3;</span>
             </Box>
             <Box sx={{
                 display: 'flex',

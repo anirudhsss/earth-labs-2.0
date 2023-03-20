@@ -56,34 +56,20 @@ export const Yaxis = ({
                                         </span>
                                     </>}
                                 </Box>
-                                {/* {(yAxisItemClicked === item.id || yAxisItemHovered === item.id) && <> */}
-                                {/* <span
-                                    style={{
-                                        position: 'absolute',
-                                        left: '40px',
-                                        top: '5px',
-                                    }}
-                                > */}
-                                {/* <Typography
-                                    text={item.range}
-                                    fontSize="10px"
-                                /> */}
-                                {/* </span> */}
-                                {/* <span style={{
-                                    position: 'absolute',
-                                    left: '60px',
-                                    top: '5px',
-                                }}>
-                                    <img src={'./assets/images/ethereum-logo.svg'} alt=""
-                                        style={{ position: 'absolute', width: '16px', }}
-                                    />
-                                </span> */}
-                                {/* </>} */}
                             </>
                         )
                     })}
                 </Box>
-                <Box className={styles.line}></Box>
+                <Box className={styles.line}>
+                    <span
+                        style={{
+                            position: 'absolute',
+                            fontSize: '1.5rem',
+                            right: '-3px',
+                            top: '-5px',
+                        }}
+                    >&#8963;</span>
+                </Box>
                 {/* <Box className={styles.groupOfCircles}>
                     {yAxisItems?.map((item: any) => {
                         return (
