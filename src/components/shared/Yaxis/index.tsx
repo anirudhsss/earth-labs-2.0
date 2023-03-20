@@ -65,8 +65,8 @@ export const Yaxis = ({
                         style={{
                             position: 'absolute',
                             fontSize: '1.5rem',
-                            right: '-3px',
-                            top: '-5px',
+                            right: '-5.5px',
+                            top: '-5.5px',
                         }}
                     >&#8963;</span>
                 </Box>
