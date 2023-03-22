@@ -141,13 +141,6 @@ export const Header = ({
                                         />
                                     </Button>
                                 </Link>
-                                {/* <Link
-                            to="/wallet"
-                            state={{
-                                icon: 'wallet',
-                            }}
-                            style={{ textDecoration: 'none', }}
-                        > */}
                                 <Button
                                     backgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
                                     color={`${(openWalletModal) ? '#fff' : '#000'}`}

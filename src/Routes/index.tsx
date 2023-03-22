@@ -26,7 +26,6 @@ export const router = createBrowserRouter(
             />
             <Route path="/maps" element={<UserHomepage />} />
             <Route path="/discovery" element={<Discovery />} />
-            {/* <Route path="/wallet" element={<Wallet />} /> */}
         </Route>
     )
 )

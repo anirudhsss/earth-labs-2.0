@@ -41,16 +41,7 @@ export const XaxisItems = ({
     onCircleClicked,
     clickedElement,
     monthOrYear,
-    data1,
-    matchedMonths,
-    setMatchedMonths,
-    yearViewEnabled,
-    setYearViewEnabled,
-    range,
-    setChosenData,
-    chosenData,
 }: XaxisItemsProps) => {
-    const location = useLocation();
     const whichDuration1 = monthOrYear === '' ? month : (monthOrYear === 'year' || monthOrYear === 'month') ? moment().month(month - 1).format("MMM") : [];
 
     // const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '35px', }}>&#x2B22;</span>

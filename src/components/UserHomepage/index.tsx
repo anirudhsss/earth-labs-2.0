@@ -118,6 +118,23 @@ export const UserHomepage = ({
     const [newChosenData, setNewChosenData] = useState<any>(false);
     const [lowerRange, setLowerRange] = useState<any>();
     const [higherRange, setHigherRange] = useState<any>();
+    const [yAxisValue, setYAxisValue] = useState({
+        yAxisValueMin: 0, yAxisValueMax: 0,
+    });
+    const [xAxisValue, setXAxisValue] = useState({
+        xAxisDateMin: 0, xAxisDateMax: 0,
+    });
+
+    const [abcd, setAbcd] = useState([]);
+    const [abcd1, setAbcd1] = useState([]);
+
+    const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
+    const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
+    const [difference, setDifference] = useState<string>('');
+
+    useEffect(() => {
+        onFindingXAxisMinAndMax();
+    }, [matchedMonths]);
 
     useEffect(() => {
         const info = async () => {
@@ -134,6 +151,56 @@ export const UserHomepage = ({
             setEtherProvider(provider);
         }
     }, []);
+
+    useEffect(() => {
+        const info = async () => {
+            const res = await ApiRequest();
+            // setData1(res?.data[0].hexes);
+            setData1(sample[0].hexes);
+            setLoading1(false);
+        }
+        info();
+    }, [])
+
+    useEffect(() => {
+        onDisplayYear();
+    }, [])
+
+    useEffect(() => {
+        if (monthOrYear === '') {
+            anotherFunc1();
+        }
+    }, [chosenData, data1, matchedMonths]);
+
+    useEffect(() => {
+        if (monthOrYear === 'year') {
+            anotherFunc2(someYear);
+        }
+    }, [chosenData, data1, matchedMonths]);
+
+    useEffect(() => {
+        onEthToUsdcConversion();
+    }, [difference])
+
+    const onFindingXAxisMinAndMax = () => {
+        let arr: number[] = [];
+        matchedMonths?.map((item: any) => {
+            arr.push(Number(moment(item.timestamp).format("DD")));
+        });
+        if (arr.length > 0) {
+            let max = arr[0];
+            let min = arr[1];
+            let n = arr.length;
+            for (let i = 0; i < n; i++) {
+                if (arr[i] > max) {
+                    max = arr[i];
+                } else if (arr[i] < min) {
+                    min = arr[i];
+                }
+                setXAxisValue({ xAxisDateMin: min, xAxisDateMax: max });
+            }
+        }
+    }
 
     const onOpenConnectWalletModal = useCallback(() => {
         setOpen(true);
@@ -242,23 +309,13 @@ export const UserHomepage = ({
         setWalletConnected(false);
     };
 
-    useEffect(() => {
-        const info = async () => {
-            const res = await ApiRequest();
-            setData1(res?.data[0].hexes);
-            // setData1(sample[0].hexes);
-            setLoading1(false);
-        }
-        info();
-    }, [])
-
     const clamp = (a: number, min = 0, max = 1) => Math.min(max, Math.max(min, a)); //0.33
     const invlerp = (x: number, y: number, a: number) => { //0.35
         return clamp((a - x) / (y - x))
     };
-    const [abcd, setAbcd] = useState([]);
-    const [abcd1, setAbcd1] = useState([]);
+
     const onCircleClicked = (month: any) => {
+        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         setCurrency([]);
         setYAxisItems([]);
         setYAxisItemClicked(null);
@@ -438,13 +495,13 @@ export const UserHomepage = ({
         })
         return [arr, lowerRange, higherRange];
     }
-    const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
-    const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
+
     const onYAxisItemClicked = (id: any, range: any) => {
         let lowerRange = 0, higherRange = 0;
         const b = range.split(' ');
         lowerRange = Number(b[0]);
         higherRange = Number(b[2]);
+        setYAxisValue({ yAxisValueMin: lowerRange, yAxisValueMax: higherRange });
         let data2: any = [];
         let idd = Number(id);
         setYAxisItemClicked(idd);
@@ -468,19 +525,9 @@ export const UserHomepage = ({
         setYAxisItemHovered(null);
     }
 
-    useEffect(() => {
-        onDisplayYear();
-    }, [])
-
     const onDisplayYear = () => {
         setmonthOrYear('');
     }
-
-    useEffect(() => {
-        if (monthOrYear === '') {
-            anotherFunc1();
-        }
-    }, [chosenData, data1, matchedMonths]);
 
     const anotherFunc1 = () => {
         if (monthOrYear === '' && !range) {
@@ -522,6 +569,7 @@ export const UserHomepage = ({
     const [someYear, setSomeYear] = useState<any>();
 
     const onDisplayMonth = (year: number) => {
+        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         setCurrency([]);
         setSomeYear(year);
         setYearViewEnabled(false);
@@ -532,6 +580,7 @@ export const UserHomepage = ({
         // }
         if (chosenData?.length > 0) {
             const arrIndexesOfClickedYears = chosenData?.filter((item: { timestamp: moment.MomentInput; }) => {
+                //console.log('Number(moment(item.timestamp).format("MM"))', Number(moment(item.timestamp).format("MM")))
                 let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
                 return monthFromApi === Number(year);
             });
@@ -540,12 +589,6 @@ export const UserHomepage = ({
         }
         setmonthOrYear('year');
     }
-
-    useEffect(() => {
-        if (monthOrYear === 'year') {
-            anotherFunc2(someYear);
-        }
-    }, [chosenData, data1, matchedMonths]);
 
     const anotherFunc2 = (someYear: any) => {
         if (chosenData?.length > 0) {
@@ -629,10 +672,6 @@ export const UserHomepage = ({
             setCoordinates({ x: coordinates.x + 10, y: coordinates.y, })
         }
     }
-    const [difference, setDifference] = useState<string>('');
-    useEffect(() => {
-        onEthToUsdcConversion();
-    }, [difference])
 
     const onEthToUsdcConversion = async () => {
         const yesterday = moment().subtract(1, 'days').format("DD-MM-YYYY");
@@ -659,6 +698,7 @@ export const UserHomepage = ({
             setEthToUsdcYvsTPercent(percent);
         }
     }
+
     //console.log('monthOrYear', monthOrYear)
     return (
         <>
@@ -850,7 +890,7 @@ export const UserHomepage = ({
                                 position: 'absolute',
                                 width: '12px',
                                 height: '12px',
-                                transform: difference === 'decrement' ? '' : 'rotate(180deg)',
+                                transform: difference === 'increment' ? '' : 'rotate(180deg)',
                             }}
                         />
                     </span>
@@ -858,7 +898,7 @@ export const UserHomepage = ({
                         position: 'absolute',
                         top: '1px',
                         left: '86px',
-                        marginTop: difference === 'decrement' ? '0' : '5px',
+                        marginTop: difference === 'increment' ? '0' : '5px',
                     }}>
                         <Typography
                             text={ethToUsdcYvsTPercent + '%'}
@@ -884,10 +924,7 @@ export const UserHomepage = ({
 
                 <Box className={styles.body}>
                     <Box
-                        // className={styles.lhsBody1}
                         style={{
-                            //marginBottom: loading1 !== false ? '-100px' : '0',
-                            // position: 'relative',
                             marginLeft: (yAxisItems?.length > 0) ? '0rem' : '3.6rem',
                         }}
                     >
@@ -913,13 +950,14 @@ export const UserHomepage = ({
                                 loading1={loading1}
                                 chosenData={chosenData}
                                 testData={testData}
+                                yAxisValue={yAxisValue}
+                                xAxisValue={xAxisValue}
                             />
                             <div className={styles.grad1}></div>
                         </Box>
                         <Box className={styles.lhsBody2}>
                             <Xaxis
                                 data={data}
-                                // data2={myFunc()}
                                 monthOrYear={monthOrYear}
                                 onDisplayYear={onDisplayYear}
                                 onDisplayMonth={onDisplayMonth}

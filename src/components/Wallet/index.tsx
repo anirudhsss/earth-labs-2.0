@@ -26,16 +26,6 @@ export const Wallet = ({
     const mapsLocation = location?.state?.icon === 'maps';
     const discoveryLocation = location?.state?.icon === 'discovery';
 
-    //const [openWalletModal, setOpenWalletModal] = useState(false);
-
-    // const onWalletBtnClickOpen = () => {
-    //     setOpenWalletModal(true);
-    // }
-
-    // const onWalletBtnClickClose = () => {
-    //     setOpenWalletModal(false);
-    // }
-
     return (
         <Box sx={{
             backgroundColor: '#1C223D',

@@ -18,13 +18,6 @@ export interface DiscoveryProps {
 export const Discovery = ({
     userWalletAddress,
 }: DiscoveryProps) => {
-    const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
-    // const { icon } = location?.state;
-    const [data, setData] = useState<any>();
 
     useEffect(() => {
         const info = async () => {
@@ -33,6 +26,14 @@ export const Discovery = ({
         }
         info();
     }, [])
+
+    const location = useLocation();
+    const homeLocation = location?.state?.icon === 'home';
+    const walletLocation = location?.state?.icon === 'wallet';
+    const mapsLocation = location?.state?.icon === 'maps';
+    const discoveryLocation = location?.state?.icon === 'discovery';
+    // const { icon } = location?.state;
+    const [data, setData] = useState<any>();
 
     return (
         <>

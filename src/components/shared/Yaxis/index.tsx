@@ -51,7 +51,6 @@ export const Yaxis = ({
                                         </span>
                                         <span>
                                             <img src={'./assets/images/ethereum-logo.svg'} alt=""
-                                            // style={{ position: 'absolute', width: '16px', }}
                                             />
                                         </span>
                                     </>}
@@ -70,19 +69,6 @@ export const Yaxis = ({
                         }}
                     >&#8963;</span>
                 </Box>
-                {/* <Box className={styles.groupOfCircles}>
-                    {yAxisItems?.map((item: any) => {
-                        return (
-                           
-                                <Box>
-                                    <Typography
-                                        text={item.range}
-                                        fontSize="10px"
-                                    />
-                                </Box>
-                        )
-                    })}
-                </Box> */}
             </Box>
         </>
     )

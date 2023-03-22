@@ -13,6 +13,7 @@ import { Fragment, useEffect, useState } from "react";
 import moment from "moment";
 import sample from "../../../sample.json";
 import styles from "./styles.module.css";
+import { HEXAGON_WIDTH, HEXAGON_HEIGHT } from "constant";
 
 // export interface HexgridProps {
 //     matchedMonths?: any;
@@ -29,45 +30,137 @@ export const Hexgrid = ({
   loading1,
   chosenData,
   testData,
+  yAxisValue,
+  xAxisValue,
 }) => {
   const [data, setData] = useState();
   const [data1, setData1] = useState();
   const [sortedData, setSortedData] = useState([]);
-  //const whichDuration = monthOrYear === '' ? arrOfYears : monthOrYear === 'year' ? arrOfMonths : [];
-
-  // useEffect(() => {
-  //     setArrOfYears(onDisplayYear);
-  // }, [chosenData])
+  const [newCoordinates, setNewCoordinates] = useState({});
+  const [testArr, setTestArr] = useState(matchedMonths);
 
   useEffect(() => {
-    // if (testData?.length >= 0) {
-    //   setSortedData(testData);
-    // } else {
-    setSortedData(matchedMonths);
-    // }
-  }, [matchedMonths]);
+    const reqQRSContainingArr = generateRectangleDynamic(
+      6,
+      5,
+      yAxisValue.yAxisValueMin,
+      yAxisValue.yAxisValueMax,
+      xAxisValue.xAxisDateMin,
+      xAxisValue.xAxisDateMax,
+      matchedMonths
+    );
+    const x = {};
+    reqQRSContainingArr?.map((item) => {
+      x[item.guid] = {
+        guid: item.guid,
+        newQ: item.Q,
+        newR: item.R,
+        newS: item.S,
+      };
+    });
+    setTestArr(reqQRSContainingArr);
+    setNewCoordinates(x);
+  }, [xAxisValue, yAxisValue, matchedMonths]);
 
   useEffect(() => {
     const info = async () => {
       const res = await ApiRequest();
-      setData(res?.data[0]);
-      setData1(res?.data[0].hexes);
-      // setData(sample[0]);
-      // setData1(sample[0].hexes);
+      // setData(res?.data[0]);
+      // setData1(res?.data[0].hexes);
+      setData(sample[0]);
+      setData1(sample[0].hexes);
     };
     info();
   }, []);
 
   useEffect(() => {
-    sortedData?.map((item, index) => {
+    testArr?.map((item, index) => {
       let pattern = document.getElementById(`PAT-${index}`);
       if (pattern) {
         pattern.setAttribute("width", "100%");
         pattern.setAttribute("height", "100%");
       }
     });
-  }, [sortedData]);
-  //console.log("sortedData", sortedData);
+  }, [testArr]);
+
+  const generateRectangleDynamic = (
+    mapWidth,
+    mapHeight,
+    valueMin,
+    valueMax,
+    dateMin,
+    dateMax,
+    targetHexes
+  ) => {
+    const filteredHexes = targetHexes
+      .filter((h) => {
+        let referenceDate;
+        if (monthOrYear === "year") {
+          referenceDate = Number(moment(h.timestamp).format("MM"));
+        } else if (monthOrYear === "month") {
+          referenceDate = Number(moment(h.timestamp).format("DD"));
+        }
+        let filteredData;
+        //   console.log(
+        //     "test",
+        //     h.targetValue,
+        //     valueMax,
+        //     valueMin,
+        //     referenceDate,
+        //     dateMax,
+        //     dateMin
+        //   );
+        if (valueMax > 0 && valueMin > 0) {
+          console.log("in1", valueMax, valueMin);
+          filteredData =
+            h.targetValue <= valueMax &&
+            h.targetValue >= valueMin &&
+            referenceDate <= dateMax &&
+            referenceDate >= dateMin;
+        } else {
+          console.log("in2");
+          filteredData = referenceDate <= dateMax && referenceDate >= dateMin;
+        }
+        return filteredData;
+      })
+      .sort((a, b) => {
+        return (
+          a.targetValue - b.targetValue || b.referenceDate - a.referenceDate
+        );
+      });
+    //console.log("filteredHexes", filteredHexes);
+    const coords = [];
+    let counter = 0;
+
+    for (let r = 0; r < mapHeight; r++) {
+      const offset = Math.floor(r / 2);
+      for (let q = -offset; q < mapWidth - offset; q++) {
+        const h = {};
+
+        h.Q = q;
+        h.R = r;
+        h.S = -q - r;
+        h.Order = counter++;
+        coords.push(h);
+      }
+    }
+    coords.sort((a, b) => a.Order - b.Order);
+    // console.log("coords", coords);
+    let coordIndex = 0;
+
+    for (const fHex of filteredHexes) {
+      fHex.Q = coords[coordIndex]?.Q;
+      fHex.R = coords[coordIndex]?.R;
+      fHex.S = coords[coordIndex]?.S;
+      coordIndex++;
+    }
+    // console.log(
+    //   "filteredHexes.slice(0, mapWidth * mapHeight)",
+    //   filteredHexes.slice(0, mapWidth * mapHeight)
+    // );
+    return filteredHexes.slice(0, mapWidth * mapHeight);
+  };
+
   return (
     <Box
       sx={{
@@ -103,26 +196,34 @@ export const Hexgrid = ({
         viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}
       >
         <Layout
-          size={{ x: 12.5, y: 12.5 }}
+          size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
           flat={false}
           spacing={1.1}
           origin={coordinates}
         >
-          {sortedData?.map((item, index) => {
+          {/* {sortedData?.map((item, index) => { */}
+          {testArr?.map((item, guid) => {
             return (
               <>
                 <Fragment>
+                  {/* {console.log(
+                    "newCoordinates?.[item.guid]",
+                    newCoordinates?.[item.guid]
+                  )} */}
                   <Hexagon
-                    q={item.q}
-                    r={item.r}
-                    s={item.s}
-                    fill={`PAT-${index}`}
-                    id={`grid-identifier-${index}`}
+                    // q={newCoordinates?.[item.guid]?.newQ || 0}
+                    // r={newCoordinates?.[item.guid]?.newR || 0}
+                    // s={newCoordinates?.[item.guid]?.newS || 0}
+                    q={item.Q}
+                    r={item.R}
+                    s={item.S}
+                    fill={`PAT-${guid}`}
+                    id={`grid-identifier-${guid}`}
                   />
                   <Pattern
-                    id={`PAT-${index}`}
+                    id={`PAT-${guid}`}
                     link={item.fillURL}
-                    size={{ x: 12.5, y: 12.5 }}
+                    size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
                   />
                 </Fragment>
               </>

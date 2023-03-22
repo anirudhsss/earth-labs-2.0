@@ -7,7 +7,6 @@ import moment from "moment";
 
 export interface XaxisProps {
     data?: any,
-    // data2?: any,
     onCircleClicked: (month: any) => void;
     onDisplayYear: () => void;
     onDisplayMonth: (year: any) => void;
@@ -32,8 +31,6 @@ export interface XaxisProps {
 }
 
 export const Xaxis = ({
-    data,
-    // data2,
     onCircleClicked,
     clickedElement,
     monthOrYear,
@@ -51,24 +48,21 @@ export const Xaxis = ({
     hoverElementId,
     onCircleHoverStarts,
     onCircleHoverEnds,
-    loading1,
     range,
     setChosenData,
     chosenData,
 }: XaxisProps) => {
 
     const whichDuration = monthOrYear === '' ? arrOfYears : (monthOrYear === 'year' || monthOrYear === 'month') ? arrOfMonths : [];
-    // console.log('whichDuration', whichDuration)
+
     return (
         <Box sx={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
-            //position: 'relative',
         }}>
             <Box sx={{
                 borderBottom: '1px solid black',
-                //marginTop: loading1 === false ? '0' : '53px',
                 width: '88vw',
                 position: 'relative',
             }}>
@@ -93,11 +87,8 @@ export const Xaxis = ({
                 {whichDuration?.map((item: any) => {
                     return (
                         <XaxisItems
-                            // key={id}
                             dimension={item.dimension}
                             month={item.month}
-                            //year={item.year}
-                            // id={id}
                             backgroundColor={backgroundColor}
                             hoverElementId={hoverElementId}
                             onCircleHoverStarts={onCircleHoverStarts}
@@ -118,30 +109,6 @@ export const Xaxis = ({
                         />
                     )
                 })}
-                {/* <Box
-                    sx={{
-                        width: '35px',
-                        height: '35px',
-                        borderRadius: '50%',
-                        border: '1px solid black',
-                        backgroundColor: '#FE7D06',
-                        cursor: 'pointer',
-                    }}
-                >
-
-                </Box>
-                <Box
-                    sx={{
-                        width: '10px',
-                        height: '10px',
-                        borderRadius: '50%',
-                        border: '1px solid black',
-                        backgroundColor: '#FE7D06',
-                        cursor: 'pointer',
-                    }}
-                >
-
-                </Box> */}
             </Box>
         </Box>
     )
