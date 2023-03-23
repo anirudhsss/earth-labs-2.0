@@ -60,14 +60,14 @@ export const Yaxis = ({
                     })}
                 </Box>
                 <Box className={styles.line}>
-                    <span
+                    {/* <span
                         style={{
                             position: 'absolute',
                             fontSize: '1.5rem',
                             right: '-5.5px',
                             top: '-5.5px',
                         }}
-                    >&#8963;</span>
+                    >&#8963;</span> */}
                 </Box>
             </Box>
         </>

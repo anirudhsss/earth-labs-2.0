@@ -13,7 +13,12 @@ import { Fragment, useEffect, useState } from "react";
 import moment from "moment";
 import sample from "../../../sample.json";
 import styles from "./styles.module.css";
-import { HEXAGON_WIDTH, HEXAGON_HEIGHT } from "constant";
+import {
+  HEXAGON_WIDTH,
+  HEXAGON_HEIGHT,
+  HEXGRID_RENDER_TOTAL_WIDTH,
+  HEXGRID_RENDER_TOTAL_HEIGHT,
+} from "constant";
 
 // export interface HexgridProps {
 //     matchedMonths?: any;
@@ -41,8 +46,8 @@ export const Hexgrid = ({
 
   useEffect(() => {
     const reqQRSContainingArr = generateRectangleDynamic(
-      6,
-      5,
+      8,
+      4,
       yAxisValue.yAxisValueMin,
       yAxisValue.yAxisValueMax,
       xAxisValue.xAxisDateMin,
@@ -101,24 +106,13 @@ export const Hexgrid = ({
           referenceDate = Number(moment(h.timestamp).format("DD"));
         }
         let filteredData;
-        //   console.log(
-        //     "test",
-        //     h.targetValue,
-        //     valueMax,
-        //     valueMin,
-        //     referenceDate,
-        //     dateMax,
-        //     dateMin
-        //   );
         if (valueMax > 0 && valueMin > 0) {
-          console.log("in1", valueMax, valueMin);
           filteredData =
             h.targetValue <= valueMax &&
             h.targetValue >= valueMin &&
             referenceDate <= dateMax &&
             referenceDate >= dateMin;
         } else {
-          console.log("in2");
           filteredData = referenceDate <= dateMax && referenceDate >= dateMin;
         }
         return filteredData;
@@ -128,7 +122,6 @@ export const Hexgrid = ({
           a.targetValue - b.targetValue || b.referenceDate - a.referenceDate
         );
       });
-    //console.log("filteredHexes", filteredHexes);
     const coords = [];
     let counter = 0;
 
@@ -145,7 +138,6 @@ export const Hexgrid = ({
       }
     }
     coords.sort((a, b) => a.Order - b.Order);
-    // console.log("coords", coords);
     let coordIndex = 0;
 
     for (const fHex of filteredHexes) {
@@ -154,18 +146,23 @@ export const Hexgrid = ({
       fHex.S = coords[coordIndex]?.S;
       coordIndex++;
     }
-    // console.log(
-    //   "filteredHexes.slice(0, mapWidth * mapHeight)",
-    //   filteredHexes.slice(0, mapWidth * mapHeight)
-    // );
     return filteredHexes.slice(0, mapWidth * mapHeight);
   };
+
+  useEffect(() => {
+    const a = document.getElementById("hexgrid");
+    console.log("width", a.getBoundingClientRect().width);
+    console.log("height", a.getBoundingClientRect().height);
+    // const b = document.getElementById("layout");
+    // console.log("width", b.getBoundingClientRect().width);
+    // console.log("height", b.getBoundingClientRect().height);
+  }, []);
 
   return (
     <Box
       sx={{
-        width: "90vw",
-        height: "84vh",
+        width: `${HEXGRID_RENDER_TOTAL_WIDTH}vw`,
+        height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
         //  position: 'absolute',
         zIndex: 100,
       }}
@@ -193,23 +190,21 @@ export const Hexgrid = ({
       <HexGrid
         width={"100%"}
         height={"100%"}
-        viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}
+        viewBox={`-15 -52 ${data?.viewboxWidth} ${data?.viewboxHeight}`}
+        id="hexgrid"
       >
         <Layout
           size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
           flat={false}
           spacing={1.1}
           origin={coordinates}
+          id="layout"
         >
           {/* {sortedData?.map((item, index) => { */}
           {testArr?.map((item, guid) => {
             return (
               <>
                 <Fragment>
-                  {/* {console.log(
-                    "newCoordinates?.[item.guid]",
-                    newCoordinates?.[item.guid]
-                  )} */}
                   <Hexagon
                     // q={newCoordinates?.[item.guid]?.newQ || 0}
                     // r={newCoordinates?.[item.guid]?.newR || 0}
