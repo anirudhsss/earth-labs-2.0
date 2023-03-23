@@ -938,49 +938,44 @@ export const UserHomepage = ({
                         />
                     </Box>
                     <Box className={styles.midBody}>
-                        <Box className={styles.midBody1}>
-                            <Hexgrid
-                                matchedMonths={matchedMonths}
-                                arrOfMonths={arrOfMonths}
-                                arrOfYears={arrOfYears}
-                                monthOrYear={monthOrYear}
-                                onDisplayYear={onDisplayYear}
-                                setArrOfYears={setArrOfYears}
-                                coordinates={coordinates}
-                                loading1={loading1}
-                                chosenData={chosenData}
-                                testData={testData}
-                                yAxisValue={yAxisValue}
-                                xAxisValue={xAxisValue}
-                            />
-                            <div className={styles.grad1}></div>
-                        </Box>
-                        <Box className={styles.lhsBody2}>
-                            <Xaxis
-                                data={data}
-                                monthOrYear={monthOrYear}
-                                onDisplayYear={onDisplayYear}
-                                onDisplayMonth={onDisplayMonth}
-                                onCircleClicked={onCircleClicked}
-                                clickedElement={clickedElement}
-                                data1={data1}
-                                arrOfMonths={arrOfMonths}
-                                arrOfYears={arrOfYears}
-                                setArrOfYears={setArrOfYears}
-                                matchedMonths={matchedMonths}
-                                setMatchedMonths={setMatchedMonths}
-                                yearViewEnabled={yearViewEnabled}
-                                setYearViewEnabled={setYearViewEnabled}
-                                onCircleHoverStarts={onCircleHoverStarts}
-                                onCircleHoverEnds={onCircleHoverEnds}
-                                hoverElementId={hoverElementId}
-                                backgroundColor={backgroundColor}
-                                loading1={loading1}
-                                range={range}
-                                setChosenData={setChosenData}
-                                chosenData={chosenData}
-                            />
-                        </Box>
+                        <Hexgrid
+                            matchedMonths={matchedMonths}
+                            arrOfMonths={arrOfMonths}
+                            arrOfYears={arrOfYears}
+                            monthOrYear={monthOrYear}
+                            onDisplayYear={onDisplayYear}
+                            setArrOfYears={setArrOfYears}
+                            coordinates={coordinates}
+                            loading1={loading1}
+                            chosenData={chosenData}
+                            testData={testData}
+                            yAxisValue={yAxisValue}
+                            xAxisValue={xAxisValue}
+                        />
+                        <Xaxis
+                            data={data}
+                            monthOrYear={monthOrYear}
+                            onDisplayYear={onDisplayYear}
+                            onDisplayMonth={onDisplayMonth}
+                            onCircleClicked={onCircleClicked}
+                            clickedElement={clickedElement}
+                            data1={data1}
+                            arrOfMonths={arrOfMonths}
+                            arrOfYears={arrOfYears}
+                            setArrOfYears={setArrOfYears}
+                            matchedMonths={matchedMonths}
+                            setMatchedMonths={setMatchedMonths}
+                            yearViewEnabled={yearViewEnabled}
+                            setYearViewEnabled={setYearViewEnabled}
+                            onCircleHoverStarts={onCircleHoverStarts}
+                            onCircleHoverEnds={onCircleHoverEnds}
+                            hoverElementId={hoverElementId}
+                            backgroundColor={backgroundColor}
+                            loading1={loading1}
+                            range={range}
+                            setChosenData={setChosenData}
+                            chosenData={chosenData}
+                        />
                     </Box>
                     <RhsNav
                         openMenu={openMenu}

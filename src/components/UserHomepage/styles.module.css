@@ -19,33 +19,12 @@
     height: 90%;
 }
 
-/* .grad1 {
-    max-width: 600px;
-    height: 350px;
-    overflow-y: scroll;
-    background: url(img_5terre.jpg) no-repeat;
-    -webkit-mask-image: linear-gradient(black, transparent);
-    mask-image: linear-gradient (black, transparent);
-} */
-
 .midBody {
     width: 88%;
     height: 100%;
     /* display: flex;
     flex-direction: column;
     position: relative; */
-}
-
-.midBody1 {
-    /* width: 100%;
-    height: 84vh;
-    border: 50px solid rgba(245, 245, 245, 0.5); */
-    /* position: absolute; */
-}
-
-.lhsBody2 {
-    /* position: absolute;
-    top: 716px; */
 }
 
 .line {
@@ -57,11 +36,6 @@
     height: 20px;
     margin: 10px;
 }
-
-/* .rhsBody {
-    width: 10%;
-    height: 100%;
-} */
 
 .mapAndWalletBtn {
     width: 100%;
@@ -103,7 +77,6 @@
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    /* background-color: #FFF7EE; */
     box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.25);
     display: inline-block;
 }
@@ -123,11 +96,9 @@
 
 .timeMenuBtn1 {
     width: 10%;
-    /* margin-top: 1rem; */
     height: 3vh;
     position: absolute;
     top: 15px;
-    /* margin-left: 5px; */
     z-index: 101;
 }
 
