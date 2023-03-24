@@ -165,11 +165,11 @@ export const Hexgrid = ({
 
   return (
     <TransformWrapper
-      // wheel={{ step: 0.01 }}
-      // maxScale={4}
-      // centerOnInit={true}
-      // doubleClick={{ disabled: true }}
-      // panning={{ disabled: false }}
+      wheel={{ step: 0.01 }}
+      maxScale={4}
+      centerOnInit={true}
+      doubleClick={{ disabled: true }}
+      panning={{ disabled: false }}
       className={styles.transformWrapper}
     >
       <TransformComponent>

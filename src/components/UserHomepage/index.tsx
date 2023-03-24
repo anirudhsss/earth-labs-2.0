@@ -582,6 +582,7 @@ export const UserHomepage = ({
             const arrIndexesOfClickedYears = chosenData?.filter((item: { timestamp: moment.MomentInput; }) => {
                 //console.log('Number(moment(item.timestamp).format("MM"))', Number(moment(item.timestamp).format("MM")))
                 let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
+                console.log('year array', monthFromApi);
                 return monthFromApi === Number(year);
             });
             setMatchedMonths(arrIndexesOfClickedYears);
