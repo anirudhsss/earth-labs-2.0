@@ -155,8 +155,8 @@ export const UserHomepage = ({
     useEffect(() => {
         const info = async () => {
             const res = await ApiRequest();
-            // setData1(res?.data[0].hexes);
-            setData1(sample[0].hexes);
+            setData1(res?.data[0].hexes);
+            //setData1(sample[0].hexes);
             setLoading1(false);
         }
         info();
