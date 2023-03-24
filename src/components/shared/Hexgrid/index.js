@@ -19,6 +19,7 @@ import {
   HEXGRID_RENDER_TOTAL_WIDTH,
   HEXGRID_RENDER_TOTAL_HEIGHT,
 } from "constant";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 // export interface HexgridProps {
 //     matchedMonths?: any;
@@ -153,21 +154,34 @@ export const Hexgrid = ({
     const a = document.getElementById("hexgrid");
     console.log("width", a.getBoundingClientRect().width);
     console.log("height", a.getBoundingClientRect().height);
-    // const b = document.getElementById("layout");
-    // console.log("width", b.getBoundingClientRect().width);
-    // console.log("height", b.getBoundingClientRect().height);
+    let b;
+    testArr?.map((item) => {
+      // return `grid-identifier-${item.guid}`;
+      b = item.guid;
+    });
+
+    console.log("b", b);
   }, []);
 
   return (
-    <Box
-      sx={{
-        width: `${HEXGRID_RENDER_TOTAL_WIDTH}vw`,
-        height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
-        //  position: 'absolute',
-        zIndex: 100,
-      }}
+    <TransformWrapper
+      // wheel={{ step: 0.01 }}
+      // maxScale={4}
+      // centerOnInit={true}
+      // doubleClick={{ disabled: true }}
+      // panning={{ disabled: false }}
+      className={styles.transformWrapper}
     >
-      {/* {!loading1 && <><Box sx={{
+      <TransformComponent>
+        <Box
+          sx={{
+            width: `${HEXGRID_RENDER_TOTAL_WIDTH}vw`,
+            height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
+            //  position: 'absolute',
+            zIndex: 100,
+          }}
+        >
+          {/* {!loading1 && <><Box sx={{
                 position: 'absolute',
                 marginRight: '184px',
                 top: 3,
@@ -187,46 +201,45 @@ export const Hexgrid = ({
                 background: 'linear-gradient(0deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
                 zIndex: 98,
             }}></Box></>} */}
-      <HexGrid
-        width={"100%"}
-        height={"100%"}
-        viewBox={`-15 -52 ${data?.viewboxWidth} ${data?.viewboxHeight}`}
-        id="hexgrid"
-      >
-        <Layout
-          size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
-          flat={false}
-          spacing={1.1}
-          origin={coordinates}
-          id="layout"
-        >
-          {/* {sortedData?.map((item, index) => { */}
-          {testArr?.map((item, guid) => {
-            return (
-              <>
-                <Fragment>
-                  <Hexagon
-                    // q={newCoordinates?.[item.guid]?.newQ || 0}
-                    // r={newCoordinates?.[item.guid]?.newR || 0}
-                    // s={newCoordinates?.[item.guid]?.newS || 0}
-                    q={item.Q}
-                    r={item.R}
-                    s={item.S}
-                    fill={`PAT-${guid}`}
-                    id={`grid-identifier-${guid}`}
-                  />
-                  <Pattern
-                    id={`PAT-${guid}`}
-                    link={item.fillURL}
-                    size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
-                  />
-                </Fragment>
-              </>
-            );
-          })}
-        </Layout>
-      </HexGrid>
-      {/* {!loading1 && <><Box sx={{
+          <HexGrid
+            width={"100%"}
+            height={"100%"}
+            viewBox={`-15 -52 ${data?.viewboxWidth} ${data?.viewboxHeight}`}
+            id="hexgrid"
+          >
+            <Layout
+              size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
+              flat={false}
+              spacing={1.1}
+              origin={coordinates}
+            >
+              {/* {sortedData?.map((item, index) => { */}
+              {testArr?.map((item, index) => {
+                return (
+                  <>
+                    <Fragment>
+                      <Hexagon
+                        // q={newCoordinates?.[item.guid]?.newQ || 0}
+                        // r={newCoordinates?.[item.guid]?.newR || 0}
+                        // s={newCoordinates?.[item.guid]?.newS || 0}
+                        q={item.Q}
+                        r={item.R}
+                        s={item.S}
+                        fill={`PAT-${index}`}
+                        id={`grid-identifier-${index}`}
+                      />
+                      <Pattern
+                        id={`PAT-${index}`}
+                        link={item.fillURL}
+                        size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
+                      />
+                    </Fragment>
+                  </>
+                );
+              })}
+            </Layout>
+          </HexGrid>
+          {/* {!loading1 && <><Box sx={{
                 position: 'absolute',
                 marginTop: '650px',
                 top: 0,
@@ -246,6 +259,8 @@ export const Hexgrid = ({
                 background: 'linear-gradient(270deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
                 zIndex: 98,
             }}></Box></>} */}
-    </Box>
+        </Box>
+      </TransformComponent>
+    </TransformWrapper>
   );
 };
