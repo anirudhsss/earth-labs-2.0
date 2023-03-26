@@ -170,13 +170,13 @@ export const UserHomepage = ({
         if (monthOrYear === '') {
             anotherFunc1();
         }
-    }, [chosenData, data1, matchedMonths]);
+    }, [data1, matchedMonths]);
 
     useEffect(() => {
         if (monthOrYear === 'year') {
             anotherFunc2(someYear);
         }
-    }, [chosenData, data1, matchedMonths]);
+    }, [matchedMonths]);
 
     useEffect(() => {
         onEthToUsdcConversion();
@@ -314,29 +314,6 @@ export const UserHomepage = ({
         return clamp((a - x) / (y - x))
     };
 
-    const onCircleClicked = (month: any) => {
-        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
-        setCurrency([]);
-        setYAxisItems([]);
-        setYAxisItemClicked(null);
-        setYAxisItemHovered(null);
-        // setYearViewEnabled(false);
-        setClickedElement(month);
-        let monthOrYear = 'month';
-        setmonthOrYear('month');
-        // if (monthOrYear === 'month' && !range) {
-        //     setChosenData(data1);
-        // } else if ((monthOrYear === 'month') && range) {
-
-        // }
-        const arrIndexesOfClickedMonths = abcd?.filter((item: { timestamp: moment.MomentInput; }) => {
-            let monthFromApi = Number(moment(item.timestamp).format("MM"));
-            return monthFromApi === Number(month);
-        });
-        setMatchedMonths(arrIndexesOfClickedMonths);
-        setAbcd1(arrIndexesOfClickedMonths);
-    }
-
     const onOpenYearMenu = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget);
     }
@@ -378,6 +355,10 @@ export const UserHomepage = ({
             </div>
         );
     };
+    // const [valueMenuItemClicked, setValueMenuItemClicked] = useState(false);
+    // useEffect(() => {
+    //     setChosenData(matchedMonths);
+    // }, [valueMenuItemClicked]);
 
     const onValueMenuItemClicked = (id: number) => {
         setClickedElement(null);
@@ -386,8 +367,10 @@ export const UserHomepage = ({
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
         onCloseYearMenu();
-        onDisplayYear();
         setMatchedMonths([]);
+        setmonthOrYear('year');
+        onDisplayMonth(id);
+        //setValueMenuItemClicked(true);
         // setYearViewEnabled(true);
         const selectedItem = YEARS.filter((item) => item.id === id);
         setYears(selectedItem);
@@ -530,26 +513,41 @@ export const UserHomepage = ({
     }
 
     const anotherFunc1 = () => {
-        if (monthOrYear === '' && !range) {
-            setChosenData(data1);
-        } else if ((monthOrYear === '') && range) {
-            setChosenData(matchedMonths);
-        }
-        if (chosenData?.length > 0) {
+        // if (monthOrYear === '' && !range) {
+        //setChosenData(data1);
+        // } else if ((monthOrYear === '') && range) {
+        //     setChosenData(matchedMonths);
+        // }
+        if (data1?.length > 0) {
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrYearPointsOfAxis: any[] = [];
-            arrOfDuration = chosenData.map((item: any) => {
+            arrOfDuration = data1.map((item: any) => {
                 return Number(moment(item.timestamp).format("YYYY"));
             });
+
             freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
                 acc[item] = acc[item] ? acc[item] + 1 : 1;
                 return acc;
             }, {});
+
             duration = Object.keys(freqOfDuration);
             noOfTxns = Object.values(freqOfDuration);
             if (duration?.length === 1) {
-                // let val1 = ((35 + 10) / 2);
                 let val1 = 35;
                 arrYearPointsOfAxis = [...arrYearPointsOfAxis, val1];
+            } else {
+                arrOfDuration = data1?.map((item: any) => Number(moment(item.timestamp).format('YYYY')));
+                freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
+                    acc[item] = acc[item] ? acc[item] + 1 : 1;
+                    return acc;
+                }, {});
+                duration = Object.keys(freqOfDuration);
+                noOfTxns = Object.values(freqOfDuration);
+                const min = Math.min(...noOfTxns);
+                const max = Math.max(...noOfTxns);
+                noOfTxns.forEach((item: number) => {
+                    let val1 = (((35 - 10) * invlerp(min, max, item)) + 10);
+                    arrYearPointsOfAxis = [...arrYearPointsOfAxis, val1] //processed count
+                })
             }
             const arrOfYears: { month: any; dimension: any; noOfGlyphs: any; }[] = [];
             arrYearPointsOfAxis?.forEach((_, index) => {
@@ -559,7 +557,7 @@ export const UserHomepage = ({
                     noOfGlyphs: noOfTxns[index],
                 });
             })
-            // return arrOfYears;
+            console.log('arrOfYears', arrOfYears)
             setArrOfYears(arrOfYears);
         }
     }
@@ -574,15 +572,14 @@ export const UserHomepage = ({
         setSomeYear(year);
         setYearViewEnabled(false);
         // if (matchedMonths === 0) {
-        setChosenData(data1);
+        //setChosenData(data1);
         // } else if (matchedMonths > 0) {
         //     setChosenData(matchedMonths);
         // }
-        if (chosenData?.length > 0) {
-            const arrIndexesOfClickedYears = chosenData?.filter((item: { timestamp: moment.MomentInput; }) => {
+        if (data1?.length > 0) {
+            const arrIndexesOfClickedYears = data1?.filter((item: { timestamp: moment.MomentInput; }) => {
                 //console.log('Number(moment(item.timestamp).format("MM"))', Number(moment(item.timestamp).format("MM")))
                 let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
-                console.log('year array', monthFromApi);
                 return monthFromApi === Number(year);
             });
             setMatchedMonths(arrIndexesOfClickedYears);
@@ -592,15 +589,21 @@ export const UserHomepage = ({
     }
 
     const anotherFunc2 = (someYear: any) => {
-        if (chosenData?.length > 0) {
+        // if (matchedMonths?.length === 0) {
+        //     setChosenData(data1);
+        // } else {
+        //setChosenData(matchedMonths);
+        // }
+        if (matchedMonths?.length > 0) {
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrMonthPointsOfAxis: any[] = [];
-            arrOfDuration = chosenData.map((item: any) => {
+            arrOfDuration = matchedMonths?.map((item: any) => {
                 // return Number(moment(item.timestamp).format("YYYY")) == year ? Number(moment(item.timestamp).format("MM")) : undefined;
-                if (Number(moment(item.timestamp).format("YYYY")) == someYear) {
+                if (Number(moment(item.timestamp).format("YYYY")) == Number(someYear)) {
                     return Number(moment(item.timestamp).format("MM"));
-                } else {
-                    return undefined;
                 }
+                // else {
+                //     return undefined;
+                // }
             });
             freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
                 acc[item] = acc[item] ? acc[item] + 1 : 1;
@@ -624,7 +627,30 @@ export const UserHomepage = ({
                 })
             })
             setArrOfMonths(arrOfMonths);
+            //setValueMenuItemClicked(false);
         }
+    }
+
+    const onCircleClicked = (month: any) => {
+        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
+        setCurrency([]);
+        setYAxisItems([]);
+        setYAxisItemClicked(null);
+        setYAxisItemHovered(null);
+        // setYearViewEnabled(false);
+        setClickedElement(month);
+        setmonthOrYear('month');
+        // if (monthOrYear === 'month' && !range) {
+        //     setChosenData(data1);
+        // } else if ((monthOrYear === 'month') && range) {
+
+        // }
+        const arrIndexesOfClickedMonths = abcd?.filter((item: { timestamp: moment.MomentInput; }) => {
+            let monthFromApi = Number(moment(item.timestamp).format("MM"));
+            return monthFromApi === Number(month);
+        });
+        setMatchedMonths(arrIndexesOfClickedMonths);
+        setAbcd1(arrIndexesOfClickedMonths);
     }
 
     const onCircleHoverStarts = (elementId: any) => {
@@ -700,7 +726,6 @@ export const UserHomepage = ({
         }
     }
 
-    //console.log('monthOrYear', monthOrYear)
     return (
         <>
             <Box

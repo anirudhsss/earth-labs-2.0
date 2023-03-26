@@ -152,15 +152,15 @@ export const Hexgrid = ({
 
   useEffect(() => {
     const a = document.getElementById("hexgrid");
-    console.log("width", a.getBoundingClientRect().width);
-    console.log("height", a.getBoundingClientRect().height);
+    // console.log("width", a.getBoundingClientRect().width);
+    // console.log("height", a.getBoundingClientRect().height);
     let b;
     testArr?.map((item) => {
       // return `grid-identifier-${item.guid}`;
       b = item.guid;
     });
 
-    console.log("b", b);
+    //console.log("b", b);
   }, []);
 
   return (
