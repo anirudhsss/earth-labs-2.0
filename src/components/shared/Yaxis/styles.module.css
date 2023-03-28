@@ -12,7 +12,7 @@
     position: relative;
     z-index: 101;
     left: 18px;
-    height: 76.8vh;
+    height: 80.83vh;
     margin-top: 7.28vh;
 }
 
@@ -53,7 +53,7 @@
 
 .line {
     border-left: 1px solid black;
-    height: 76.8vh;
+    height: 80.83vh;
     margin-top: 7.28vh;
     position: relative;
 }

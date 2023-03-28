@@ -7,13 +7,17 @@
 
 .gridContainer {
     width: 90vw;
-    height: 84vh;
+    height: 88vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* .gridContainer svg g {
+.gridContainer svg {
+    width: 1000px;
+}
+
+.gridContainer svg g {
     fill: #000;
     fill-opacity: 1;
 }
@@ -41,4 +45,4 @@
     stroke-opacity: 0.7;
     stroke-linecap: round;
     stroke-linejoin: round;
-} */
+}

@@ -48,7 +48,7 @@ export const Hexgrid = ({
   useEffect(() => {
     const reqQRSContainingArr = generateRectangleDynamic(
       6,
-      5,
+      4,
       yAxisValue.yAxisValueMin,
       yAxisValue.yAxisValueMax,
       xAxisValue.xAxisDateMin,
