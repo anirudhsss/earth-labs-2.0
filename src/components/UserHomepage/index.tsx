@@ -107,8 +107,10 @@ export const UserHomepage = ({
     const [openWalletModal, setOpenWalletModal] = useState(false);
     const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
     const [coordinates, setCoordinates] = useState<any>({
-        x: -53,
-        y: -31,
+        // x: -53,
+        // y: -31,
+        x: 0,
+        y: 0,
     })
     const [ethToUsdc, setEthToUsdc] = useState<any>();
     const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();
@@ -557,7 +559,6 @@ export const UserHomepage = ({
                     noOfGlyphs: noOfTxns[index],
                 });
             })
-            console.log('arrOfYears', arrOfYears)
             setArrOfYears(arrOfYears);
         }
     }

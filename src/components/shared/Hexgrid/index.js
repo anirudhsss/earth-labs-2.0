@@ -47,8 +47,8 @@ export const Hexgrid = ({
 
   useEffect(() => {
     const reqQRSContainingArr = generateRectangleDynamic(
-      8,
-      4,
+      6,
+      5,
       yAxisValue.yAxisValueMin,
       yAxisValue.yAxisValueMax,
       xAxisValue.xAxisDateMin,
@@ -152,36 +152,56 @@ export const Hexgrid = ({
 
   useEffect(() => {
     const a = document.getElementById("hexgrid");
-    // console.log("width", a.getBoundingClientRect().width);
-    // console.log("height", a.getBoundingClientRect().height);
+    console.log("width", a.getBoundingClientRect().width);
+    console.log("height", a.getBoundingClientRect().height);
     let b;
     testArr?.map((item) => {
-      // return `grid-identifier-${item.guid}`;
+      return `grid-identifier-${item.guid}`;
       b = item.guid;
     });
 
     //console.log("b", b);
   }, []);
 
+  useEffect(() => {
+    const svg = document.querySelector("svg.grid");
+    const { xMin, xMax, yMin, yMax } = [...svg.children].reduce((acc, el) => {
+      const { x, y, width, height } = el.getBBox();
+      if (!acc.xMin || x < acc.xMin) acc.xMin = x;
+      if (!acc.xMax || x + width > acc.xMax) acc.xMax = x + width;
+      if (!acc.yMin || y < acc.yMin) acc.yMin = y;
+      if (!acc.yMax || y + height > acc.yMax) acc.yMax = y + height;
+      return acc;
+    }, {});
+    const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
+    svg.setAttribute("viewBox", viewbox);
+  }, [monthOrYear]);
+
+  // const hexagonSize = {
+  //   x: layoutHexagonSizeX ?? 15,
+  //   y: layoutHexagonSizeY ?? 15,
+  // };
+
   return (
-    <TransformWrapper
-      wheel={{ step: 0.01 }}
-      maxScale={4}
-      centerOnInit={true}
-      doubleClick={{ disabled: true }}
-      panning={{ disabled: false }}
-      className={styles.transformWrapper}
+    <Box
+      sx={{
+        width: `${HEXGRID_RENDER_TOTAL_WIDTH}vw`,
+        height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
+        //  position: 'absolute',
+        zIndex: 100,
+      }}
     >
-      <TransformComponent>
-        <Box
-          sx={{
-            width: `${HEXGRID_RENDER_TOTAL_WIDTH}vw`,
-            height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
-            //  position: 'absolute',
-            zIndex: 100,
-          }}
-        >
-          {/* {!loading1 && <><Box sx={{
+      <TransformWrapper
+        wheel={{ step: 0.01 }}
+        maxScale={4}
+        centerOnInit={true}
+        doubleClick={{ disabled: true }}
+        panning={{ disabled: false }}
+        className={styles.transformWrapper}
+      >
+        <TransformComponent>
+          <Box className={styles.gridContainer}>
+            {/* {!loading1 && <><Box sx={{
                 position: 'absolute',
                 marginRight: '184px',
                 top: 3,
@@ -201,45 +221,55 @@ export const Hexgrid = ({
                 background: 'linear-gradient(0deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
                 zIndex: 98,
             }}></Box></>} */}
-          <HexGrid
-            width={"100%"}
-            height={"100%"}
-            viewBox={`-15 -52 ${data?.viewboxWidth} ${data?.viewboxHeight}`}
-            id="hexgrid"
-          >
-            <Layout
-              size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
-              flat={false}
-              spacing={1.1}
-              origin={coordinates}
+            <HexGrid
+              // width={"100%"}
+              // height={"100%"}
+              viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}
+              id="hexgrid"
             >
-              {/* {sortedData?.map((item, index) => { */}
-              {testArr?.map((item, index) => {
-                return (
-                  <>
-                    <Fragment>
-                      <Hexagon
-                        // q={newCoordinates?.[item.guid]?.newQ || 0}
-                        // r={newCoordinates?.[item.guid]?.newR || 0}
-                        // s={newCoordinates?.[item.guid]?.newS || 0}
-                        q={item.Q}
-                        r={item.R}
-                        s={item.S}
-                        fill={`PAT-${index}`}
-                        id={`grid-identifier-${index}`}
-                      />
-                      <Pattern
-                        id={`PAT-${index}`}
-                        link={item.fillURL}
-                        size={{ x: HEXAGON_WIDTH, y: HEXAGON_HEIGHT }}
-                      />
-                    </Fragment>
-                  </>
-                );
-              })}
-            </Layout>
-          </HexGrid>
-          {/* {!loading1 && <><Box sx={{
+              <Layout
+                size={{
+                  x: HEXAGON_WIDTH,
+                  y: HEXAGON_HEIGHT,
+                }}
+                flat={false}
+                spacing={1.1}
+                origin={coordinates}
+              >
+                {/* {sortedData?.map((item, index) => { */}
+                {testArr?.map((item, index) => {
+                  return (
+                    <>
+                      <Fragment>
+                        <Hexagon
+                          // q={newCoordinates?.[item.guid]?.newQ || 0}
+                          // r={newCoordinates?.[item.guid]?.newR || 0}
+                          // s={newCoordinates?.[item.guid]?.newS || 0}
+                          q={item.Q}
+                          r={item.R}
+                          s={item.S}
+                          fill={`PAT-${index}`}
+                          id={`grid-identifier-${index}`}
+                          cellStyle={{
+                            stroke: item.borderColorHex,
+                            strokeWidth: item.borderColorWidth,
+                          }}
+                        />
+                        <Pattern
+                          id={`PAT-${index}`}
+                          link={item.fillURL}
+                          size={{
+                            x: HEXAGON_WIDTH,
+                            y: HEXAGON_HEIGHT,
+                          }}
+                        />
+                      </Fragment>
+                    </>
+                  );
+                })}
+              </Layout>
+            </HexGrid>
+            {/* {!loading1 && <><Box sx={{
                 position: 'absolute',
                 marginTop: '650px',
                 top: 0,
@@ -259,8 +289,9 @@ export const Hexgrid = ({
                 background: 'linear-gradient(270deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
                 zIndex: 98,
             }}></Box></>} */}
-        </Box>
-      </TransformComponent>
-    </TransformWrapper>
+          </Box>
+        </TransformComponent>
+      </TransformWrapper>
+    </Box>
   );
 };
