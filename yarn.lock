@@ -4447,18 +4447,35 @@
     buffer "6.0.3"
     valtio "1.9.0"
 
+"@web3modal/core@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@web3modal/core/-/core-2.2.2.tgz#1e282dc45bddb11c04f1c93abce570bac1b9a620"
+  integrity sha512-RKbYNIEVP5Hwiva68PWXExbkTFLUTasneyRpcjoQSM4BIh78qXp1YMt0nyTvFdHmHQEGxXEMCuRG5qoE97uMHA==
+  dependencies:
+    buffer "6.0.3"
+    valtio "1.10.3"
+
 "@web3modal/ethereum@^2.0.0-rc.3":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@web3modal/ethereum/-/ethereum-2.1.1.tgz#073c1de70bf7d47f12247bee1b1fd04fa06be871"
   integrity sha512-F5kqPtqOgYt+1S7lZd8nfD59x1+YUkqvhbJrnSMg1uxDPSBtOGnSX33XVTQ7m3Z2/3yeoFkeLipx4i4WVLdAFA==
 
-"@web3modal/react@^2.0.0-rc.3":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@web3modal/react/-/react-2.1.1.tgz#e069ef0ad0011f2830691d2f10783feb9bb0322f"
-  integrity sha512-lij4OxfL8jCmgjQIrqXzNwGXEfXHr6ext/2+MwA12+2TO4SOOtbvkBmmvicHmV7EEo43fCAqyrk6vDhsXZ00Ag==
+"@web3modal/react@^2.1.3":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@web3modal/react/-/react-2.2.2.tgz#2ff0f6b03e3824b3c46e27aeb183caca84d6a7a5"
+  integrity sha512-NgMbRaF4XP6uzLsB935bQtjXgGEUoAM5ywXo6tVMdhmfQarEUyqxoG+H1HM2GLndMDSxJqMjVNoYXo3ibQUvVw==
   dependencies:
-    "@web3modal/core" "2.1.1"
-    "@web3modal/ui" "2.1.1"
+    "@web3modal/core" "2.2.2"
+    "@web3modal/standalone" "2.2.2"
+    "@web3modal/ui" "2.2.2"
+
+"@web3modal/standalone@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@web3modal/standalone/-/standalone-2.2.2.tgz#2d5ce74bbb7f112b31da32049620afa75c4a4686"
+  integrity sha512-c05kkTFNGZqnjJ3n2C8uo+wWL6ut1jexGYAyTvbweDengdsOr8LDo0VpK5V3XSKCV2fFcPh5JE9H1aA4jpnZPg==
+  dependencies:
+    "@web3modal/core" "2.2.2"
+    "@web3modal/ui" "2.2.2"
 
 "@web3modal/standalone@^2.0.0-rc.2":
   version "2.1.1"
@@ -4474,6 +4491,16 @@
   integrity sha512-0jRDxgPc/peaE5KgqnzzriXhdVu5xNyCMP5Enqdpd77VkknJIs7h16MYKidxgFexieyHpCOssWySsryWcP2sXA==
   dependencies:
     "@web3modal/core" "2.1.1"
+    lit "2.6.1"
+    motion "10.15.5"
+    qrcode "1.5.1"
+
+"@web3modal/ui@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@web3modal/ui/-/ui-2.2.2.tgz#f1c1ac908230d4214c35891a5d922c118353eaf2"
+  integrity sha512-PAuMOuk4sZ4UGjucGMZKzu6Qu56XtFsgLaqOn8ZgP2RkZmYEBGSG9mUQVzJd3XzfzAy1T91Wmqp/3TI3m0pXuQ==
+  dependencies:
+    "@web3modal/core" "2.2.2"
     lit "2.6.1"
     motion "10.15.5"
     qrcode "1.5.1"
@@ -13700,6 +13727,11 @@ proxy-compare@2.4.0:
   resolved "https://registry.yarnpkg.com/proxy-compare/-/proxy-compare-2.4.0.tgz#90f6abffe734ef86d8e37428c5026268606a9c1b"
   integrity sha512-FD8KmQUQD6Mfpd0hywCOzcon/dbkFP8XBd9F1ycbKtvVsfv6TsFUKJ2eC0Iz2y+KzlkdT1Z8SY6ZSgm07zOyqg==
 
+proxy-compare@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/proxy-compare/-/proxy-compare-2.5.0.tgz#0387c5e4d283ba9b1c0353bb20def4449b06bbd2"
+  integrity sha512-f1us0OsVAJ3tdIMXGQx2lmseYS4YXe4W+sKF5g5ww/jV+5ogMadPt+sIZ+88Ga9kvMJsrRNWzCrKPpr6pMWYbA==
+
 proxy-from-env@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
@@ -16546,6 +16578,14 @@ validate-npm-package-license@^3.0.1:
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
+
+valtio@1.10.3:
+  version "1.10.3"
+  resolved "https://registry.yarnpkg.com/valtio/-/valtio-1.10.3.tgz#273eda9ba6459869798b4f58c84514e18fb80ed8"
+  integrity sha512-t3Ez/+baJ+Z5tIyeaI6nCAbW/hrmcq2jditwg/X++o5IvCdiGirQKTOv1kJq0glgUo13v5oABCVGcinggBfiKw==
+  dependencies:
+    proxy-compare "2.5.0"
+    use-sync-external-store "1.2.0"
 
 valtio@1.9.0:
   version "1.9.0"
