@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { Box, createTheme, ThemeProvider } from '@mui/material';
 import DINAlternateBold from './fonts/DINAlternate-Bold.ttf';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, RouterProvider } from "react-router-dom";
 import { router } from './Routes'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const dinAlternateBold = {
   fontFamily: 'DINAlternateBold',
@@ -55,10 +56,13 @@ const root = ReactDOM.createRoot(
 {/* <BrowserRouter basename={process.env.PUBLIC_URL} /> */ }
 
 root.render(
-  <ThemeProvider theme={theme}>
-    <RouterProvider router={router} />
-  </ThemeProvider>
-);
+  <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+  </Box>
+)
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
