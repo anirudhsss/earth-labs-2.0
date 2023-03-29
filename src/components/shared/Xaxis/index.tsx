@@ -6,7 +6,6 @@ import { ApiRequest } from "components/utils";
 import moment from "moment";
 
 export interface XaxisProps {
-    data?: any,
     onCircleClicked: (month: any) => void;
     onDisplayYear: () => void;
     onDisplayMonth: (year: any) => void;

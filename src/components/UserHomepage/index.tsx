@@ -29,6 +29,7 @@ import { Wallet } from "components/Wallet";
 import axios from "axios";
 import { Yaxis } from "components/shared/Yaxis";
 import { AnyAaaaRecord } from "dns";
+import { AxiosFetch, BackdropDuringApiLoading } from '../utils';
 
 export interface UserHomepageProps {
 
@@ -69,7 +70,7 @@ export const UserHomepage = ({
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
     const openMenu1 = Boolean(anchorEl1);
-    const [data1, setData1] = useState<any>([]);
+    const [test1, setData1] = useState<any>([]);
     const [loading1, setLoading1] = useState(true);
     const [months, setMonths] = useState<any>();
     const [occurences, setOccurences] = useState<any>();
@@ -103,7 +104,7 @@ export const UserHomepage = ({
     const [signatureMessage, setSignatureMessage] = useState<any>("");
     const [sessionToken, setSessionToken] = useState<any>();
     const [isWalletConnected, setWalletConnected] = useState(false);
-    const [data, setData] = useState<any>();
+    const [test, setData] = useState<any>();
     const [openWalletModal, setOpenWalletModal] = useState(false);
     const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
     const [coordinates, setCoordinates] = useState<any>({
@@ -133,18 +134,19 @@ export const UserHomepage = ({
     const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [difference, setDifference] = useState<string>('');
+    const { data1, apiLoading, apiError } = AxiosFetch();
 
     useEffect(() => {
         onFindingXAxisMinAndMax();
     }, [matchedMonths]);
 
-    useEffect(() => {
-        const info = async () => {
-            const res = await ApiRequest();
-            setData(res);
-        }
-        info();
-    }, [])
+    // useEffect(() => {
+    //     const info = async () => {
+    //         const res = await ApiRequest();
+    //         setData(res);
+    //     }
+    //     info();
+    // }, [])
 
     useEffect(() => {
         const w: any = window;
@@ -154,15 +156,15 @@ export const UserHomepage = ({
         }
     }, []);
 
-    useEffect(() => {
-        const info = async () => {
-            const res = await ApiRequest();
-            setData1(res?.data[0].hexes);
-            //setData1(sample[0].hexes);
-            setLoading1(false);
-        }
-        info();
-    }, [])
+    // useEffect(() => {
+    //     const info = async () => {
+    //         const res = await ApiRequest();
+    //         setData1(res?.data[0].hexes);
+    //         //setData1(sample[0].hexes);
+    //         setLoading1(false);
+    //     }
+    //     info();
+    // }, [])
 
     useEffect(() => {
         onDisplayYear();
@@ -522,7 +524,7 @@ export const UserHomepage = ({
         // }
         if (data1?.length > 0) {
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrYearPointsOfAxis: any[] = [];
-            arrOfDuration = data1.map((item: any) => {
+            arrOfDuration = data1?.map((item: any) => {
                 return Number(moment(item.timestamp).format("YYYY"));
             });
 
@@ -980,7 +982,6 @@ export const UserHomepage = ({
                             xAxisValue={xAxisValue}
                         />
                         <Xaxis
-                            data={data}
                             monthOrYear={monthOrYear}
                             onDisplayYear={onDisplayYear}
                             onDisplayMonth={onDisplayMonth}
@@ -1039,6 +1040,8 @@ export const UserHomepage = ({
                     onWalletBtnClickClose={onWalletBtnClickClose}
                 />
             </ModalDialog>
+
+            <BackdropDuringApiLoading show={apiLoading} />
         </>
     )
 }
