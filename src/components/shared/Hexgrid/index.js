@@ -47,7 +47,7 @@ export const Hexgrid = ({
 
   useEffect(() => {
     const reqQRSContainingArr = generateRectangleDynamic(
-      6,
+      8,
       4,
       yAxisValue.yAxisValueMin,
       yAxisValue.yAxisValueMax,
@@ -189,7 +189,9 @@ export const Hexgrid = ({
         height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
         //  position: 'absolute',
         zIndex: 100,
+        overflow: "hidden",
       }}
+      className={styles.transformWrapper}
     >
       <TransformWrapper
         wheel={{ step: 0.01 }}
