@@ -862,7 +862,7 @@ export const UserHomepage = ({
                     </span>
                 </Box>
 
-                <Box sx={{
+                {ethToUsdc !== undefined && difference !== undefined && <Box sx={{
                     position: 'absolute',
                     zIndex: 101,
                     top: '22px',
@@ -927,7 +927,7 @@ export const UserHomepage = ({
                             color="#EA1313"
                         />
                     </span>
-                </Box>
+                </Box>}
 
                 <Box sx={{
                     position: 'absolute',

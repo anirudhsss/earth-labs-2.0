@@ -136,7 +136,7 @@ export const Header = ({
                                         onClick={onWalletBtnClickClose}
                                     >
                                         <Typography
-                                            text="My Atlas"
+                                            text="Activities"
                                             fontSize="1.3rem"
                                         />
                                     </Button>
@@ -151,7 +151,7 @@ export const Header = ({
                                     onClick={onWalletBtnClickOpen}
                                 >
                                     <Typography
-                                        text="Wallet"
+                                        text="Assets"
                                         fontSize="1.3rem"
                                     />
                                 </Button>
