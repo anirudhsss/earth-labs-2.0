@@ -69,17 +69,6 @@ export const Hexgrid = ({
   }, [xAxisValue, yAxisValue, matchedMonths]);
 
   useEffect(() => {
-    const info = async () => {
-      const res = await ApiRequest();
-      setData(res?.data[0]);
-      setData1(res?.data[0].hexes);
-      // setData(sample[0]);
-      // setData1(sample[0].hexes);
-    };
-    info();
-  }, []);
-
-  useEffect(() => {
     testArr?.map((item, index) => {
       let pattern = document.getElementById(`PAT-${index}`);
       if (pattern) {
@@ -101,7 +90,9 @@ export const Hexgrid = ({
     const filteredHexes = targetHexes
       .filter((h) => {
         let referenceDate;
-        if (monthOrYear === "year") {
+        if (monthOrYear === "") {
+          referenceDate = Number(moment(h.timestamp).format("YYYY"));
+        } else if (monthOrYear === "year") {
           referenceDate = Number(moment(h.timestamp).format("MM"));
         } else if (monthOrYear === "month") {
           referenceDate = Number(moment(h.timestamp).format("DD"));
@@ -150,18 +141,18 @@ export const Hexgrid = ({
     return filteredHexes.slice(0, mapWidth * mapHeight);
   };
 
-  useEffect(() => {
-    const a = document.getElementById("hexgrid");
-    console.log("width", a.getBoundingClientRect().width);
-    console.log("height", a.getBoundingClientRect().height);
-    let b;
-    testArr?.map((item) => {
-      return `grid-identifier-${item.guid}`;
-      b = item.guid;
-    });
+  // useEffect(() => {
+  //   const a = document.getElementById("hexgrid");
+  //   console.log("width", a.getBoundingClientRect().width);
+  //   console.log("height", a.getBoundingClientRect().height);
+  //   let b;
+  //   testArr?.map((item) => {
+  //     return `grid-identifier-${item.guid}`;
+  //     b = item.guid;
+  //   });
 
-    //console.log("b", b);
-  }, []);
+  //   //console.log("b", b);
+  // }, []);
 
   useEffect(() => {
     const svg = document.querySelector("svg.grid");
@@ -175,12 +166,7 @@ export const Hexgrid = ({
     }, {});
     const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
     svg.setAttribute("viewBox", viewbox);
-  }, [monthOrYear]);
-
-  // const hexagonSize = {
-  //   x: layoutHexagonSizeX ?? 15,
-  //   y: layoutHexagonSizeY ?? 15,
-  // };
+  }, [testArr]);
 
   return (
     <Box
@@ -240,6 +226,7 @@ export const Hexgrid = ({
               >
                 {/* {sortedData?.map((item, index) => { */}
                 {testArr?.map((item, index) => {
+                  // console.log("item.timestamp", item.timestamp);
                   return (
                     <>
                       <Fragment>

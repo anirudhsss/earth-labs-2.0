@@ -3,7 +3,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ApiUrl } from "../../constant";
 
-export const truncate = (fullStr, strLen, separator) => {
+export const truncate = (
+  fullStr: string,
+  strLen: number,
+  separator: string | any[]
+) => {
   if (fullStr) {
     if (fullStr.length <= strLen) return fullStr;
 
@@ -55,7 +59,11 @@ export const AxiosFetch = () => {
   return { data1: apiData, apiLoading, apiError };
 };
 
-export const BackdropDuringApiLoading = ({ show }) => {
+export interface BackdropDuringApiLoadingProps {
+  show?: Boolean;
+}
+
+export const BackdropDuringApiLoading = ({ show }: BackdropDuringApiLoadingProps) => {
   const backdrop = (
     <Backdrop
       sx={{

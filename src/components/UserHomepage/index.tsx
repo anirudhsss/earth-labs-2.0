@@ -141,30 +141,12 @@ export const UserHomepage = ({
     }, [matchedMonths]);
 
     // useEffect(() => {
-    //     const info = async () => {
-    //         const res = await ApiRequest();
-    //         setData(res);
+    //     const w: any = window;
+    //     if (w && w.ethereum) {
+    //         let provider = new ethers.providers.Web3Provider(w.ethereum);
+    //         setEtherProvider(provider);
     //     }
-    //     info();
-    // }, [])
-
-    useEffect(() => {
-        const w: any = window;
-        if (w && w.ethereum) {
-            let provider = new ethers.providers.Web3Provider(w.ethereum);
-            setEtherProvider(provider);
-        }
-    }, []);
-
-    // useEffect(() => {
-    //     const info = async () => {
-    //         const res = await ApiRequest();
-    //         setData1(res?.data[0].hexes);
-    //         //setData1(sample[0].hexes);
-    //         setLoading1(false);
-    //     }
-    //     info();
-    // }, [])
+    // }, []);
 
     useEffect(() => {
         onDisplayYear();
@@ -173,6 +155,7 @@ export const UserHomepage = ({
     useEffect(() => {
         if (monthOrYear === '') {
             anotherFunc1();
+            onDisplayAllTimeTxnInDescOrder();
         }
     }, [data1, matchedMonths]);
 
@@ -185,6 +168,14 @@ export const UserHomepage = ({
     useEffect(() => {
         onEthToUsdcConversion();
     }, [difference])
+
+    const onDisplayAllTimeTxnInDescOrder = () => {
+        const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {
+            return +new Date(b.timestamp) - +new Date(a.timestamp);
+        });
+        // console.log('sortedTxnInDescOrder', sortedTxnInDescOrder)
+        setMatchedMonths(sortedTxnInDescOrder);
+    }
 
     const onFindingXAxisMinAndMax = () => {
         let arr: number[] = [];
