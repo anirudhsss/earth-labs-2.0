@@ -124,7 +124,7 @@ export const RhsNav = ({
                     <a className={styles.iconOuter} style={{ backgroundColor: '#fff' }}>
                         <img src='/assets/images/help.svg' alt="" className={styles.imageAsIcon} />
                     </a>
-                    <a href="https://twitter.com/dotearth_" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#fff', marginTop: '1rem', }}>
+                    <a href="https://twitter.com/AtlasXY_" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#fff', marginTop: '1rem', }}>
                         <img src='/assets/images/twitter.svg' alt="" className={styles.imageAsIcon} />
                     </a>
                     <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#fff', marginTop: '1rem', }}>
