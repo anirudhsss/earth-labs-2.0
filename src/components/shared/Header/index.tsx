@@ -116,7 +116,7 @@ export const Header = ({
                 >
 
                     <Box className={styles.mapAndWalletBtn}>
-                        {(mapsLocation || homeLocation || walletLocation) &&
+                        {/* {(mapsLocation || homeLocation || walletLocation) &&
                             <>
                                 <Link
                                     to="/maps"
@@ -155,9 +155,8 @@ export const Header = ({
                                         fontSize="1.3rem"
                                     />
                                 </Button>
-                                {/* </Link> */}
                             </>
-                        }
+                        } */}
                     </Box>
                     {/* <Typography
                                 text={truncate(userWalletAddress, 12)}

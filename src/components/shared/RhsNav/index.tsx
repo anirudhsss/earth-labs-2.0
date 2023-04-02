@@ -46,8 +46,13 @@ export const RhsNav = ({
     return (
         <Box className={styles.rhsBody}>
             <Box className={styles.allIcons}>
-                <Box sx={{ height: '22vh' }} className={styles.arrowsToNavigate}>
-                    {(mapsLocation || homeLocation) && !openWalletModal &&
+                <Box sx={{
+                    height: '22vh',
+                    paddingTop: '2rem'
+                }}
+                // className={styles.arrowsToNavigate}
+                >
+                    {/* {(mapsLocation || homeLocation) && !openWalletModal &&
                         <Box>
                             <div style={{
                                 cursor: 'pointer', fontSize: '30px', position: 'absolute', top: '16px', left: '9px'
@@ -78,6 +83,48 @@ export const RhsNav = ({
                                 <div onClick={() => onMoveHexes('right')}>&#8594;</div>
                             </div>
                         </Box>
+                    } */}
+                    {(mapsLocation || homeLocation || walletLocation) &&
+                        <>
+                            <Link
+                                to="/maps"
+                                state={{
+                                    icon: 'maps',
+                                }}
+                                style={{ textDecoration: 'none', }}
+                            >
+                                <Button
+                                    backgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                    color={`${(openWalletModal) ? '#000' : '#fff'}`}
+                                    border="0.5px solid rgba(46, 52, 81, 0.58)"
+                                    hoverBackgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                    borderRadius="0.6rem"
+                                    padding="0.4rem 0.2rem"
+                                    width="75px"
+                                    margin="0 6px 0 0"
+                                    onClick={onWalletBtnClickClose}
+                                >
+                                    <Typography
+                                        text="Activities"
+                                        fontSize="1.3rem"
+                                    />
+                                </Button>
+                            </Link>
+                            <Button
+                                backgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                color={`${(openWalletModal) ? '#fff' : '#000'}`}
+                                border="0.5px solid rgba(46, 52, 81, 0.58)"
+                                hoverBackgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                borderRadius="0.6rem"
+                                padding="0.4rem 1.8rem"
+                                onClick={onWalletBtnClickOpen}
+                            >
+                                <Typography
+                                    text="Assets"
+                                    fontSize="1.3rem"
+                                />
+                            </Button>
+                        </>
                     }
                 </Box>
                 <Box className={styles.upperIcons}>
