@@ -38,9 +38,11 @@ export const Hexgrid = ({
   testData,
   yAxisValue,
   xAxisValue,
+  data,
+  data1,
 }) => {
-  const [data, setData] = useState();
-  const [data1, setData1] = useState();
+  // const [data, setData] = useState();
+  // const [data1, setData1] = useState();
   const [sortedData, setSortedData] = useState([]);
   const [newCoordinates, setNewCoordinates] = useState({});
   const [testArr, setTestArr] = useState(matchedMonths);
@@ -158,6 +160,7 @@ export const Hexgrid = ({
     const svg = document.querySelector("svg.grid");
     const { xMin, xMax, yMin, yMax } = [...svg.children].reduce((acc, el) => {
       const { x, y, width, height } = el.getBBox();
+      console.log("test", x, y, width, height);
       if (!acc.xMin || x < acc.xMin) acc.xMin = x;
       if (!acc.xMax || x + width > acc.xMax) acc.xMax = x + width;
       if (!acc.yMin || y < acc.yMin) acc.yMin = y;
@@ -165,6 +168,7 @@ export const Hexgrid = ({
       return acc;
     }, {});
     const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
+    console.log("viewbox", viewbox);
     svg.setAttribute("viewBox", viewbox);
   }, [testArr]);
 
@@ -220,13 +224,16 @@ export const Hexgrid = ({
                   x: HEXAGON_WIDTH,
                   y: HEXAGON_HEIGHT,
                 }}
+                // size={{
+                //   x: data?.layoutHexagonSizeX,
+                //   y: data?.layoutHexagonSizeY,
+                // }}
                 flat={false}
                 spacing={1.1}
                 origin={coordinates}
               >
                 {/* {sortedData?.map((item, index) => { */}
                 {testArr?.map((item, index) => {
-                  // console.log("item.timestamp", item.timestamp);
                   return (
                     <>
                       <Fragment>
@@ -243,7 +250,9 @@ export const Hexgrid = ({
                             stroke: item.borderColorHex,
                             strokeWidth: item.borderColorWidth,
                           }}
-                        />
+                        >
+                          <title id="unique-id">{item.altText}</title>
+                        </Hexagon>
                         <Pattern
                           id={`PAT-${index}`}
                           link={item.fillURL}
@@ -251,6 +260,10 @@ export const Hexgrid = ({
                             x: HEXAGON_WIDTH,
                             y: HEXAGON_HEIGHT,
                           }}
+                          // size={{
+                          //   x: data?.layoutHexagonSizeX,
+                          //   y: data?.layoutHexagonSizeY,
+                          // }}
                         />
                       </Fragment>
                     </>

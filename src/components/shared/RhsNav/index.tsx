@@ -48,7 +48,8 @@ export const RhsNav = ({
             <Box className={styles.allIcons}>
                 <Box sx={{
                     height: '22vh',
-                    paddingTop: '2rem'
+                    width: '16.3rem',
+                    paddingTop: '2rem',
                 }}
                 // className={styles.arrowsToNavigate}
                 >
@@ -85,7 +86,12 @@ export const RhsNav = ({
                         </Box>
                     } */}
                     {(mapsLocation || homeLocation || walletLocation) &&
-                        <>
+                        <Box sx={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}>
                             <Link
                                 to="/maps"
                                 state={{
@@ -101,7 +107,6 @@ export const RhsNav = ({
                                     borderRadius="0.6rem"
                                     padding="0.4rem 0.2rem"
                                     width="75px"
-                                    margin="0 6px 0 0"
                                     onClick={onWalletBtnClickClose}
                                 >
                                     <Typography
@@ -117,6 +122,7 @@ export const RhsNav = ({
                                 hoverBackgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
                                 borderRadius="0.6rem"
                                 padding="0.4rem 1.8rem"
+                                margin="0 0 0 10px"
                                 onClick={onWalletBtnClickOpen}
                             >
                                 <Typography
@@ -124,7 +130,7 @@ export const RhsNav = ({
                                     fontSize="1.3rem"
                                 />
                             </Button>
-                        </>
+                        </Box>
                     }
                 </Box>
                 <Box className={styles.upperIcons}>

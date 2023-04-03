@@ -134,7 +134,7 @@ export const UserHomepage = ({
     const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [difference, setDifference] = useState<string>('');
-    const { data1, apiLoading, apiError } = AxiosFetch();
+    const { data, data1, apiLoading, apiError } = AxiosFetch();
 
     useEffect(() => {
         onFindingXAxisMinAndMax();
@@ -971,6 +971,8 @@ export const UserHomepage = ({
                             testData={testData}
                             yAxisValue={yAxisValue}
                             xAxisValue={xAxisValue}
+                            data1={data1}
+                            data={data}
                         />
                         <Xaxis
                             monthOrYear={monthOrYear}

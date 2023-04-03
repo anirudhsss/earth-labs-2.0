@@ -39,6 +39,7 @@ export const ApiRequest = async () => {
 
 export const AxiosFetch = () => {
   const [apiData, setApiData] = useState([]);
+  const [data, setData] = useState();
   const [apiLoading, setApiLoading] = useState(true);
   const [apiError, setApiError] = useState("");
 
@@ -52,11 +53,12 @@ export const AxiosFetch = () => {
         setApiError(apiData.apiError);
         setApiData(apiData[0]?.hexes);
         setApiLoading(false);
+        setData(apiData[0]);
       })
       .catch(() => setApiLoading(false));
   }, []);
 
-  return { data1: apiData, apiLoading, apiError };
+  return { data, data1: apiData, apiLoading, apiError };
 };
 
 export interface BackdropDuringApiLoadingProps {

@@ -22,6 +22,6 @@
 
 .gridContainer svg g polygon:hover {
     stroke: #FE7D06 !important;
-    stroke-width: 1 !important;
-    transition: fill-opacity .2s !important;
+    stroke-width: 0.3 !important;
+    /* transition: fill-opacity .2s !important; */
 }
