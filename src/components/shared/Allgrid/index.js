@@ -70,6 +70,7 @@ export const Allgrid = ({
       data1
     );
     const x = {};
+    console.log("reqQRSContainingArr", reqQRSContainingArr);
     reqQRSContainingArr?.map((item) => {
       x[item.guid] = {
         guid: item.guid,
@@ -191,7 +192,7 @@ export const Allgrid = ({
                   flat={false}
                   spacing={1.1}
                   // origin={coordinates}
-                  origin={{ x: -90, y: -35 }}
+                  origin={{ x: -80, y: -25 }}
                 >
                   {testArr?.map((item, index) => {
                     return (

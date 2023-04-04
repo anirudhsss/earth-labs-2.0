@@ -104,7 +104,7 @@ export const Wallet = ({
             backgroundColor: '#1C223D',
             width: '100%',
             height: '100vh',
-            // opacity: '0.9'
+            // opacity: '0.1'
         }}
         // className={styles.transformWrapper}
         >
