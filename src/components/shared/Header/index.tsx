@@ -179,14 +179,22 @@ export const Header = ({
                                 <img src="/assets/images/earth.svg" />
                             </span> */}
                     {/* <LogoutButton /> */}
-                    <Box onClick={onWalletBtnClickClose}>
-                        <Typography
-                            text="Allen.earth.eth"
-                            fontSize="1.4rem"
-                            color={openWalletModal ? '#fff' : '#000'}
-                            cursor="pointer"
-                        />
-                    </Box>
+                    <Link
+                        to="/maps"
+                        state={{
+                            icon: 'maps',
+                        }}
+                        style={{ textDecoration: 'none', }}
+                    >
+                        <Box onClick={onWalletBtnClickClose}>
+                            <Typography
+                                text="Allen.earth.eth"
+                                fontSize="1.4rem"
+                                color={openWalletModal ? '#fff' : '#000'}
+                                cursor="pointer"
+                            />
+                        </Box>
+                    </Link>
                     <Avatar
                         alt=""
                         src="/assets/images/avatarTest.jpg"
