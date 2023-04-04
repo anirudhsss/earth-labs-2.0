@@ -726,8 +726,9 @@ export const UserHomepage = ({
     return (
         <>
             <Box sx={{
-                backgroundColor: '#1C223D',
-                opacity: '50%',
+                // backgroundColor: '#1C223D',
+                // opacity: '50%',
+                backgroundColor: 'rgba(28, 34, 61, 0.5)'
             }}>
                 <Box
                     sx={{ height: '7.6vh', }}
