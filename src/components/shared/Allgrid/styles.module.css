@@ -11,7 +11,7 @@
 .gridContainer {
     width: 87.5vw;
     height: 190vh;
-    overflow: scroll;
+    /* overflow: scroll; */
     /* width: 90vw;
     height: 85vh; */
     /* display: flex;
@@ -22,7 +22,7 @@
 .gridContainer svg {
     width: 87.5vw;
     height: 80vh;
-    overflow: scroll;
+    /* overflow: scroll; */
     /* width: 90vw;
     height: 85vh; */
     /* display: flex;
@@ -33,7 +33,7 @@
 .gridContainer svg g {
     width: 87.5vw;
     height: 180vh;
-    overflow: scroll;
+    /* overflow: scroll; */
 }
 
 .gridContainer svg g polygon:hover {
