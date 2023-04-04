@@ -53,8 +53,8 @@ export const Header = ({
                             <img
                                 src='./assets/images/light_atlas.svg'
                                 alt=""
-                                width="75"
-                                height="32"
+                                width="80"
+                                height="80"
                                 style={{
                                     backgroundColor: 'transparent'
                                 }}
@@ -70,12 +70,12 @@ export const Header = ({
                             icon: 'discovery',
                         }}
                     >
-                        <span style={{ margin: '0 15px 0 8px' }}>
+                        <span style={{ margin: '0 15px 0 0px' }}>
                             <img
                                 src='./assets/images/dark_atlas.svg'
                                 alt=""
-                                width="95"
-                                height="40"
+                                width="120"
+                                height="120"
                                 style={{
                                     // backgroundColor: '#1C223D',
                                 }}
