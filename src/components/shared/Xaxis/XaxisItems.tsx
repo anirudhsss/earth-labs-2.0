@@ -46,7 +46,6 @@ export const XaxisItems = ({
 
     // const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '35px', }}>&#x2B22;</span>
 
-
     return (
         <Box sx={{
             display: 'flex',

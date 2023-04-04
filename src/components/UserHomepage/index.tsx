@@ -70,7 +70,7 @@ export const UserHomepage = ({
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
     const openMenu1 = Boolean(anchorEl1);
-    const [test1, setData1] = useState<any>([]);
+    const [test1, setData1] = useState<any>();
     const [loading1, setLoading1] = useState(true);
     const [months, setMonths] = useState<any>();
     const [occurences, setOccurences] = useState<any>();
@@ -135,6 +135,10 @@ export const UserHomepage = ({
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [difference, setDifference] = useState<string>('');
     const { data, data1, apiLoading, apiError } = AxiosFetch();
+
+    // useEffect(() => {
+    //     setData(data?.hexes);
+    // }, [data]);
 
     useEffect(() => {
         onFindingXAxisMinAndMax();
@@ -518,7 +522,6 @@ export const UserHomepage = ({
             arrOfDuration = data1?.map((item: any) => {
                 return Number(moment(item.timestamp).format("YYYY"));
             });
-
             freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
                 acc[item] = acc[item] ? acc[item] + 1 : 1;
                 return acc;
@@ -1031,6 +1034,10 @@ export const UserHomepage = ({
                 <Wallet
                     openWalletModal={openWalletModal}
                     onWalletBtnClickClose={onWalletBtnClickClose}
+                    coordinates={coordinates}
+                    yAxisValue={yAxisValue}
+                    xAxisValue={xAxisValue}
+                    monthOrYear={monthOrYear}
                 />
             </ModalDialog>
 

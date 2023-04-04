@@ -160,7 +160,7 @@ export const Hexgrid = ({
     const svg = document.querySelector("svg.grid");
     const { xMin, xMax, yMin, yMax } = [...svg.children].reduce((acc, el) => {
       const { x, y, width, height } = el.getBBox();
-      console.log("test", x, y, width, height);
+      // console.log("test", x, y, width, height);
       if (!acc.xMin || x < acc.xMin) acc.xMin = x;
       if (!acc.xMax || x + width > acc.xMax) acc.xMax = x + width;
       if (!acc.yMin || y < acc.yMin) acc.yMin = y;
@@ -168,7 +168,7 @@ export const Hexgrid = ({
       return acc;
     }, {});
     const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
-    console.log("viewbox", viewbox);
+    // console.log("viewbox", viewbox);
     svg.setAttribute("viewBox", viewbox);
   }, [testArr]);
 

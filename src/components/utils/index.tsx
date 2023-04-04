@@ -38,10 +38,10 @@ export const ApiRequest = async () => {
 };
 
 export const AxiosFetch = () => {
-  const [apiData, setApiData] = useState([]);
-  const [data, setData] = useState();
-  const [apiLoading, setApiLoading] = useState(true);
-  const [apiError, setApiError] = useState("");
+  const [apiData, setApiData] = useState<any>([]);
+  const [data, setData] = useState<any>();
+  const [apiLoading, setApiLoading] = useState<any>(true);
+  const [apiError, setApiError] = useState<any>("");
 
   useEffect(() => {
     const url =
@@ -51,7 +51,7 @@ export const AxiosFetch = () => {
       .then((res) => res.json())
       .then((apiData) => {
         setApiError(apiData.apiError);
-        setApiData(apiData[0]?.hexes);
+        setApiData(apiData[0].hexes);
         setApiLoading(false);
         setData(apiData[0]);
       })

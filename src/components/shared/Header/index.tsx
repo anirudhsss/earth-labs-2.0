@@ -26,7 +26,6 @@ export const Header = ({
     onWalletBtnClickClose,
 }: HeaderProps) => {
 
-
     return (
         <Container
             padding="0.5rem 2rem 0.5rem 0"
@@ -44,30 +43,45 @@ export const Header = ({
                 }}
             >
                 {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal &&
-                    <span style={{ margin: '0 15px' }}>
-                        <img
-                            src='./assets/images/light_atlas.svg'
-                            alt=""
-                            width="75"
-                            height="32"
-                            style={{
-                                backgroundColor: 'transparent'
-                            }}
-                        />
-                    </span>
+                    <Link
+                        to="/discovery"
+                        state={{
+                            icon: 'discovery',
+                        }}
+                    >
+                        <span style={{ margin: '0 15px' }}>
+                            <img
+                                src='./assets/images/light_atlas.svg'
+                                alt=""
+                                width="75"
+                                height="32"
+                                style={{
+                                    backgroundColor: 'transparent'
+                                }}
+                            />
+                        </span>
+                    </Link>
+
                 }
                 {openWalletModal &&
-                    <span style={{ margin: '0 15px 0 8px' }}>
-                        <img
-                            src='./assets/images/dark_atlas.svg'
-                            alt=""
-                            width="95"
-                            height="40"
-                            style={{
-                                backgroundColor: 'transparent'
-                            }}
-                        />
-                    </span>
+                    <Link
+                        to="/discovery"
+                        state={{
+                            icon: 'discovery',
+                        }}
+                    >
+                        <span style={{ margin: '0 15px 0 8px' }}>
+                            <img
+                                src='./assets/images/dark_atlas1.svg'
+                                alt=""
+                                width="95"
+                                height="40"
+                                style={{
+                                    // backgroundColor: '#1C223D',
+                                }}
+                            />
+                        </span>
+                    </Link>
                 }
                 {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal && <NormalSearchField
 
@@ -165,11 +179,14 @@ export const Header = ({
                                 <img src="/assets/images/earth.svg" />
                             </span> */}
                     {/* <LogoutButton /> */}
-                    <Typography
-                        text="Allen.earth.eth"
-                        fontSize="1.4rem"
-                        color={openWalletModal ? '#fff' : '#000'}
-                    />
+                    <Box onClick={onWalletBtnClickClose}>
+                        <Typography
+                            text="Allen.earth.eth"
+                            fontSize="1.4rem"
+                            color={openWalletModal ? '#fff' : '#000'}
+                            cursor="pointer"
+                        />
+                    </Box>
                     <Avatar
                         alt=""
                         src="/assets/images/avatarTest.jpg"

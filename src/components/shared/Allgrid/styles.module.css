@@ -1,0 +1,43 @@
+.transformWrapper {
+    /* width: 100%;
+    height: 100%; */
+    width: 87.5vw;
+    height: 190vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.gridContainer {
+    width: 87.5vw;
+    height: 190vh;
+    overflow: scroll;
+    /* width: 90vw;
+    height: 85vh; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.gridContainer svg {
+    width: 87.5vw;
+    height: 80vh;
+    overflow: scroll;
+    /* width: 90vw;
+    height: 85vh; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
+.gridContainer svg g {
+    width: 87.5vw;
+    height: 180vh;
+    overflow: scroll;
+}
+
+.gridContainer svg g polygon:hover {
+    stroke: #FE7D06 !important;
+    stroke-width: 0.3 !important;
+    /* transition: fill-opacity .2s !important; */
+}
