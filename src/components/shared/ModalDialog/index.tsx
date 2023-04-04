@@ -22,7 +22,7 @@ export const ModalDialog = ({
             onClose={onWalletBtnClickClose}
             PaperProps={{
                 style: {
-                    opacity: '0.9'
+                    // opacity: '0.9'
                 },
             }}
         >
