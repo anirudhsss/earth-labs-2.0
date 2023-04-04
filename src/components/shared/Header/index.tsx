@@ -72,7 +72,7 @@ export const Header = ({
                     >
                         <span style={{ margin: '0 15px 0 8px' }}>
                             <img
-                                src='./assets/images/dark_atlas1.svg'
+                                src='./assets/images/dark_atlas.svg'
                                 alt=""
                                 width="95"
                                 height="40"
