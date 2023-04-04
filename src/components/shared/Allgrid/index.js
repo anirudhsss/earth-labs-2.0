@@ -156,7 +156,7 @@ export const Allgrid = ({
         // width: `${HEXGRID_RENDER_TOTAL_WIDTH}vw`,
         // height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
         zIndex: 100,
-        overflow: "scroll",
+        overflow: "hidden",
       }}
     >
       <TransformWrapper
