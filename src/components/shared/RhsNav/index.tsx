@@ -100,10 +100,12 @@ export const RhsNav = ({
                                 style={{ textDecoration: 'none', }}
                             >
                                 <Button
-                                    backgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                    // backgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                    backgroundColor={`${(openWalletModal) ? '#FFF7EE' : 'rgba(28, 34, 61, 0.5)'}`}
                                     color={`${(openWalletModal) ? '#000' : '#fff'}`}
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                    hoverBackgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                    // hoverBackgroundColor={`${(openWalletModal) ? '#FFF7EE' : '#FE7D06'}`}
+                                    hoverBackgroundColor={`${(openWalletModal) ? '#FFF7EE' : 'rgba(28, 34, 61, 0.5)'}`}
                                     borderRadius="0.6rem"
                                     padding="0.4rem 0.2rem"
                                     width="75px"
@@ -116,10 +118,12 @@ export const RhsNav = ({
                                 </Button>
                             </Link>
                             <Button
-                                backgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                // backgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                backgroundColor={`${(openWalletModal) ? '#1C223D' : '#FFF7EE'}`}
                                 color={`${(openWalletModal) ? '#fff' : '#000'}`}
                                 border="0.5px solid rgba(46, 52, 81, 0.58)"
-                                hoverBackgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                // hoverBackgroundColor={`${(openWalletModal) ? '#FE7D06' : '#FFF7EE'}`}
+                                hoverBackgroundColor={`${(openWalletModal) ? '#1C223D' : '#FFF7EE'}`}
                                 borderRadius="0.6rem"
                                 padding="0.4rem 1.8rem"
                                 margin="0 0 0 10px"
