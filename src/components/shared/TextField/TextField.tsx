@@ -4,6 +4,7 @@ import MUITextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import { InputAdornment, InputBaseProps, Typography } from '@mui/material';
 import { useCallback } from 'react';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 export interface TextFieldProps {
     title?: string;
@@ -28,6 +29,7 @@ export interface TextFieldProps {
     placeholderColor?: string;
     placeholderFontSize?: string;
     borderColor?: string;
+    searchIconColor?: string;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -52,6 +54,7 @@ const TextField: React.FC<TextFieldProps> = ({
     src,
     placeholderColor,
     borderColor,
+    searchIconColor,
     ...props
 }: TextFieldProps): JSX.Element => {
     const onChangeText = useCallback(
@@ -116,7 +119,8 @@ const TextField: React.FC<TextFieldProps> = ({
                             }}
                             position="start"
                         >
-                            <img src={src} alt="" width="14px" height="14px" />
+                            <SearchRoundedIcon sx={{ color: searchIconColor }} />
+                            {/* <img src={src} alt="" width="14px" height="14px" /> */}
                         </InputAdornment>
                     ),
                     style: {
