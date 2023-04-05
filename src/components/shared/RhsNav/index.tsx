@@ -119,14 +119,14 @@ export const RhsNav = ({
                                     color={`${(mapsLocation || homeLocation) ? '#fff' : '#000'}`}
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
                                     hoverBackgroundColor={`${(mapsLocation || homeLocation) ? '#FE7D06' : '#FFF7EE'}`}
-                                    borderRadius="0.6rem"
-                                    padding="0.6rem 0.2rem"
+                                    borderRadius="0.5rem"
+                                    padding="0.4rem 0.2rem"
                                     width="75px"
                                 // onClick={onWalletBtnClickClose}
                                 >
                                     <Typography
                                         text="Activities"
-                                        fontSize="1.4rem"
+                                        fontSize="1.3rem"
                                     />
                                 </Button>
                             </Link>
@@ -142,14 +142,14 @@ export const RhsNav = ({
                                     color={`${(walletLocation) ? '#fff' : '#000'}`}
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
                                     hoverBackgroundColor={`${(walletLocation) ? '#FE7D06' : '#FFF7EE'}`}
-                                    borderRadius="0.6rem"
-                                    padding="0.6rem 1.8rem"
+                                    borderRadius="0.5rem"
+                                    padding="0.4rem 1.8rem"
                                     margin="0 0 0 10px"
                                 // onClick={onWalletBtnClickOpen}
                                 >
                                     <Typography
                                         text="Assets"
-                                        fontSize="1.4rem"
+                                        fontSize="1.3rem"
                                     />
                                 </Button>
                             </Link>
