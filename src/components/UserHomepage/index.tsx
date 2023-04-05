@@ -1019,6 +1019,8 @@ export const UserHomepage = ({
                             coordinates={coordinates}
                             loading1={loading1}
                             monthOrYear={monthOrYear}
+                            yAxisValue={yAxisValue}
+                            xAxisValue={xAxisValue}
                         />
                     </Box>
                 </Container>
@@ -1030,21 +1032,20 @@ export const UserHomepage = ({
                     connectWalletConnectWallet={connectWalletConnectWallet}
                 />
             </Box>
-            <ModalDialog
+            {/* <ModalDialog
                 fullScreen="fullScreen"
                 openWalletModal={openWalletModal}
                 onWalletBtnClickClose={onWalletBtnClickClose}
-            // TransitionComponent={Transition}
             >
-                <Wallet
-                    openWalletModal={openWalletModal}
-                    onWalletBtnClickClose={onWalletBtnClickClose}
-                    coordinates={coordinates}
-                    yAxisValue={yAxisValue}
-                    xAxisValue={xAxisValue}
-                    monthOrYear={monthOrYear}
-                />
-            </ModalDialog>
+            <Wallet
+                openWalletModal={openWalletModal}
+                onWalletBtnClickClose={onWalletBtnClickClose}
+                coordinates={coordinates}
+                yAxisValue={yAxisValue}
+                xAxisValue={xAxisValue}
+            monthOrYear={monthOrYear}
+            />
+            </ModalDialog> */}
 
             <BackdropDuringApiLoading show={apiLoading} />
         </>

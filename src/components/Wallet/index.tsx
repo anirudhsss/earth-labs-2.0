@@ -28,29 +28,39 @@ import {
     Hex,
 } from "react-hexgrid";
 import { Allgrid } from 'components/shared/Allgrid';
+import moment from 'moment';
 
 export interface WalletProps {
-    openWalletModal?: any;
-    onWalletBtnClickClose?: any;
-    monthOrYear?: any;
-    coordinates?: any;
-    yAxisValue?: any;
-    xAxisValue?: any;
+    // openWalletModal?: any;
+    // onWalletBtnClickClose?: any;
+    // monthOrYear?: any;
+    // coordinates?: any;
+    // yAxisValue?: any;
+    // xAxisValue?: any;
 }
 
 export const Wallet = ({
-    openWalletModal,
-    onWalletBtnClickClose,
-    monthOrYear,
-    coordinates,
-    yAxisValue,
-    xAxisValue,
+    // openWalletModal,
+    // onWalletBtnClickClose,
+    // monthOrYear,
+    // coordinates,
+    // yAxisValue,
+    // xAxisValue,
 }: WalletProps) => {
+    const [yAxisValue, setYAxisValue] = useState({
+        yAxisValueMin: 0, yAxisValueMax: 0,
+    });
+    const [xAxisValue, setXAxisValue] = useState({
+        xAxisDateMin: 0, xAxisDateMax: 0,
+    });
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
     const walletLocation = location?.state?.icon === 'wallet';
     const mapsLocation = location?.state?.icon === 'maps';
     const discoveryLocation = location?.state?.icon === 'discovery';
+
+    // const yAxisValue = location?.state?.yAxisValue;
+    // const xAxisValue = location?.state?.xAxisValue;
 
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
 
@@ -58,14 +68,34 @@ export const Wallet = ({
     // const [data1, setData1] = useState<any>([]);
 
     useEffect(() => {
-        if (monthOrYear === '') {
-            onDisplayAllTimeTxnInDescOrder();
-        }
+        onFindingXAxisMinAndMax();
     }, [data1, matchedMonths]);
 
-    // useEffect(() => {
-    //     setData1(data[0]?.hexes);
-    // }, [data]);
+    useEffect(() => {
+        // if (monthOrYear === '') {
+        onDisplayAllTimeTxnInDescOrder();
+        // }
+    }, [data1, matchedMonths]);
+
+    const onFindingXAxisMinAndMax = () => {
+        let arr: number[] = [];
+        matchedMonths?.map((item: any) => {
+            arr.push(Number(moment(item.timestamp).format("DD")));
+        });
+        if (arr.length > 0) {
+            let max = arr[0];
+            let min = arr[1];
+            let n = arr.length;
+            for (let i = 0; i < n; i++) {
+                if (arr[i] > max) {
+                    max = arr[i];
+                } else if (arr[i] < min) {
+                    min = arr[i];
+                }
+                setXAxisValue({ xAxisDateMin: min, xAxisDateMax: max });
+            }
+        }
+    }
 
     const onDisplayAllTimeTxnInDescOrder = () => {
         const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {
@@ -73,31 +103,6 @@ export const Wallet = ({
         });
         setMatchedMonths(sortedTxnInDescOrder);
     }
-
-    useEffect(() => {
-        matchedMonths?.map((item: any, index: any) => {
-            let pattern = document.getElementById(`PAT-${index}`);
-            if (pattern) {
-                pattern.setAttribute("width", "100%");
-                pattern.setAttribute("height", "100%");
-            }
-        });
-    }, [matchedMonths]);
-
-    // useEffect(() => {
-    //     const svg = document.querySelector("svg.grid");
-    //     // console.log('svg.children', svg.children)
-    //     const { xMin, xMax, yMin, yMax } = [...svg.children].reduce((acc, el) => {
-    //         const { x, y, width, height } = el.getBBox();
-    //         if (!acc.xMin || x < acc.xMin) acc.xMin = x;
-    //         if (!acc.xMax || x + width > acc.xMax) acc.xMax = x + width;
-    //         if (!acc.yMin || y < acc.yMin) acc.yMin = y;
-    //         if (!acc.yMax || y + height > acc.yMax) acc.yMax = y + height;
-    //         return acc;
-    //     }, {});
-    //     const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
-    //     svg.setAttribute("viewBox", viewbox);
-    // }, [matchedMonths]);
 
     return (
         <Box sx={{
@@ -113,8 +118,8 @@ export const Wallet = ({
                 walletLocation={walletLocation}
                 mapsLocation={mapsLocation}
                 discoveryLocation={discoveryLocation}
-                openWalletModal={openWalletModal}
-                onWalletBtnClickClose={onWalletBtnClickClose}
+            // openWalletModal={openWalletModal}
+            // onWalletBtnClickClose={onWalletBtnClickClose}
             />
 
             <Container
@@ -126,15 +131,15 @@ export const Wallet = ({
                 alignItems='center'
             >
                 <Allgrid
-                    coordinates={coordinates}
+                    // coordinates={coordinates}
                     xAxisValue={xAxisValue}
                     yAxisValue={yAxisValue}
-                    monthOrYear={monthOrYear}
+                // monthOrYear={monthOrYear}
                 />
 
                 <RhsNav
-                    openWalletModal={openWalletModal}
-                    onWalletBtnClickClose={onWalletBtnClickClose}
+                // openWalletModal={openWalletModal}
+                // onWalletBtnClickClose={onWalletBtnClickClose}
                 />
             </Container>
 

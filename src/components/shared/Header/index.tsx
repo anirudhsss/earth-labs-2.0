@@ -63,7 +63,7 @@ export const Header = ({
                     </Link>
 
                 }
-                {openWalletModal &&
+                {walletLocation &&
                     <Link
                         to="/discovery"
                         state={{
@@ -190,7 +190,7 @@ export const Header = ({
                             <Typography
                                 text="Allen.earth.eth"
                                 fontSize="1.4rem"
-                                color={openWalletModal ? '#fff' : '#000'}
+                                color={walletLocation ? '#fff' : '#000'}
                                 cursor="pointer"
                             />
                         </Box>

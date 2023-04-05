@@ -26,10 +26,10 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 // }
 
 export const Allgrid = ({
-  coordinates,
+  // coordinates,
   xAxisValue,
   yAxisValue,
-  monthOrYear,
+  // monthOrYear,
 }) => {
   const { data, data1, apiLoading, apiError } = AxiosFetch();
   const [newCoordinates, setNewCoordinates] = useState({});
@@ -56,6 +56,7 @@ export const Allgrid = ({
       return acc;
     }, {});
     const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
+    console.log("viewbox", viewbox);
     svg.setAttribute("viewBox", viewbox);
   }, [testArr]);
 
@@ -95,13 +96,13 @@ export const Allgrid = ({
     const filteredHexes = targetHexes
       .filter((h) => {
         let referenceDate;
-        if (monthOrYear === "") {
-          referenceDate = Number(moment(h.timestamp).format("YYYY"));
-        } else if (monthOrYear === "year") {
-          referenceDate = Number(moment(h.timestamp).format("MM"));
-        } else if (monthOrYear === "month") {
-          referenceDate = Number(moment(h.timestamp).format("DD"));
-        }
+        // if (monthOrYear === "") {
+        referenceDate = Number(moment(h.timestamp).format("YYYY"));
+        // } else if (monthOrYear === "year") {
+        //   referenceDate = Number(moment(h.timestamp).format("MM"));
+        // } else if (monthOrYear === "month") {
+        //   referenceDate = Number(moment(h.timestamp).format("DD"));
+        // }
         let filteredData;
         if (valueMax > 0 && valueMin > 0) {
           filteredData =
@@ -149,7 +150,7 @@ export const Allgrid = ({
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "88vw",
         height: "92vh",
         // width: "90vw",
         // height: "90vh",
@@ -174,8 +175,8 @@ export const Allgrid = ({
           >
             <Box className={styles.gridContainer}>
               <HexGrid
-                width={"97.5vw"}
-                height={"190vh"}
+                // width={"97.5vw"}
+                // height={"190vh"}
                 viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}
                 overflow="auto"
                 id="hexgrid"
@@ -191,8 +192,8 @@ export const Allgrid = ({
                   // }}
                   flat={false}
                   spacing={1.1}
-                  // origin={coordinates}
-                  origin={{ x: -80, y: -25 }}
+                  origin={{ x: 0, y: 0 }}
+                  // origin={{ x: -80, y: -25 }}
                 >
                   {testArr?.map((item, index) => {
                     return (

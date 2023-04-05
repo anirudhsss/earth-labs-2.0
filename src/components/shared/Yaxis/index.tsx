@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { Typography } from '../Typography';
-import { YaxisItems } from './YaxisItems';
 import styles from './styles.module.css';
 
 export interface YaxisProps {
