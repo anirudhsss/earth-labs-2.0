@@ -83,10 +83,11 @@ export const Header = ({
                         </span>
                     </Link>
                 }
-                {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal && <NormalSearchField
-
-                />}
-                {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal && <Button
+                {(mapsLocation || homeLocation || discoveryLocation || walletLocation) && !openWalletModal &&
+                    <NormalSearchField
+                        placeholderColor={`${(mapsLocation || homeLocation || discoveryLocation) ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)'}`}
+                    />}
+                {(mapsLocation || homeLocation || discoveryLocation || walletLocation) && !openWalletModal && <Button
                     backgroundColor="#FE7D06"
                     color="white"
                     border="0.5px solid rgba(46, 52, 81, 0.58)"

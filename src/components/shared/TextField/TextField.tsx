@@ -49,6 +49,7 @@ const TextField: React.FC<TextFieldProps> = ({
     color,
     fontSize,
     src,
+    placeholderColor,
     ...props
 }: TextFieldProps): JSX.Element => {
     const onChangeText = useCallback(
@@ -92,7 +93,8 @@ const TextField: React.FC<TextFieldProps> = ({
                     input: {
                         '&::placeholder': {
                             fontSize: '1.2rem',
-                            color: 'rgba(0, 0, 0, 0.6)',
+                            // color: 'rgba(0, 0, 0, 0.6)',
+                            color: { placeholderColor },
                             fontWeight: '700',
                         }
                     },
