@@ -120,13 +120,13 @@ export const RhsNav = ({
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
                                     hoverBackgroundColor={`${(mapsLocation || homeLocation) ? '#FE7D06' : '#FFF7EE'}`}
                                     borderRadius="0.6rem"
-                                    padding="0.4rem 0.2rem"
+                                    padding="0.6rem 0.2rem"
                                     width="75px"
                                 // onClick={onWalletBtnClickClose}
                                 >
                                     <Typography
                                         text="Activities"
-                                        fontSize="1.3rem"
+                                        fontSize="1.4rem"
                                     />
                                 </Button>
                             </Link>
@@ -143,13 +143,13 @@ export const RhsNav = ({
                                     border="0.5px solid rgba(46, 52, 81, 0.58)"
                                     hoverBackgroundColor={`${(walletLocation) ? '#FE7D06' : '#FFF7EE'}`}
                                     borderRadius="0.6rem"
-                                    padding="0.4rem 1.8rem"
+                                    padding="0.6rem 1.8rem"
                                     margin="0 0 0 10px"
                                 // onClick={onWalletBtnClickOpen}
                                 >
                                     <Typography
                                         text="Assets"
-                                        fontSize="1.3rem"
+                                        fontSize="1.4rem"
                                     />
                                 </Button>
                             </Link>
