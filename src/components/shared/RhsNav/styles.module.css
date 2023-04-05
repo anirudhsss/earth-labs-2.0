@@ -12,11 +12,25 @@
 
 .allIcons {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+.groupedIcons1 {
+    /* height: 50%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.groupedIcons2 {
+    /* height: 50%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .arrowsToNavigate {
@@ -31,7 +45,7 @@
 
 .upperIcons {
     width: 100%;
-    height: 22vh;
+    height: 16vh;
     /* margin-top: 17vh; */
     display: flex;
     flex-direction: column;

@@ -44,7 +44,7 @@ export const Discovery = ({
                 discoveryLocation={discoveryLocation}
             />
 
-            <Container padding="0.5rem 2rem 0 2rem">
+            <Container padding="0 3rem 0 2rem">
                 <Box className={styles.body}>
                     <Box
                         className={styles.lhsBody}
@@ -122,7 +122,7 @@ export const Discovery = ({
                                 />
                             </span>
                         </Box>
-                        <Box className={styles.bwText} sx={{ marginTop: '3rem', marginLeft: '16rem' }}>
+                        {/* <Box className={styles.bwText} sx={{ marginTop: '3rem', marginLeft: '16rem' }}>
                             <Box>
                                 <Typography
                                     text="Biggest Swaps"
@@ -187,7 +187,7 @@ export const Discovery = ({
                                     width="10rem"
                                 />
                             </span>
-                        </Box>
+                        </Box> */}
                     </Box>
                     <RhsNav
 
