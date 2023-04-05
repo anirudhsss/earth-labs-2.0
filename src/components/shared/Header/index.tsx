@@ -194,7 +194,7 @@ export const Header = ({
                         <Box onClick={onWalletBtnClickClose}>
                             <Typography
                                 text="Allen.earth.eth"
-                                fontSize="1.4rem"
+                                fontSize="1.6rem"
                                 color={walletLocation ? '#fff' : '#000'}
                                 cursor="pointer"
                             />
