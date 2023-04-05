@@ -34,7 +34,7 @@ export const Header = ({
             justifyContent='space-between'
             alignItems='center'
             width='100%'
-            borderBottom='0.5px solid #000000'
+            borderBottom={`0.5px solid ${(mapsLocation || homeLocation || discoveryLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
             height='7.6vh'
         >
             <Box
