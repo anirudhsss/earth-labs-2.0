@@ -165,11 +165,12 @@ export const RhsNav = ({
                         >
                             <span
                                 className={styles.iconOuter}
-                                style={{ backgroundColor: (homeLocation || mapsLocation || walletLocation) ? '#FE7D06' : '#FFF7EE' }}
+                                style={{ backgroundColor: walletLocation ? '#FFF7EE' : '#FFF7EE' }}
 
                             >
                                 <img
-                                    src='/assets/images/home.svg'
+                                    src={`${(homeLocation || mapsLocation || walletLocation) ? '/assets/images/home_highlighted.svg' : '/assets/images/home.svg'}`}
+                                    // src='/assets/images/home.svg'
                                     alt=""
                                     className={styles.imageAsIcon}
                                 />
@@ -184,12 +185,13 @@ export const RhsNav = ({
                             <span
                                 className={styles.iconOuter}
                                 style={{
-                                    backgroundColor: discoveryLocation ? '#FE7D06' : '#FFF7EE',
+                                    backgroundColor: walletLocation ? '#FFF7EE' : '#FFF7EE',
                                     marginTop: '1rem',
                                 }}
                             >
                                 <img
-                                    src='/assets/images/discovery.svg'
+                                    // src='/assets/images/discovery.svg'
+                                    src={`${discoveryLocation ? '/assets/images/discovery_highlighted.svg' : '/assets/images/discovery.svg'}`}
                                     alt=""
                                     className={styles.imageAsIcon}
                                 />
