@@ -203,32 +203,32 @@ export const RhsNav = ({
                     }}
                 >
                     <Box className={styles.lowerIcons}>
-                        <Link
+                        {/* <Link
                             to="/maps"
                             state={{
                                 icon: 'maps',
                             }}
                             style={{ textDecoration: 'none', }}
-                        >
-                            <a className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE' }}>
-                                <img
-                                    src='/assets/images/help.svg'
-                                    alt="" className={styles.imageAsIcon} />
-                            </a>
-                        </Link>
+                        > */}
+                        <a className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE', cursor: 'pointer' }}>
+                            <img
+                                src='/assets/images/help.svg'
+                                alt="" className={styles.imageAsIcon} />
+                        </a>
+                        {/* </Link>
                         <Link
                             to="/discovery"
                             state={{
                                 icon: 'discovery'
                             }}
                             style={{ textDecoration: 'none', }}
-                        >
-                            <a
-                                // href="https://twitter.com/AtlasXY_" 
-                                target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE', marginTop: '1rem', }}>
-                                <img src='/assets/images/twitter.svg' alt="" className={styles.imageAsIcon} />
-                            </a>
-                        </Link>
+                        > */}
+                        <a
+                            href="https://twitter.com/AtlasXY_"
+                            target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE', marginTop: '1rem', }}>
+                            <img src='/assets/images/twitter.svg' alt="" className={styles.imageAsIcon} />
+                        </a>
+                        {/* </Link> */}
                         <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE', marginTop: '1rem', }}>
                             <img src='/assets/images/discord.svg' alt="" className={styles.imageAsIcon} />
                         </a>
