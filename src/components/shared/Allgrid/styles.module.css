@@ -9,13 +9,13 @@
 }
 
 .gridContainer {
-    width: 87.5vw;
-    height: 80vh;
-    /* overflow: scroll; */
-    /* width: 90vw;
-    height: 85vh; */
+    /* width: 87.5vw; */
+    width: 83.5vw;
+    /* height: 80vh; */
+    height: 83vh;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    justify-content: flex-end;
     align-items: center;
 }
 

@@ -730,11 +730,18 @@ export const UserHomepage = ({
 
     return (
         <>
+
             <Box sx={{
                 // backgroundColor: '#1C223D',
                 // opacity: '50%',
                 backgroundColor: '#FFFDFB',
             }}>
+                {/* <Box sx={{
+                    border: '2px solid black',
+                    position: 'relative',
+                    top: '50rem',
+                    width: '20rem'
+                }}></Box> */}
                 <Box
                     sx={{ height: '7.6vh', }}
                 >

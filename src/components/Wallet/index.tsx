@@ -113,6 +113,12 @@ export const Wallet = ({
         }}
         // className={styles.transformWrapper}
         >
+            {/* <Box sx={{
+                border: '2px solid white',
+                position: 'relative',
+                top: '50rem',
+                width: '20rem'
+            }}></Box> */}
             <Header
                 homeLocation={homeLocation}
                 walletLocation={walletLocation}
