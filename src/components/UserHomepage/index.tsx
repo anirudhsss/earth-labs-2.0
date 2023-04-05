@@ -751,7 +751,7 @@ export const UserHomepage = ({
 
                 <Container
                     height="92.4vh"
-                    padding="0 2rem"
+                    padding="0 3rem 0 2rem"
                     position="relative"
                 >
 

@@ -50,7 +50,7 @@ export const Header = ({
                             icon: 'discovery',
                         }}
                     >
-                        <span style={{ margin: '0 15px' }}>
+                        <span style={{ margin: '0 25px 0 15px' }}>
                             <img
                                 src='./assets/images/light_atlas.svg'
                                 alt=""
@@ -71,7 +71,7 @@ export const Header = ({
                             icon: 'discovery',
                         }}
                     >
-                        <span style={{ margin: '0 15px 0 0px' }}>
+                        <span style={{ margin: '0 0 0 0px' }}>
                             <img
                                 src='./assets/images/dark_atlas.svg'
                                 alt=""
@@ -129,12 +129,13 @@ export const Header = ({
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                        width: '32rem'
+                        // width: '32rem'
+                        marginRight: '1.5rem',
                     }}
                 >
 
-                    <Box className={styles.mapAndWalletBtn}>
-                        {/* {(mapsLocation || homeLocation || walletLocation) &&
+                    {/* <Box className={styles.mapAndWalletBtn}>
+                        {(mapsLocation || homeLocation || walletLocation) &&
                             <>
                                 <Link
                                     to="/maps"
@@ -174,8 +175,8 @@ export const Header = ({
                                     />
                                 </Button>
                             </>
-                        } */}
-                    </Box>
+                        }
+                    </Box> */}
                     {/* <Typography
                                 text={truncate(userWalletAddress, 12)}
                             /> */}
@@ -199,7 +200,7 @@ export const Header = ({
                             />
                         </Box>
                     </Link>
-                    <Avatar
+                    {/* <Avatar
                         alt=""
                         src="/assets/images/avatarTest.jpg"
                         sx={{
@@ -207,7 +208,7 @@ export const Header = ({
                             height: 30,
                             cursor: 'pointer',
                         }}
-                    />
+                    /> */}
                 </div>
                 {/* } */}
             </Box>

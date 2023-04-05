@@ -123,7 +123,7 @@ export const Wallet = ({
             />
 
             <Container
-                padding="0 2rem"
+                padding="0 3rem 0 2rem"
                 width="100%"
                 height="92%"
                 display='flex'
