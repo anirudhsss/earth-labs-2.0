@@ -86,6 +86,7 @@ export const Header = ({
                 {(mapsLocation || homeLocation || discoveryLocation || walletLocation) && !openWalletModal &&
                     <NormalSearchField
                         placeholderColor={`${(mapsLocation || homeLocation || discoveryLocation) ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)'}`}
+                        borderColor={`${(mapsLocation || homeLocation || discoveryLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
                     />}
                 {(mapsLocation || homeLocation || discoveryLocation || walletLocation) && !openWalletModal && <Button
                     backgroundColor="#FE7D06"

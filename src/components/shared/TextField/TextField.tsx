@@ -27,6 +27,7 @@ export interface TextFieldProps {
     src?: string;
     placeholderColor?: string;
     placeholderFontSize?: string;
+    borderColor?: string;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -50,6 +51,7 @@ const TextField: React.FC<TextFieldProps> = ({
     fontSize,
     src,
     placeholderColor,
+    borderColor,
     ...props
 }: TextFieldProps): JSX.Element => {
     const onChangeText = useCallback(
@@ -98,6 +100,7 @@ const TextField: React.FC<TextFieldProps> = ({
                             fontWeight: '700',
                         }
                     },
+                    fieldset: { borderColor: { borderColor } },
                 }}
                 onChange={onChangeText}
                 value={value}
