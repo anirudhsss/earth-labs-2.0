@@ -723,6 +723,11 @@ export const UserHomepage = ({
         }
     }
 
+    useEffect(() => {
+        const a = data1?.map((item: any) => item.isWallet);
+        console.log('isWallet', a)
+    }, [data1]);
+
     return (
         <>
             <Box sx={{
