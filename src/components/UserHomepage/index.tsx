@@ -964,9 +964,9 @@ export const UserHomepage = ({
 
                     <Box className={styles.body}>
                         <Box
-                            style={{
-                                marginLeft: (yAxisItems?.length > 0) ? '0rem' : '3.6rem',
-                            }}
+                        // style={{
+                        //     marginLeft: (yAxisItems?.length > 0) ? '0' : '18px',
+                        // }}
                         >
                             <Yaxis
                                 yAxisItems={yAxisItems}

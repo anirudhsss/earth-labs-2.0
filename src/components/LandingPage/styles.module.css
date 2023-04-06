@@ -1,0 +1,6 @@
+.landingPageimage {
+    background-image: url('../../images/landingPage.svg');
+    /* width: 100vw;
+    height: 100vh; */
+    background-color: #1C223D;
+}

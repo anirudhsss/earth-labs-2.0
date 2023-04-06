@@ -82,7 +82,7 @@ export const Xaxis = ({
         }}>
             <Box sx={{
                 borderBottom: '1px solid black',
-                width: '86vw',
+                width: '100%',
                 position: 'relative',
             }}
                 className="line"
@@ -98,12 +98,12 @@ export const Xaxis = ({
             </Box>
             <Box sx={{
                 display: 'flex',
-                justifyContent: 'space-around',
+                justifyContent: whichDuration?.length === 1 ? 'center' : 'space-between',
                 alignItems: 'center',
                 position: 'relative',
                 zIndex: 101,
                 bottom: '17.5px',
-                width: '86vw',
+                width: '100%',
             }}>
                 {whichDuration?.map((item: any) => {
 

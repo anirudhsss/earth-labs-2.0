@@ -24,9 +24,16 @@ export const Yaxis = ({
         <>
             <Box className={styles.container}>
                 <Box className={styles.groupOfCircles}>
+                    <Box sx={{
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: '50%',
+                        backgroundColor: 'black',
+                    }}></Box>
                     {yAxisItems?.map((item: any) => {
                         return (
                             <>
+
                                 <Box
                                     key={item.id}
                                     className={styles.circle1}
@@ -54,9 +61,16 @@ export const Yaxis = ({
                                         </span>
                                     </>}
                                 </Box>
+
                             </>
                         )
                     })}
+                    <Box sx={{
+                        width: '10px',
+                        height: '10px',
+                        borderRadius: '50%',
+                        backgroundColor: 'black',
+                    }}></Box>
                 </Box>
                 <Box className={styles.line}>
                     {/* <span

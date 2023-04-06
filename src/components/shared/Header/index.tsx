@@ -15,6 +15,7 @@ export interface HeaderProps {
     openWalletModal?: any;
     onWalletBtnClickOpen?: any;
     onWalletBtnClickClose?: any;
+    landingPageLocation?: any;
 }
 
 export const Header = ({
@@ -25,8 +26,9 @@ export const Header = ({
     openWalletModal,
     onWalletBtnClickOpen,
     onWalletBtnClickClose,
+    landingPageLocation,
 }: HeaderProps) => {
-
+    // console.log('landingPageLocation', landingPageLocation)
     return (
         <Container
             padding="0.5rem 2rem 0.5rem 0"
@@ -84,13 +86,13 @@ export const Header = ({
                         </span>
                     </Link>
                 }
-                {(mapsLocation || homeLocation || discoveryLocation || walletLocation) && !openWalletModal &&
+                {(mapsLocation || homeLocation || discoveryLocation || walletLocation || landingPageLocation) && !openWalletModal &&
                     <NormalSearchField
-                        placeholderColor={`${(mapsLocation || homeLocation || discoveryLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
-                        borderColor={`${(mapsLocation || homeLocation || discoveryLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
-                        searchIconColor={`${(mapsLocation || homeLocation || discoveryLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
+                        placeholderColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
+                        borderColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
+                        searchIconColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
                     />}
-                {(mapsLocation || homeLocation || discoveryLocation || walletLocation) && !openWalletModal && <Button
+                {(mapsLocation || homeLocation || discoveryLocation || walletLocation || landingPageLocation) && !openWalletModal && <Button
                     backgroundColor="#FE7D06"
                     color="white"
                     border="0.5px solid rgba(46, 52, 81, 0.58)"

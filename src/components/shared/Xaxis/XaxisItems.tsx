@@ -64,7 +64,7 @@ export const XaxisItems = ({
             flexDirection: 'column',
             justifyContent: 'space-between',
             alignItems: 'center',
-            width: '100px',
+            // width: '100px',
         }}>
             {/* <Box className={styles.test}> */}
             <div style={{
@@ -82,11 +82,19 @@ export const XaxisItems = ({
             ></div>
             {/* </Box>
             <Box className={styles.test}> */}
-            <Typography
-                fontSize="12px"
-                color={`${(month === hoverElementId || month === clickedElement) && '#FE7D06'}`}
-                text={`${whichDuration1}${(month === hoverElementId || month === clickedElement) ? `: ${noOfGlyphs} hex` : ''}`}
-            />
+            <Box sx={{
+                position: 'absolute',
+                top: '35px',
+                width: '100px',
+                textAlign: 'center',
+            }}>
+                <Typography
+                    fontSize="12px"
+                    color={`${(month === hoverElementId || month === clickedElement) && '#FE7D06'}`}
+                    text={`${whichDuration1}${(month === hoverElementId || month === clickedElement) ? `: ${noOfGlyphs} hex` : ''}`}
+                // text={'nkj jsi'}
+                />
+            </Box>
             {/* </Box> */}
         </Box>
     )

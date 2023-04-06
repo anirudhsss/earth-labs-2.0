@@ -1,18 +1,20 @@
 .container {
     display: flex;
     justify-content: space-around;
-    /* width: 130px; */
+    position: relative;
+    height: 100%;
+    width: 40px;
 }
 
 .groupOfCircles {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    position: relative;
+    /* position: relative; */
     z-index: 101;
-    left: 18px;
-    height: 77.82vh;
+    /* left: 18px; */
+    /* height: 77.82vh; */
     margin-top: 7.28vh;
 }
 
@@ -55,5 +57,6 @@
     border-left: 1px solid black;
     height: 74.82vh;
     margin-top: 7.28vh;
-    position: relative;
+    position: absolute;
+    /* left: 50%; */
 }

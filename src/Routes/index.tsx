@@ -3,16 +3,21 @@ import { UserHomepage } from "components/UserHomepage";
 import { Wallet } from "components/Wallet";
 import { Discovery } from "components/Discovery";
 import App from "App";
+import { LandingPage } from "components/LandingPage";
 
-interface routerProps {
-    children: React.ReactNode;
-}
+// declare function createRoutesFromElements(
+//     children: React.ReactNode
+// ): RouteObject[];
 
-const R = () => {
-    return (
-        <div></div>
-    )
-}
+// interface RouteObject {
+//     caseSensitive?: boolean;
+//     children?: RouteObject[];
+//     element?: React.ReactNode;
+//     index?: boolean;
+//     path?: string;
+// }
+
+// const UserHomepage = () => <div>Maps</div>
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -24,9 +29,8 @@ export const router = createBrowserRouter(
                     }}
                 />}
             />
-            <Route path="/maps" element={<UserHomepage />}>
-                {/* <Route path="/wallet" element={<Wallet />} /> */}
-            </Route>
+            {/* <Route path="/" element={<LandingPage />} /> */}
+            <Route path="/maps" element={<UserHomepage />} />
             <Route path="/discovery" element={<Discovery />} />
             <Route path="/wallet" element={<Wallet />} />
         </Route>
