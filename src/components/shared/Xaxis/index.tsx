@@ -53,18 +53,40 @@ export const Xaxis = ({
 }: XaxisProps) => {
 
     const whichDuration = monthOrYear === '' ? arrOfYears : (monthOrYear === 'year' || monthOrYear === 'month') ? arrOfMonths : [];
+    const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
+    // useEffect(() => {
+    //     let nodes = document.querySelectorAll('.line');
+    //     console.log('nodes', nodes);
+    // }, []);
+
+    useEffect(() => {
+        findMax();
+    }, [whichDuration]);
+
+    const findMax = () => {
+        whichDuration?.map((item: any) => {
+            let max = 0;
+            if (Number(item.dimension) > max) {
+                max = Number(item.dimension);
+            }
+            setGlyphWithMaxDimension(max);
+        })
+    }
 
     return (
         <Box sx={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
+            marginLeft: '2vw',
         }}>
             <Box sx={{
                 borderBottom: '1px solid black',
-                width: '88vw',
+                width: '86vw',
                 position: 'relative',
-            }}>
+            }}
+                className="line"
+            >
                 {/* <span
                     style={{
                         position: 'absolute',
@@ -80,10 +102,11 @@ export const Xaxis = ({
                 alignItems: 'center',
                 position: 'relative',
                 zIndex: 101,
-                bottom: '35px',
-                width: '88vw',
+                bottom: '17.5px',
+                width: '86vw',
             }}>
                 {whichDuration?.map((item: any) => {
+
                     return (
                         <XaxisItems
                             dimension={item.dimension}
@@ -105,6 +128,7 @@ export const Xaxis = ({
                             range={range}
                             setChosenData={setChosenData}
                             chosenData={chosenData}
+                            glyphWithMaxDimension={glyphWithMaxDimension}
                         />
                     )
                 })}

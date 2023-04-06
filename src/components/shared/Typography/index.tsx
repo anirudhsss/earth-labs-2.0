@@ -12,6 +12,7 @@ export interface TypographyProps {
     margin?: string;
     marginTop?: string;
     cursor?: string;
+    height?: string;
 }
 
 export const Typography = ({
@@ -24,6 +25,7 @@ export const Typography = ({
     margin,
     marginTop,
     cursor,
+    height,
 }: TypographyProps) => {
     return (
         <MUITypography
@@ -36,6 +38,7 @@ export const Typography = ({
                 margin: margin,
                 marginTop: marginTop,
                 cursor: cursor,
+                height: height,
             }}>
             {text}
         </MUITypography>
