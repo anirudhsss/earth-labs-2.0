@@ -1,4 +1,5 @@
 import { Box, Menu, MenuItem } from '@mui/material';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../Button';
 import { Typography } from '../Typography';
@@ -46,6 +47,12 @@ export const RhsNav = ({
     const walletLocation = location?.state?.icon === 'wallet';
     const mapsLocation = location?.state?.icon === 'maps';
     const discoveryLocation = location?.state?.icon === 'discovery';
+
+    const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
+
+    const onHelpIconClicked = () => {
+        setHelpIconClicked(!helpIconClicked);
+    }
 
     return (
         <Box
@@ -212,10 +219,10 @@ export const RhsNav = ({
                             }}
                             style={{ textDecoration: 'none', }}
                         > */}
-                        <a className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE', cursor: 'pointer' }}>
-                            <img
-                                src='/assets/images/help.svg'
-                                alt="" className={styles.imageAsIcon} />
+                        <a style={{ cursor: 'pointer' }}>
+                            <img width="40px"
+                                src={helpIconClicked ? '/assets/images/help_highlighted.svg' : '/assets/images/help.svg'}
+                                alt="" onClick={onHelpIconClicked} />
                         </a>
                         {/* </Link>
                         <Link

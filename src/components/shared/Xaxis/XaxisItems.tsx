@@ -93,7 +93,6 @@ export const XaxisItems = ({
                     color={`${(month === hoverElementId || month === clickedElement) && '#FE7D06'}`}
                     text={`${whichDuration1}${(month === hoverElementId || month === clickedElement) ? `: ${noOfGlyphs} hex` : ''}`}
                     fontWeight="bold"
-                // text={'nkj jsi'}
                 />
             </Box>
             {/* </Box> */}
