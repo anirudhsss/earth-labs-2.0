@@ -31,6 +31,7 @@ export const Yaxis = ({
                         backgroundColor: 'black',
                     }}></Box>
                     {yAxisItems?.map((item: any) => {
+                        console.log('item', item)
                         return (
                             <>
 
@@ -52,7 +53,8 @@ export const Yaxis = ({
                                         }}>
                                             <Typography
                                                 text={item.range}
-                                                fontSize="10px"
+                                                fontSize="12px"
+                                                fontWeight='bold'
                                             />
                                         </span>
                                         <span>

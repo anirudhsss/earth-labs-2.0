@@ -445,7 +445,8 @@ export const UserHomepage = ({
             const processedInput = lengthsArr?.map((item: any) => item[0].length);
             const min = Math.min(...processedInput);
             const max = Math.max(...processedInput);
-            const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
+            // const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
+            const rangeArr = lengthsArr?.map((item: any) => item[1])
             let arrOfInterest: any = [];
             processedInput.forEach((item: any) => {
                 let val1 = Math.round(((35 - 10) * invlerp(min, max, item)) + 10);

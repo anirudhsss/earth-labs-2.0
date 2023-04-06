@@ -89,9 +89,10 @@ export const XaxisItems = ({
                 textAlign: 'center',
             }}>
                 <Typography
-                    fontSize="12px"
+                    fontSize="18px"
                     color={`${(month === hoverElementId || month === clickedElement) && '#FE7D06'}`}
                     text={`${whichDuration1}${(month === hoverElementId || month === clickedElement) ? `: ${noOfGlyphs} hex` : ''}`}
+                    fontWeight="bold"
                 // text={'nkj jsi'}
                 />
             </Box>
