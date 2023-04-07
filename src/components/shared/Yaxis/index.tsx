@@ -19,7 +19,7 @@ export const Yaxis = ({
     onYAxisItemHoverOff,
     yAxisItemHovered,
 }: YaxisProps) => {
-
+    console.log('yAxisItems', yAxisItems)
     return (
         <>
             <Box className={styles.container}>
@@ -29,9 +29,22 @@ export const Yaxis = ({
                         height: '10px',
                         borderRadius: '50%',
                         backgroundColor: 'black',
-                    }}></Box>
+                    }}>
+                        <span style={{
+                            marginLeft: '10rem',
+                            // width: '10px',
+                            // height: '10px',
+                        }}>
+                            <Typography
+                                text={yAxisItems?.lowerRange}
+                                fontSize="12px"
+                                fontWeight='bold'
+                            // width='10px'
+                            // height='10px'
+                            />
+                        </span>
+                    </Box>
                     {yAxisItems?.map((item: any) => {
-                        console.log('item', item)
                         return (
                             <>
 
@@ -47,32 +60,47 @@ export const Yaxis = ({
                                     onMouseEnter={() => onYAxisItemHoverOn(item.id)}
                                     onMouseLeave={() => onYAxisItemHoverOff(item.id)}
                                 >
-                                    {(yAxisItemClicked === item.id || yAxisItemHovered === item.id) && <>
-                                        <span style={{
-                                            marginLeft: '10rem'
-                                        }}>
-                                            <Typography
-                                                text={item.range}
-                                                fontSize="12px"
-                                                fontWeight='bold'
-                                            />
-                                        </span>
-                                        <span>
+                                    {(yAxisItemClicked === item.id || yAxisItemHovered === item.id) &&
+                                        <>
+                                            <span style={{
+                                                marginLeft: '10rem'
+                                            }}>
+                                                <Typography
+                                                    text={item.range}
+                                                    fontSize="12px"
+                                                    fontWeight='bold'
+                                                />
+                                            </span>
+                                            {/* <span>
                                             <img src={'./assets/images/ethereum-logo.svg'} alt=""
                                             />
-                                        </span>
-                                    </>}
+                                        </span> */}
+                                        </>
+                                    }
                                 </Box>
 
                             </>
                         )
                     })}
-                    <Box sx={{
-                        width: '10px',
-                        height: '10px',
-                        borderRadius: '50%',
-                        backgroundColor: 'black',
-                    }}></Box>
+                    <Box sx={{ position: 'relative', }}>
+                        <Box sx={{
+                            width: '10px',
+                            height: '10px',
+                            borderRadius: '50%',
+                            backgroundColor: 'black',
+                        }}>
+                        </Box>
+                        <span style={{
+                            position: 'absolute',
+                            left: '10rem'
+                        }}>
+                            <Typography
+                                text={yAxisItems?.higherRange}
+                                fontSize="12px"
+                                fontWeight='bold'
+                            />
+                        </span>
+                    </Box>
                 </Box>
                 <Box className={styles.line}>
                     {/* <span

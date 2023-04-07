@@ -22,6 +22,8 @@ export interface RhsNavProps {
     monthOrYear?: any;
     yAxisValue?: any;
     xAxisValue?: any;
+    helpIconClicked?: any;
+    onHelpIconClicked?: any;
 }
 
 export const RhsNav = ({
@@ -41,6 +43,8 @@ export const RhsNav = ({
     monthOrYear,
     yAxisValue,
     xAxisValue,
+    helpIconClicked,
+    onHelpIconClicked,
 }: RhsNavProps) => {
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
@@ -48,18 +52,9 @@ export const RhsNav = ({
     const mapsLocation = location?.state?.icon === 'maps';
     const discoveryLocation = location?.state?.icon === 'discovery';
 
-    const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
-
-    const onHelpIconClicked = () => {
-        setHelpIconClicked(!helpIconClicked);
-    }
-
     return (
         <Box
             className={styles.rhsBody}
-        // sx={{
-        //     height: `${(mapsLocation || homeLocation) ? '100%' : walletLocation ? '90%' : discoveryLocation ? '' : '90vh'}`
-        // }}
         >
             <Box
                 className={styles.allIcons}

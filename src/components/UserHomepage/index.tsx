@@ -30,6 +30,7 @@ import axios from "axios";
 import { Yaxis } from "components/shared/Yaxis";
 import { AnyAaaaRecord } from "dns";
 import { AxiosFetch, BackdropDuringApiLoading } from '../utils';
+import { HelpPage } from "components/HelpPage";
 
 export interface UserHomepageProps {
 
@@ -134,6 +135,8 @@ export const UserHomepage = ({
     const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [difference, setDifference] = useState<string>('');
+
+    const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data1, apiLoading, apiError } = AxiosFetch();
 
     // useEffect(() => {
@@ -172,6 +175,10 @@ export const UserHomepage = ({
     useEffect(() => {
         onEthToUsdcConversion();
     }, [difference])
+
+    const onHelpIconClicked = () => {
+        setHelpIconClicked(!helpIconClicked);
+    }
 
     const onDisplayAllTimeTxnInDescOrder = () => {
         const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {
@@ -447,6 +454,7 @@ export const UserHomepage = ({
             const max = Math.max(...processedInput);
             // const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
             const rangeArr = lengthsArr?.map((item: any) => item[1])
+            // console.log('rangeArr', rangeArr)
             let arrOfInterest: any = [];
             processedInput.forEach((item: any) => {
                 let val1 = Math.round(((35 - 10) * invlerp(min, max, item)) + 10);
@@ -459,6 +467,8 @@ export const UserHomepage = ({
                     range: rangeArr[index],
                     dimension: arrOfInterest[index],
                     noOfGlyphs: processedInput[index],
+                    lowerRange: lowerRange,
+                    higherRange: higherRange,
                 })
             })
             setRange(false);
@@ -724,10 +734,11 @@ export const UserHomepage = ({
         }
     }
 
-    useEffect(() => {
-        const a = data1?.map((item: any) => item.timestamp);
-        // console.log('timestamp', a)
-    }, [data1]);
+    // useEffect(() => {
+    //     const a = data1?.map((item: any) => ({ ...item, targetValue1: Math.random() }));
+    //     setData1(a);
+    //     // console.log('a', a)
+    // }, [data1]);
 
     return (
         <>
@@ -979,22 +990,26 @@ export const UserHomepage = ({
                             />
                         </Box>
                         <Box className={styles.midBody}>
-                            <Hexgrid
-                                matchedMonths={matchedMonths}
-                                arrOfMonths={arrOfMonths}
-                                arrOfYears={arrOfYears}
-                                monthOrYear={monthOrYear}
-                                onDisplayYear={onDisplayYear}
-                                setArrOfYears={setArrOfYears}
-                                coordinates={coordinates}
-                                loading1={loading1}
-                                chosenData={chosenData}
-                                testData={testData}
-                                yAxisValue={yAxisValue}
-                                xAxisValue={xAxisValue}
-                                data1={data1}
-                                data={data}
-                            />
+                            {helpIconClicked ?
+                                <HelpPage
+
+                                />
+                                : <Hexgrid
+                                    matchedMonths={matchedMonths}
+                                    arrOfMonths={arrOfMonths}
+                                    arrOfYears={arrOfYears}
+                                    monthOrYear={monthOrYear}
+                                    onDisplayYear={onDisplayYear}
+                                    setArrOfYears={setArrOfYears}
+                                    coordinates={coordinates}
+                                    loading1={loading1}
+                                    chosenData={chosenData}
+                                    testData={testData}
+                                    yAxisValue={yAxisValue}
+                                    xAxisValue={xAxisValue}
+                                    data1={data1}
+                                    data={data}
+                                />}
                             <Xaxis
                                 monthOrYear={monthOrYear}
                                 onDisplayYear={onDisplayYear}
@@ -1034,6 +1049,8 @@ export const UserHomepage = ({
                             monthOrYear={monthOrYear}
                             yAxisValue={yAxisValue}
                             xAxisValue={xAxisValue}
+                            helpIconClicked={helpIconClicked}
+                            onHelpIconClicked={onHelpIconClicked}
                         />
                     </Box>
                 </Container>

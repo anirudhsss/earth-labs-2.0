@@ -51,7 +51,8 @@ export const AxiosFetch = () => {
       .then((res) => res.json())
       .then((apiData) => {
         setApiError(apiData.apiError);
-        setApiData(apiData[0].hexes);
+        const a = apiData[0].hexes?.map((item: any) => ({ ...item, targetValue1: Math.random() }));
+        setApiData(a);
         setApiLoading(false);
         setData(apiData[0]);
       })

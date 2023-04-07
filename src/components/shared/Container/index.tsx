@@ -11,6 +11,7 @@ export interface ContainerProps {
     children?: any;
     position?: any;
     height?: any;
+    margin?: any;
 }
 
 export const Container = ({
@@ -23,6 +24,7 @@ export const Container = ({
     children,
     position,
     height,
+    margin,
 }: ContainerProps) => {
 
 
@@ -37,6 +39,7 @@ export const Container = ({
                 padding: padding,
                 position: position,
                 height: height,
+                margin: margin,
             }}
         >
             {children}
