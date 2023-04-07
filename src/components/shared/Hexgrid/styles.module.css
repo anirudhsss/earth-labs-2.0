@@ -20,8 +20,13 @@
     align-items: center;
 }
 
+.gridContainer svg g polygon {
+    fill-opacity: 0.8;
+}
+
 .gridContainer svg g polygon:hover {
-    stroke: #FE7D06 !important;
-    stroke-width: 0.3 !important;
+    /* stroke: #FE7D06 !important;
+    stroke-width: 0.3 !important; */
+    fill-opacity: 1;
     /* transition: fill-opacity .2s !important; */
 }
