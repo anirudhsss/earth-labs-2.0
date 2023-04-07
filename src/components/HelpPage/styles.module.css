@@ -20,7 +20,7 @@
 } */
 
 .subContainer1 {
-    width: calc(90vw / 3);
+    width: 23.5vw;
     height: inherit;
     /* border-right: 1px solid black; */
     /* background-color: green; */
@@ -30,14 +30,14 @@
 }
 
 .subContainer2 {
-    width: calc(90vw * (2 / 3));
+    width: 60vw;
     height: inherit;
     /* background-color: red; */
     padding: 4rem 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .txnGlyph {

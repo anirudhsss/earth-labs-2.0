@@ -40,8 +40,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Holding'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -52,8 +52,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Burn'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -64,8 +64,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Airdrop'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -76,8 +76,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Transfer'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -88,8 +88,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Mint'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                     </Box>
@@ -102,8 +102,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Bridge'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -114,8 +114,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Stake'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -126,8 +126,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Swap'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -138,8 +138,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Join Pool'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -150,8 +150,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Leave Pool'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                     </Box>
@@ -164,8 +164,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='List'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -176,8 +176,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Bid'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.eachIcon}>
@@ -188,8 +188,8 @@ export const HelpPage = ({
                             />
                             <Typography
                                 text='Sale'
-                                fontSize='18px'
-                                lineHeight='21px'
+                                fontSize='12px'
+                            // lineHeight='21px'
                             />
                         </Box>
                         <Box className={styles.icons}></Box>
