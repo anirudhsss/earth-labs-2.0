@@ -16,7 +16,7 @@ export const HelpPage = ({
             width="90vw"
             height="84.5vh"
             display="flex"
-            justifyContent="center"
+            justifyContent="flex-end"
             alignItems="center"
             margin="1.5rem 0 0 2.5rem"
         >
