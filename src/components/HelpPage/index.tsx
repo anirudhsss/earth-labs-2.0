@@ -18,7 +18,7 @@ export const HelpPage = ({
             display="flex"
             justifyContent="flex-end"
             alignItems="center"
-            margin="1.5rem 0 0 2.5rem"
+            margin="1.5rem 0 0 0.5rem"
         >
             <Box
                 className={styles.container}
