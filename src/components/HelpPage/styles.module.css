@@ -1,5 +1,5 @@
 .container {
-    width: 90vw;
+    width: 63vw;
     height: 65vh;
     background-color: #fff7ee;
     /* background-color: blue; */
@@ -39,8 +39,8 @@
 }
 
 .txnGlyph {
-    width: 21vw;
-    height: 58vh;
+    width: 25vw;
+    height: 52vh;
 }
 
 .iconCollection1,
