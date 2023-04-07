@@ -150,7 +150,7 @@ export const HelpPage = ({
                             <img
                                 src='/assets/images/list.svg'
                                 alt=""
-                                className={styles.icons}
+                                className={styles.icons1}
                             />
                             <Typography
                                 text='List'

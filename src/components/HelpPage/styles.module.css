@@ -60,6 +60,11 @@
     height: 8rem;
 }
 
+.icons1 {
+    width: 7rem;
+    height: 7rem;
+}
+
 .eachIcon {
     cursor: pointer;
     height: 11rem;
