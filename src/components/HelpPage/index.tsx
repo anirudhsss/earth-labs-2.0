@@ -16,9 +16,9 @@ export const HelpPage = ({
             width="90vw"
             height="84.5vh"
             display="flex"
-            justifyContent="flex-end"
+            justifyContent="center"
             alignItems="center"
-            margin="1.5rem 0 0 0.5rem"
+            margin="1.5rem 0 0 0"
         >
             <Box
                 className={styles.container}
