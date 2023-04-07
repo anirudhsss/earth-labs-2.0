@@ -25,7 +25,7 @@ export const HelpPage = ({
             >
                 <Box className={styles.subContainer1}>
                     <img
-                        src='/assets/images/txnGlyph.svg'
+                        src='/assets/images/txnGlyph1.svg'
                         alt=""
                         className={styles.txnGlyph}
                     />
