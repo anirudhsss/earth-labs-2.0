@@ -13,8 +13,8 @@ export const HelpPage = ({
 }: HelpPageProps) => {
     return (
         <Container
-            width="90vw"
-            height="84.5vh"
+            width="100%"
+            height="100%"
             display="flex"
             justifyContent="center"
             alignItems="center"
