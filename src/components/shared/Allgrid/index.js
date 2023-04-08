@@ -99,11 +99,11 @@ export const Allgrid = ({
       .filter((h) => {
         let referenceDate;
         // if (monthOrYear === "") {
-        referenceDate = Number(moment(h.timestamp).format("YYYY"));
+        // referenceDate = Number(moment(h.timestamp).format("YYYY"));
         // } else if (monthOrYear === "year") {
         //   referenceDate = Number(moment(h.timestamp).format("MM"));
         // } else if (monthOrYear === "month") {
-        //   referenceDate = Number(moment(h.timestamp).format("DD"));
+        referenceDate = Number(moment(h.timestamp).format("DD"));
         // }
         let filteredData;
         if (valueMax > 0 && valueMin > 0) {
@@ -115,6 +115,7 @@ export const Allgrid = ({
         } else {
           filteredData = referenceDate <= dateMax && referenceDate >= dateMin;
         }
+
         return filteredData;
       })
       .sort((a, b) => {
@@ -122,6 +123,7 @@ export const Allgrid = ({
           a.targetValue - b.targetValue || b.referenceDate - a.referenceDate
         );
       });
+
     const coords = [];
     let counter = 0;
 
@@ -146,6 +148,7 @@ export const Allgrid = ({
       fHex.S = coords[coordIndex]?.S;
       coordIndex++;
     }
+
     return filteredHexes.slice(0, mapWidth * mapHeight);
   };
 
