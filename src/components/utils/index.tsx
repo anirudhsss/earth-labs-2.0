@@ -59,7 +59,7 @@ export const AxiosFetch = () => {
       .catch(() => setApiLoading(false));
   }, []);
 
-  return { data, data1: apiData, apiLoading, apiError };
+  return { data, data2: apiData, apiLoading, apiError };
 };
 
 export interface BackdropDuringApiLoadingProps {

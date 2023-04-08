@@ -64,8 +64,13 @@ export const Wallet = ({
 
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
 
-    const { data, data1, apiLoading, apiError } = AxiosFetch();
-    // const [data1, setData1] = useState<any>([]);
+    const { data, data2, apiLoading, apiError } = AxiosFetch();
+    const [data1, setData1] = useState<any>([]);
+
+    useEffect(() => {
+        const a = data2?.filter((item: any) => item.isWallet === 1);
+        setData1(a);
+    }, [data2]);
 
     useEffect(() => {
         onFindingXAxisMinAndMax();
@@ -140,6 +145,8 @@ export const Wallet = ({
                     // coordinates={coordinates}
                     xAxisValue={xAxisValue}
                     yAxisValue={yAxisValue}
+                    data1={data1}
+                    data={data}
                 // monthOrYear={monthOrYear}
                 />
 

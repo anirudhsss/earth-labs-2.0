@@ -19,7 +19,7 @@ export const Yaxis = ({
     onYAxisItemHoverOff,
     yAxisItemHovered,
 }: YaxisProps) => {
-    console.log('yAxisItems', yAxisItems)
+
     return (
         <>
             <Box className={styles.container}>

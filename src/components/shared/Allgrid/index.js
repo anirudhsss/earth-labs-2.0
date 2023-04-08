@@ -30,8 +30,10 @@ export const Allgrid = ({
   xAxisValue,
   yAxisValue,
   // monthOrYear,
+  data1,
+  data,
 }) => {
-  const { data, data1, apiLoading, apiError } = AxiosFetch();
+  // const { data, data1, apiLoading, apiError } = AxiosFetch();
   const [newCoordinates, setNewCoordinates] = useState({});
   const [testArr, setTestArr] = useState(data1);
 
@@ -56,7 +58,7 @@ export const Allgrid = ({
       return acc;
     }, {});
     const viewbox = `${xMin} ${yMin} ${xMax - xMin} ${yMax - yMin}`;
-    console.log("viewbox", viewbox);
+    // console.log("viewbox", viewbox);
     svg.setAttribute("viewBox", viewbox);
   }, [testArr]);
 
@@ -71,7 +73,7 @@ export const Allgrid = ({
       data1
     );
     const x = {};
-    console.log("reqQRSContainingArr", reqQRSContainingArr);
+    // console.log("reqQRSContainingArr", reqQRSContainingArr);
     reqQRSContainingArr?.map((item) => {
       x[item.guid] = {
         guid: item.guid,

@@ -71,7 +71,7 @@ export const UserHomepage = ({
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
     const openMenu1 = Boolean(anchorEl1);
-    const [test1, setData1] = useState<any>();
+    const [data1, setData1] = useState<any>();
     const [loading1, setLoading1] = useState(true);
     const [months, setMonths] = useState<any>();
     const [occurences, setOccurences] = useState<any>();
@@ -137,7 +137,7 @@ export const UserHomepage = ({
     const [difference, setDifference] = useState<string>('');
 
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
-    const { data, data1, apiLoading, apiError } = AxiosFetch();
+    const { data, data2, apiLoading, apiError } = AxiosFetch();
 
     // useEffect(() => {
     //     setData(data?.hexes);
@@ -175,6 +175,11 @@ export const UserHomepage = ({
     useEffect(() => {
         onEthToUsdcConversion();
     }, [difference])
+
+    useEffect(() => {
+        const a = data2?.filter((item: any) => item.isWallet === 0);
+        setData1(a);
+    }, [data2]);
 
     const onHelpIconClicked = () => {
         setHelpIconClicked(!helpIconClicked);
@@ -733,12 +738,6 @@ export const UserHomepage = ({
             setEthToUsdcYvsTPercent(percent);
         }
     }
-
-    // useEffect(() => {
-    //     const a = data1?.map((item: any) => ({ ...item, targetValue1: Math.random() }));
-    //     setData1(a);
-    //     // console.log('a', a)
-    // }, [data1]);
 
     return (
         <>
