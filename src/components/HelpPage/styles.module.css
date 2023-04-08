@@ -22,7 +22,7 @@
 .subContainer1 {
     width: 23vw;
     height: 100%;
-    padding: 2rem 4rem;
+    /* padding: 2rem 4rem; */
     /* border-right: 1px solid black; */
     /* background-color: green; */
     display: flex;
@@ -42,8 +42,8 @@
 }
 
 .txnGlyph {
-    width: 30rem;
-    height: 42rem;
+    width: 15vw;
+    height: 44vh;
 }
 
 .iconCollection1,
