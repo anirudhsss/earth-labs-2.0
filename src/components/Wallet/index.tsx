@@ -29,6 +29,7 @@ import {
 } from "react-hexgrid";
 import { Allgrid } from 'components/shared/Allgrid';
 import moment from 'moment';
+import { HelpPage } from 'components/HelpPage';
 
 export interface WalletProps {
     // openWalletModal?: any;
@@ -63,6 +64,7 @@ export const Wallet = ({
     // const xAxisValue = location?.state?.xAxisValue;
 
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
+    const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
 
     const { data, data2, apiLoading, apiError } = AxiosFetch();
     const [data1, setData1] = useState<any>([]);
@@ -109,6 +111,10 @@ export const Wallet = ({
         setMatchedMonths(sortedTxnInDescOrder);
     }
 
+    const onHelpIconClicked = () => {
+        setHelpIconClicked(!helpIconClicked);
+    }
+
     return (
         <Box sx={{
             backgroundColor: '#1C223D',
@@ -141,18 +147,22 @@ export const Wallet = ({
                 justifyContent='center'
                 alignItems='center'
             >
-                <Allgrid
-                    // coordinates={coordinates}
-                    xAxisValue={xAxisValue}
-                    yAxisValue={yAxisValue}
-                    data1={data1}
-                    data={data}
-                // monthOrYear={monthOrYear}
-                />
+                {helpIconClicked ?
+                    <HelpPage />
+                    : <Allgrid
+                        // coordinates={coordinates}
+                        xAxisValue={xAxisValue}
+                        yAxisValue={yAxisValue}
+                        data1={data1}
+                        data={data}
+                    // monthOrYear={monthOrYear}
+                    />}
 
                 <RhsNav
-                // openWalletModal={openWalletModal}
-                // onWalletBtnClickClose={onWalletBtnClickClose}
+                    // openWalletModal={openWalletModal}
+                    // onWalletBtnClickClose={onWalletBtnClickClose}
+                    helpIconClicked={helpIconClicked}
+                    onHelpIconClicked={onHelpIconClicked}
                 />
             </Container>
 

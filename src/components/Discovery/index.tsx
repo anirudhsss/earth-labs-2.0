@@ -10,6 +10,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Container } from "components/shared/Container";
 import { Header } from "components/shared/Header";
 import { RhsNav } from "components/shared/RhsNav";
+import { HelpPage } from "components/HelpPage";
 
 export interface DiscoveryProps {
     userWalletAddress?: any;
@@ -34,6 +35,11 @@ export const Discovery = ({
     const discoveryLocation = location?.state?.icon === 'discovery';
     // const { icon } = location?.state;
     const [data, setData] = useState<any>();
+    const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
+
+    const onHelpIconClicked = () => {
+        setHelpIconClicked(!helpIconClicked);
+    }
 
     return (
         <>
@@ -46,6 +52,8 @@ export const Discovery = ({
 
             <Container padding="0 3rem 0 2rem">
                 <Box className={styles.body}>
+                    {/* {helpIconClicked ?
+                        <HelpPage /> : */}
                     <Box
                         className={styles.lhsBody}
                     >
@@ -123,74 +131,76 @@ export const Discovery = ({
                             </span>
                         </Box>
                         {/* <Box className={styles.bwText} sx={{ marginTop: '3rem', marginLeft: '16rem' }}>
-                            <Box>
-                                <Typography
-                                    text="Biggest Swaps"
-                                    margin='3rem 0 0 12rem'
-                                    fontSize="2.5rem"
-                                    fontWeight="bold"
-                                />
+                                <Box>
+                                    <Typography
+                                        text="Biggest Swaps"
+                                        margin='3rem 0 0 12rem'
+                                        fontSize="2.5rem"
+                                        fontWeight="bold"
+                                    />
+                                </Box>
+                                <Box>
+                                    <Typography
+                                        text="show more >"
+                                        margin='3rem 0 0 12rem'
+                                        fontSize="1.1rem"
+                                    />
+                                </Box>
                             </Box>
-                            <Box>
-                                <Typography
-                                    text="show more >"
-                                    margin='3rem 0 0 12rem'
-                                    fontSize="1.1rem"
-                                />
-                            </Box>
-                        </Box>
-                        <Box className={styles.glyphContainerParent} sx={{
-                            margin: '2rem 0 0 23rem',
-                        }}>
-                            <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" width="250px" />
-                                <Typography
-                                    text="Share | View Map | View collection"
-                                    fontSize="1.1rem"
-                                    fontWeight="bold"
-                                    width="10rem"
-                                />
-                            </span>
-                            <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
-                                <Typography
-                                    text="Share | View Map | View collection"
-                                    fontSize="1.1rem"
-                                    fontWeight="bold"
-                                    width="10rem"
-                                />
-                            </span>
-                            <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
-                                <Typography
-                                    text="Share | View Map | View collection"
-                                    fontSize="1.1rem"
-                                    fontWeight="bold"
-                                    width="10rem"
-                                />
-                            </span>
-                            <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
-                                <Typography
-                                    text="Share | View Map | View collection"
-                                    fontSize="1.1rem"
-                                    fontWeight="bold"
-                                    width="10rem"
-                                />
-                            </span>
-                            <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
-                                <Typography
-                                    text="Share | View Map | View collection"
-                                    fontSize="1.1rem"
-                                    fontWeight="bold"
-                                    width="10rem"
-                                />
-                            </span>
-                        </Box> */}
+                            <Box className={styles.glyphContainerParent} sx={{
+                                margin: '2rem 0 0 23rem',
+                            }}>
+                                <span className={styles.glyphContainer}>
+                                    <img src="./testImage.png" width="250px" />
+                                    <Typography
+                                        text="Share | View Map | View collection"
+                                        fontSize="1.1rem"
+                                        fontWeight="bold"
+                                        width="10rem"
+                                    />
+                                </span>
+                                <span className={styles.glyphContainer1}>
+                                    <img src="./testImage.png" width="250px" />
+                                    <Typography
+                                        text="Share | View Map | View collection"
+                                        fontSize="1.1rem"
+                                        fontWeight="bold"
+                                        width="10rem"
+                                    />
+                                </span>
+                                <span className={styles.glyphContainer1}>
+                                    <img src="./testImage.png" width="250px" />
+                                    <Typography
+                                        text="Share | View Map | View collection"
+                                        fontSize="1.1rem"
+                                        fontWeight="bold"
+                                        width="10rem"
+                                    />
+                                </span>
+                                <span className={styles.glyphContainer1}>
+                                    <img src="./testImage.png" width="250px" />
+                                    <Typography
+                                        text="Share | View Map | View collection"
+                                        fontSize="1.1rem"
+                                        fontWeight="bold"
+                                        width="10rem"
+                                    />
+                                </span>
+                                <span className={styles.glyphContainer1}>
+                                    <img src="./testImage.png" width="250px" />
+                                    <Typography
+                                        text="Share | View Map | View collection"
+                                        fontSize="1.1rem"
+                                        fontWeight="bold"
+                                        width="10rem"
+                                    />
+                                </span>
+                            </Box> */}
                     </Box>
+                    {/* } */}
                     <RhsNav
-
+                    // helpIconClicked={helpIconClicked}
+                    // onHelpIconClicked={onHelpIconClicked}
                     />
                 </Box>
             </Container>
