@@ -21,12 +21,12 @@
 }
 
 .gridContainer svg g polygon {
-    fill-opacity: 0.8;
+    fill-opacity: 1;
 }
 
 .gridContainer svg g polygon:hover {
     /* stroke: #FE7D06 !important;
     stroke-width: 0.3 !important; */
-    fill-opacity: 1;
-    /* transition: fill-opacity .2s !important; */
+    fill-opacity: 0.75;
+    transition: fill-opacity .2s !important;
 }
