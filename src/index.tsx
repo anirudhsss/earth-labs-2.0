@@ -9,45 +9,45 @@ import { BrowserRouter, RouterProvider } from "react-router-dom";
 import { router } from './Routes'
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const dinAlternateBold = {
-  fontFamily: 'DINAlternateBold',
-  fontStyle: 'normal',
-  fontDisplay: 'swap',
-  fontWeight: 700,
-  src: `
-    local('DINAlternate'),
-    local('DINAlternate-Bold'),
-    url(${DINAlternateBold}) format('truetype')
-  `,
-};
+// const dinAlternateBold = {
+//   fontFamily: 'DINAlternateBold',
+//   fontStyle: 'normal',
+//   fontDisplay: 'swap',
+//   fontWeight: 700,
+//   src: `
+//     local('DINAlternate'),
+//     local('DINAlternate-Bold'),
+//     url(${DINAlternateBold}) format('truetype')
+//   `,
+// };
 
-const theme = createTheme({
-  typography: {
-    htmlFontSize: 10,
-    fontFamily: [
-      'dinAlternateBold',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-  },
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: `
-        '@global': {
-          '@font-face': [dinAlternateBold],
-      },
-      `
-    },
-  },
-});
+// const theme = createTheme({
+//   typography: {
+//     htmlFontSize: 10,
+//     fontFamily: [
+//       'dinAlternateBold',
+//       '-apple-system',
+//       'BlinkMacSystemFont',
+//       '"Segoe UI"',
+//       'Roboto',
+//       '"Helvetica Neue"',
+//       'Arial',
+//       'sans-serif',
+//       '"Apple Color Emoji"',
+//       '"Segoe UI Emoji"',
+//       '"Segoe UI Symbol"',
+//     ].join(','),
+//   },
+//   components: {
+//     MuiCssBaseline: {
+//       styleOverrides: `
+//         '@global': {
+//           '@font-face': [dinAlternateBold],
+//       },
+//       `
+//     },
+//   },
+// });
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -57,9 +57,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-    <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    {/* <ThemeProvider theme={theme}> */}
+    <RouterProvider router={router} />
+    {/* </ThemeProvider> */}
   </Box>
 )
 

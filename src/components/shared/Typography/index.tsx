@@ -13,6 +13,7 @@ export interface TypographyProps {
     marginTop?: string;
     cursor?: string;
     height?: string;
+    fontFamily?: string;
 }
 
 export const Typography = ({
@@ -26,6 +27,7 @@ export const Typography = ({
     marginTop,
     cursor,
     height,
+    fontFamily,
 }: TypographyProps) => {
     return (
         <MUITypography
@@ -39,6 +41,7 @@ export const Typography = ({
                 marginTop: marginTop,
                 cursor: cursor,
                 height: height,
+                fontFamily: 'DINAlternateBold',
             }}>
             {text}
         </MUITypography>
