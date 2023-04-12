@@ -46,28 +46,28 @@ export const Header = ({
                     padding: openWalletModal && '5px 0'
                 }}
             >
-                {/* {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal && */}
-                <Link
-                    to="/discovery"
-                    state={{
-                        icon: 'discovery',
-                    }}
-                >
-                    <span style={{ margin: '0 25px 0 15px' }}>
-                        <img
-                            src='./assets/images/light_atlas.svg'
-                            alt=""
-                            width="80"
-                            height="80"
-                            style={{
-                                backgroundColor: 'transparent'
-                            }}
-                        />
-                    </span>
-                </Link>
+                {(mapsLocation || homeLocation || discoveryLocation) && !openWalletModal &&
+                    <Link
+                        to="/discovery"
+                        state={{
+                            icon: 'discovery',
+                        }}
+                    >
+                        <span style={{ margin: '0 25px 0 15px' }}>
+                            <img
+                                src='./assets/images/light_atlas.svg'
+                                alt=""
+                                width="80"
+                                height="80"
+                                style={{
+                                    backgroundColor: 'transparent'
+                                }}
+                            />
+                        </span>
+                    </Link>
 
-                {/* } */}
-                {/* {walletLocation &&
+                }
+                {walletLocation &&
                     <Link
                         to="/discovery"
                         state={{
@@ -86,12 +86,12 @@ export const Header = ({
                             />
                         </span>
                     </Link>
-                } */}
+                }
                 {(mapsLocation || homeLocation || discoveryLocation || walletLocation || landingPageLocation) && !openWalletModal &&
                     <NormalSearchField
-                    // placeholderColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
-                    // borderColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
-                    // searchIconColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
+                        placeholderColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
+                        borderColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
+                        searchIconColor={`${(mapsLocation || homeLocation || discoveryLocation || landingPageLocation) ? 'rgba(0, 0, 0, 0.6)' : '#FFFDFB'}`}
                     />}
                 {(mapsLocation || homeLocation || discoveryLocation || walletLocation || landingPageLocation) && !openWalletModal && <Button
                     backgroundColor="#FE7D06"
@@ -198,8 +198,8 @@ export const Header = ({
                             <Typography
                                 text="Allen.earth.eth"
                                 fontSize="1.6rem"
-                                // color={walletLocation ? '#fff' : '#000'}
-                                color="#000"
+                                color={walletLocation ? '#fff' : '#000'}
+                                // color="#000"
                                 cursor="pointer"
                             />
                         </Box>

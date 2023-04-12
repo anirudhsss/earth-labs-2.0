@@ -42,7 +42,10 @@ export const Discovery = ({
     }
 
     return (
-        <>
+        <Box sx={{
+            backgroundColor: '#FFFDFB',
+            height: '100vh',
+        }}>
             <Header
                 homeLocation={homeLocation}
                 walletLocation={walletLocation}
@@ -204,6 +207,6 @@ export const Discovery = ({
                     />
                 </Box>
             </Container>
-        </>
+        </Box>
     )
 }
