@@ -189,7 +189,6 @@ export const UserHomepage = ({
         const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {
             return +new Date(b.timestamp) - +new Date(a.timestamp);
         });
-        // console.log('sortedTxnInDescOrder', sortedTxnInDescOrder)
         setMatchedMonths(sortedTxnInDescOrder);
     }
 
@@ -383,9 +382,12 @@ export const UserHomepage = ({
         onDisplayMonth(id);
         //setValueMenuItemClicked(true);
         // setYearViewEnabled(true);
-        const selectedItem = YEARS.filter((item) => item.id === id);
+        const selectedItem = arrOfYears.filter((item: any) => {
+            return Number(item.month) === Number(id);
+        });
         setYears(selectedItem);
     }
+
     const [selectedItem1, setSelectedItem1] = useState<any>();
     const onValueMenuItemClicked1 = (id: number) => {
         setYAxisItems([]);
@@ -459,7 +461,6 @@ export const UserHomepage = ({
             const max = Math.max(...processedInput);
             // const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
             const rangeArr = lengthsArr?.map((item: any) => item[1])
-            // console.log('rangeArr', rangeArr)
             let arrOfInterest: any = [];
             processedInput.forEach((item: any) => {
                 let val1 = Math.round(((35 - 10) * invlerp(min, max, item)) + 10);

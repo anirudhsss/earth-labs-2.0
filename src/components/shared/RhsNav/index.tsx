@@ -260,7 +260,7 @@ export const RhsNav = ({
                                 >
                                     {years?.length > 0 ?
                                         <Typography
-                                            text={`${years[0].value}`}
+                                            text={`${years[0].month}`}
                                             fontSize="13px"
                                             color={`${openMenu ? '#FE7D06' : '#000'}`}
                                         />
@@ -302,6 +302,7 @@ export const RhsNav = ({
                                     }}
                                 >
                                     {arrOfYears?.map((item: any) => {
+                                        // console.log('item', item.month)
                                         return (
                                             <MenuItem
                                                 key={item.month}
