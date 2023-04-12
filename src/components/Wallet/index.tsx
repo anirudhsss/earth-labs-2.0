@@ -117,7 +117,8 @@ export const Wallet = ({
 
     return (
         <Box sx={{
-            backgroundColor: '#1C223D',
+            // backgroundColor: '#1C223D',
+            backgroundColor: '#f5f5f5',
             width: '100%',
             height: '100vh',
             // opacity: '0.1'
