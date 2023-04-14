@@ -18,7 +18,7 @@ export interface XaxisItemsProps {
     dimension?: number;
     noOfGlyphs?: any;
     clickedElement?: any;
-    monthOrYear?: any;
+    // monthOrYear?: any;
     data1?: any;
     matchedMonths?: any;
     setMatchedMonths?: any;
@@ -42,10 +42,11 @@ export const XaxisItems = ({
     noOfGlyphs,
     onCircleClicked,
     clickedElement,
-    monthOrYear,
+    // monthOrYear,
     glyphWithMaxDimension,
 }: XaxisItemsProps) => {
-    const whichDuration1 = monthOrYear === '' ? month : (monthOrYear === 'year' || monthOrYear === 'month') ? moment().month(month - 1).format("MMM") : [];
+    // const whichDuration1 = monthOrYear === '' ? month : (monthOrYear === 'year' || monthOrYear === 'month') ? moment().month(month - 1).format("MMM") : [];
+    const whichDuration1 = moment().month(month - 1).format("MMM");
 
     // const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '35px', }}>&#x2B22;</span>
 
@@ -76,7 +77,8 @@ export const XaxisItems = ({
                 cursor: 'pointer',
             }}
                 className="dimensions"
-                onClick={() => { monthOrYear === '' ? onDisplayMonth(month) : onCircleClicked(month) }}
+                // onClick={() => { monthOrYear === '' ? onDisplayMonth(month) : onCircleClicked(month) }}
+                onClick={() => onCircleClicked(month)}
                 onMouseEnter={() => onCircleHoverStarts(month)}
                 onMouseLeave={() => onCircleHoverEnds(month)}
             ></div>

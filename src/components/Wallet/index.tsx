@@ -8,7 +8,7 @@ import { RhsNav } from 'components/shared/RhsNav';
 import { NormalSearchField } from 'components/shared/TextField';
 import { Typography } from 'components/shared/Typography';
 import { AxiosFetch, BackdropDuringApiLoading } from 'components/utils';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 import {
@@ -74,17 +74,7 @@ export const Wallet = ({
         setData1(a);
     }, [data2]);
 
-    useEffect(() => {
-        onFindingXAxisMinAndMax();
-    }, [data1, matchedMonths]);
-
-    useEffect(() => {
-        // if (monthOrYear === '') {
-        onDisplayAllTimeTxnInDescOrder();
-        // }
-    }, [data1, matchedMonths]);
-
-    const onFindingXAxisMinAndMax = () => {
+    const onFindingXAxisMinAndMax = useCallback(() => {
         let arr: number[] = [];
         matchedMonths?.map((item: any) => {
             arr.push(Number(moment(item.timestamp).format("DD")));
@@ -102,14 +92,24 @@ export const Wallet = ({
                 setXAxisValue({ xAxisDateMin: min, xAxisDateMax: max });
             }
         }
-    }
+    }, [matchedMonths]);
 
-    const onDisplayAllTimeTxnInDescOrder = () => {
+    useEffect(() => {
+        onFindingXAxisMinAndMax();
+    }, [onFindingXAxisMinAndMax]);
+
+    const onDisplayAllTimeTxnInDescOrder = useCallback(() => {
         const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {
             return +new Date(b.timestamp) - +new Date(a.timestamp);
         });
         setMatchedMonths(sortedTxnInDescOrder);
-    }
+    }, [data1]);
+
+    useEffect(() => {
+        // if (monthOrYear === '') {
+        onDisplayAllTimeTxnInDescOrder();
+        // }
+    }, [onDisplayAllTimeTxnInDescOrder]);
 
     const onHelpIconClicked = () => {
         setHelpIconClicked(!helpIconClicked);
@@ -146,7 +146,7 @@ export const Wallet = ({
                 height="92%"
                 display='flex'
                 justifyContent='center'
-                alignItems='center'
+            // alignItems='center'
             >
                 {helpIconClicked ?
                     <HelpPage />

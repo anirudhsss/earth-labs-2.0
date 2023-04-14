@@ -3,3 +3,17 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.timeMenuBtn {
+    /* height: 5vh; */
+    /* margin-top: 11vh; */
+    /* height: 25%; */
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: -3rem;
+}
+
+.blackTriangle {
+    width: 9px;
+    height: 9px;
+}

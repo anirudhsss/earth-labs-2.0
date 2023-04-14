@@ -19,7 +19,7 @@ export interface RhsNavProps {
     onMoveHexes?: any;
     coordinates?: any;
     loading1?: any;
-    monthOrYear?: any;
+    // monthOrYear?: any;
     yAxisValue?: any;
     xAxisValue?: any;
     helpIconClicked?: any;
@@ -40,7 +40,7 @@ export const RhsNav = ({
     onMoveHexes,
     coordinates,
     loading1,
-    monthOrYear,
+    // monthOrYear,
     yAxisValue,
     xAxisValue,
     helpIconClicked,
@@ -55,11 +55,14 @@ export const RhsNav = ({
     return (
         <Box
             className={styles.rhsBody}
+            sx={{
+                height: `${walletLocation ? '86%' : '77%'}`
+            }}
         >
             <Box
                 className={styles.allIcons}
                 sx={{
-                    height: `${discoveryLocation ? '83vh' : '100%'}`
+                    height: `${discoveryLocation ? '77vh' : '100%'}`
                 }}
             >
                 <Box className={styles.groupedIcons1}>
@@ -237,7 +240,7 @@ export const RhsNav = ({
                             <img src='/assets/images/discord.svg' alt="" className={styles.imageAsIcon} />
                         </a>
                     </Box>
-                    <Box sx={{ height: '9vh' }} className={styles.timeMenuBtn}>
+                    {/* <Box sx={{ height: '9vh' }} className={styles.timeMenuBtn}>
                         {(mapsLocation || homeLocation) && !openWalletModal &&
                             <Box>
                                 <Button
@@ -320,7 +323,7 @@ export const RhsNav = ({
                                 </Menu>
                             </Box>
                         }
-                    </Box>
+                    </Box> */}
                 </Box>
             </Box>
         </Box>

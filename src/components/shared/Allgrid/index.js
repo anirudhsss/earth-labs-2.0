@@ -155,7 +155,7 @@ export const Allgrid = ({
   return (
     <Box
       sx={{
-        width: "88vw",
+        width: "77vw",
         height: "92vh",
         // width: "90vw",
         // height: "90vh",

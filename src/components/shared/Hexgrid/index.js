@@ -29,8 +29,7 @@ export const Hexgrid = ({
   matchedMonths,
   arrOfMonths,
   arrOfYears,
-  monthOrYear,
-  onDisplayYear,
+  // monthOrYear,
   setArrOfYears,
   coordinates,
   loading1,
@@ -92,13 +91,13 @@ export const Hexgrid = ({
     const filteredHexes = targetHexes
       .filter((h) => {
         let referenceDate;
-        if (monthOrYear === "") {
-          referenceDate = Number(moment(h.timestamp).format("YYYY"));
-        } else if (monthOrYear === "year") {
-          referenceDate = Number(moment(h.timestamp).format("MM"));
-        } else if (monthOrYear === "month") {
-          referenceDate = Number(moment(h.timestamp).format("DD"));
-        }
+        // if (monthOrYear === "") {
+        //   referenceDate = Number(moment(h.timestamp).format("YYYY"));
+        // } else if (monthOrYear === "year") {
+        //   referenceDate = Number(moment(h.timestamp).format("MM"));
+        // } else if (monthOrYear === "month") {
+        referenceDate = Number(moment(h.timestamp).format("DD"));
+        // }
         let filteredData;
         if (valueMax > 0 && valueMin > 0) {
           filteredData =

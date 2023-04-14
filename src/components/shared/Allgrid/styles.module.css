@@ -10,29 +10,29 @@
 
 .gridContainer {
     /* width: 87.5vw; */
-    width: 83.5vw;
+    width: 74.5vw;
     /* height: 80vh; */
     height: 83vh;
     display: flex;
     /* justify-content: center; */
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.gridContainer svg {
-    width: 72.5vw;
-    height: 80vh;
-    /* overflow: scroll; */
-    /* width: 90vw;
-    height: 85vh; */
-    display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.gridContainer svg {
+    /* width: 72.5vw;
+    height: 80vh; */
+    /* overflow: scroll; */
+    /* width: 90vw;
+    height: 85vh; */
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
+
 .gridContainer svg g {
-    width: 87.5vw;
-    height: 80vh;
+    /* width: 87.5vw;
+    height: 80vh; */
     /* overflow: scroll; */
 }
 
