@@ -13,11 +13,11 @@ export const ApiUrl =
   "https://api.earth.domains/earthapi/dotEarth/GenerateMap?address=0x1E815a8188F1b84564577C1c998f7E6B4706B752";
 
 export const Icons = {
-  atlasDark: "./assets/images/dark_atlas.svg",
-  atlasWhite: "./assets/images/atlas_white.svg",
-  copy: "./assets/images/copy.svg",
-  glyphSample: "./assets/images/glyphSample.svg",
-  twitterWhite: "./assets/images/twitter_white.svg",
-  trophy: "./assets/images/trophy.svg",
-  landingBg : './assets/images/landing.svg'
+  atlasDark: "/./assets/images/dark_atlas.svg",
+  atlasWhite: "/./assets/images/atlas_white.svg",
+  copy: "/./assets/images/copy.svg",
+  glyphSample: "/./assets/images/glyphSample.svg",
+  twitterWhite: "/./assets/images/twitter_white.svg",
+  trophy: "/./assets/images/trophy.svg",
+  landingBg : '/./assets/images/landing.svg'
 };

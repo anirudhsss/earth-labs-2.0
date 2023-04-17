@@ -26,7 +26,7 @@ export const router = createBrowserRouter(
           />
         }
       />
-      <Route path="/txn" element={<GlyphDetailPage />} />
+      <Route path="/txn/:id" element={<GlyphDetailPage />} />
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/maps" element={<UserHomepage />} />
       <Route path="/discovery" element={<Discovery />} />

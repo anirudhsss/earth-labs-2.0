@@ -25,8 +25,7 @@ export const LandingPage = ({}: LandingPageProps) => {
           backgroundImage: `url('${Icons.landingBg}')`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right bottom",
-          height: "100vh",
-          backgroundSize: "100rem",
+          height:'inherit'
         }}
       >
         <img src={Icons.atlasWhite} width={300} height={150}></img>
@@ -57,7 +56,7 @@ export const LandingPage = ({}: LandingPageProps) => {
                 iconSize={"2rem"}
               />
               <Link
-                to="/txn"
+                to="/txn/2"
                 style={{
                   textDecoration: "none",
                 }}
