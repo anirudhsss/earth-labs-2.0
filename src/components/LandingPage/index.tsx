@@ -53,6 +53,8 @@ export const LandingPage = ({}: LandingPageProps) => {
                 placeholderColor={"#fff"}
                 placeholderFontSize={"2rem"}
                 fontSize={"2rem"}
+                searchIconColor={"#fff"}
+                iconSize={"2rem"}
               />
               <Link
                 to="/txn"
