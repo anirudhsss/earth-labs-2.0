@@ -4,6 +4,18 @@ import { useState } from "react";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
 
+interface IGlyphDetail {
+  forHumans: string;
+  txnHash: string;
+  value: string;
+  activityDetails: {
+    from: string;
+    to: string;
+  };
+  date: string;
+  etherPrice: string;
+}
+
 const GlyphDetail = () => {
   const [isOpen, setOpenModal] = useState<boolean>(false);
 
@@ -135,7 +147,6 @@ const GlyphDetail = () => {
         style={{
           padding: "5rem 20rem",
           gap: "10rem",
-
         }}
       >
         <div

@@ -48,7 +48,7 @@ export const LandingPage = ({}: LandingPageProps) => {
             <div className={styles.landing_innter_content_search}>
               <NormalSearchField
                 borderColor="#fff"
-                padding={"10px"}
+                padding={"1rem"}
                 placeholderColor={"#fff"}
                 placeholderFontSize={"2rem"}
                 fontSize={"2rem"}
