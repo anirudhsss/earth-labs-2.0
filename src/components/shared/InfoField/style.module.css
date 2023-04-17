@@ -1,0 +1,33 @@
+.info_field_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.info_field_label {
+  color: #fff;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.info_field_input {
+  background: rgba(255, 253, 251, 0.31);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  padding-left: 8px;
+}
+
+.info_field_divider {
+  height: inherit;
+  width: 3px;
+  background: #1c223d;
+  padding: 1px;
+}
+
+.info_field_text {
+  color: #fff;
+  font-weight: 700;
+  font-size: 2rem;
+  padding: 1.2rem;
+}

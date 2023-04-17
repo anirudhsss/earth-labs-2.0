@@ -1,21 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
-import { ConnectWalletModal } from 'components/ConnectWalletModal'
-import { UserHomepage } from 'components/UserHomepage'
+import { useCallback, useEffect, useState } from "react";
 import { ethers, providers } from "ethers";
-import Web3Modal from 'web3modal';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import MetaMaskOnboarding from "@metamask/onboarding";
-import { CLAIM_PROCESS } from 'constant';
-import { Discovery } from 'components/Discovery';
-import { Routes, Route, Navigate } from "react-router-dom"
-import { ApiRequest } from 'components/utils';
-
-import './App.css';
-import { Wallet } from 'components/Wallet';
-
-const providerOptions = {
-
-}
+import { CLAIM_PROCESS } from "constant";
+import { ApiRequest } from "components/utils";
+import "./App.css";
 
 const App = () => {
   const [open, setOpen] = useState(false);
@@ -43,9 +32,9 @@ const App = () => {
     const info = async () => {
       const res = await ApiRequest();
       setData(res);
-    }
+    };
     info();
-  }, [])
+  }, []);
 
   useEffect(() => {
     const w: any = window;
@@ -61,7 +50,7 @@ const App = () => {
 
   const onClose = () => {
     setOpen(false);
-  }
+  };
 
   const openModal = () => {
     setModalOpen(true);
@@ -95,14 +84,14 @@ const App = () => {
     // await _getSignatureMessage(accountAddress[0]);
     setUserWalletAddress(accountAddress[0]);
     setChainId(network.chainId);
-  }
+  };
 
   const renderDialogContainers = (claimProcess: string): any => {
     switch (claimProcess) {
       case CLAIM_PROCESS.CONNECT_WALLET_LOADING:
         setLoading(true);
     }
-  }
+  };
 
   const _onboardUserForMetaMask = () => {
     const onboarding = new MetaMaskOnboarding({ forwarderOrigin });
@@ -116,9 +105,7 @@ const App = () => {
 
   const _getSignatureMessage = async (
     accountAddress: string
-  ): Promise<void> => {
-
-  }
+  ): Promise<void> => {};
 
   const connectWalletConnectWallet = async () => {
     onClose();
@@ -135,19 +122,18 @@ const App = () => {
       // await _getSignatureMessage(accounts[0]);
       setUserWalletAddress(accounts[0]);
       // Subscribe to accounts change
-      provider.on("accountsChanged", (accounts: string[]) => { });
+      provider.on("accountsChanged", (accounts: string[]) => {});
 
       // Subscribe to chainId change
-      provider.on("chainChanged", (chainId: number) => { });
+      provider.on("chainChanged", (chainId: number) => {});
 
       // Subscribe to session connection
-      provider.on("connect", () => { });
+      provider.on("connect", () => {});
 
       // Subscribe to session disconnection
       provider.on("disconnect", (code: number, reason: string) => {
         logoutWallet();
       });
-
     } catch (error) {
       console.error(error);
     }
@@ -162,40 +148,7 @@ const App = () => {
     setWalletConnected(false);
   };
 
-  return (
-    <div className="App">
-      {/* <UserHomepage
-        onOpenConnectWalletModal={onOpenConnectWalletModal}
-        userWalletAddress={userWalletAddress}
-        loading={loading}
-        logoutWallet={logoutWallet}
-        data={data?.data[0]}
-      >
-        <ConnectWalletModal
-          open={open}
-          onClose={onClose}
-          onConnectMetamask={onConnectMetamask}
-          connectWalletConnectWallet={connectWalletConnectWallet}
-        />
-      </UserHomepage> */}
-      {/* }
-        />
-        <Route
-          path="/discovery"
-          element={ */}
-      {/* <Discovery /> */}
-      {/* }
-        />
-        <Route
-          path="/wallet"
-          element={ */}
-      {/* <Wallet /> */}
-      {/* }
-        />
-        <Route path="/" element={<Navigate to="/maps" replace />} />
-      </Routes> */}
-    </div>
-  );
-}
+  return <div className="App"></div>;
+};
 
 export default App;
