@@ -7,7 +7,7 @@ const GlyphDetailPage = () => {
   const location = useLocation();
   const landingPageLocation = location?.state?.icon === "/";
   return (
-    <Container backgroundColor="#1C223D" height={"100%"}>
+    <Container backgroundColor="#1C223D" height={"100vh"}>
       <Header landingPageLocation={landingPageLocation} />
       <GlyphDetail />
     </Container>

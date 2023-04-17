@@ -10,7 +10,15 @@ const CopyContainer: FC<ICopyContainer> = ({ text }) => {
   return (
     <div className={styles.copy_container}>
       <span className={styles.copy_container_text}>{text}</span>
-      <img src={Icons.copy} />
+      <img
+        style={{
+          cursor: 'pointer'
+        }}
+        src={Icons.copy}
+        onClick={async () => {
+          await navigator.clipboard.writeText(text);
+        }}
+      />
     </div>
   );
 };

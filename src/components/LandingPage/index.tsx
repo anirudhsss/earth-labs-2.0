@@ -8,6 +8,7 @@ import CopyContainer from "components/shared/CopyContainer";
 import { NormalSearchField } from "components/shared/TextField";
 import { Button } from "components/shared/Button";
 import { height } from "@mui/system";
+import { Link } from "react-router-dom";
 
 export interface LandingPageProps {}
 
@@ -25,7 +26,7 @@ export const LandingPage = ({}: LandingPageProps) => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right bottom",
           height: "100vh",
-          backgroundSize : '100rem'
+          backgroundSize: "100rem",
         }}
       >
         <img src={Icons.atlasWhite} width={300} height={150}></img>
@@ -53,15 +54,23 @@ export const LandingPage = ({}: LandingPageProps) => {
                 placeholderFontSize={"2rem"}
                 fontSize={"2rem"}
               />
-              <Button
-                backgroundColor="#FE7D06"
-                borderRadius="2rem"
-                height={"4.5rem"}
-                width={"13rem"}
-                size={"2rem"}
+              <Link
+                to="/txn"
+                style={{
+                  textDecoration: "none",
+                }}
               >
-                Search
-              </Button>
+                <Button
+                  onClick={() => {}}
+                  backgroundColor="#FE7D06"
+                  borderRadius="2rem"
+                  height={"4.5rem"}
+                  width={"13rem"}
+                  size={"2rem"}
+                >
+                  Search
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
