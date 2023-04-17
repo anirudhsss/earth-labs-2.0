@@ -7,6 +7,7 @@ import InfoField from "components/shared/InfoField";
 import CopyContainer from "components/shared/CopyContainer";
 import { NormalSearchField } from "components/shared/TextField";
 import { Button } from "components/shared/Button";
+import { height } from "@mui/system";
 
 export interface LandingPageProps {}
 
@@ -14,9 +15,19 @@ export const LandingPage = ({}: LandingPageProps) => {
   const location = useLocation();
   const landingPageLocation = location?.state?.icon === "/";
   return (
-    <Container backgroundColor="#1C223D" height={"100vh"}>
+    <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
       <Header landingPageLocation={landingPageLocation} />
-      <div className={styles.landing_inner}>
+      <div
+        className={styles.landing_inner}
+        style={{
+          overflow: "hidden",
+          backgroundImage: `url('${Icons.landingBg}')`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right bottom",
+          height: "100vh",
+          backgroundSize : '100rem'
+        }}
+      >
         <img src={Icons.atlasWhite} width={300} height={150}></img>
         <div className={styles.landing_inner_content}>
           <div className={styles.landing_inner_content_top}>
@@ -45,7 +56,7 @@ export const LandingPage = ({}: LandingPageProps) => {
               <Button
                 backgroundColor="#FE7D06"
                 borderRadius="2rem"
-                height={"100%"}
+                height={"4.5rem"}
                 width={"13rem"}
                 size={"2rem"}
               >

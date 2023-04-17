@@ -1,7 +1,7 @@
 .info_field_wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .info_field_label {

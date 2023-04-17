@@ -75,3 +75,11 @@ code {
 .flex-1 {
   flex: 1;
 }
+
+.font-size-20 {
+  font-size: "2rem";
+}
+
+.color-white {
+  color: white;
+}

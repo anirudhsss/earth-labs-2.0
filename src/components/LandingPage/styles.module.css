@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  padding: 10rem;
+  padding: 5rem 10rem;
+
 }
 
 .landing_inner_content {
   display: flex;
-  width: 100%;
+  width: 100vh;
   flex-direction: column;
   gap: 5rem;
 }
@@ -17,6 +18,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: 77rem;
 }
 
 .landing_inner_content_bottom {
@@ -34,7 +36,7 @@
 
 .landing_innter_content_search {
   display: flex;
-  margin-top: 3rem;
+  margin-top: 1rem;
   flex-direction: row;
   align-items: center;
   gap: 3rem;
