@@ -83,3 +83,7 @@ code {
 .color-white {
   color: white;
 }
+
+.h-100 {
+  height: 100%;
+}

@@ -131,10 +131,11 @@ const GlyphDetail = () => {
   return (
     <>
       <div
-        className="flex w-full"
+        className="flex w-100 h-100"
         style={{
           padding: "5rem 20rem",
           gap: "10rem",
+
         }}
       >
         <div
