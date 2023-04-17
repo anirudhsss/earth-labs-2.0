@@ -1,6 +1,41 @@
-.landingPageimage {
-    background-image: url('../../images/landingPage.svg');
-    /* width: 100vw;
-    height: 100vh; */
-    background-color: #1C223D;
+.landing_inner {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  padding: 10rem;
+}
+
+.landing_inner_content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.landing_inner_content_top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.landing_inner_content_bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-items: center;
+}
+
+.landing_inner_content_bottom_label {
+  color: #fff;
+  font-size: 2rem;
+}
+
+.landing_innter_content_search {
+  display: flex;
+  margin-top: 3rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 3rem;
 }
