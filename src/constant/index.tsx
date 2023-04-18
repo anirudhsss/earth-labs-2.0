@@ -19,5 +19,6 @@ export const Icons = {
   glyphSample: "/./assets/images/glyphSample.svg",
   twitterWhite: "/./assets/images/twitter_white.svg",
   trophy: "/./assets/images/trophy.svg",
-  landingBg : '/./assets/images/landing.svg'
+  landingBg : '/./assets/images/landing.svg',
+  bells : '/./assets/images/bell.svg'
 };

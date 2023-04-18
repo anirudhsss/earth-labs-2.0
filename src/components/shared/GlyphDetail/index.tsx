@@ -1,24 +1,30 @@
 import { Icons } from "constant";
 import BasicModal from "modals/Modal";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
 
 interface IGlyphDetail {
-  forHumans: string;
-  txnHash: string;
-  value: string;
-  activityDetails: {
+  forHumans?: string;
+  txnHash?: string;
+  value?: string;
+  activityDetails?: {
     from: string;
     to: string;
   };
-  date: string;
-  etherPrice: string;
+  date?: string;
+  etherPrice?: string;
+  handleTwitterShare: () => void;
+  buttonText: string;
+  icon?: string;
 }
 
-const GlyphDetail = () => {
+const GlyphDetail: FC<IGlyphDetail> = ({
+  handleTwitterShare,
+  buttonText,
+  icon,
+}) => {
   const [isOpen, setOpenModal] = useState<boolean>(false);
-
   const ShareTwitterGlyphContent = () => {
     return (
       <div
@@ -84,6 +90,10 @@ const GlyphDetail = () => {
             Cancel
           </button>
           <Button
+            onClick={() => {
+              setOpenModal(false);
+              handleTwitterShare();
+            }}
             color="#fff"
             size="2rem"
             borderRadius="3rem"
@@ -175,7 +185,7 @@ const GlyphDetail = () => {
                 }}
               >
                 <img src={Icons.twitterWhite} width={30} height={25} />
-                <span>Share the Glyph on twitter</span>
+                <span>{buttonText}</span>
               </div>
             </Button>
           </div>
