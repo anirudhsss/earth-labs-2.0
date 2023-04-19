@@ -1,8 +1,12 @@
 import { Icons } from "constant";
+import useTwitterFlow from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
+import RenderIf from "../RenderIf";
 
 interface IGlyphDetail {
   forHumans?: string;
@@ -14,17 +18,36 @@ interface IGlyphDetail {
   };
   date?: string;
   etherPrice?: string;
-  handleTwitterShare: () => void;
-  buttonText: string;
-  icon?: string;
 }
 
-const GlyphDetail: FC<IGlyphDetail> = ({
-  handleTwitterShare,
-  buttonText,
-  icon,
-}) => {
+const GlyphDetail: FC<IGlyphDetail> = ({}) => {
+  const [isAlertOpen, setAlertOpen] = useState<boolean>(false);
   const [isOpen, setOpenModal] = useState<boolean>(false);
+  const {
+    initateTwitterAuth,
+    getTwitterUserInfo,
+    generateMediaId,
+    tweetGlyphImageOnTwitter,
+  } = useTwitterFlow();
+
+  const [searchParams] = useSearchParams();
+
+  // Checking if state and code  is there or not
+  useEffect(() => {
+    processTwitterAuthentication();
+  }, []);
+
+  const processTwitterAuthentication = async () => {
+    const state = searchParams.get("state");
+    const code = searchParams.get("code");
+    if (state && code) {
+      setOpenModal(true);
+      const user = await getTwitterUserInfo(state, code);
+      const mediaId = await generateMediaId("", Number(user.id), "");
+      await tweetGlyphImageOnTwitter(Number(mediaId), user.id);
+    }
+  };
+
   const ShareTwitterGlyphContent = () => {
     return (
       <div
@@ -91,8 +114,8 @@ const GlyphDetail: FC<IGlyphDetail> = ({
           </button>
           <Button
             onClick={() => {
-              setOpenModal(false);
-              handleTwitterShare();
+              // setOpenModal(false);
+              initateTwitterAuth();
             }}
             color="#fff"
             size="2rem"
@@ -152,6 +175,11 @@ const GlyphDetail: FC<IGlyphDetail> = ({
 
   return (
     <>
+      <RenderIf isTrue={isAlertOpen}>
+        <div className="flex justify-content-center">
+          <Alert text="First Glyph shared on Twitter!" icon={Icons.bells} />
+        </div>
+      </RenderIf>
       <div
         className="flex w-100 h-100"
         style={{
@@ -185,7 +213,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({
                 }}
               >
                 <img src={Icons.twitterWhite} width={30} height={25} />
-                <span>{buttonText}</span>
+                <span>Share the Glyph on twitter</span>
               </div>
             </Button>
           </div>
