@@ -28,6 +28,18 @@ export interface XaxisItemsProps {
     setChosenData?: any;
     chosenData?: any;
     glyphWithMaxDimension?: number;
+    showDays?: boolean;
+    onShowDaysInfo?: any;
+    arrOfDays?: any;
+    setShowDays?: any;
+    setClickedMonth?: any;
+    setClickedElement?: any;
+    furtherPropagation?: any;
+    onClickedElementEnabled?: any;
+    setdayClicked?: any;
+    furtherPropagationDisabled?: any;
+    showDaysEnabled?: any;
+    onCaptureDayWhenDayClickedEnabled?: any;
 }
 
 export const XaxisItems = ({
@@ -42,22 +54,37 @@ export const XaxisItems = ({
     noOfGlyphs,
     onCircleClicked,
     clickedElement,
+    showDays,
+    onShowDaysInfo,
+    arrOfDays,
     // monthOrYear,
     glyphWithMaxDimension,
+    setShowDays,
+    setClickedMonth,
+    setClickedElement,
+    furtherPropagation,
+    onClickedElementEnabled,
+    setdayClicked,
+    furtherPropagationDisabled,
+    showDaysEnabled,
+    onCaptureDayWhenDayClickedEnabled,
 }: XaxisItemsProps) => {
     // const whichDuration1 = monthOrYear === '' ? month : (monthOrYear === 'year' || monthOrYear === 'month') ? moment().month(month - 1).format("MMM") : [];
-    const whichDuration1 = moment().month(month - 1).format("MMM");
+    const whichDuration1 = showDays ? (month) : moment().month(month - 1).format("MMM");
+
+    const setParams = () => {
+        if (furtherPropagation) {
+            showDaysEnabled();
+            setClickedMonth(month);
+        }
+        else {
+            onClickedElementEnabled(month);
+            setdayClicked(true);
+            onCaptureDayWhenDayClickedEnabled(month);
+        }
+    }
 
     // const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '35px', }}>&#x2B22;</span>
-
-    // useEffect(() => {
-    //     if (dimension) {
-    //         let nodes = document.querySelectorAll('.dimensions');
-    //         nodes.forEach(function (item: any, index: number) {
-    //             console.log('item', item);
-    //         });
-    //     }
-    // }, [])
 
     return (
         <Box sx={{
@@ -76,9 +103,9 @@ export const XaxisItems = ({
                 backgroundColor: (month === hoverElementId || month === clickedElement) ? '#FE7D06' : '#FFF7EE',
                 cursor: 'pointer',
             }}
-                className="dimensions"
-                // onClick={() => { monthOrYear === '' ? onDisplayMonth(month) : onCircleClicked(month) }}
-                onClick={() => onCircleClicked(month)}
+                // className="dimensions"
+                // onClick={() => showDays ? onShowDaysInfo(month) : onCircleClicked(month)}
+                onClick={setParams}
                 onMouseEnter={() => onCircleHoverStarts(month)}
                 onMouseLeave={() => onCircleHoverEnds(month)}
             ></div>
