@@ -365,7 +365,7 @@ export const UserHomepage = ({
         if (clickedDay && abcd2?.length > 0) {
             let filteredDays: any[];
             filteredDays = abcd2?.filter((item) => {
-                // console.log('test', Number(moment.utc(item.timestamp).format("DD")));
+                // console.log('test', Number(moment.utc(item.timestamp).format("DD")))
                 // console.log('day', Number(day));
                 // console.log('Number(moment(item.timestamp).format("DD)) === day', Number(moment(item.timestamp).format('DD')) === Number(day));
                 return Number(moment.utc(item.timestamp).format("DD")) === Number(day);
