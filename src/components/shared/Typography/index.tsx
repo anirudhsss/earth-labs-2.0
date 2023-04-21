@@ -14,6 +14,7 @@ export interface TypographyProps {
     cursor?: string;
     height?: string;
     fontFamily?: string;
+    align?: string;
 }
 
 export const Typography = ({
@@ -28,6 +29,7 @@ export const Typography = ({
     cursor,
     height,
     fontFamily,
+    align,
 }: TypographyProps) => {
     return (
         <MUITypography
@@ -42,6 +44,7 @@ export const Typography = ({
                 cursor: cursor,
                 height: height,
                 fontFamily: 'DINAlternateBold',
+                align,
             }}>
             {text}
         </MUITypography>

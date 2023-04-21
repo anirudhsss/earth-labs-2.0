@@ -187,6 +187,7 @@ export const UserHomepage = ({
     // }, [])
 
     const onDisplayMonth = useCallback((year: number) => {
+        // console.log('onDisplayMonth', year);
         setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         setCurrency([]);
         setSomeYear(year);
@@ -290,19 +291,19 @@ export const UserHomepage = ({
             setmonthInLetters(moment().month(month - 1).format("MMM"));
             setArrOfDays(arrOfDays);
         }
-        console.log('month', month);
+
         setfurtherPropagation(false);
     }, [invlerp]);
 
     const onCircleClicked = useCallback((month: any) => {
-        // console.log('onCircleClicked');
+        // console.log('onCircleClicked', month);
         setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         setCurrency([]);
         setYAxisItems([]);
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
         // setYearViewEnabled(false);
-        setClickedElement(month);
+        onClickedElementEnabled(month);
         // setmonthOrYear('month');
         // if (monthOrYear === 'month' && !range) {
         //     setChosenData(data1);
@@ -318,16 +319,22 @@ export const UserHomepage = ({
         setAbcd1(arrIndexesOfClickedMonths);
     }, [abcd]);
 
+    // useEffect(() => {
+    //     if (clickedElement) {
+    //         onClickedElementEnabled(clickedElement);
+    //     }
+    // }, [clickedElement]);
+
     useEffect(() => {
         if (years[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
             const a = arrOfMonths[arrOfMonths.length - 1]?.month;
             onCircleClicked(a);
-            setClickedElement(a);
+            onClickedElementEnabled(a);
         }
         else {
             const a = arrOfMonths[0]?.month;
             onCircleClicked(a);
-            setClickedElement(a);
+            onClickedElementEnabled(a);
         }
     }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
 
@@ -680,6 +687,7 @@ export const UserHomepage = ({
         const selectedItem = arrOfYears.filter((item: any) => {
             return Number(item.month) === Number(id);
         });
+        // console.log('onValueMenuItemClicked', id);
         setYears(selectedItem);
     }
 
@@ -896,9 +904,12 @@ export const UserHomepage = ({
     }
 
     const onClickedElementEnabled = (month: any) => {
-        console.log('onClickedElementEnabled', month);
         setClickedElement(month);
     }
+
+    // const onNavigateOutOfDays = () => {
+
+    // }
 
     // console.log('clickedElement', clickedElement)
     // console.log('furtherPropagation', furtherPropagation);
@@ -908,6 +919,7 @@ export const UserHomepage = ({
     // console.log('matchedMonths', matchedMonths);
     // console.log('leastDimension', leastDimension);
     // console.log('arrOfDays', arrOfDays);
+    // console.log('month', month);
     return (
         <>
 
@@ -917,6 +929,7 @@ export const UserHomepage = ({
                 backgroundColor: '#FFFDFB',
                 height: '100vh',
                 overflowY: 'hidden',
+                position: 'relative',
             }}>
                 {/* <Box sx={{
                     border: '2px solid black',
@@ -939,7 +952,7 @@ export const UserHomepage = ({
                 </Box>
 
                 <Container
-                    height="87.5vh"
+                    height="86.5vh"
                     padding="0 3rem 0 2rem"
                     position="relative"
                 >
@@ -1200,6 +1213,83 @@ export const UserHomepage = ({
                         />
                     </Box>
                 </Container>
+
+                <Box className={styles.yearMonthBoxParent}>
+                    <Box className={styles.yearMonthBox}>
+                        {showDays ?
+                            <>
+                                <Button
+                                    padding="2px"
+                                    backgroundColor="#FE7D06"
+                                    hoverBackgroundColor="#FE7D06"
+                                    borderRadius="1rem"
+                                    onClick={() => {
+                                        setShowDays(false);
+                                        setfurtherPropagation(true);
+                                    }}
+                                >
+                                    <Typography
+                                        text={monthInLetters ? monthInLetters : ''}
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </Button>
+                                <span style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}>
+                                    <Typography
+                                        text={years[0]?.month}
+                                        width="2.2rem"
+                                        height="2rem"
+                                        margin="0 0 0 0.5rem"
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </span>
+                            </>
+                            :
+                            <>
+                                <span style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}>
+                                    <Typography
+                                        text={moment().month(clickedElement - 1).format("MMM") ? moment().month(clickedElement - 1).format("MMM") : ''}
+                                        width="2.2rem"
+                                        height="2rem"
+                                        margin="0 0 0 0.5rem"
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </span>
+                                <Button
+                                    padding="2px"
+                                    backgroundColor="#FE7D06"
+                                    hoverBackgroundColor="#FE7D06"
+                                    borderRadius="1rem"
+                                >
+                                    <Typography
+                                        text={years[0]?.month}
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </Button>
+                            </>
+                        }
+                        <span>
+                            <img
+                                src={'./assets/images/👀.svg'}
+                                alt=""
+                                width="20px"
+                                height="20px"
+
+                            />
+                        </span>
+                    </Box>
+                </Box>
 
                 <Box sx={{
                     width: '100%',
