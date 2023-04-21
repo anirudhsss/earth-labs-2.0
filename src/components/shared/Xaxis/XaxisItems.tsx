@@ -40,6 +40,7 @@ export interface XaxisItemsProps {
     furtherPropagationDisabled?: any;
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
+    monthInLetters?: any;
 }
 
 export const XaxisItems = ({
@@ -68,9 +69,10 @@ export const XaxisItems = ({
     furtherPropagationDisabled,
     showDaysEnabled,
     onCaptureDayWhenDayClickedEnabled,
+    monthInLetters,
 }: XaxisItemsProps) => {
-    // const whichDuration1 = monthOrYear === '' ? month : (monthOrYear === 'year' || monthOrYear === 'month') ? moment().month(month - 1).format("MMM") : [];
-    const whichDuration1 = showDays ? (month) : moment().month(month - 1).format("MMM");
+    // const day = `${(moment().month(month - 1).format("MMM") / month)} / ${month}`;
+    const whichDuration1: any = showDays ? `${month} ${monthInLetters}` : moment().month(month - 1).format("MMM");
 
     const setParams = () => {
         if (furtherPropagation) {
