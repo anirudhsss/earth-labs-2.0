@@ -141,6 +141,7 @@ export const UserHomepage = ({
     const [selectedItem1, setSelectedItem1] = useState<any>();
     const [testData, setTestData] = useState([]);
     const [leastDimension, setLeastDimension] = useState<number>(0);
+    const [monthInLetters, setmonthInLetters] = useState<any>();
 
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data2, apiLoading, apiError } = AxiosFetch();
@@ -286,8 +287,10 @@ export const UserHomepage = ({
                 })
             })
             // console.log('arrOfDays', arrOfDays);
+            setmonthInLetters(moment().month(month - 1).format("MMM"));
             setArrOfDays(arrOfDays);
         }
+        console.log('month', month);
         setfurtherPropagation(false);
     }, [invlerp]);
 
@@ -346,9 +349,9 @@ export const UserHomepage = ({
         if (showDays) {
             onShowDaysInfo(abcd, clickedMonth);
         }
-        else {
-            onCircleClicked(clickedMonth);
-        }
+        // else {
+        //     onCircleClicked(clickedMonth);
+        // }
     }, [showDays, abcd, clickedMonth, onCircleClicked]);
 
     useEffect(() => {
@@ -458,7 +461,6 @@ export const UserHomepage = ({
             noOfTxns = Object.values(freqOfDuration);
             const min = Math.min(...noOfTxns);
             const max = Math.max(...noOfTxns);
-            let arr1: any[] = [];
             noOfTxns.forEach((item: number) => {
                 let val1 = (((35 - 10) * invlerp(min, max, item)) + 10);
                 arrMonthPointsOfAxis = [...arrMonthPointsOfAxis, val1] //processed count
@@ -471,7 +473,6 @@ export const UserHomepage = ({
                     noOfGlyphs: noOfTxns[index],
                 })
             })
-            // console.log('arrOfMonths', arrOfMonths)
             setArrOfMonths(arrOfMonths);
             //setValueMenuItemClicked(false);
         }
@@ -895,6 +896,7 @@ export const UserHomepage = ({
     }
 
     const onClickedElementEnabled = (month: any) => {
+        console.log('onClickedElementEnabled', month);
         setClickedElement(month);
     }
 
@@ -905,6 +907,7 @@ export const UserHomepage = ({
     // console.log('dayClicked', dayClicked);
     // console.log('matchedMonths', matchedMonths);
     // console.log('leastDimension', leastDimension);
+    // console.log('arrOfDays', arrOfDays);
     return (
         <>
 
@@ -1203,6 +1206,7 @@ export const UserHomepage = ({
 
                 }}>
                     <Xaxis
+                        monthInLetters={monthInLetters}
                         leastDimension={leastDimension}
                         onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
                         showDaysEnabled={showDaysEnabled}

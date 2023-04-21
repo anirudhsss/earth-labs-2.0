@@ -49,6 +49,7 @@ export interface XaxisProps {
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
     leastDimension?: any;
+    monthInLetters?: any;
 }
 
 export const Xaxis = ({
@@ -90,6 +91,7 @@ export const Xaxis = ({
     showDaysEnabled,
     onCaptureDayWhenDayClickedEnabled,
     leastDimension,
+    monthInLetters,
 }: XaxisProps) => {
 
     // const whichDuration = monthOrYear === '' ? arrOfYears : (monthOrYear === 'year' || monthOrYear === 'month') ? arrOfMonths : [];
@@ -161,6 +163,7 @@ export const Xaxis = ({
                     {whichDuration?.map((item: any) => {
                         return (
                             <XaxisItems
+                                monthInLetters={monthInLetters}
                                 onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
                                 showDaysEnabled={showDaysEnabled}
                                 furtherPropagationDisabled={furtherPropagationDisabled}
