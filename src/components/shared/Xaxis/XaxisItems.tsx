@@ -76,10 +76,12 @@ export const XaxisItems = ({
 
     const setParams = () => {
         if (furtherPropagation) {
+            console.log('in1')
             showDaysEnabled();
             setClickedMonth(month);
         }
         else {
+            console.log('in2')
             onClickedElementEnabled(month);
             setdayClicked(true);
             onCaptureDayWhenDayClickedEnabled(month);
