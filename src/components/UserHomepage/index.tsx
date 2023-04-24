@@ -182,10 +182,6 @@ export const UserHomepage = ({
     //     }
     // }, []);
 
-    // useEffect(() => {
-    //     onDisplayYear();
-    // }, [])
-
     const onDisplayMonth = useCallback((year: number) => {
         // console.log('onDisplayMonth', year);
         setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
@@ -202,11 +198,7 @@ export const UserHomepage = ({
     }, [data1]);
 
     useEffect(() => {
-        // if (years[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
         onDisplayMonth(arrOfYears[arrOfYears?.length - 1]?.month);
-        // } else {
-        //     onDisplayMonth(arrOfYears[0]?.month);
-        // }
     }, [arrOfYears, onDisplayMonth]);
 
     const clamp = (a: number, min = 0, max = 1) => {
@@ -302,14 +294,7 @@ export const UserHomepage = ({
         setYAxisItems([]);
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
-        // setYearViewEnabled(false);
         onClickedElementEnabled(month);
-        // setmonthOrYear('month');
-        // if (monthOrYear === 'month' && !range) {
-        //     setChosenData(data1);
-        // } else if ((monthOrYear === 'month') && range) {
-
-        // }
         const arrIndexesOfClickedMonths = abcd?.filter((item: { timestamp: moment.MomentInput; }) => {
             let monthFromApi = Number(moment(item.timestamp).format("MM"));
             return monthFromApi === Number(month);
@@ -369,6 +354,7 @@ export const UserHomepage = ({
     };
 
     const onClickOfADay = useCallback((abcd2: any[], day: number) => {
+        console.log('onClickOfADay');
         if (clickedDay && abcd2?.length > 0) {
             let filteredDays: any[];
             filteredDays = abcd2?.filter((item) => {
@@ -385,7 +371,11 @@ export const UserHomepage = ({
         if (dayClicked) {
             onClickOfADay(abcd2, clickedDay);
         }
-    }, [abcd2, clickedDay, dayClicked, onClickOfADay]);
+        else {
+            // console.log('arrOfDays', arrOfDays)
+            // onClickOfADay(abcd2, clickedDay);
+        }
+    }, [abcd2, arrOfDays, clickedDay, dayClicked, onClickOfADay]);
 
     const anotherFunc1 = useCallback(() => {
         if (data1?.length > 0) {
@@ -917,6 +907,7 @@ export const UserHomepage = ({
     // console.log('showDays', showDays);
     // console.log('monthInLetters', monthInLetters);
     // console.log('dayClicked', dayClicked);
+    // console.log('clickedDay', clickedDay);
     // console.log('matchedMonths', matchedMonths);
     // console.log('leastDimension', leastDimension);
     // console.log('arrOfDays', arrOfDays);
