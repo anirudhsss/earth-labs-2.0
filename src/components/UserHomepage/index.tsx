@@ -245,6 +245,7 @@ export const UserHomepage = ({
     })
 
     const anotherFunc3 = useCallback((abcd2: any, month: any) => {
+        // console.log('anotherFunc3', abcd2, month);
         if (abcd2?.length > 0) {
             // console.log('month', month);
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrDaysPointsOfAxis: any[] = [];
@@ -291,7 +292,6 @@ export const UserHomepage = ({
             setmonthInLetters(moment().month(month - 1).format("MMM"));
             setArrOfDays(arrOfDays);
         }
-
         setfurtherPropagation(false);
     }, [invlerp]);
 
@@ -319,27 +319,26 @@ export const UserHomepage = ({
         setAbcd1(arrIndexesOfClickedMonths);
     }, [abcd]);
 
-    // useEffect(() => {
-    //     if (clickedElement) {
-    //         onClickedElementEnabled(clickedElement);
-    //     }
-    // }, [clickedElement]);
-
     useEffect(() => {
+        // console.log('useEffect ran')
         if (years[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
             const a = arrOfMonths[arrOfMonths.length - 1]?.month;
+            // console.log('a1', a);
             onCircleClicked(a);
             onClickedElementEnabled(a);
+            setClickedMonth(a);
         }
         else {
             const a = arrOfMonths[0]?.month;
+            // console.log('a2', a);
             onCircleClicked(a);
             onClickedElementEnabled(a);
+            setClickedMonth(a);
         }
     }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
 
-    const onShowDaysInfo = (abcd: any, month: any) => {
-        // console.log('onShowDaysInfo')
+    const onShowDaysInfo = useCallback((abcd: any, month: any) => {
+        // console.log('onShowDaysInfo', abcd, month)
         const arrIndexesOfClickedDays = abcd?.filter((item: any) => {
             let monthsFromApi = Number(moment(item.timestamp).format("MM"));
             // console.log('monthsFromApi', monthsFromApi)
@@ -350,19 +349,17 @@ export const UserHomepage = ({
         setAbcd2(arrIndexesOfClickedDays);
         // setMatchedMonths(arrIndexesOfClickedDays);
         setfurtherPropagation(false);
-    }
+    }, []);
 
     useEffect(() => {
         if (showDays) {
             onShowDaysInfo(abcd, clickedMonth);
         }
-        // else {
-        //     onCircleClicked(clickedMonth);
-        // }
-    }, [showDays, abcd, clickedMonth, onCircleClicked]);
+    }, [showDays, abcd, clickedMonth, onCircleClicked, onShowDaysInfo]);
 
     useEffect(() => {
         if (showDays) {
+            // console.log('inside useEffect2', abcd2, clickedMonth);
             anotherFunc3(abcd2, clickedMonth);
         }
     }, [showDays, abcd2, clickedMonth, anotherFunc3]);
@@ -667,7 +664,7 @@ export const UserHomepage = ({
     //     setChosenData(matchedMonths);
     // }, [valueMenuItemClicked]);
 
-    const onValueMenuItemClicked = (id: number) => {
+    const onValueMenuItemClicked = useCallback((id: number) => {
         showDaysDsiabled();
         furtherPropagationEnabled();
         setAbcd2([]);
@@ -679,17 +676,12 @@ export const UserHomepage = ({
         setYAxisItemHovered(null);
         onCloseYearMenu();
         setMatchedMonths([]);
-        // setmonthOrYear('year');
         onDisplayMonth(id);
-        // anotherFunc2(id);
-        //setValueMenuItemClicked(true);
-        // setYearViewEnabled(true);
         const selectedItem = arrOfYears.filter((item: any) => {
             return Number(item.month) === Number(id);
         });
-        // console.log('onValueMenuItemClicked', id);
         setYears(selectedItem);
-    }
+    }, [arrOfYears, onDisplayMonth])
 
     const onValueMenuItemClicked1 = (id: number) => {
         setShowDays(false);
@@ -907,14 +899,23 @@ export const UserHomepage = ({
         setClickedElement(month);
     }
 
-    // const onNavigateOutOfDays = () => {
+    const onYearButtonClicked = useCallback((year: any) => {
+        // setShowDays(false);
+        // setfurtherPropagation(true);
+        onValueMenuItemClicked(year);
+    }, [onValueMenuItemClicked]);
 
-    // }
+    const onMonthButtonClicked = useCallback(() => {
+        setShowDays(true);
+        setfurtherPropagation(false);
+    }, []);
 
     // console.log('clickedElement', clickedElement)
+    // console.log('clickedMonth', clickedMonth)
     // console.log('furtherPropagation', furtherPropagation);
     // console.log('abcd2', abcd2);
     // console.log('showDays', showDays);
+    // console.log('monthInLetters', monthInLetters);
     // console.log('dayClicked', dayClicked);
     // console.log('matchedMonths', matchedMonths);
     // console.log('leastDimension', leastDimension);
@@ -1214,19 +1215,17 @@ export const UserHomepage = ({
                     </Box>
                 </Container>
 
-                <Box className={styles.yearMonthBoxParent}>
+                {!apiLoading && <Box className={styles.yearMonthBoxParent}>
                     <Box className={styles.yearMonthBox}>
                         {showDays ?
                             <>
                                 <Button
-                                    padding="2px"
+                                    padding="2px 0"
                                     backgroundColor="#FE7D06"
                                     hoverBackgroundColor="#FE7D06"
                                     borderRadius="1rem"
-                                    onClick={() => {
-                                        setShowDays(false);
-                                        setfurtherPropagation(true);
-                                    }}
+                                    textAlign="center"
+                                    margin="0 0.5rem"
                                 >
                                     <Typography
                                         text={monthInLetters ? monthInLetters : ''}
@@ -1235,10 +1234,15 @@ export const UserHomepage = ({
                                     />
                                 </Button>
                                 <span style={{
+                                    width: '6rem',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                }}>
+                                    textAlign: "center",
+                                    cursor: 'pointer',
+                                }}
+                                    onClick={() => onYearButtonClicked(years[0]?.month)}
+                                >
                                     <Typography
                                         text={years[0]?.month}
                                         width="2.2rem"
@@ -1252,12 +1256,16 @@ export const UserHomepage = ({
                             :
                             <>
                                 <span style={{
+                                    width: '6rem',
                                     display: 'flex',
                                     justifyContent: 'center',
                                     alignItems: 'center',
-                                }}>
+                                    textAlign: "center",
+                                    cursor: 'pointer',
+                                }}
+                                    onClick={onMonthButtonClicked}>
                                     <Typography
-                                        text={moment().month(clickedElement - 1).format("MMM") ? moment().month(clickedElement - 1).format("MMM") : ''}
+                                        text={moment().month(clickedElement - 1).format("MMM") !== 'undefined' ? moment().month(clickedElement - 1).format("MMM") : ''}
                                         width="2.2rem"
                                         height="2rem"
                                         margin="0 0 0 0.5rem"
@@ -1266,20 +1274,22 @@ export const UserHomepage = ({
                                     />
                                 </span>
                                 <Button
-                                    padding="2px"
+                                    padding="2px 0"
                                     backgroundColor="#FE7D06"
                                     hoverBackgroundColor="#FE7D06"
                                     borderRadius="1rem"
+                                    textAlign="center"
+                                    margin="0 0.5rem"
                                 >
                                     <Typography
-                                        text={years[0]?.month}
+                                        text={years[0]?.month !== '' ? years[0]?.month : ''}
                                         fontSize="1.4rem"
                                         color="#FFFDFB"
                                     />
                                 </Button>
                             </>
                         }
-                        <span>
+                        {/* <span>
                             <img
                                 src={'./assets/images/👀.svg'}
                                 alt=""
@@ -1287,9 +1297,9 @@ export const UserHomepage = ({
                                 height="20px"
 
                             />
-                        </span>
+                        </span> */}
                     </Box>
-                </Box>
+                </Box>}
 
                 <Box sx={{
                     width: '100%',
