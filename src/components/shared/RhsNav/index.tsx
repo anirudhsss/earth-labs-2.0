@@ -335,7 +335,7 @@ export const RhsNav = ({
                             </Box>
                         }
                     </Box> */}
-                    {(mapsLocation && homeLocation) && <Box sx={{ height: '9vh' }} className={styles.yearMonthBoxParent}>
+                    {(mapsLocation || homeLocation) && <Box sx={{ height: '9vh' }} className={styles.yearMonthBoxParent}>
                         <Box className={styles.yearMonthBox}>
                             {showDays ?
                                 <>
