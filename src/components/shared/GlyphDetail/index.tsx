@@ -44,7 +44,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
       setOpenModal(true);
       const user = await getTwitterUserInfo(state, code);
       const mediaId = await generateMediaId("", Number(user.id), "");
-      await tweetGlyphImageOnTwitter(Number(mediaId), user.id);
+      await tweetGlyphImageOnTwitter(Number(mediaId), Number(user.id));
     }
   };
 
