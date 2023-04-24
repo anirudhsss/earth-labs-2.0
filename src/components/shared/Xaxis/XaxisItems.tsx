@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Box } from "@mui/material"
 import data from 'test.json';
 import { Typography } from "../Typography";
@@ -74,19 +74,19 @@ export const XaxisItems = ({
     // const day = `${(moment().month(month - 1).format("MMM") / month)} / ${month}`;
     const whichDuration1: any = showDays ? `${month} ${monthInLetters}` : moment().month(month - 1).format("MMM");
 
-    const setParams = () => {
+    const setParams = useCallback(() => {
         if (furtherPropagation) {
-            console.log('in1')
+            // console.log('in1')
             showDaysEnabled();
             setClickedMonth(month);
         }
         else {
-            console.log('in2')
+            // console.log('in2')
             onClickedElementEnabled(month);
             setdayClicked(true);
             onCaptureDayWhenDayClickedEnabled(month);
         }
-    }
+    }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, setClickedMonth, setdayClicked, showDaysEnabled]);
 
     // const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '35px', }}>&#x2B22;</span>
 
@@ -108,7 +108,6 @@ export const XaxisItems = ({
                 cursor: 'pointer',
             }}
                 // className="dimensions"
-                // onClick={() => showDays ? onShowDaysInfo(month) : onCircleClicked(month)}
                 onClick={setParams}
                 onMouseEnter={() => onCircleHoverStarts(month)}
                 onMouseLeave={() => onCircleHoverEnds(month)}
