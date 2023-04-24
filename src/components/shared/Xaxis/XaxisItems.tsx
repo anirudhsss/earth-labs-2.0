@@ -72,7 +72,7 @@ export const XaxisItems = ({
     monthInLetters,
 }: XaxisItemsProps) => {
     // const day = `${(moment().month(month - 1).format("MMM") / month)} / ${month}`;
-    const whichDuration1: any = showDays ? `${month} ${monthInLetters}` : moment().month(month - 1).format("MMM");
+    const whichDuration1: any = showDays ? `${monthInLetters} ${month}` : moment().month(month - 1).format("MMM");
 
     const setParams = useCallback(() => {
         if (furtherPropagation) {
