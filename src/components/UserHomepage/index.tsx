@@ -1195,6 +1195,11 @@ export const UserHomepage = ({
                                 />}
                         </Box>
                         <RhsNav
+                            clickedElement={clickedElement}
+                            onMonthButtonClicked={onMonthButtonClicked}
+                            onYearButtonClicked={onYearButtonClicked}
+                            showDays={showDays}
+                            monthInLetters={monthInLetters}
                             openMenu={openMenu}
                             onOpenYearMenu={onOpenYearMenu}
                             years={years}
@@ -1215,7 +1220,7 @@ export const UserHomepage = ({
                     </Box>
                 </Container>
 
-                {!apiLoading && <Box className={styles.yearMonthBoxParent}>
+                {/* {!apiLoading && <Box className={styles.yearMonthBoxParent}>
                     <Box className={styles.yearMonthBox}>
                         {showDays ?
                             <>
@@ -1289,17 +1294,8 @@ export const UserHomepage = ({
                                 </Button>
                             </>
                         }
-                        {/* <span>
-                            <img
-                                src={'./assets/images/👀.svg'}
-                                alt=""
-                                width="20px"
-                                height="20px"
-
-                            />
-                        </span> */}
                     </Box>
-                </Box>}
+                </Box>} */}
 
                 <Box sx={{
                     width: '100%',

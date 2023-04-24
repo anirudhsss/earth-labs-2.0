@@ -1,4 +1,5 @@
 import { Box, Menu, MenuItem } from '@mui/material';
+import moment from 'moment';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '../Button';
@@ -24,6 +25,11 @@ export interface RhsNavProps {
     xAxisValue?: any;
     helpIconClicked?: any;
     onHelpIconClicked?: any;
+    showDays?: any;
+    monthInLetters?: any;
+    onYearButtonClicked?: any;
+    onMonthButtonClicked?: any;
+    clickedElement?: any;
 }
 
 export const RhsNav = ({
@@ -45,6 +51,11 @@ export const RhsNav = ({
     xAxisValue,
     helpIconClicked,
     onHelpIconClicked,
+    showDays,
+    monthInLetters,
+    onYearButtonClicked,
+    onMonthButtonClicked,
+    clickedElement,
 }: RhsNavProps) => {
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
@@ -56,13 +67,13 @@ export const RhsNav = ({
         <Box
             className={styles.rhsBody}
             sx={{
-                height: `${walletLocation ? '86%' : '74%'}`
+                height: `${walletLocation ? '86%' : '82%'}`
             }}
         >
             <Box
                 className={styles.allIcons}
                 sx={{
-                    height: `${discoveryLocation ? '74vh' : '100%'}`
+                    height: `${discoveryLocation ? '82vh' : '100%'}`
                 }}
             >
                 <Box className={styles.groupedIcons1}>
@@ -324,6 +335,91 @@ export const RhsNav = ({
                             </Box>
                         }
                     </Box> */}
+                    <Box sx={{ height: '9vh' }} className={styles.yearMonthBoxParent}>
+                        <Box className={styles.yearMonthBox}>
+                            {showDays ?
+                                <>
+                                    <Button
+                                        padding="2px 0"
+                                        backgroundColor="#FE7D06"
+                                        hoverBackgroundColor="#FE7D06"
+                                        borderRadius="1rem"
+                                        textAlign="center"
+                                        margin="0 0.5rem"
+                                    >
+                                        <Typography
+                                            text={monthInLetters ? monthInLetters : ''}
+                                            fontSize="1.4rem"
+                                            color="#FFFDFB"
+                                        />
+                                    </Button>
+                                    <span style={{
+                                        width: '6rem',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        textAlign: "center",
+                                        cursor: 'pointer',
+                                    }}
+                                        onClick={() => onYearButtonClicked(years[0]?.month)}
+                                    >
+                                        <Typography
+                                            text={years[0]?.month}
+                                            width="2.2rem"
+                                            height="2rem"
+                                            margin="0 0 0 0.5rem"
+                                            fontSize="1.4rem"
+                                            color="#FFFDFB"
+                                        />
+                                    </span>
+                                </>
+                                :
+                                <>
+                                    <span style={{
+                                        width: '6rem',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        textAlign: "center",
+                                        cursor: 'pointer',
+                                    }}
+                                        onClick={onMonthButtonClicked}>
+                                        <Typography
+                                            text={moment().month(clickedElement - 1).format("MMM") !== 'undefined' ? moment().month(clickedElement - 1).format("MMM") : ''}
+                                            width="2.2rem"
+                                            height="2rem"
+                                            margin="0 0 0 0.5rem"
+                                            fontSize="1.4rem"
+                                            color="#FFFDFB"
+                                        />
+                                    </span>
+                                    <Button
+                                        padding="2px 0"
+                                        backgroundColor="#FE7D06"
+                                        hoverBackgroundColor="#FE7D06"
+                                        borderRadius="1rem"
+                                        textAlign="center"
+                                        margin="0 0.5rem"
+                                    >
+                                        <Typography
+                                            text={years[0]?.month !== '' ? years[0]?.month : ''}
+                                            fontSize="1.4rem"
+                                            color="#FFFDFB"
+                                        />
+                                    </Button>
+                                </>
+                            }
+                            {/* <span>
+                            <img
+                                src={'./assets/images/👀.svg'}
+                                alt=""
+                                width="20px"
+                                height="20px"
+
+                            />
+                        </span> */}
+                        </Box>
+                    </Box>
                 </Box>
             </Box>
         </Box>
