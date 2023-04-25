@@ -801,10 +801,6 @@ export const UserHomepage = ({
         setYAxisItemHovered(null);
     }
 
-    // const onDisplayYear = () => {
-    //     setmonthOrYear('');
-    // }
-
     const onCircleHoverStarts = (elementId: any) => {
         setHoverElementId(elementId);
     }
@@ -909,19 +905,11 @@ export const UserHomepage = ({
         <>
 
             <Box sx={{
-                // backgroundColor: '#1C223D',
-                // opacity: '50%',
                 backgroundColor: '#FFFDFB',
                 height: '100vh',
                 overflowY: 'hidden',
                 position: 'relative',
             }}>
-                {/* <Box sx={{
-                    border: '2px solid black',
-                    position: 'relative',
-                    top: '50rem',
-                    width: '20rem'
-                }}></Box> */}
                 <Box
                     sx={{ height: '7.6%', }}
                 >
@@ -955,11 +943,7 @@ export const UserHomepage = ({
                     />
 
                     <Box className={styles.body}>
-                        <Box
-                        // style={{
-                        //     marginLeft: (yAxisItems?.length > 0) ? '0' : '18px',
-                        // }}
-                        >
+                        <Box>
                             <Yaxis
                                 yAxisItems={yAxisItems}
                                 onYAxisItemClicked={onYAxisItemClicked}
@@ -978,7 +962,6 @@ export const UserHomepage = ({
                                     matchedMonths={matchedMonths}
                                     arrOfMonths={arrOfMonths}
                                     arrOfYears={arrOfYears}
-                                    // monthOrYear={monthOrYear}
                                     setArrOfYears={setArrOfYears}
                                     coordinates={coordinates}
                                     loading1={loading1}
@@ -1007,7 +990,6 @@ export const UserHomepage = ({
                             onMoveHexes={onMoveHexes}
                             coordinates={coordinates}
                             loading1={loading1}
-                            // monthOrYear={monthOrYear}
                             yAxisValue={yAxisValue}
                             xAxisValue={xAxisValue}
                             helpIconClicked={helpIconClicked}
@@ -1065,83 +1047,6 @@ export const UserHomepage = ({
                         />
                     </Box>
                 </Container>
-
-                {/* {!apiLoading && <Box className={styles.yearMonthBoxParent}>
-                    <Box className={styles.yearMonthBox}>
-                        {showDays ?
-                            <>
-                                <Button
-                                    padding="2px 0"
-                                    backgroundColor="#FE7D06"
-                                    hoverBackgroundColor="#FE7D06"
-                                    borderRadius="1rem"
-                                    textAlign="center"
-                                    margin="0 0.5rem"
-                                >
-                                    <Typography
-                                        text={monthInLetters ? monthInLetters : ''}
-                                        fontSize="1.4rem"
-                                        color="#FFFDFB"
-                                    />
-                                </Button>
-                                <span style={{
-                                    width: '6rem',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    textAlign: "center",
-                                    cursor: 'pointer',
-                                }}
-                                    onClick={() => onYearButtonClicked(years[0]?.month)}
-                                >
-                                    <Typography
-                                        text={years[0]?.month}
-                                        width="2.2rem"
-                                        height="2rem"
-                                        margin="0 0 0 0.5rem"
-                                        fontSize="1.4rem"
-                                        color="#FFFDFB"
-                                    />
-                                </span>
-                            </>
-                            :
-                            <>
-                                <span style={{
-                                    width: '6rem',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    textAlign: "center",
-                                    cursor: 'pointer',
-                                }}
-                                    onClick={onMonthButtonClicked}>
-                                    <Typography
-                                        text={moment().month(clickedElement - 1).format("MMM") !== 'undefined' ? moment().month(clickedElement - 1).format("MMM") : ''}
-                                        width="2.2rem"
-                                        height="2rem"
-                                        margin="0 0 0 0.5rem"
-                                        fontSize="1.4rem"
-                                        color="#FFFDFB"
-                                    />
-                                </span>
-                                <Button
-                                    padding="2px 0"
-                                    backgroundColor="#FE7D06"
-                                    hoverBackgroundColor="#FE7D06"
-                                    borderRadius="1rem"
-                                    textAlign="center"
-                                    margin="0 0.5rem"
-                                >
-                                    <Typography
-                                        text={years[0]?.month !== '' ? years[0]?.month : ''}
-                                        fontSize="1.4rem"
-                                        color="#FFFDFB"
-                                    />
-                                </Button>
-                            </>
-                        }
-                    </Box>
-                </Box>} */}
 
                 <ConnectWalletModal
                     open={open}
