@@ -1,6 +1,6 @@
 import { Container } from "components/shared/Container";
 import { Header } from "components/shared/Header";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./styles.module.css";
 import { Icons } from "constant";
 import InfoField from "components/shared/InfoField";
@@ -9,12 +9,30 @@ import { NormalSearchField } from "components/shared/TextField";
 import { Button } from "components/shared/Button";
 import { height } from "@mui/system";
 import { Link } from "react-router-dom";
+import { router } from "Routes";
+import { useEffect } from "react";
 
 export interface LandingPageProps {}
 
 export const LandingPage = ({}: LandingPageProps) => {
   const location = useLocation();
   const landingPageLocation = location?.state?.icon === "/";
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    processTwitterAuthentication();
+  }, []);
+
+  const processTwitterAuthentication = async () => {
+    const state = searchParams.get("state");
+    const code = searchParams.get("code");
+    if (state && code) {
+      localStorage.setItem("code", code);
+      navigate("/txn/1");
+    }
+  };
+
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
       <Header landingPageLocation={landingPageLocation} />
@@ -25,7 +43,7 @@ export const LandingPage = ({}: LandingPageProps) => {
           backgroundImage: `url('${Icons.landingBg}')`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right bottom",
-          height:'inherit'
+          height: "inherit",
         }}
       >
         <img src={Icons.atlasWhite} width={300} height={150}></img>

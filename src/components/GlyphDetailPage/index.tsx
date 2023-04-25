@@ -6,10 +6,11 @@ import { useLocation } from "react-router-dom";
 const GlyphDetailPage = () => {
   const location = useLocation();
   const landingPageLocation = location?.state?.icon === "/";
+
   return (
     <Container backgroundColor="#1C223D">
       <Header landingPageLocation={landingPageLocation} />
-        <GlyphDetail />
+      <GlyphDetail />
     </Container>
   );
 };

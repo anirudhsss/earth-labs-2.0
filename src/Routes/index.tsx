@@ -17,13 +17,13 @@ export const router = createBrowserRouter(
       <Route
         path="/"
         element={
-          <Navigate
-            to="/maps"
-            replace
-            state={{
-              icon: "maps",
-            }}
-          />
+          <LandingPage />
+          // <Navigate
+          //   to="/landing"
+          //   replace
+          //   state={{
+          //     icon: "maps",
+          //   }}
         }
       />
       <Route path="/txn/:id" element={<GlyphDetailPage />} />
