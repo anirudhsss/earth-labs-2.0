@@ -67,13 +67,13 @@ export const RhsNav = ({
         <Box
             className={styles.rhsBody}
             sx={{
-                height: `${walletLocation ? '85%' : '76%'}`
+                height: `${walletLocation ? '75.5%' : '76%'}`
             }}
         >
             <Box
                 className={styles.allIcons}
                 sx={{
-                    height: `${discoveryLocation ? '76vh' : '100%'}`
+                    height: `${discoveryLocation ? '66.5vh' : '100%'}`
                 }}
             >
                 <Box className={styles.groupedIcons1}>
