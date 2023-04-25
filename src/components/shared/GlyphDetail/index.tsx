@@ -114,8 +114,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
           </button>
           <Button
             onClick={() => {
-              // setOpenModal(false);
-              initateTwitterAuth();
+              setOpenModal(false);
             }}
             color="#fff"
             size="2rem"
@@ -202,8 +201,10 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
               backgroundColor="#FE7D06"
               padding="0.5rem 3rem"
               display="flex"
-              onClick={() => {
-                setOpenModal(true);
+              onClick={async () => {
+                const url = await initateTwitterAuth();
+                window.open(url,"_self");
+                // setOpenModal(true);
               }}
             >
               <div
