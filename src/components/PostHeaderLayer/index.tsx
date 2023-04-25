@@ -232,7 +232,7 @@ const PostHeaderLayer = ({
                     </Box>}
                 </Box>
                 <Box className={styles.group2}></Box>
-                <Box
+                {!discoveryLocation && <Box
                     className={styles.group3}
                 >
                     <Box sx={{
@@ -294,7 +294,7 @@ const PostHeaderLayer = ({
                         </Box>
                         {/* } */}
                     </Box>
-                </Box>
+                </Box>}
             </Box>
         </>
     )
