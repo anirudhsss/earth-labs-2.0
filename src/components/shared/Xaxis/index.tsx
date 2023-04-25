@@ -121,18 +121,18 @@ export const Xaxis = ({
 
     return (
         <Box sx={{
-            width: '99%',
+            width: '100%',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             position: 'relative',
         }}>
             <Box sx={{
-                width: '90%',
+                width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-end',
-                marginLeft: '4vw',
+                marginLeft: '3vw',
             }}>
                 <Box sx={{
                     borderBottom: '1px solid black',

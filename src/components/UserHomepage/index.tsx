@@ -31,6 +31,7 @@ import { Yaxis } from "components/shared/Yaxis";
 import { AnyAaaaRecord } from "dns";
 import { AxiosFetch, BackdropDuringApiLoading } from '../utils';
 import { HelpPage } from "components/HelpPage";
+import PostHeaderLayer from "components/PostHeaderLayer";
 
 export interface UserHomepageProps {
 
@@ -62,11 +63,6 @@ export const UserHomepage = ({
     const [eth, setEth] = useState(ETH);
     const [usdc, setUsdc] = useState(USDC);
     const [currName, setCurrName] = useState('ETH');
-    const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
@@ -930,13 +926,9 @@ export const UserHomepage = ({
                     width: '20rem'
                 }}></Box> */}
                 <Box
-                    sx={{ height: '7.6vh', }}
+                    sx={{ height: '7.6%', }}
                 >
                     <Header
-                        homeLocation={homeLocation}
-                        walletLocation={walletLocation}
-                        mapsLocation={mapsLocation}
-                        discoveryLocation={discoveryLocation}
                         openWalletModal={openWalletModal}
                         onWalletBtnClickOpen={onWalletBtnClickOpen}
                         onWalletBtnClickClose={onWalletBtnClickClose}
@@ -944,210 +936,26 @@ export const UserHomepage = ({
                 </Box>
 
                 <Container
-                    height="86.5vh"
+                    height="88.5%"
                     padding="0 3rem 0 2rem"
                     position="relative"
                 >
 
-                    <Box className={styles.timeMenuBtn1}>
-                        <Button
-                            backgroundColor="#FFF7EE"
-                            hoverBackgroundColor="#FFF7EE"
-                            color="black"
-                            boxShadow="none"
-                            hoverBoxShadow="none"
-                            borderRadius={`${openMenu1 ? '2rem 2rem 0 0' : '2rem'}`}
-                            padding="5px"
-                            width={`${(currency?.length > 0 || openMenu1) ? '17rem' : '8.3rem'}`}
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            border="1px solid #000"
-                            borderBottom={`${openMenu1 ? '0' : '1px solid #000'}`}
-                            onClick={onOpenYearMenu1}
-                            height="2.9rem"
-                        // disabled={monthOrYear === ''}
-                        >
-                            {currency?.length > 0 ?
-                                <Typography
-                                    text={`${currency[0].value}`}
-                                    fontSize="13px"
-                                    margin="0 5px 0 0"
-                                />
-                                : <Typography
-                                    text="value"
-                                    fontSize="13px"
-                                    color={`${openMenu1 ? '#FE7D06' : '#000'}`}
-                                    margin="0 5px 0 0"
-                                />}
-                            <img
-                                src={`${openMenu1 ? '/assets/images/orangeTriangle.svg' : '/assets/images/blackTriangle.svg'}`}
-                                alt=""
-                                className={styles.blackTriangle}
-                                style={{
-                                    marginTop: '2px',
-                                    transform: openMenu1 ? 'rotate(180deg)' : '',
-                                }}
-                            />
-                        </Button>
-                        <Menu
-                            anchorEl={anchorEl1}
-                            open={openMenu1}
-                            onClose={onCloseYearMenu1}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            PaperProps={{
-                                elevation: 0,
-                                style: {
-                                    width: '17rem',
-                                    borderRadius: '0 0 20px 20px',
-                                    backgroundColor: '#FFF7EE',
-                                    border: '1px solid #000',
-                                },
-
-                            }}
-                        >
-                            {chosenCurrency.map((item: any) => {
-                                return (
-                                    <>
-                                        <MenuItem
-                                            key={item.id}
-                                            onClick={() => onValueMenuItemClicked1(item.id)}
-                                            sx={{
-                                                fontSize: '13px',
-                                                borderBottom: '1px solid black',
-                                                '&:last-child': {
-                                                    borderBottom: '0px',
-                                                },
-                                            }}
-                                        >{item.value}</MenuItem>
-                                    </>
-                                )
-                            })}
-                        </Menu>
-                    </Box>
-
-                    <Box style={{
-                        width: '4%',
-                        marginLeft: (currency?.length > 0 || openMenu1) ? '19rem' : '10rem',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        position: 'absolute',
-                        top: '20px',
-                        zIndex: '101',
-                    }}>
-                        <span
-                            style={{ cursor: 'pointer', }}
-                            onClick={() => onChosingCurrency('ETH')}
-                        >
-                            <Typography
-                                text="ETH"
-                                fontSize="13px"
-                                color={`${currName === 'ETH' ? '#FE7D06' : '#000'}`}
-                            />
-                        </span>
-                        <Typography
-                            text=" |"
-                            fontSize="13px"
-                            margin="0 5px"
-                        />
-                        <span
-                            style={{ cursor: 'pointer', }}
-                            onClick={() => onChosingCurrency('USDC')}
-                        >
-                            <Typography
-                                text=" USDC"
-                                fontSize="13px"
-                                color={`${currName === 'USDC' ? '#FE7D06' : '#000'}`}
-                            />
-                        </span>
-                    </Box>
-
-                    {ethToUsdc !== undefined && difference !== undefined && <Box sx={{
-                        position: 'absolute',
-                        zIndex: 101,
-                        top: '22px',
-                        left: '190px',
-                        marginLeft: (currency?.length > 0 || openMenu1) ? '11rem' : '2rem',
-                    }}>
-                        <span>
-                            <img
-                                src={'./assets/images/ethereum_logo.svg'}
-                                alt=''
-                                style={{
-                                    position: 'absolute',
-                                    width: '18px',
-                                    height: '16px'
-                                }}
-                            />
-                        </span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '2px',
-                            left: '20px',
-                            fontSize: '12px',
-                            fontWeight: 'bold',
-                        }}>=</span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '-1px',
-                            left: '32px',
-                        }}>
-                            <Typography
-                                text={'$' + ethToUsdc}
-                                fontSize='13px'
-                                fontWeight='bold'
-                            />
-                        </span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '4px',
-                            left: '76px',
-                        }}>
-                            <img
-                                src={'./assets/images/redDownArrow.svg'}
-                                alt=''
-                                style={{
-                                    position: 'absolute',
-                                    width: '12px',
-                                    height: '12px',
-                                    transform: difference === 'increment' ? '' : 'rotate(180deg)',
-                                }}
-                            />
-                        </span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '1px',
-                            left: '86px',
-                            marginTop: difference === 'increment' ? '0' : '5px',
-                        }}>
-                            <Typography
-                                text={ethToUsdcYvsTPercent + '%'}
-                                fontSize='9px'
-                                fontWeight='bold'
-                                color="#EA1313"
-                            />
-                        </span>
-                    </Box>}
-
-                    <Box sx={{
-                        position: 'absolute',
-                        top: '60px',
-                        left: '70px',
-                    }}>
-                        {currency?.length > 0 &&
-                            <Typography
-                                text={`Currently Viewing: ${currency[0].value}`}
-                                fontSize="1.2rem"
-                            />
-                        }
-                    </Box>
+                    <PostHeaderLayer
+                        apiLoading={apiLoading}
+                        openMenu1={openMenu1}
+                        currency={currency}
+                        onOpenYearMenu1={onOpenYearMenu1}
+                        anchorEl1={anchorEl1}
+                        onCloseYearMenu1={onCloseYearMenu1}
+                        chosenCurrency={chosenCurrency}
+                        onValueMenuItemClicked1={onValueMenuItemClicked1}
+                        onChosingCurrency={onChosingCurrency}
+                        currName={currName}
+                        ethToUsdc={ethToUsdc}
+                        difference={difference}
+                        ethToUsdcYvsTPercent={ethToUsdcYvsTPercent}
+                    />
 
                     <Box className={styles.body}>
                         <Box
@@ -1207,6 +1015,56 @@ export const UserHomepage = ({
                             xAxisValue={xAxisValue}
                             helpIconClicked={helpIconClicked}
                             onHelpIconClicked={onHelpIconClicked}
+                        />
+                    </Box>
+
+
+
+                    <Box sx={{
+                        width: '100%',
+
+                    }}>
+                        <Xaxis
+                            monthInLetters={monthInLetters}
+                            leastDimension={leastDimension}
+                            onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
+                            showDaysEnabled={showDaysEnabled}
+                            furtherPropagationDisabled={furtherPropagationDisabled}
+                            setdayClicked={setdayClicked}
+                            onClickedElementEnabled={onClickedElementEnabled}
+                            furtherPropagation={furtherPropagation}
+                            setClickedElement={setClickedElement}
+                            setClickedMonth={setClickedMonth}
+                            setShowDays={setShowDays}
+                            arrOfDays={arrOfDays}
+                            onShowDaysInfo={onShowDaysInfo}
+                            showDays={showDays}
+                            years={years}
+                            anchorEl={anchorEl}
+                            onCloseYearMenu={onCloseYearMenu}
+                            openMenu={openMenu}
+                            onValueMenuItemClicked={onValueMenuItemClicked}
+                            onOpenYearMenu={onOpenYearMenu}
+                            // monthOrYear={monthOrYear}
+                            onDisplayMonth={onDisplayMonth}
+                            onCircleClicked={onCircleClicked}
+                            clickedElement={clickedElement}
+                            data1={data1}
+                            arrOfMonths={arrOfMonths}
+                            arrOfYears={arrOfYears}
+                            setArrOfYears={setArrOfYears}
+                            matchedMonths={matchedMonths}
+                            setMatchedMonths={setMatchedMonths}
+                            yearViewEnabled={yearViewEnabled}
+                            setYearViewEnabled={setYearViewEnabled}
+                            onCircleHoverStarts={onCircleHoverStarts}
+                            onCircleHoverEnds={onCircleHoverEnds}
+                            hoverElementId={hoverElementId}
+                            backgroundColor={backgroundColor}
+                            loading1={loading1}
+                            range={range}
+                            setChosenData={setChosenData}
+                            chosenData={chosenData}
                         />
                     </Box>
                 </Container>
@@ -1287,54 +1145,6 @@ export const UserHomepage = ({
                         }
                     </Box>
                 </Box>} */}
-
-                <Box sx={{
-                    width: '100%',
-
-                }}>
-                    <Xaxis
-                        monthInLetters={monthInLetters}
-                        leastDimension={leastDimension}
-                        onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
-                        showDaysEnabled={showDaysEnabled}
-                        furtherPropagationDisabled={furtherPropagationDisabled}
-                        setdayClicked={setdayClicked}
-                        onClickedElementEnabled={onClickedElementEnabled}
-                        furtherPropagation={furtherPropagation}
-                        setClickedElement={setClickedElement}
-                        setClickedMonth={setClickedMonth}
-                        setShowDays={setShowDays}
-                        arrOfDays={arrOfDays}
-                        onShowDaysInfo={onShowDaysInfo}
-                        showDays={showDays}
-                        years={years}
-                        anchorEl={anchorEl}
-                        onCloseYearMenu={onCloseYearMenu}
-                        openMenu={openMenu}
-                        onValueMenuItemClicked={onValueMenuItemClicked}
-                        onOpenYearMenu={onOpenYearMenu}
-                        // monthOrYear={monthOrYear}
-                        onDisplayMonth={onDisplayMonth}
-                        onCircleClicked={onCircleClicked}
-                        clickedElement={clickedElement}
-                        data1={data1}
-                        arrOfMonths={arrOfMonths}
-                        arrOfYears={arrOfYears}
-                        setArrOfYears={setArrOfYears}
-                        matchedMonths={matchedMonths}
-                        setMatchedMonths={setMatchedMonths}
-                        yearViewEnabled={yearViewEnabled}
-                        setYearViewEnabled={setYearViewEnabled}
-                        onCircleHoverStarts={onCircleHoverStarts}
-                        onCircleHoverEnds={onCircleHoverEnds}
-                        hoverElementId={hoverElementId}
-                        backgroundColor={backgroundColor}
-                        loading1={loading1}
-                        range={range}
-                        setChosenData={setChosenData}
-                        chosenData={chosenData}
-                    />
-                </Box>
 
                 <ConnectWalletModal
                     open={open}

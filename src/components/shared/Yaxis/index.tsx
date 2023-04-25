@@ -21,7 +21,7 @@ export const Yaxis = ({
 }: YaxisProps) => {
 
     return (
-        <Box sx={{ height: '83vh', }}>
+        <Box sx={{ height: '78vh', }}>
             <Box className={styles.container}>
                 <Box className={styles.groupOfCircles}>
                     <Box sx={{

@@ -46,12 +46,7 @@ export const Discovery = ({
             backgroundColor: '#FFFDFB',
             height: '100vh',
         }}>
-            <Header
-                homeLocation={homeLocation}
-                walletLocation={walletLocation}
-                mapsLocation={mapsLocation}
-                discoveryLocation={discoveryLocation}
-            />
+            <Header />
 
             <Container padding="0 3rem 0 2rem">
                 <Box className={styles.body}>
