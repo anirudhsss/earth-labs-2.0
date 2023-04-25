@@ -11,11 +11,8 @@
     flex-direction: column-reverse;
     justify-content: space-between;
     align-items: center;
-    /* position: relative; */
     z-index: 101;
-    /* left: 18px; */
-    /* height: 77.82vh; */
-    margin-top: 7.28vh;
+    /* margin-top: 2vh; */
 }
 
 /* .circle {
@@ -55,8 +52,8 @@
 
 .line {
     border-left: 1px solid black;
-    height: 74.82vh;
-    margin-top: 7.28vh;
+    height: 78vh;
+    /* margin-top: 2vh; */
     position: absolute;
     /* left: 50%; */
 }

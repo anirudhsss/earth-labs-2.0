@@ -30,23 +30,36 @@ import {
 import { Allgrid } from 'components/shared/Allgrid';
 import moment from 'moment';
 import { HelpPage } from 'components/HelpPage';
+import PostHeaderLayer from 'components/PostHeaderLayer';
 
 export interface WalletProps {
-    // openWalletModal?: any;
-    // onWalletBtnClickClose?: any;
-    // monthOrYear?: any;
-    // coordinates?: any;
-    // yAxisValue?: any;
-    // xAxisValue?: any;
+    openMenu1?: any;
+    currency?: any;
+    onOpenYearMenu1?: any;
+    anchorEl1?: any;
+    onCloseYearMenu1?: any;
+    chosenCurrency?: any;
+    onValueMenuItemClicked1?: any;
+    onChosingCurrency?: any;
+    currName?: any;
+    ethToUsdc?: any;
+    difference?: any;
+    ethToUsdcYvsTPercent?: any;
 }
 
 export const Wallet = ({
-    // openWalletModal,
-    // onWalletBtnClickClose,
-    // monthOrYear,
-    // coordinates,
-    // yAxisValue,
-    // xAxisValue,
+    openMenu1,
+    currency,
+    onOpenYearMenu1,
+    anchorEl1,
+    onCloseYearMenu1,
+    chosenCurrency,
+    onValueMenuItemClicked1,
+    onChosingCurrency,
+    currName,
+    ethToUsdc,
+    difference,
+    ethToUsdcYvsTPercent,
 }: WalletProps) => {
     const [yAxisValue, setYAxisValue] = useState({
         yAxisValueMin: 0, yAxisValueMax: 0,
@@ -54,11 +67,6 @@ export const Wallet = ({
     const [xAxisValue, setXAxisValue] = useState({
         xAxisDateMin: 0, xAxisDateMax: 0,
     });
-    const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
 
     // const yAxisValue = location?.state?.yAxisValue;
     // const xAxisValue = location?.state?.xAxisValue;
@@ -132,39 +140,50 @@ export const Wallet = ({
                 width: '20rem'
             }}></Box> */}
             <Header
-                homeLocation={homeLocation}
-                walletLocation={walletLocation}
-                mapsLocation={mapsLocation}
-                discoveryLocation={discoveryLocation}
-            // openWalletModal={openWalletModal}
-            // onWalletBtnClickClose={onWalletBtnClickClose}
             />
 
             <Container
                 padding="0 3rem 0 2rem"
                 width="100%"
                 height="92%"
-                display='flex'
-                justifyContent='center'
-            // alignItems='center'
             >
-                {helpIconClicked ?
-                    <HelpPage />
-                    : <Allgrid
-                        // coordinates={coordinates}
-                        xAxisValue={xAxisValue}
-                        yAxisValue={yAxisValue}
-                        data1={data1}
-                        data={data}
-                    // monthOrYear={monthOrYear}
-                    />}
-
-                <RhsNav
-                    // openWalletModal={openWalletModal}
-                    // onWalletBtnClickClose={onWalletBtnClickClose}
-                    helpIconClicked={helpIconClicked}
-                    onHelpIconClicked={onHelpIconClicked}
+                <PostHeaderLayer
+                    apiLoading={apiLoading}
+                    openMenu1={openMenu1}
+                    currency={currency}
+                    onOpenYearMenu1={onOpenYearMenu1}
+                    anchorEl1={anchorEl1}
+                    onCloseYearMenu1={onCloseYearMenu1}
+                    chosenCurrency={chosenCurrency}
+                    onValueMenuItemClicked1={onValueMenuItemClicked1}
+                    onChosingCurrency={onChosingCurrency}
+                    currName={currName}
+                    ethToUsdc={ethToUsdc}
+                    difference={difference}
+                    ethToUsdcYvsTPercent={ethToUsdcYvsTPercent}
                 />
+
+                <Box sx={{
+                    width: "100%",
+                    height: "82%",
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}>
+                    {helpIconClicked ?
+                        <HelpPage />
+                        : <Allgrid
+                            xAxisValue={xAxisValue}
+                            yAxisValue={yAxisValue}
+                            data1={data1}
+                            data={data}
+                        />}
+
+                    <RhsNav
+                        helpIconClicked={helpIconClicked}
+                        onHelpIconClicked={onHelpIconClicked}
+                    />
+                </Box>
+
             </Container>
 
             <BackdropDuringApiLoading show={apiLoading} />
