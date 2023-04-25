@@ -9,28 +9,34 @@ export const authorizeTwitter = (baseUrl: string): Promise<Response> => {
 export const getUserTwitterId = (
   baseUrl: string,
   state = "state",
-  code: string
+  code: string,
+  redirectURI?: string
 ): Promise<Response> => {
   return fetch(
-    `${baseUrl}/oAuthAtlas/AtlasLoginCallback?state=${state}&code=${code}`
+    `${baseUrl}/oAuthAtlas/AtlasLoginCallback?state=${state}&code=${code}&redirectURI=${redirectURI}`
   );
 };
 
 export const getMediaIdUsingMediaUrl = (
   baseUrl: string,
   mediaUrl: string,
-  twitterId: number,
+  twitterId: string,
   handle: string
 ): Promise<Response> => {
   return fetch(
-    `${baseUrl}/oAuthAtlas/AtlasTwitterMediaUpload?mediaURL=${mediaUrl}&TwitterId=${twitterId}&Handle=${handle}`
+    `${baseUrl}/oAuthAtlas/AtlasTwitterMediaUpload?mediaURL=${mediaUrl}&TwitterId=${twitterId}&Handle=${handle}`,
+    {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+      },
+    }
   );
 };
 
 export const tweetThePost = (
   baseUrl: string,
-  mediaId: number,
-  twitterUserId: number
+  mediaId: string,
+  twitterUserId: string
 ): Promise<Response> => {
   return fetch(
     `${baseUrl}/oAuthAtlas/AtlasGenerateTweet?TwitterId=${twitterUserId}&mediaId=${mediaId}`

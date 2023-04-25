@@ -1,5 +1,5 @@
 import { Icons } from "constant";
-import useTwitterFlow from "hooks/useTwitterFlow";
+import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
 import { FC, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -23,6 +23,7 @@ interface IGlyphDetail {
 const GlyphDetail: FC<IGlyphDetail> = ({}) => {
   const [isAlertOpen, setAlertOpen] = useState<boolean>(false);
   const [isOpen, setOpenModal] = useState<boolean>(false);
+  const [user, setUser] = useState<ITwitterUser>({});
   const {
     initateTwitterAuth,
     getTwitterUserInfo,
@@ -35,17 +36,26 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
   // Checking if state and code  is there or not
   useEffect(() => {
     processTwitterAuthentication();
+    return () => {
+      removeCode();
+    };
   }, []);
 
   const processTwitterAuthentication = async () => {
-    const state = searchParams.get("state");
-    const code = searchParams.get("code");
-    if (state && code) {
+    const code = localStorage.getItem("code");
+    if (code) {
       setOpenModal(true);
-      const user = await getTwitterUserInfo(state, code);
-      const mediaId = await generateMediaId("", Number(user.id), "");
-      await tweetGlyphImageOnTwitter(Number(mediaId), Number(user.id));
+      const user = await getTwitterUserInfo(
+        "state",
+        code,
+        window.location.origin
+      );
+      setUser(user);
     }
+  };
+
+  const removeCode = () => {
+    localStorage.removeItem("code");
   };
 
   const ShareTwitterGlyphContent = () => {
@@ -95,6 +105,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
           <button
             onClick={() => {
               setOpenModal(false);
+              removeCode();
             }}
             style={{
               color: "#000",
@@ -113,8 +124,22 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
             Cancel
           </button>
           <Button
-            onClick={() => {
+            onClick={async () => {
               setOpenModal(false);
+              const mediaId = await generateMediaId(
+                "https://dotearth.blob.core.windows.net/dotearthdemo/glyphs/glyph-87738138.png",
+                user.id as string,
+                user.username as string
+              );
+              const data = await tweetGlyphImageOnTwitter(
+                mediaId,
+                user.id as string
+              );
+              if (data) {
+                setOpenModal(false);
+                setAlertOpen(true);
+                removeCode();
+              }
             }}
             color="#fff"
             size="2rem"
@@ -184,6 +209,9 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
         style={{
           padding: "5rem 20rem",
           gap: "10rem",
+          height: "100vh",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <div
@@ -202,8 +230,8 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
               padding="0.5rem 3rem"
               display="flex"
               onClick={async () => {
-                const url = await initateTwitterAuth();
-                window.open(url,"_self");
+                const url = await initateTwitterAuth("2");
+                window.open(url, "_self");
                 // setOpenModal(true);
               }}
             >

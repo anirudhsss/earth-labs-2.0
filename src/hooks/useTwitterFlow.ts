@@ -5,10 +5,10 @@ import {
   tweetThePost,
 } from "apis/twitter.api";
 
-interface ITwitterUser {
-  id: string;
-  name: string;
-  username: string;
+export interface ITwitterUser {
+  id?: string;
+  name?: string;
+  username?: string;
 }
 
 const useTwitterFlow = () => {
@@ -16,17 +16,19 @@ const useTwitterFlow = () => {
   const BASE_URL = "https://atlasapi-twitter-ms.azure-api.net";
 
   // Initate the Link for the twitter authO
-  const initateTwitterAuth = async (): Promise<string> => {
+  const initateTwitterAuth = async (txn: string): Promise<string> => {
     const response = await authorizeTwitter(BASE_URL);
+    localStorage.setItem("txn", txn);
     const url = await response.text();
     return url;
   };
 
   const getTwitterUserInfo = async (
     state = "state",
-    code: string
+    code: string,
+    redirectURI?: string
   ): Promise<ITwitterUser> => {
-    const response = await getUserTwitterId(BASE_URL, state, code);
+    const response = await getUserTwitterId(BASE_URL, state, code, redirectURI);
     const result = await response.json();
     const user: ITwitterUser = result.data;
     return user;
@@ -34,7 +36,7 @@ const useTwitterFlow = () => {
 
   const generateMediaId = async (
     mediaUrl: string,
-    twitterUserId: number,
+    twitterUserId: string,
     handle: string
   ): Promise<string> => {
     const response = await getMediaIdUsingMediaUrl(
@@ -43,15 +45,15 @@ const useTwitterFlow = () => {
       twitterUserId,
       handle
     );
-    const result = await response.json();
-    return result.Media_id;
+    const result = await response.text();
+    return result;
   };
 
   const tweetGlyphImageOnTwitter = async (
-    mediaUrl: number,
-    twitterUserId: number
+    mediaId: string,
+    twitterUserId: string
   ): Promise<{ message: string; code: number; result: any }> => {
-    const response = await tweetThePost(BASE_URL, mediaUrl, twitterUserId);
+    const response = await tweetThePost(BASE_URL, mediaId, twitterUserId);
     const result = await response.json();
     return {
       result,
