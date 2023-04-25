@@ -290,7 +290,7 @@ export const UserHomepage = ({
         setYAxisItems([]);
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
-        onClickedElementEnabled(month);
+        // onClickedElementEnabled(month);
         const arrIndexesOfClickedMonths = abcd?.filter((item: { timestamp: moment.MomentInput; }) => {
             let monthFromApi = Number(moment(item.timestamp).format("MM"));
             return monthFromApi === Number(month);
@@ -320,6 +320,12 @@ export const UserHomepage = ({
 
     const onShowDaysInfo = useCallback((abcd: any, month: any) => {
         // console.log('onShowDaysInfo', abcd, month)
+        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
+        setCurrency([]);
+        setYAxisItems([]);
+        setYAxisItemClicked(null);
+        setYAxisItemHovered(null);
+
         const arrIndexesOfClickedDays = abcd?.filter((item: any) => {
             let monthsFromApi = Number(moment(item.timestamp).format("MM"));
             // console.log('monthsFromApi', monthsFromApi)
@@ -331,6 +337,28 @@ export const UserHomepage = ({
         // setMatchedMonths(arrIndexesOfClickedDays);
         setfurtherPropagation(false);
     }, []);
+
+    const onClickOfADay = useCallback((abcd2: any[], day: number) => {
+        // console.log('onClickOfADay');
+        if (abcd2?.length > 0) {
+            let filteredDays: any[];
+            filteredDays = abcd2?.filter((item) => {
+                // console.log('test', Number(moment.utc(item.timestamp).format("DD")))
+                // console.log('day', Number(day));
+                // console.log('Number(moment(item.timestamp).format("DD)) === day', Number(moment(item.timestamp).format('DD')) === Number(day));
+                return Number(moment.utc(item.timestamp).format("DD")) === Number(day);
+            })
+            setMatchedMonths(filteredDays);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (showDays) {
+            const a = arrOfDays[0]?.month;
+            onClickedElementEnabled(a);
+            onClickOfADay(abcd2, arrOfDays[0]?.month);
+        }
+    }, [abcd2, arrOfDays, onClickOfADay, showDays]);
 
     useEffect(() => {
         if (showDays) {
@@ -349,29 +377,11 @@ export const UserHomepage = ({
         setClickedDay(day);
     };
 
-    const onClickOfADay = useCallback((abcd2: any[], day: number) => {
-        console.log('onClickOfADay');
-        if (clickedDay && abcd2?.length > 0) {
-            let filteredDays: any[];
-            filteredDays = abcd2?.filter((item) => {
-                // console.log('test', Number(moment.utc(item.timestamp).format("DD")))
-                // console.log('day', Number(day));
-                // console.log('Number(moment(item.timestamp).format("DD)) === day', Number(moment(item.timestamp).format('DD')) === Number(day));
-                return Number(moment.utc(item.timestamp).format("DD")) === Number(day);
-            })
-            setMatchedMonths(filteredDays);
-        }
-    }, [clickedDay]);
-
     useEffect(() => {
         if (dayClicked) {
             onClickOfADay(abcd2, clickedDay);
         }
-        else {
-            // console.log('arrOfDays', arrOfDays)
-            // onClickOfADay(abcd2, clickedDay);
-        }
-    }, [abcd2, arrOfDays, clickedDay, dayClicked, onClickOfADay]);
+    }, [abcd2, clickedDay, dayClicked, onClickOfADay]);
 
     const anotherFunc1 = useCallback(() => {
         if (data1?.length > 0) {
@@ -422,12 +432,6 @@ export const UserHomepage = ({
         // onDisplayAllTimeTxnInDescOrder();
         // }
     }, [anotherFunc1]);
-
-    // useEffect(() => {
-    //     if (someYear === undefined) {
-    //         setSomeYear(arrOfYears[arrOfYears?.length - 1]?.month);
-    //     }
-    // }, [arrOfYears, someYear]);
 
     useEffect(() => {
         setYears(arrOfYears.slice(-1));
@@ -489,13 +493,6 @@ export const UserHomepage = ({
     const onHelpIconClicked = () => {
         setHelpIconClicked(!helpIconClicked);
     }
-
-    // const onDisplayAllTimeTxnInDescOrder = () => {
-    //     const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {
-    //         return +new Date(b.timestamp) - +new Date(a.timestamp);
-    //     });
-    //     setMatchedMonths(sortedTxnInDescOrder);
-    // }
 
     const onOpenConnectWalletModal = useCallback(() => {
         setOpen(true);
