@@ -36,6 +36,20 @@ export interface XaxisProps {
     anchorEl?: any;
     onCloseYearMenu?: any;
     onValueMenuItemClicked?: any;
+    showDays?: boolean;
+    onShowDaysInfo?: any;
+    arrOfDays?: any;
+    setShowDays?: any;
+    setClickedMonth?: any;
+    setClickedElement?: any;
+    furtherPropagation?: any;
+    onClickedElementEnabled?: any;
+    setdayClicked?: any;
+    furtherPropagationDisabled?: any;
+    showDaysEnabled?: any;
+    onCaptureDayWhenDayClickedEnabled?: any;
+    leastDimension?: any;
+    monthInLetters?: any;
 }
 
 export const Xaxis = ({
@@ -64,26 +78,38 @@ export const Xaxis = ({
     anchorEl,
     onCloseYearMenu,
     onValueMenuItemClicked,
+    showDays,
+    onShowDaysInfo,
+    arrOfDays,
+    setShowDays,
+    setClickedMonth,
+    setClickedElement,
+    furtherPropagation,
+    onClickedElementEnabled,
+    setdayClicked,
+    furtherPropagationDisabled,
+    showDaysEnabled,
+    onCaptureDayWhenDayClickedEnabled,
+    leastDimension,
+    monthInLetters,
 }: XaxisProps) => {
 
     // const whichDuration = monthOrYear === '' ? arrOfYears : (monthOrYear === 'year' || monthOrYear === 'month') ? arrOfMonths : [];
-    const whichDuration = arrOfMonths;
+    const whichDuration = showDays ? arrOfDays : arrOfMonths;
     const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
     const walletLocation = location?.state?.icon === 'wallet';
     const mapsLocation = location?.state?.icon === 'maps';
     const discoveryLocation = location?.state?.icon === 'discovery';
-    // useEffect(() => {
-    //     let nodes = document.querySelectorAll('.line');
-    //     console.log('nodes', nodes);
-    // }, []);
 
     const findMax = useCallback(() => {
         whichDuration?.map((item: any) => {
-            let max = 0;
+            let max = 0, min = 0;
             if (Number(item.dimension) > max) {
                 max = Number(item.dimension);
+            } else if (Number(item.dimension) < min) {
+                min = Number(item.dimension);
             }
             setGlyphWithMaxDimension(max);
         })
@@ -95,18 +121,18 @@ export const Xaxis = ({
 
     return (
         <Box sx={{
-            width: '99%',
+            width: '100%',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             position: 'relative',
         }}>
             <Box sx={{
-                width: '90%',
+                width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-end',
-                marginLeft: '4vw',
+                marginLeft: '3vw',
             }}>
                 <Box sx={{
                     borderBottom: '1px solid black',
@@ -131,12 +157,24 @@ export const Xaxis = ({
                     position: 'relative',
                     zIndex: 101,
                     bottom: '17.5px',
+                    // bottom: leastDimension ? leastDimension : '17.5px',
                     width: '100%',
                 }}>
                     {whichDuration?.map((item: any) => {
-
                         return (
                             <XaxisItems
+                                monthInLetters={monthInLetters}
+                                onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
+                                showDaysEnabled={showDaysEnabled}
+                                furtherPropagationDisabled={furtherPropagationDisabled}
+                                setdayClicked={setdayClicked}
+                                onClickedElementEnabled={onClickedElementEnabled}
+                                furtherPropagation={furtherPropagation}
+                                setClickedMonth={setClickedMonth}
+                                setShowDays={setShowDays}
+                                arrOfDays={arrOfDays}
+                                onShowDaysInfo={onShowDaysInfo}
+                                showDays={showDays}
                                 dimension={item.dimension}
                                 month={item.month}
                                 backgroundColor={backgroundColor}

@@ -1,5 +1,5 @@
 import { Avatar, Box } from "@mui/material"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { Button } from "../Button"
 import { Container } from "../Container"
 import { NormalSearchField } from "../TextField"
@@ -8,10 +8,6 @@ import styles from './styles.module.css'
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 
 export interface HeaderProps {
-    homeLocation?: any;
-    walletLocation?: any;
-    mapsLocation?: any;
-    discoveryLocation?: any;
     openWalletModal?: any;
     onWalletBtnClickOpen?: any;
     onWalletBtnClickClose?: any;
@@ -19,16 +15,17 @@ export interface HeaderProps {
 }
 
 const Header = ({
-    homeLocation,
-    walletLocation,
-    mapsLocation,
-    discoveryLocation,
     openWalletModal,
     onWalletBtnClickOpen,
     onWalletBtnClickClose,
     landingPageLocation,
 }: HeaderProps) => {
-    // console.log('landingPageLocation', landingPageLocation)
+    const location = useLocation();
+    const homeLocation = location?.state?.icon === 'home';
+    const walletLocation = location?.state?.icon === 'wallet';
+    const mapsLocation = location?.state?.icon === 'maps';
+    const discoveryLocation = location?.state?.icon === 'discovery';
+
     return (
         <Container
             padding="0.5rem 2rem 0.5rem 0"

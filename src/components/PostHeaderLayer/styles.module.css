@@ -1,0 +1,43 @@
+.postHeaderParent {}
+
+.postHeader {
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group1 {
+    width: 33%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.timeMenuBtn1 {
+    width: auto;
+    height: 3rem;
+    /* position: absolute;
+    top: 15px;
+    z-index: 101; */
+}
+
+.group2 {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blackTriangle {
+    width: 9px;
+    height: 9px;
+}
+
+.group3 {
+    width: 33%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

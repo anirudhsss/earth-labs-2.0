@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Box } from "@mui/material"
 import data from 'test.json';
 import { Typography } from "../Typography";
@@ -28,6 +28,19 @@ export interface XaxisItemsProps {
     setChosenData?: any;
     chosenData?: any;
     glyphWithMaxDimension?: number;
+    showDays?: boolean;
+    onShowDaysInfo?: any;
+    arrOfDays?: any;
+    setShowDays?: any;
+    setClickedMonth?: any;
+    setClickedElement?: any;
+    furtherPropagation?: any;
+    onClickedElementEnabled?: any;
+    setdayClicked?: any;
+    furtherPropagationDisabled?: any;
+    showDaysEnabled?: any;
+    onCaptureDayWhenDayClickedEnabled?: any;
+    monthInLetters?: any;
 }
 
 export const XaxisItems = ({
@@ -42,22 +55,40 @@ export const XaxisItems = ({
     noOfGlyphs,
     onCircleClicked,
     clickedElement,
+    showDays,
+    onShowDaysInfo,
+    arrOfDays,
     // monthOrYear,
     glyphWithMaxDimension,
+    setShowDays,
+    setClickedMonth,
+    setClickedElement,
+    furtherPropagation,
+    onClickedElementEnabled,
+    setdayClicked,
+    furtherPropagationDisabled,
+    showDaysEnabled,
+    onCaptureDayWhenDayClickedEnabled,
+    monthInLetters,
 }: XaxisItemsProps) => {
-    // const whichDuration1 = monthOrYear === '' ? month : (monthOrYear === 'year' || monthOrYear === 'month') ? moment().month(month - 1).format("MMM") : [];
-    const whichDuration1 = moment().month(month - 1).format("MMM");
+    // const day = `${(moment().month(month - 1).format("MMM") / month)} / ${month}`;
+    const whichDuration1: any = showDays ? `${monthInLetters} ${month}` : moment().month(month - 1).format("MMM");
+
+    const setParams = useCallback(() => {
+        if (furtherPropagation) {
+            // console.log('in1')
+            showDaysEnabled();
+            setClickedMonth(month);
+        }
+        else {
+            // console.log('in2')
+            onClickedElementEnabled(month);
+            setdayClicked(true);
+            onCaptureDayWhenDayClickedEnabled(month);
+        }
+    }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, setClickedMonth, setdayClicked, showDaysEnabled]);
 
     // const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '35px', }}>&#x2B22;</span>
-
-    // useEffect(() => {
-    //     if (dimension) {
-    //         let nodes = document.querySelectorAll('.dimensions');
-    //         nodes.forEach(function (item: any, index: number) {
-    //             console.log('item', item);
-    //         });
-    //     }
-    // }, [])
 
     return (
         <Box sx={{
@@ -76,9 +107,8 @@ export const XaxisItems = ({
                 backgroundColor: (month === hoverElementId || month === clickedElement) ? '#FE7D06' : '#FFF7EE',
                 cursor: 'pointer',
             }}
-                className="dimensions"
-                // onClick={() => { monthOrYear === '' ? onDisplayMonth(month) : onCircleClicked(month) }}
-                onClick={() => onCircleClicked(month)}
+                // className="dimensions"
+                onClick={setParams}
                 onMouseEnter={() => onCircleHoverStarts(month)}
                 onMouseLeave={() => onCircleHoverEnds(month)}
             ></div>

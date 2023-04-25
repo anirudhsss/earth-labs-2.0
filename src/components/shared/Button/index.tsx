@@ -1,13 +1,11 @@
-import * as React from "react";
-import Stack from "@mui/material/Stack";
+import { ReactElement, MouseEvent } from "react";
 import MUIButton from "@mui/material/Button";
-import { Typography } from "@mui/material";
 
 export interface ButtonProps {
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (e: MouseEvent<HTMLElement>) => void;
   title?: string;
   reverse?: boolean;
-  icon?: React.ReactElement;
+  icon?: ReactElement;
   backgroundColor?: string;
   boxShadow?: string;
   color?: string;
@@ -31,7 +29,7 @@ export interface ButtonProps {
   borderBottom?: any;
   textDecoration?: any;
   height?: any;
-  // onClick?; any;
+  textAlign?: any;
 }
 
 export const Button = ({
@@ -62,6 +60,7 @@ export const Button = ({
   borderBottom,
   textDecoration,
   height,
+  textAlign,
 }: ButtonProps) => {
   return (
     <MUIButton
@@ -91,6 +90,7 @@ export const Button = ({
         borderBottom: borderBottom,
         textDecoration: textDecoration,
         height: height,
+        textAlign: textAlign,
         "&:hover": {
           background: hoverBackgroundColor,
           boxShadow: hoverBoxShadow,

@@ -31,6 +31,7 @@ import { Yaxis } from "components/shared/Yaxis";
 import { AnyAaaaRecord } from "dns";
 import { AxiosFetch, BackdropDuringApiLoading } from '../utils';
 import { HelpPage } from "components/HelpPage";
+import PostHeaderLayer from "components/PostHeaderLayer";
 
 export interface UserHomepageProps {
 
@@ -62,11 +63,6 @@ export const UserHomepage = ({
     const [eth, setEth] = useState(ETH);
     const [usdc, setUsdc] = useState(USDC);
     const [currName, setCurrName] = useState('ETH');
-    const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
@@ -136,9 +132,12 @@ export const UserHomepage = ({
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [difference, setDifference] = useState<string>('');
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
+    const [arrOfDays, setArrOfDays] = useState<any>([]);
     const [someYear, setSomeYear] = useState<any>();
     const [selectedItem1, setSelectedItem1] = useState<any>();
     const [testData, setTestData] = useState([]);
+    const [leastDimension, setLeastDimension] = useState<number>(0);
+    const [monthInLetters, setmonthInLetters] = useState<any>();
 
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data2, apiLoading, apiError } = AxiosFetch();
@@ -179,50 +178,202 @@ export const UserHomepage = ({
     //     }
     // }, []);
 
-    // useEffect(() => {
-    //     onDisplayYear();
-    // }, [])
-
     const onDisplayMonth = useCallback((year: number) => {
+        // console.log('onDisplayMonth', year);
         setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         setCurrency([]);
         setSomeYear(year);
         setYearViewEnabled(false);
-        // if (matchedMonths === 0) {
-        //setChosenData(data1);
-        // } else if (matchedMonths > 0) {
-        //     setChosenData(matchedMonths);
-        // }
         if (data1?.length > 0) {
             const arrIndexesOfClickedYears = data1?.filter((item: { timestamp: moment.MomentInput; }) => {
                 let monthFromApi = Number(moment(item.timestamp).format("YYYY"));
                 return Number(monthFromApi) === Number(year);
             });
-            // setMatchedMonths(arrIndexesOfClickedYears);
             setAbcd(arrIndexesOfClickedYears);
         }
-        // setmonthOrYear('year');
     }, [data1]);
 
     useEffect(() => {
-        // if (years[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
         onDisplayMonth(arrOfYears[arrOfYears?.length - 1]?.month);
-        // } else {
-        //     onDisplayMonth(arrOfYears[0]?.month);
-        // }
     }, [arrOfYears, onDisplayMonth]);
 
-    const clamp = (a: number, min = 0, max = 1) => Math.min(max, Math.max(min, a)); //0.33
-    const invlerp = useCallback((x: number, y: number, a: number) => { //0.35
-        return clamp((a - x) / (y - x))
+    const clamp = (a: number, min = 0, max = 1) => {
+        // console.log('test', a, min, max);
+        return Math.min(max, Math.max(min, a)); //0.33
+    }
+    const invlerp = useCallback((min: number, max: number, item: number) => {
+        return clamp((item - min) / (max - min)); //0.35
     }, []);
 
+    const [showDays, setShowDays] = useState<boolean | undefined>(false);
+    const [furtherPropagation, setfurtherPropagation] = useState<boolean | undefined>(true);
+    const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
+    const [clickedDay, setClickedDay] = useState<any>();
+    const [abcd2, setAbcd2] = useState<any>([]);
+    const [clickedMonth, setClickedMonth] = useState<any>();
+
+    const showDaysEnabled = () => {
+        setShowDays(true);
+    }
+
+    const showDaysDsiabled = () => {
+        setShowDays(false);
+    }
+
+    const furtherPropagationEnabled = () => {
+        setfurtherPropagation(true);
+    }
+
+    const furtherPropagationDisabled = () => {
+        setfurtherPropagation(false);
+    }
+
+    const allEqual = (noOfTxns: any[], param: any) => noOfTxns.every((item: any) => {
+        return item === param;
+    })
+
+    const anotherFunc3 = useCallback((abcd2: any, month: any) => {
+        // console.log('anotherFunc3', abcd2, month);
+        if (abcd2?.length > 0) {
+            // console.log('month', month);
+            let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrDaysPointsOfAxis: any[] = [];
+            // console.log('abcd2', abcd2)
+            arrOfDuration = abcd2?.map((item: any) => {
+                // console.log('Number(moment(item.timestamp).format("MM")', Number(moment(item.timestamp).format("MM")));
+                // console.log('Number(month)', Number(month));
+                if (Number(moment(item.timestamp).format("MM")) === Number(month)) {
+                    // console.log('Number(moment(item.timestamp).format("DD")', Number(moment(item.timestamp).format("DD")));
+                    return Number(moment.utc(item.timestamp).format("DD"));
+                }
+            });
+            freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
+                acc[item] = acc[item] ? acc[item] + 1 : 1;
+                return acc;
+            }, {});
+            duration = Object.keys(freqOfDuration);
+            noOfTxns = Object.values(freqOfDuration);
+            let min = Math.min(...noOfTxns);
+            let max = Math.max(...noOfTxns);
+            // console.log('noOfTxns', noOfTxns)
+            noOfTxns.forEach((item: number) => {
+                let val1;
+                if (allEqual(noOfTxns, min) || (duration?.length === 1)) {
+                    val1 = 35;
+                    // const arr = whichDuration?.map((item: any) => item.dimension);
+                    // setLeastDimension(Math.min(...arr));
+                    const half = val1 / 2;
+                    setLeastDimension(half);
+                } else {
+                    val1 = (((35 - 10) * invlerp(min, max, item)) + 10);
+                }
+                arrDaysPointsOfAxis = [...arrDaysPointsOfAxis, val1] //processed count
+            })
+            const arrOfDays: { month: any; dimension: any; noOfGlyphs: any; }[] = [];
+            arrDaysPointsOfAxis.forEach((_, index) => {
+                arrOfDays.push({
+                    month: duration[index],
+                    dimension: arrDaysPointsOfAxis[index],
+                    noOfGlyphs: noOfTxns[index],
+                })
+            })
+            // console.log('arrOfDays', arrOfDays);
+            setmonthInLetters(moment().month(month - 1).format("MMM"));
+            setArrOfDays(arrOfDays);
+        }
+        setfurtherPropagation(false);
+    }, [invlerp]);
+
+    const onCircleClicked = useCallback((month: any) => {
+        // console.log('onCircleClicked', month);
+        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
+        setCurrency([]);
+        setYAxisItems([]);
+        setYAxisItemClicked(null);
+        setYAxisItemHovered(null);
+        onClickedElementEnabled(month);
+        const arrIndexesOfClickedMonths = abcd?.filter((item: { timestamp: moment.MomentInput; }) => {
+            let monthFromApi = Number(moment(item.timestamp).format("MM"));
+            return monthFromApi === Number(month);
+        });
+        setMatchedMonths(arrIndexesOfClickedMonths);
+        // console.log('arrIndexesOfClickedMonths', arrIndexesOfClickedMonths);
+        setAbcd1(arrIndexesOfClickedMonths);
+    }, [abcd]);
+
+    useEffect(() => {
+        // console.log('useEffect ran')
+        if (years[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
+            const a = arrOfMonths[arrOfMonths.length - 1]?.month;
+            // console.log('a1', a);
+            onCircleClicked(a);
+            onClickedElementEnabled(a);
+            setClickedMonth(a);
+        }
+        else {
+            const a = arrOfMonths[0]?.month;
+            // console.log('a2', a);
+            onCircleClicked(a);
+            onClickedElementEnabled(a);
+            setClickedMonth(a);
+        }
+    }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
+
+    const onShowDaysInfo = useCallback((abcd: any, month: any) => {
+        // console.log('onShowDaysInfo', abcd, month)
+        const arrIndexesOfClickedDays = abcd?.filter((item: any) => {
+            let monthsFromApi = Number(moment(item.timestamp).format("MM"));
+            // console.log('monthsFromApi', monthsFromApi)
+            // console.log('month', month)
+            return monthsFromApi === Number(month);
+        });
+        // console.log('arrIndexesOfClickedDays', arrIndexesOfClickedDays)
+        setAbcd2(arrIndexesOfClickedDays);
+        // setMatchedMonths(arrIndexesOfClickedDays);
+        setfurtherPropagation(false);
+    }, []);
+
+    useEffect(() => {
+        if (showDays) {
+            onShowDaysInfo(abcd, clickedMonth);
+        }
+    }, [showDays, abcd, clickedMonth, onCircleClicked, onShowDaysInfo]);
+
+    useEffect(() => {
+        if (showDays) {
+            // console.log('inside useEffect2', abcd2, clickedMonth);
+            anotherFunc3(abcd2, clickedMonth);
+        }
+    }, [showDays, abcd2, clickedMonth, anotherFunc3]);
+
+    const onCaptureDayWhenDayClickedEnabled = (day: number) => {
+        setClickedDay(day);
+    };
+
+    const onClickOfADay = useCallback((abcd2: any[], day: number) => {
+        console.log('onClickOfADay');
+        if (clickedDay && abcd2?.length > 0) {
+            let filteredDays: any[];
+            filteredDays = abcd2?.filter((item) => {
+                // console.log('test', Number(moment.utc(item.timestamp).format("DD")))
+                // console.log('day', Number(day));
+                // console.log('Number(moment(item.timestamp).format("DD)) === day', Number(moment(item.timestamp).format('DD')) === Number(day));
+                return Number(moment.utc(item.timestamp).format("DD")) === Number(day);
+            })
+            setMatchedMonths(filteredDays);
+        }
+    }, [clickedDay]);
+
+    useEffect(() => {
+        if (dayClicked) {
+            onClickOfADay(abcd2, clickedDay);
+        }
+        else {
+            // console.log('arrOfDays', arrOfDays)
+            // onClickOfADay(abcd2, clickedDay);
+        }
+    }, [abcd2, arrOfDays, clickedDay, dayClicked, onClickOfADay]);
+
     const anotherFunc1 = useCallback(() => {
-        // if (monthOrYear === '' && !range) {
-        //setChosenData(data1);
-        // } else if ((monthOrYear === '') && range) {
-        //     setChosenData(matchedMonths);
-        // }
         if (data1?.length > 0) {
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrYearPointsOfAxis: any[] = [];
             arrOfDuration = data1?.map((item: any) => {
@@ -283,21 +434,15 @@ export const UserHomepage = ({
     }, [arrOfYears]);
 
     const anotherFunc2 = useCallback((someYear1: any) => {
-        // if (matchedMonths?.length === 0) {
-        //     setChosenData(data1);
-        // } else {
-        //setChosenData(matchedMonths);
-        // }
         if (abcd?.length > 0) {
+            // console.log('abcd', abcd);
             let arrOfDuration, freqOfDuration, duration: string | any[], noOfTxns: any[], arrMonthPointsOfAxis: any[] = [];
             arrOfDuration = abcd?.map((item: any) => {
                 if (Number(moment(item.timestamp).format("YYYY")) == Number(someYear1)) {
                     return Number(moment(item.timestamp).format("MM"));
                 }
-                // else {
-                //     return undefined;
-                // }
             });
+            // console.log('arrOfDuration', arrOfDuration);
             freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
                 acc[item] = acc[item] ? acc[item] + 1 : 1;
                 return acc;
@@ -306,7 +451,6 @@ export const UserHomepage = ({
             noOfTxns = Object.values(freqOfDuration);
             const min = Math.min(...noOfTxns);
             const max = Math.max(...noOfTxns);
-            let arr1: any[] = [];
             noOfTxns.forEach((item: number) => {
                 let val1 = (((35 - 10) * invlerp(min, max, item)) + 10);
                 arrMonthPointsOfAxis = [...arrMonthPointsOfAxis, val1] //processed count
@@ -325,6 +469,7 @@ export const UserHomepage = ({
     }, [invlerp, abcd]);
 
     useEffect(() => {
+        // console.log('years', years);
         const a = years[0]?.month;
         anotherFunc2(a);
     }, [anotherFunc2, years]);
@@ -340,41 +485,6 @@ export const UserHomepage = ({
         });
         setData1(sortedTxnInDescOrder);
     }, [data2]);
-
-    const onCircleClicked = useCallback((month: any) => {
-        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
-        setCurrency([]);
-        setYAxisItems([]);
-        setYAxisItemClicked(null);
-        setYAxisItemHovered(null);
-        // setYearViewEnabled(false);
-        setClickedElement(month);
-        // setmonthOrYear('month');
-        // if (monthOrYear === 'month' && !range) {
-        //     setChosenData(data1);
-        // } else if ((monthOrYear === 'month') && range) {
-
-        // }
-        const arrIndexesOfClickedMonths = abcd?.filter((item: { timestamp: moment.MomentInput; }) => {
-            let monthFromApi = Number(moment(item.timestamp).format("MM"));
-            return monthFromApi === Number(month);
-        });
-        setMatchedMonths(arrIndexesOfClickedMonths);
-        setAbcd1(arrIndexesOfClickedMonths);
-    }, [abcd]);
-
-    useEffect(() => {
-        if (years[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
-            const a = arrOfMonths[arrOfMonths.length - 1]?.month;
-            onCircleClicked(a);
-            setClickedElement(a);
-        } else {
-            const a = arrOfMonths[0]?.month;
-            onCircleClicked(a);
-            setClickedElement(a);
-        }
-
-    }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
 
     const onHelpIconClicked = () => {
         setHelpIconClicked(!helpIconClicked);
@@ -540,7 +650,11 @@ export const UserHomepage = ({
     //     setChosenData(matchedMonths);
     // }, [valueMenuItemClicked]);
 
-    const onValueMenuItemClicked = (id: number) => {
+    const onValueMenuItemClicked = useCallback((id: number) => {
+        showDaysDsiabled();
+        furtherPropagationEnabled();
+        setAbcd2([]);
+        setShowDays(false);
         setClickedElement(null);
         setCurrency([]);
         setYAxisItems([]);
@@ -548,18 +662,15 @@ export const UserHomepage = ({
         setYAxisItemHovered(null);
         onCloseYearMenu();
         setMatchedMonths([]);
-        // setmonthOrYear('year');
         onDisplayMonth(id);
-        // anotherFunc2(id);
-        //setValueMenuItemClicked(true);
-        // setYearViewEnabled(true);
         const selectedItem = arrOfYears.filter((item: any) => {
             return Number(item.month) === Number(id);
         });
         setYears(selectedItem);
-    }
+    }, [arrOfYears, onDisplayMonth])
 
     const onValueMenuItemClicked1 = (id: number) => {
+        setShowDays(false);
         setYAxisItems([]);
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
@@ -770,6 +881,33 @@ export const UserHomepage = ({
         }
     }
 
+    const onClickedElementEnabled = (month: any) => {
+        setClickedElement(month);
+    }
+
+    const onYearButtonClicked = useCallback((year: any) => {
+        // setShowDays(false);
+        // setfurtherPropagation(true);
+        onValueMenuItemClicked(year);
+    }, [onValueMenuItemClicked]);
+
+    const onMonthButtonClicked = useCallback(() => {
+        setShowDays(true);
+        setfurtherPropagation(false);
+    }, []);
+
+    // console.log('clickedElement', clickedElement)
+    // console.log('clickedMonth', clickedMonth)
+    // console.log('furtherPropagation', furtherPropagation);
+    // console.log('abcd2', abcd2);
+    // console.log('showDays', showDays);
+    // console.log('monthInLetters', monthInLetters);
+    // console.log('dayClicked', dayClicked);
+    // console.log('clickedDay', clickedDay);
+    // console.log('matchedMonths', matchedMonths);
+    // console.log('leastDimension', leastDimension);
+    // console.log('arrOfDays', arrOfDays);
+    // console.log('month', month);
     return (
         <>
 
@@ -779,6 +917,7 @@ export const UserHomepage = ({
                 backgroundColor: '#FFFDFB',
                 height: '100vh',
                 overflowY: 'hidden',
+                position: 'relative',
             }}>
                 {/* <Box sx={{
                     border: '2px solid black',
@@ -787,13 +926,9 @@ export const UserHomepage = ({
                     width: '20rem'
                 }}></Box> */}
                 <Box
-                    sx={{ height: '7.6vh', }}
+                    sx={{ height: '7.6%', }}
                 >
                     <Header
-                        homeLocation={homeLocation}
-                        walletLocation={walletLocation}
-                        mapsLocation={mapsLocation}
-                        discoveryLocation={discoveryLocation}
                         openWalletModal={openWalletModal}
                         onWalletBtnClickOpen={onWalletBtnClickOpen}
                         onWalletBtnClickClose={onWalletBtnClickClose}
@@ -801,210 +936,26 @@ export const UserHomepage = ({
                 </Box>
 
                 <Container
-                    height="87.5vh"
+                    height="88.5%"
                     padding="0 3rem 0 2rem"
                     position="relative"
                 >
 
-                    <Box className={styles.timeMenuBtn1}>
-                        <Button
-                            backgroundColor="#FFF7EE"
-                            hoverBackgroundColor="#FFF7EE"
-                            color="black"
-                            boxShadow="none"
-                            hoverBoxShadow="none"
-                            borderRadius={`${openMenu1 ? '2rem 2rem 0 0' : '2rem'}`}
-                            padding="5px"
-                            width={`${(currency?.length > 0 || openMenu1) ? '17rem' : '8.3rem'}`}
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                            border="1px solid #000"
-                            borderBottom={`${openMenu1 ? '0' : '1px solid #000'}`}
-                            onClick={onOpenYearMenu1}
-                            height="2.9rem"
-                        // disabled={monthOrYear === ''}
-                        >
-                            {currency?.length > 0 ?
-                                <Typography
-                                    text={`${currency[0].value}`}
-                                    fontSize="13px"
-                                    margin="0 5px 0 0"
-                                />
-                                : <Typography
-                                    text="value"
-                                    fontSize="13px"
-                                    color={`${openMenu1 ? '#FE7D06' : '#000'}`}
-                                    margin="0 5px 0 0"
-                                />}
-                            <img
-                                src={`${openMenu1 ? '/assets/images/orangeTriangle.svg' : '/assets/images/blackTriangle.svg'}`}
-                                alt=""
-                                className={styles.blackTriangle}
-                                style={{
-                                    marginTop: '2px',
-                                    transform: openMenu1 ? 'rotate(180deg)' : '',
-                                }}
-                            />
-                        </Button>
-                        <Menu
-                            anchorEl={anchorEl1}
-                            open={openMenu1}
-                            onClose={onCloseYearMenu1}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
-                            PaperProps={{
-                                elevation: 0,
-                                style: {
-                                    width: '17rem',
-                                    borderRadius: '0 0 20px 20px',
-                                    backgroundColor: '#FFF7EE',
-                                    border: '1px solid #000',
-                                },
-
-                            }}
-                        >
-                            {chosenCurrency.map((item: any) => {
-                                return (
-                                    <>
-                                        <MenuItem
-                                            key={item.id}
-                                            onClick={() => onValueMenuItemClicked1(item.id)}
-                                            sx={{
-                                                fontSize: '13px',
-                                                borderBottom: '1px solid black',
-                                                '&:last-child': {
-                                                    borderBottom: '0px',
-                                                },
-                                            }}
-                                        >{item.value}</MenuItem>
-                                    </>
-                                )
-                            })}
-                        </Menu>
-                    </Box>
-
-                    <Box style={{
-                        width: '4%',
-                        marginLeft: (currency?.length > 0 || openMenu1) ? '19rem' : '10rem',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        position: 'absolute',
-                        top: '20px',
-                        zIndex: '101',
-                    }}>
-                        <span
-                            style={{ cursor: 'pointer', }}
-                            onClick={() => onChosingCurrency('ETH')}
-                        >
-                            <Typography
-                                text="ETH"
-                                fontSize="13px"
-                                color={`${currName === 'ETH' ? '#FE7D06' : '#000'}`}
-                            />
-                        </span>
-                        <Typography
-                            text=" |"
-                            fontSize="13px"
-                            margin="0 5px"
-                        />
-                        <span
-                            style={{ cursor: 'pointer', }}
-                            onClick={() => onChosingCurrency('USDC')}
-                        >
-                            <Typography
-                                text=" USDC"
-                                fontSize="13px"
-                                color={`${currName === 'USDC' ? '#FE7D06' : '#000'}`}
-                            />
-                        </span>
-                    </Box>
-
-                    {ethToUsdc !== undefined && difference !== undefined && <Box sx={{
-                        position: 'absolute',
-                        zIndex: 101,
-                        top: '22px',
-                        left: '190px',
-                        marginLeft: (currency?.length > 0 || openMenu1) ? '11rem' : '2rem',
-                    }}>
-                        <span>
-                            <img
-                                src={'./assets/images/ethereum_logo.svg'}
-                                alt=''
-                                style={{
-                                    position: 'absolute',
-                                    width: '18px',
-                                    height: '16px'
-                                }}
-                            />
-                        </span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '2px',
-                            left: '20px',
-                            fontSize: '12px',
-                            fontWeight: 'bold',
-                        }}>=</span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '-1px',
-                            left: '32px',
-                        }}>
-                            <Typography
-                                text={'$' + ethToUsdc}
-                                fontSize='13px'
-                                fontWeight='bold'
-                            />
-                        </span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '4px',
-                            left: '76px',
-                        }}>
-                            <img
-                                src={'./assets/images/redDownArrow.svg'}
-                                alt=''
-                                style={{
-                                    position: 'absolute',
-                                    width: '12px',
-                                    height: '12px',
-                                    transform: difference === 'increment' ? '' : 'rotate(180deg)',
-                                }}
-                            />
-                        </span>
-                        <span style={{
-                            position: 'absolute',
-                            top: '1px',
-                            left: '86px',
-                            marginTop: difference === 'increment' ? '0' : '5px',
-                        }}>
-                            <Typography
-                                text={ethToUsdcYvsTPercent + '%'}
-                                fontSize='9px'
-                                fontWeight='bold'
-                                color="#EA1313"
-                            />
-                        </span>
-                    </Box>}
-
-                    <Box sx={{
-                        position: 'absolute',
-                        top: '60px',
-                        left: '70px',
-                    }}>
-                        {currency?.length > 0 &&
-                            <Typography
-                                text={`Currently Viewing: ${currency[0].value}`}
-                                fontSize="1.2rem"
-                            />
-                        }
-                    </Box>
+                    <PostHeaderLayer
+                        apiLoading={apiLoading}
+                        openMenu1={openMenu1}
+                        currency={currency}
+                        onOpenYearMenu1={onOpenYearMenu1}
+                        anchorEl1={anchorEl1}
+                        onCloseYearMenu1={onCloseYearMenu1}
+                        chosenCurrency={chosenCurrency}
+                        onValueMenuItemClicked1={onValueMenuItemClicked1}
+                        onChosingCurrency={onChosingCurrency}
+                        currName={currName}
+                        ethToUsdc={ethToUsdc}
+                        difference={difference}
+                        ethToUsdcYvsTPercent={ethToUsdcYvsTPercent}
+                    />
 
                     <Box className={styles.body}>
                         <Box
@@ -1043,6 +994,11 @@ export const UserHomepage = ({
                                 />}
                         </Box>
                         <RhsNav
+                            clickedElement={clickedElement}
+                            onMonthButtonClicked={onMonthButtonClicked}
+                            onYearButtonClicked={onYearButtonClicked}
+                            showDays={showDays}
+                            monthInLetters={monthInLetters}
                             openMenu={openMenu}
                             onOpenYearMenu={onOpenYearMenu}
                             years={years}
@@ -1061,41 +1017,134 @@ export const UserHomepage = ({
                             onHelpIconClicked={onHelpIconClicked}
                         />
                     </Box>
+
+
+
+                    <Box sx={{
+                        width: '100%',
+
+                    }}>
+                        <Xaxis
+                            monthInLetters={monthInLetters}
+                            leastDimension={leastDimension}
+                            onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
+                            showDaysEnabled={showDaysEnabled}
+                            furtherPropagationDisabled={furtherPropagationDisabled}
+                            setdayClicked={setdayClicked}
+                            onClickedElementEnabled={onClickedElementEnabled}
+                            furtherPropagation={furtherPropagation}
+                            setClickedElement={setClickedElement}
+                            setClickedMonth={setClickedMonth}
+                            setShowDays={setShowDays}
+                            arrOfDays={arrOfDays}
+                            onShowDaysInfo={onShowDaysInfo}
+                            showDays={showDays}
+                            years={years}
+                            anchorEl={anchorEl}
+                            onCloseYearMenu={onCloseYearMenu}
+                            openMenu={openMenu}
+                            onValueMenuItemClicked={onValueMenuItemClicked}
+                            onOpenYearMenu={onOpenYearMenu}
+                            // monthOrYear={monthOrYear}
+                            onDisplayMonth={onDisplayMonth}
+                            onCircleClicked={onCircleClicked}
+                            clickedElement={clickedElement}
+                            data1={data1}
+                            arrOfMonths={arrOfMonths}
+                            arrOfYears={arrOfYears}
+                            setArrOfYears={setArrOfYears}
+                            matchedMonths={matchedMonths}
+                            setMatchedMonths={setMatchedMonths}
+                            yearViewEnabled={yearViewEnabled}
+                            setYearViewEnabled={setYearViewEnabled}
+                            onCircleHoverStarts={onCircleHoverStarts}
+                            onCircleHoverEnds={onCircleHoverEnds}
+                            hoverElementId={hoverElementId}
+                            backgroundColor={backgroundColor}
+                            loading1={loading1}
+                            range={range}
+                            setChosenData={setChosenData}
+                            chosenData={chosenData}
+                        />
+                    </Box>
                 </Container>
 
-                <Box sx={{
-                    width: '100%',
-
-                }}>
-                    <Xaxis
-                        years={years}
-                        anchorEl={anchorEl}
-                        onCloseYearMenu={onCloseYearMenu}
-                        openMenu={openMenu}
-                        onValueMenuItemClicked={onValueMenuItemClicked}
-                        onOpenYearMenu={onOpenYearMenu}
-                        // monthOrYear={monthOrYear}
-                        onDisplayMonth={onDisplayMonth}
-                        onCircleClicked={onCircleClicked}
-                        clickedElement={clickedElement}
-                        data1={data1}
-                        arrOfMonths={arrOfMonths}
-                        arrOfYears={arrOfYears}
-                        setArrOfYears={setArrOfYears}
-                        matchedMonths={matchedMonths}
-                        setMatchedMonths={setMatchedMonths}
-                        yearViewEnabled={yearViewEnabled}
-                        setYearViewEnabled={setYearViewEnabled}
-                        onCircleHoverStarts={onCircleHoverStarts}
-                        onCircleHoverEnds={onCircleHoverEnds}
-                        hoverElementId={hoverElementId}
-                        backgroundColor={backgroundColor}
-                        loading1={loading1}
-                        range={range}
-                        setChosenData={setChosenData}
-                        chosenData={chosenData}
-                    />
-                </Box>
+                {/* {!apiLoading && <Box className={styles.yearMonthBoxParent}>
+                    <Box className={styles.yearMonthBox}>
+                        {showDays ?
+                            <>
+                                <Button
+                                    padding="2px 0"
+                                    backgroundColor="#FE7D06"
+                                    hoverBackgroundColor="#FE7D06"
+                                    borderRadius="1rem"
+                                    textAlign="center"
+                                    margin="0 0.5rem"
+                                >
+                                    <Typography
+                                        text={monthInLetters ? monthInLetters : ''}
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </Button>
+                                <span style={{
+                                    width: '6rem',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    textAlign: "center",
+                                    cursor: 'pointer',
+                                }}
+                                    onClick={() => onYearButtonClicked(years[0]?.month)}
+                                >
+                                    <Typography
+                                        text={years[0]?.month}
+                                        width="2.2rem"
+                                        height="2rem"
+                                        margin="0 0 0 0.5rem"
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </span>
+                            </>
+                            :
+                            <>
+                                <span style={{
+                                    width: '6rem',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    textAlign: "center",
+                                    cursor: 'pointer',
+                                }}
+                                    onClick={onMonthButtonClicked}>
+                                    <Typography
+                                        text={moment().month(clickedElement - 1).format("MMM") !== 'undefined' ? moment().month(clickedElement - 1).format("MMM") : ''}
+                                        width="2.2rem"
+                                        height="2rem"
+                                        margin="0 0 0 0.5rem"
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </span>
+                                <Button
+                                    padding="2px 0"
+                                    backgroundColor="#FE7D06"
+                                    hoverBackgroundColor="#FE7D06"
+                                    borderRadius="1rem"
+                                    textAlign="center"
+                                    margin="0 0.5rem"
+                                >
+                                    <Typography
+                                        text={years[0]?.month !== '' ? years[0]?.month : ''}
+                                        fontSize="1.4rem"
+                                        color="#FFFDFB"
+                                    />
+                                </Button>
+                            </>
+                        }
+                    </Box>
+                </Box>} */}
 
                 <ConnectWalletModal
                     open={open}
