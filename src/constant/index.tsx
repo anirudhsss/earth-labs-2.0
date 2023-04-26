@@ -16,9 +16,11 @@ export const Icons = {
   atlasDark: "/./assets/images/dark_atlas.svg",
   atlasWhite: "/./assets/images/atlas_white.svg",
   copy: "/./assets/images/copy.svg",
-  glyphSample: "https://dotearth.blob.core.windows.net/dotearthdemo/glyphs/glyph-87738138.png",
+  glyphSample:
+    "https://dotearth.blob.core.windows.net/dotearthdemo/glyphs/glyph-87738138.png",
   twitterWhite: "/./assets/images/twitter_white.svg",
   trophy: "/./assets/images/trophy.svg",
-  landingBg : '/./assets/images/landing.svg',
-  bells : '/./assets/images/bell.svg'
+  landingBg: "/./assets/images/landing.svg",
+  bells: "/./assets/images/bell.svg",
+  glphyLogo: "/./assets/images/Hexagon.svg",
 };

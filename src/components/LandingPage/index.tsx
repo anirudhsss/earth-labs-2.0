@@ -7,10 +7,9 @@ import InfoField from "components/shared/InfoField";
 import CopyContainer from "components/shared/CopyContainer";
 import { NormalSearchField } from "components/shared/TextField";
 import { Button } from "components/shared/Button";
-import { height } from "@mui/system";
 import { Link } from "react-router-dom";
-import { router } from "Routes";
 import { useEffect } from "react";
+import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 
 export interface LandingPageProps {}
 
@@ -35,8 +34,8 @@ export const LandingPage = ({}: LandingPageProps) => {
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
-      <Header landingPageLocation={landingPageLocation} />
-      <div
+      <OnboardingHeader />
+      <section
         className={styles.landing_inner}
         style={{
           overflow: "hidden",
@@ -93,7 +92,7 @@ export const LandingPage = ({}: LandingPageProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </Container>
   );
 };
