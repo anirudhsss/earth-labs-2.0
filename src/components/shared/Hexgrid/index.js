@@ -42,8 +42,8 @@ export const Hexgrid = ({
 }) => {
   // const [data, setData] = useState();
   // const [data1, setData1] = useState();
-  const [sortedData, setSortedData] = useState([]);
-  const [newCoordinates, setNewCoordinates] = useState({});
+  // const [sortedData, setSortedData] = useState([]);
+  // const [newCoordinates, setNewCoordinates] = useState({});
   const [testArr, setTestArr] = useState(matchedMonths);
 
   useEffect(() => {
@@ -65,8 +65,9 @@ export const Hexgrid = ({
         newS: item.S,
       };
     });
+    // console.log("reqQRSContainingArr", reqQRSContainingArr);
     setTestArr(reqQRSContainingArr);
-    setNewCoordinates(x);
+    // setNewCoordinates(x);
   }, [xAxisValue, yAxisValue, matchedMonths]);
 
   useEffect(() => {
@@ -106,8 +107,10 @@ export const Hexgrid = ({
             referenceDate <= dateMax &&
             referenceDate >= dateMin;
         } else {
+          // console.log("inside2", dateMax, dateMin);
           filteredData = referenceDate <= dateMax && referenceDate >= dateMin;
         }
+        // console.log("filteredData", filteredData);
         return filteredData;
       })
       .sort((a, b) => {
