@@ -32,6 +32,7 @@ import { AnyAaaaRecord } from "dns";
 import { AxiosFetch, BackdropDuringApiLoading } from '../utils';
 import { HelpPage } from "components/HelpPage";
 import PostHeaderLayer from "components/PostHeaderLayer";
+import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 
 export interface UserHomepageProps {
 
@@ -110,8 +111,8 @@ export const UserHomepage = ({
         x: 0,
         y: 0,
     })
-    const [ethToUsdc, setEthToUsdc] = useState<any>();
-    const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();
+    // const [ethToUsdc, setEthToUsdc] = useState<any>();
+    // const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();
     const [yAxisItems, setYAxisItems] = useState<any>([]);
     const [chosenData, setChosenData] = useState([]);
     const [range, setRange] = useState(false);
@@ -130,7 +131,7 @@ export const UserHomepage = ({
 
     const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
-    const [difference, setDifference] = useState<string>('');
+    // const [difference, setDifference] = useState<string>('');
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
     const [arrOfDays, setArrOfDays] = useState<any>([]);
     const [someYear, setSomeYear] = useState<any>();
@@ -141,10 +142,7 @@ export const UserHomepage = ({
 
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data2, apiLoading, apiError } = AxiosFetch();
-
-    // useEffect(() => {
-    //     setData(data?.hexes);
-    // }, [data]);
+    // const { ethToUsdc, ethToUsdcYvsTPercent, difference } = useEthToUsdcConversion();
 
     const onFindingXAxisMinAndMax = useCallback(() => {
         let arr: number[] = [];
@@ -478,9 +476,9 @@ export const UserHomepage = ({
         anotherFunc2(a);
     }, [anotherFunc2, years]);
 
-    useEffect(() => {
-        onEthToUsdcConversion();
-    }, [difference])
+    // useEffect(() => {
+    //     onEthToUsdcConversion();
+    // }, [difference])
 
     useEffect(() => {
         const a = data2?.filter((item: any) => item.isWallet === 0);
@@ -848,31 +846,31 @@ export const UserHomepage = ({
         }
     }
 
-    const onEthToUsdcConversion = async () => {
-        const yesterday = moment().subtract(1, 'days').format("DD-MM-YYYY");
-        const response1 = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=0')
-        const response2 = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=' + yesterday + '&localization=false');
-        if (response1 !== undefined && response2 !== undefined) {
-            let ethToUsdcToday;
-            // if (response1?.data?.ethereum?.usd !== undefined) {
-            ethToUsdcToday = response1?.data?.ethereum?.usd;
-            // }
-            setEthToUsdc(ethToUsdcToday);
-            let ethToUsdcYesterday;
-            // if (response2?.data?.market_data?.current_price?.usd) {
-            ethToUsdcYesterday = response2?.data?.market_data?.current_price?.usd;
-            // }
-            const difference1 = ethToUsdcToday - ethToUsdcYesterday;
-            if (difference1 <= 0) {
-                setDifference('increment');
-            } else {
-                setDifference('decrement')
-            }
-            const difference2 = Math.abs(difference1)
-            const percent = Math.round((difference2 / ethToUsdcToday) * 100);
-            setEthToUsdcYvsTPercent(percent);
-        }
-    }
+    // const onEthToUsdcConversion = async () => {
+    //     const yesterday = moment().subtract(1, 'days').format("DD-MM-YYYY");
+    //     const response1 = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false&precision=0')
+    //     const response2 = await axios.get('https://api.coingecko.com/api/v3/coins/ethereum/history?date=' + yesterday + '&localization=false');
+    //     if (response1 !== undefined && response2 !== undefined) {
+    //         let ethToUsdcToday;
+    //         // if (response1?.data?.ethereum?.usd !== undefined) {
+    //         ethToUsdcToday = response1?.data?.ethereum?.usd;
+    //         // }
+    //         setEthToUsdc(ethToUsdcToday);
+    //         let ethToUsdcYesterday;
+    //         // if (response2?.data?.market_data?.current_price?.usd) {
+    //         ethToUsdcYesterday = response2?.data?.market_data?.current_price?.usd;
+    //         // }
+    //         const difference1 = ethToUsdcToday - ethToUsdcYesterday;
+    //         if (difference1 <= 0) {
+    //             setDifference('increment');
+    //         } else {
+    //             setDifference('decrement')
+    //         }
+    //         const difference2 = Math.abs(difference1)
+    //         const percent = Math.round((difference2 / ethToUsdcToday) * 100);
+    //         setEthToUsdcYvsTPercent(percent);
+    //     }
+    // }
 
     const onClickedElementEnabled = (month: any) => {
         setClickedElement(month);
@@ -937,9 +935,6 @@ export const UserHomepage = ({
                         onValueMenuItemClicked1={onValueMenuItemClicked1}
                         onChosingCurrency={onChosingCurrency}
                         currName={currName}
-                        ethToUsdc={ethToUsdc}
-                        difference={difference}
-                        ethToUsdcYvsTPercent={ethToUsdcYvsTPercent}
                     />
 
                     <Box className={styles.body}>
