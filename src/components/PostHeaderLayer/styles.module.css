@@ -11,12 +11,12 @@
 .group1 {
     width: 33%;
     display: flex;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     align-items: center;
 }
 
 .timeMenuBtn1 {
-    width: auto;
+    /* width: auto; */
     height: 3rem;
     /* position: absolute;
     top: 15px;
