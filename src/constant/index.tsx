@@ -7,7 +7,7 @@ export const HEXAGON_WIDTH = 12.5;
 export const HEXAGON_HEIGHT = 12.3;
 
 export const HEXGRID_RENDER_TOTAL_WIDTH = 90;
-export const HEXGRID_RENDER_TOTAL_HEIGHT = 85;
+export const HEXGRID_RENDER_TOTAL_HEIGHT = 80;
 
 export const ApiUrl =
   "https://api.earth.domains/earthapi/dotEarth/GenerateMap?address=0x1E815a8188F1b84564577C1c998f7E6B4706B752";
