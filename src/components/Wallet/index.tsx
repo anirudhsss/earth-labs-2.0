@@ -158,9 +158,6 @@ export const Wallet = ({
                     onValueMenuItemClicked1={onValueMenuItemClicked1}
                     onChosingCurrency={onChosingCurrency}
                     currName={currName}
-                    ethToUsdc={ethToUsdc}
-                    difference={difference}
-                    ethToUsdcYvsTPercent={ethToUsdcYvsTPercent}
                 />
 
                 <Box sx={{

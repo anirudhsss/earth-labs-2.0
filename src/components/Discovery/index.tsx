@@ -23,9 +23,6 @@ export interface DiscoveryProps {
     onValueMenuItemClicked1?: any;
     onChosingCurrency?: any;
     currName?: any;
-    ethToUsdc?: any;
-    difference?: any;
-    ethToUsdcYvsTPercent?: any;
 }
 
 export const Discovery = ({
@@ -38,26 +35,7 @@ export const Discovery = ({
     onValueMenuItemClicked1,
     onChosingCurrency,
     currName,
-    ethToUsdc,
-    difference,
-    ethToUsdcYvsTPercent,
 }: DiscoveryProps) => {
-
-    // useEffect(() => {
-    //     const info = async () => {
-    //         const res = await ApiRequest();
-    //         setData(res);
-    //     }
-    //     info();
-    // }, [])
-
-    const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
-    // const { icon } = location?.state;
-    // const [data, setData] = useState<any>();
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
 
     const { data, data2, apiLoading, apiError } = AxiosFetch();
@@ -88,9 +66,6 @@ export const Discovery = ({
                     onValueMenuItemClicked1={onValueMenuItemClicked1}
                     onChosingCurrency={onChosingCurrency}
                     currName={currName}
-                    ethToUsdc={ethToUsdc}
-                    difference={difference}
-                    ethToUsdcYvsTPercent={ethToUsdcYvsTPercent}
                 />
 
                 <Box className={styles.body}>
@@ -240,10 +215,7 @@ export const Discovery = ({
                             </Box> */}
                     </Box>
                     {/* } */}
-                    <RhsNav
-                    // helpIconClicked={helpIconClicked}
-                    // onHelpIconClicked={onHelpIconClicked}
-                    />
+                    <RhsNav />
                 </Box>
             </Container>
         </Box>
