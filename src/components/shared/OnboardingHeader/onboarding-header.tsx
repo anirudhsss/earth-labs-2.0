@@ -52,7 +52,7 @@ const OnboardingHeader = () => {
             <Item text={"Documentation"} />
             <Item text={"About Us"} />
             <li>
-              <Button color="#000" backgroundColor="#fff">
+              <Button color="#1C223D" padding="0rem 4rem" height={'40px'} backgroundColor="#fff" borderRadius="200px">
                 <span
                   style={{
                     fontSize: "2rem",
