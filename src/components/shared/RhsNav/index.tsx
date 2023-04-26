@@ -243,76 +243,84 @@ export const RhsNav = ({
                     {(mapsLocation || homeLocation) && <Box sx={{ height: '9vh' }} className={styles.yearMonthBoxParent}>
                         <Box className={styles.yearMonthBox}>
                             {showDays ?
-                                <>
-                                    <Button
-                                        padding="2px 0"
-                                        backgroundColor="#FE7D06"
-                                        hoverBackgroundColor="#FE7D06"
-                                        borderRadius="1rem"
-                                        textAlign="center"
-                                        margin="0 0.5rem"
-                                    >
-                                        <Typography
-                                            text={monthInLetters ? monthInLetters : ''}
-                                            fontSize="1.4rem"
-                                            color="#FFFDFB"
-                                        />
-                                    </Button>
-                                    <span style={{
-                                        width: '6rem',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        textAlign: "center",
-                                        cursor: 'pointer',
-                                    }}
-                                        onClick={() => onYearButtonClicked(years[0]?.month)}
-                                    >
-                                        <Typography
-                                            text={years[0]?.month}
-                                            width="2.2rem"
-                                            height="2rem"
-                                            margin="0 0 0 0.5rem"
-                                            fontSize="1.4rem"
-                                            color="#FFFDFB"
-                                        />
-                                    </span>
-                                </>
+                                <Box className={styles.test1}>
+                                    <Box className={styles.test3}>
+                                        <Button
+                                            padding="2px 0"
+                                            backgroundColor="#FE7D06"
+                                            hoverBackgroundColor="#FE7D06"
+                                            borderRadius="1rem"
+                                        // textAlign="center"
+                                        // margin="0 0.5rem"
+                                        >
+                                            <Typography
+                                                text={monthInLetters ? monthInLetters : ''}
+                                                fontSize="1.4rem"
+                                                color="#FFFDFB"
+                                            />
+                                        </Button>
+                                    </Box>
+                                    <Box className={styles.test} sx={{ paddingRight: '1rem', }}>
+                                        <span style={{
+                                            // width: '6rem',
+                                            // display: 'flex',
+                                            // justifyContent: 'center',
+                                            // alignItems: 'center',
+                                            // textAlign: "center",
+                                            cursor: 'pointer',
+                                        }}
+                                            onClick={() => onYearButtonClicked(years[0]?.month)}
+                                        >
+                                            <Typography
+                                                text={years[0]?.month}
+                                                // width="2.2rem"
+                                                // height="2rem"
+                                                // margin="0 0 0 0.5rem"
+                                                fontSize="1.4rem"
+                                                color="#FFFDFB"
+                                            />
+                                        </span>
+                                    </Box>
+                                </Box>
                                 :
-                                <>
-                                    <span style={{
-                                        width: '6rem',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        textAlign: "center",
-                                        cursor: 'pointer',
-                                    }}
-                                        onClick={onMonthButtonClicked}>
-                                        <Typography
-                                            text={moment().month(clickedElement - 1).format("MMM") !== 'undefined' ? moment().month(clickedElement - 1).format("MMM") : ''}
-                                            width="2.2rem"
-                                            height="2rem"
-                                            margin="0 0 0 0.5rem"
-                                            fontSize="1.4rem"
-                                            color="#FFFDFB"
-                                        />
-                                    </span>
-                                    <Button
-                                        padding="2px 0"
-                                        backgroundColor="#FE7D06"
-                                        hoverBackgroundColor="#FE7D06"
-                                        borderRadius="1rem"
-                                        textAlign="center"
-                                        margin="0 0.5rem"
-                                    >
-                                        <Typography
-                                            text={years[0]?.month !== '' ? years[0]?.month : ''}
-                                            fontSize="1.4rem"
-                                            color="#FFFDFB"
-                                        />
-                                    </Button>
-                                </>
+                                <Box className={styles.test1}>
+                                    <Box className={styles.test} sx={{ paddingLeft: '1rem', }}>
+                                        <span style={{
+                                            // width: '6rem',
+                                            // display: 'flex',
+                                            // justifyContent: 'center',
+                                            // alignItems: 'center',
+                                            // textAlign: "center",
+                                            cursor: 'pointer',
+                                        }}
+                                            onClick={onMonthButtonClicked}>
+                                            <Typography
+                                                text={moment().month(clickedElement - 1).format("MMM") !== 'undefined' ? moment().month(clickedElement - 1).format("MMM") : ''}
+                                                // width="2.2rem"
+                                                // height="2rem"
+                                                // margin="0 0 0 0.5rem"
+                                                fontSize="1.4rem"
+                                                color="#FFFDFB"
+                                            />
+                                        </span>
+                                    </Box>
+                                    <Box className={styles.test3}>
+                                        <Button
+                                            padding="2px 0"
+                                            backgroundColor="#FE7D06"
+                                            hoverBackgroundColor="#FE7D06"
+                                            borderRadius="1rem"
+                                        // textAlign="center"
+                                        // margin="0 0.5rem"
+                                        >
+                                            <Typography
+                                                text={years[0]?.month !== '' ? years[0]?.month : ''}
+                                                fontSize="1.4rem"
+                                                color="#FFFDFB"
+                                            />
+                                        </Button>
+                                    </Box>
+                                </Box>
                             }
                             {/* <span>
                             <img
