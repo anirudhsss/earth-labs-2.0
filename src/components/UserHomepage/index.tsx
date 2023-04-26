@@ -149,9 +149,22 @@ export const UserHomepage = ({
         matchedMonths?.map((item: any) => {
             arr.push(Number(moment(item.timestamp).format("DD")));
         });
-        if (arr.length > 0) {
+        if (arr.length > 1) {
             let max = arr[0];
             let min = arr[1];
+            let n = arr.length;
+            for (let i = 0; i < n; i++) {
+                if (arr[i] > max) {
+                    max = arr[i];
+                } else if (arr[i] < min) {
+                    min = arr[i];
+                }
+                setXAxisValue({ xAxisDateMin: min, xAxisDateMax: max });
+            }
+        }
+        else if (arr.length === 1) {
+            let max = arr[0];
+            let min = arr[0];
             let n = arr.length;
             for (let i = 0; i < n; i++) {
                 if (arr[i] > max) {
