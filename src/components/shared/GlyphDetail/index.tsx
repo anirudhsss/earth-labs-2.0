@@ -153,7 +153,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
         </div>
         <div
           style={{
-            fontSize: "2rem",
+            fontSize: "1.6rem",
           }}
           className="flex w-100 justify-content-center align-items-center"
         >
@@ -256,7 +256,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
             <img src={Icons.trophy} />
             <span
               style={{
-                fontSize: "2rem",
+                fontSize: "1.6rem",
                 color: "#fff",
               }}
             >

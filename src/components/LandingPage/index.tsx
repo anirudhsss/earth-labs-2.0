@@ -68,7 +68,7 @@ export const LandingPage = ({}: LandingPageProps) => {
                 padding={"1rem"}
                 placeholderColor={"#fff"}
                 placeholderFontSize={"2rem"}
-                fontSize={"2rem"}
+                fontSize={"1.6rem"}
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
               />
@@ -84,7 +84,7 @@ export const LandingPage = ({}: LandingPageProps) => {
                   borderRadius="2rem"
                   height={"4.5rem"}
                   width={"13rem"}
-                  size={"2rem"}
+                  size={"1.6rem"}
                 >
                   Search
                 </Button>

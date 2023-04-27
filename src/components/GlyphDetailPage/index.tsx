@@ -14,7 +14,7 @@ const GlyphDetailPage = () => {
 
   return (
     <Container backgroundColor="#1C223D">
-      <OnboardingHeader />
+      <OnboardingHeader isAtlasLogo={true} />
       <GlyphDetail />
     </Container>
   );
