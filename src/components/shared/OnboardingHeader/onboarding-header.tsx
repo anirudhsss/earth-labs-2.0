@@ -7,9 +7,13 @@ import RenderIf from "../RenderIf";
 
 interface IOnboardingHeader {
   isAtlasLogo?: boolean;
+  isConnectWallet?: boolean;
 }
 
-const OnboardingHeader: FC<IOnboardingHeader> = ({ isAtlasLogo }) => {
+const OnboardingHeader: FC<IOnboardingHeader> = ({
+  isAtlasLogo,
+  isConnectWallet = true,
+}) => {
   const navigate = useNavigate();
   const Item = ({ text }: { text: string }) => {
     return (
@@ -41,8 +45,8 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({ isAtlasLogo }) => {
             <img
               style={{
                 cursor: "pointer",
-                height : '64px',
-                width : '120px'
+                height: "64px",
+                width: "120px",
               }}
               src={Icons.atlasDark}
               onClick={() => {
@@ -72,23 +76,25 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({ isAtlasLogo }) => {
           >
             <Item text={"Documentation"} />
             <Item text={"About Us"} />
-            <li>
-              <Button
-                color="#1C223D"
-                padding="0rem 4rem"
-                height={"40px"}
-                backgroundColor="#fff"
-                borderRadius="200px"
-              >
-                <span
-                  style={{
-                    fontSize: "1.6rem",
-                  }}
+            <RenderIf isTrue={isConnectWallet}>
+              <li>
+                <Button
+                  color="#1C223D"
+                  padding="0rem 4rem"
+                  height={"40px"}
+                  backgroundColor="#fff"
+                  borderRadius="200px"
                 >
-                  Connect Wallet
-                </span>
-              </Button>
-            </li>
+                  <span
+                    style={{
+                      fontSize: "1.6rem",
+                    }}
+                  >
+                    Connect Wallet
+                  </span>
+                </Button>
+              </li>
+            </RenderIf>
           </ul>
         </div>
       </div>
