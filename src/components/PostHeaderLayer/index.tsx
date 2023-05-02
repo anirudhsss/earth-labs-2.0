@@ -1,6 +1,7 @@
 import { Box, Menu, MenuItem } from '@mui/material';
 import { Button } from 'components/shared/Button';
 import { Typography } from 'components/shared/Typography';
+import { AxiosFetch } from 'components/utils';
 import useEthToUsdcConversion from 'hooks/useEthToUsdcConversion';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
@@ -16,7 +17,7 @@ export interface PostHeaderLayerProps {
     onChosingCurrency?: any;
     currName?: any;
     apiLoading?: any;
-    data?: any;
+    // data?: any;
 }
 
 const PostHeaderLayer = ({
@@ -30,7 +31,7 @@ const PostHeaderLayer = ({
     onChosingCurrency,
     currName,
     apiLoading,
-    data,
+    // data,
 }: PostHeaderLayerProps) => {
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
@@ -38,6 +39,7 @@ const PostHeaderLayer = ({
     const mapsLocation = location?.state?.icon === 'maps';
     const discoveryLocation = location?.state?.icon === 'discovery';
     const { ethToUsdc, ethToUsdcYvsTPercent, difference } = useEthToUsdcConversion();
+    const { data } = AxiosFetch();
 
     return (
         <>
@@ -242,13 +244,13 @@ const PostHeaderLayer = ({
                         </Box>}
                 </Box>
                 <Box className={styles.group2}>
-                    {data?.dotEarthHandle && <Box className={styles.earthIdContainer}>
+                    {(homeLocation || mapsLocation || walletLocation) && data?.dotEarthHandle && <Box className={styles.earthIdContainer}>
                         <Box className={styles.earthIdContainerChild}>
                             <Typography
                                 text={`${data?.dotEarthHandle}.earth.eth`}
                                 fontWeight='700'
                                 fontSize='1.8rem'
-                                color='#163A70'
+                                color={`${(homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''}`}
                             />
                             <img
                                 src='/assets/images/👀.svg'

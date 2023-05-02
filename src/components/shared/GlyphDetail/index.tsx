@@ -241,8 +241,8 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
                   gap: "1rem",
                 }}
               >
-                <img src={Icons.twitterWhite} width={30} height={25} />
-                <span >Share the Glyph on twitter</span>
+                <img src={Icons.twitter} width={30} height={25} />
+                <span >Share your 1st glyph on Twitter!</span>
               </div>
             </Button>
           </div>

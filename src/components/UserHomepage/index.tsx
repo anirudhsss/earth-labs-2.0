@@ -918,7 +918,7 @@ export const UserHomepage = ({
                 >
 
                     <PostHeaderLayer
-                        data={data}
+                        // data={data}
                         apiLoading={apiLoading}
                         openMenu1={openMenu1}
                         currency={currency}
