@@ -4,6 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./Routes";
+import Web3ModalProvider from "provider/web3modal.provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,6 +12,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Box sx={{ display: { xs: "none", md: "block" } }}>
-    <RouterProvider router={router} />
+    <Web3ModalProvider>
+      <RouterProvider router={router} />
+    </Web3ModalProvider>
   </Box>
 );
