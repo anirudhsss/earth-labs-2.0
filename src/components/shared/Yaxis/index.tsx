@@ -45,6 +45,8 @@ export const Yaxis = ({
                         </span>
                     </Box>
                     {yAxisItems?.map((item: any) => {
+                        const range = item.range.split(' ');
+                        // console.log('item', item);
                         return (
                             <>
 
@@ -56,7 +58,7 @@ export const Yaxis = ({
                                         height: item.dimension,
                                         backgroundColor: (yAxisItemClicked === item.id || yAxisItemHovered === item.id) ? '#FE7D06' : '#FFF7EE',
                                     }}
-                                    onClick={() => onYAxisItemClicked(item.id, item.range)}
+                                    onClick={() => onYAxisItemClicked(item.id, range[0], range[2])}
                                     onMouseEnter={() => onYAxisItemHoverOn(item.id)}
                                     onMouseLeave={() => onYAxisItemHoverOff(item.id)}
                                 >
@@ -66,7 +68,7 @@ export const Yaxis = ({
                                                 marginLeft: '10rem'
                                             }}>
                                                 <Typography
-                                                    text={item.range}
+                                                    text={range[0]}
                                                     fontSize="12px"
                                                     fontWeight='bold'
                                                 />

@@ -26,16 +26,12 @@ export const truncate = (
   }
 };
 
-export const ApiRequest = async () => {
-  try {
-    const response = await axios.get(
-      "https://api.earth.domains/earthapi/dotEarth/GenerateMap?address=0x1E815a8188F1b84564577C1c998f7E6B4706B752"
-    );
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
-};
+export const getRandomIntInclusive = (min: number, max: number) => {
+  min = Math.floor(min);
+  max = Math.ceil(max);
+  const num = Math.random() * (max - min + 1) + min;
+  return num;
+}
 
 export const AxiosFetch = () => {
   const [apiData, setApiData] = useState<any>([]);
@@ -51,7 +47,14 @@ export const AxiosFetch = () => {
       .then((res) => res.json())
       .then((apiData) => {
         setApiError(apiData.apiError);
-        const a = apiData[0].hexes?.map((item: any) => ({ ...item, targetValue1: Math.random() }));
+        const a = apiData[0].hexes?.map((item: any) => {
+          return (
+            {
+              ...item,
+              targetValue1: getRandomIntInclusive(0.001, 10)
+            }
+          )
+        });
         setApiData(a);
         setApiLoading(false);
         setData(apiData[0]);

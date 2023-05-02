@@ -3,7 +3,6 @@ import { ethers, providers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import { CLAIM_PROCESS } from "constant";
-import { ApiRequest } from "components/utils";
 import "./App.css";
 
 const App = () => {
@@ -28,13 +27,13 @@ const App = () => {
   const [isWalletConnected, setWalletConnected] = useState(false);
   const [data, setData] = useState<any>();
 
-  useEffect(() => {
-    const info = async () => {
-      const res = await ApiRequest();
-      setData(res);
-    };
-    info();
-  }, []);
+  // useEffect(() => {
+  //   const info = async () => {
+  //     const res = await ApiRequest();
+  //     setData(res);
+  //   };
+  //   info();
+  // }, []);
 
   useEffect(() => {
     const w: any = window;
@@ -105,7 +104,7 @@ const App = () => {
 
   const _getSignatureMessage = async (
     accountAddress: string
-  ): Promise<void> => {};
+  ): Promise<void> => { };
 
   const connectWalletConnectWallet = async () => {
     onClose();
@@ -122,13 +121,13 @@ const App = () => {
       // await _getSignatureMessage(accounts[0]);
       setUserWalletAddress(accounts[0]);
       // Subscribe to accounts change
-      provider.on("accountsChanged", (accounts: string[]) => {});
+      provider.on("accountsChanged", (accounts: string[]) => { });
 
       // Subscribe to chainId change
-      provider.on("chainChanged", (chainId: number) => {});
+      provider.on("chainChanged", (chainId: number) => { });
 
       // Subscribe to session connection
-      provider.on("connect", () => {});
+      provider.on("connect", () => { });
 
       // Subscribe to session disconnection
       provider.on("disconnect", (code: number, reason: string) => {

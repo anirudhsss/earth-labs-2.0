@@ -11,7 +11,6 @@ import { truncate } from '../utils';
 import { Xaxis } from "../shared/Xaxis";
 import { Hexgrid } from "../shared/Hexgrid";
 import { Link, useLocation } from "react-router-dom";
-import { ApiRequest } from "components/utils";
 import moment from "moment";
 import { Container } from "components/shared/Container";
 
@@ -37,13 +36,6 @@ import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 export interface UserHomepageProps {
 
 }
-
-const YEARS = [
-    { id: 0, value: '2017' },
-    { id: 1, value: '2018' },
-    { id: 2, value: '2019' },
-    { id: 3, value: '2020' },
-]
 const ETH = [
     { id: 0, value: '0.001 - 0.01 ETH' },
     { id: 1, value: '0.01 - 0.1 ETH' },
@@ -501,6 +493,17 @@ export const UserHomepage = ({
         setData1(sortedTxnInDescOrder);
     }, [data2]);
 
+    useEffect(() => {
+        const tArr = data2?.map((item: any) => item.targetValue1);
+        const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
+        if (sortedTArr?.length % 4 === 0) {
+
+        } else {
+
+        }
+        console.log('sortedTArr', sortedTArr);
+    }, [data2]);
+
     const onHelpIconClicked = () => {
         setHelpIconClicked(!helpIconClicked);
     }
@@ -690,6 +693,7 @@ export const UserHomepage = ({
     }
 
     const testFunc = (selectedItem1: any) => {
+        // console.log('selectedItem1', selectedItem1)
         let range = false;
         setRange(true);
         range = true;
@@ -728,33 +732,38 @@ export const UserHomepage = ({
             lengthsArr?.push(testFunc2(d2, d3))
             lengthsArr.push(testFunc2(d3, higherRange))
             let data2: any = [];
-            // if (monthOrYear === 'year') {
-            data2 = abcd;
-            // } else if (monthOrYear === 'month') {
             data2 = abcd1;
-            // }
             const arr = data2?.filter((item: any) => {
-                return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+                return item.targetValue1 >= lowerRange && item.targetValue1 <= higherRange;
             })
-            let processedArrays: any[] = [];
+            // console.log('arr', arr)
+            // let processedArrays: any[] = [];
             let processedArrays1: any[] = [];
-            // setTestData(arr);
             setMatchedMonths(arr);
+            // console.log('lengthsArr', lengthsArr)
             processedArrays1 = lengthsArr?.map((item: any) => {
+                // console.log('item', item)
                 return processedArrays1.concat(item[0])
             })
-            processedArrays = processedArrays1.flat();
+            // processedArrays = processedArrays1.flat();
+            // console.log('processedArrays', processedArrays)
             const processedInput = lengthsArr?.map((item: any) => item[0].length);
+            // console.log('processedInput', processedInput)
             const min = Math.min(...processedInput);
             const max = Math.max(...processedInput);
-            // const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
-            const rangeArr = lengthsArr?.map((item: any) => item[1])
+            // console.log(min, max);
+            const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
+            // const rangeArr = lengthsArr?.map((item: any) => item[1])
+            // console.log('rangeArr', rangeArr)
             let arrOfInterest: any = [];
             processedInput.forEach((item: any) => {
+                // console.log('item', item)
                 let val1 = Math.round(((35 - 10) * invlerp(min, max, item)) + 10);
+                // console.log('val1', val1)
                 arrOfInterest = [...arrOfInterest, val1]
             })
             let yAxisItems: any = [];
+            // console.log('arrOfInterest', arrOfInterest)
             arrOfInterest.forEach((_: any, index: number) => {
                 yAxisItems.push({
                     id: index,
@@ -772,28 +781,26 @@ export const UserHomepage = ({
 
     const testFunc2 = (lowerRange: any, higherRange: any) => {
         let data2: any = [];
-        // if (monthOrYear === 'year') {
-        data2 = abcd;
-        // } else if (monthOrYear === 'month') {
+        // data2 = abcd;
         data2 = abcd1;
-        // }
         const arr = data2?.filter((item: any) => {
-            return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+            return item.targetValue1 >= lowerRange && item.targetValue1 <= higherRange;
         })
         return [arr, lowerRange, higherRange];
     }
 
-    const onYAxisItemClicked = (id: any, range: any) => {
-        let lowerRange = 0, higherRange = 0;
-        const b = range.split(' ');
-        lowerRange = Number(b[0]);
-        higherRange = Number(b[2]);
+    const onYAxisItemClicked = (id: any, lowerRange: any, higherRange: any) => {
+        // let lowerRange = 0, higherRange = 0;
+        // const b = range.split(' ');
+        // lowerRange = Number(b[0]);
+        // higherRange = Number(b[2]);
+        // console.log('test', id, lowerRange, higherRange);
         setYAxisValue({ yAxisValueMin: lowerRange, yAxisValueMax: higherRange });
         let data2: any = [];
         let idd = Number(id);
         setYAxisItemClicked(idd);
         // if (monthOrYear === 'year') {
-        data2 = abcd;
+        // data2 = abcd;
         // } else if (monthOrYear === 'month') {
         data2 = abcd1;
         // }
@@ -899,7 +906,7 @@ export const UserHomepage = ({
         setShowDays(true);
         setfurtherPropagation(false);
     }, []);
-
+    // console.log('data2', data2);
     // console.log('clickedElement', clickedElement)
     // console.log('clickedMonth', clickedMonth)
     // console.log('furtherPropagation', furtherPropagation);
@@ -912,6 +919,7 @@ export const UserHomepage = ({
     // console.log('leastDimension', leastDimension);
     // console.log('arrOfDays', arrOfDays);
     // console.log('month', month);
+    console.log('chosenCurrency', chosenCurrency);
     return (
         <>
 

@@ -8,7 +8,7 @@ import {
   Path,
   Hex,
 } from "react-hexgrid";
-import { ApiRequest, AxiosFetch } from "components/utils";
+import { AxiosFetch } from "components/utils";
 import { Fragment, useEffect, useState } from "react";
 import moment from "moment";
 import sample from "../../../sample.json";
