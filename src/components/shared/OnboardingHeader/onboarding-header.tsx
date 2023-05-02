@@ -1,15 +1,25 @@
 import { Icons } from "constant";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import { Container } from "../Container";
+import RenderIf from "../RenderIf";
 
-const OnboardingHeader = () => {
+interface IOnboardingHeader {
+  isAtlasLogo?: boolean;
+  isConnectWallet?: boolean;
+}
+
+const OnboardingHeader: FC<IOnboardingHeader> = ({
+  isAtlasLogo,
+  isConnectWallet = true,
+}) => {
   const navigate = useNavigate();
   const Item = ({ text }: { text: string }) => {
     return (
       <li
         style={{
-          fontSize: "2rem",
+          fontSize: "1.6rem",
           color: "#fff",
         }}
       >
@@ -31,15 +41,30 @@ const OnboardingHeader = () => {
         }}
       >
         <div className="flex">
-          <img
-            style={{
-              cursor: "pointer",
-            }}
-            src={Icons.glphyLogo}
-            onClick={() => {
-              navigate("/maps");
-            }}
-          />
+          <RenderIf isTrue={Boolean(isAtlasLogo)}>
+            <img
+              style={{
+                cursor: "pointer",
+                height: "64px",
+                width: "120px",
+              }}
+              src={Icons.atlasDark}
+              onClick={() => {
+                navigate("/maps");
+              }}
+            />
+          </RenderIf>
+          <RenderIf isTrue={!Boolean(isAtlasLogo)}>
+            <img
+              style={{
+                cursor: "pointer",
+              }}
+              src={Icons.glphyLogo}
+              onClick={() => {
+                navigate("/maps");
+              }}
+            />
+          </RenderIf>
         </div>
         <div className="flex">
           <ul
@@ -51,17 +76,25 @@ const OnboardingHeader = () => {
           >
             <Item text={"Documentation"} />
             <Item text={"About Us"} />
-            <li>
-              <Button color="#1C223D" padding="0rem 4rem" height={'40px'} backgroundColor="#fff" borderRadius="200px">
-                <span
-                  style={{
-                    fontSize: "2rem",
-                  }}
+            <RenderIf isTrue={isConnectWallet}>
+              <li>
+                <Button
+                  color="#1C223D"
+                  padding="0rem 4rem"
+                  height={"40px"}
+                  backgroundColor="#fff"
+                  borderRadius="200px"
                 >
-                  Connect Wallet
-                </span>
-              </Button>
-            </li>
+                  <span
+                    style={{
+                      fontSize: "1.6rem",
+                    }}
+                  >
+                    Connect Wallet
+                  </span>
+                </Button>
+              </li>
+            </RenderIf>
           </ul>
         </div>
       </div>

@@ -153,7 +153,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
         </div>
         <div
           style={{
-            fontSize: "2rem",
+            fontSize: "1.6rem",
           }}
           className="flex w-100 justify-content-center align-items-center"
         >
@@ -242,7 +242,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
                 }}
               >
                 <img src={Icons.twitterWhite} width={30} height={25} />
-                <span>Share the Glyph on twitter</span>
+                <span >Share the Glyph on twitter</span>
               </div>
             </Button>
           </div>
@@ -251,12 +251,12 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
             style={{
               gap: "1rem",
             }}
-            className="flex w-full flex-row"
+            className="flex w-full flex-row align-items-center"
           >
             <img src={Icons.trophy} />
             <span
               style={{
-                fontSize: "2rem",
+                fontSize: "1.6rem",
                 color: "#fff",
               }}
             >

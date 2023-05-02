@@ -28,7 +28,7 @@ const Alert: FC<IAlert> = ({
       <span
         style={{
           color: textColor,
-          fontSize : '2rem'
+          fontSize : '1.6rem'
         }}
       >
         {text}

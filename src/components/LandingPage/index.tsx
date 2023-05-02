@@ -34,7 +34,7 @@ export const LandingPage = ({}: LandingPageProps) => {
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
-      <OnboardingHeader />
+      <OnboardingHeader isConnectWallet={false}/>
       <section
         className={styles.landing_inner}
         style={{
@@ -42,6 +42,7 @@ export const LandingPage = ({}: LandingPageProps) => {
           backgroundImage: `url('${Icons.landingBg}')`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right bottom",
+          backgroundSize : '900px',
           height: "inherit",
         }}
       >
@@ -68,7 +69,7 @@ export const LandingPage = ({}: LandingPageProps) => {
                 padding={"1rem"}
                 placeholderColor={"#fff"}
                 placeholderFontSize={"2rem"}
-                fontSize={"2rem"}
+                fontSize={"1.6rem"}
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
               />
@@ -84,7 +85,7 @@ export const LandingPage = ({}: LandingPageProps) => {
                   borderRadius="2rem"
                   height={"4.5rem"}
                   width={"13rem"}
-                  size={"2rem"}
+                  size={"1.6rem"}
                 >
                   Search
                 </Button>
