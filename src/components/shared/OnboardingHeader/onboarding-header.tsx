@@ -2,6 +2,7 @@ import { Icons } from "constant";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
+import ConnectWallet from "../ConnectWallet";
 import { Container } from "../Container";
 import RenderIf from "../RenderIf";
 
@@ -78,21 +79,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             <Item text={"About Us"} />
             <RenderIf isTrue={isConnectWallet}>
               <li>
-                <Button
-                  color="#1C223D"
-                  padding="0rem 4rem"
-                  height={"40px"}
-                  backgroundColor="#fff"
-                  borderRadius="200px"
-                >
-                  <span
-                    style={{
-                      fontSize: "1.6rem",
-                    }}
-                  >
-                    Connect Wallet
-                  </span>
-                </Button>
+                <ConnectWallet />
               </li>
             </RenderIf>
           </ul>
