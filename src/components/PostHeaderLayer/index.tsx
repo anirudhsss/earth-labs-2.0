@@ -249,7 +249,7 @@ const PostHeaderLayer = ({
                             <Typography
                                 text={`${data?.dotEarthHandle}.earth.eth`}
                                 fontWeight='700'
-                                fontSize='1.8rem'
+                                fontSize='1.3rem'
                                 color={`${(homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''}`}
                             />
                             <img
