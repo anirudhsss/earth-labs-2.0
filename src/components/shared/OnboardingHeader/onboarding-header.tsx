@@ -2,10 +2,10 @@ import { Icons } from "constant";
 import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
+import ConnectWallet from "../ConnectWallet";
 import { Container } from "../Container";
 import RenderIf from "../RenderIf";
-import { ConnectButton, useAccountModal, useChainModal, useConnectModal } from "@rainbow-me/rainbowkit";
-import { useConnect } from "wagmi";
+
 interface IOnboardingHeader {
   isAtlasLogo?: boolean;
   isConnectWallet?: boolean;
@@ -16,7 +16,6 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
   isConnectWallet = true,
 }) => {
   const navigate = useNavigate();
-  const { openConnectModal } = useConnectModal();
   const Item = ({ text }: { text: string }) => {
     return (
       <li
@@ -80,23 +79,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             <Item text={"About Us"} />
             <RenderIf isTrue={isConnectWallet}>
               <li>
-                {/* <Button
-                  color="#1C223D"
-                  padding="0rem 4rem"
-                  height={"40px"}
-                  backgroundColor="#fff"
-                  borderRadius="200px"
-                  onClick={openConnectModal}
-                >
-                  <span
-                    style={{
-                      fontSize: "1.6rem",
-                    }}
-                  >
-                    Connect Wallet
-                  </span>
-                </Button> */}
-                <ConnectButton />
+                <ConnectWallet />
               </li>
             </RenderIf>
           </ul>

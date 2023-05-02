@@ -87,3 +87,21 @@ code {
 .h-100 {
   height: 100%;
 }
+
+.connectWalletWrapper > button {
+  color: #1c223d !important;
+  padding: 0rem 4rem !important;
+  height: 4rem !important;
+  background-color: #fff !important;
+  border-radius : 20rem !important;
+
+}
+
+[data-testid="rk-connect-button"] {
+  color: #1c223d !important;
+  padding: 0rem 4rem !important;
+  height: 4rem !important;
+  background-color: #fff !important;
+  border-radius : 20rem !important;
+  font-size: 1.4rem !important;
+}
