@@ -16,6 +16,7 @@ export interface PostHeaderLayerProps {
     onChosingCurrency?: any;
     currName?: any;
     apiLoading?: any;
+    data?: any;
 }
 
 const PostHeaderLayer = ({
@@ -29,6 +30,7 @@ const PostHeaderLayer = ({
     onChosingCurrency,
     currName,
     apiLoading,
+    data,
 }: PostHeaderLayerProps) => {
     const location = useLocation();
     const homeLocation = location?.state?.icon === 'home';
@@ -239,7 +241,22 @@ const PostHeaderLayer = ({
                             </span>
                         </Box>}
                 </Box>
-                <Box className={styles.group2}></Box>
+                <Box className={styles.group2}>
+                    {data?.dotEarthHandle && <Box className={styles.earthIdContainer}>
+                        <Box className={styles.earthIdContainerChild}>
+                            <Typography
+                                text={`${data?.dotEarthHandle}.earth.eth`}
+                                fontWeight='700'
+                                fontSize='1.8rem'
+                                color='#163A70'
+                            />
+                            <img
+                                src='/assets/images/👀.svg'
+                                alt=''
+                            />
+                        </Box>
+                    </Box>}
+                </Box>
                 {!discoveryLocation && <Box
                     className={styles.group3}
                 >
