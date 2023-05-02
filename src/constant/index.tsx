@@ -23,4 +23,5 @@ export const Icons = {
   landingBg: "/./assets/images/landing.svg",
   bells: "/./assets/images/bell.svg",
   glphyLogo: "/./assets/images/Hexagon.svg",
+  twitter: "/./assets/images/twitter.svg",
 };
