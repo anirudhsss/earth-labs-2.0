@@ -40,7 +40,11 @@ const Web3ModalProvider: FC<IModalProvider> = ({ children }) => {
   return (
     <RainbowThemeContext.Provider value={{ updateTheme: setCurrentTheme }}>
       <WagmiConfig client={client}>
-        <RainbowKitProvider theme={currentTheme} chains={chains}>
+        <RainbowKitProvider
+  modalSize={'compact'}
+          theme={currentTheme}
+          chains={chains}
+        >
           {children}
         </RainbowKitProvider>
       </WagmiConfig>
