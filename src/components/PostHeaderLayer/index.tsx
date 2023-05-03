@@ -1,8 +1,9 @@
 import { Box, Menu, MenuItem } from '@mui/material';
 import { Button } from 'components/shared/Button';
 import { Typography } from 'components/shared/Typography';
-import { AxiosFetch } from 'components/utils';
+import { AxiosFetch, truncate, isEmpty } from 'components/utils';
 import useEthToUsdcConversion from 'hooks/useEthToUsdcConversion';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 
@@ -40,6 +41,19 @@ const PostHeaderLayer = ({
     const discoveryLocation = location?.state?.icon === 'discovery';
     const { ethToUsdc, ethToUsdcYvsTPercent, difference } = useEthToUsdcConversion();
     const { data } = AxiosFetch();
+    const [condition, setCondition] = useState<boolean>(false);
+
+    const onChangeText = useCallback(() => {
+        if (!isEmpty(data?.dotEarthHandle) || data?.dotEarthHandle === ('' || null)) {
+            setCondition(true);
+        } else {
+            setCondition(false);
+        }
+    }, [data?.dotEarthHandle]);
+
+    useEffect(() => {
+        onChangeText();
+    }, [onChangeText]);
 
     return (
         <>
@@ -246,12 +260,24 @@ const PostHeaderLayer = ({
                 <Box className={styles.group2}>
                     {(homeLocation || mapsLocation || walletLocation) && data?.dotEarthHandle && <Box className={styles.earthIdContainer}>
                         <Box className={styles.earthIdContainerChild}>
-                            <Typography
+                            {condition && <img
+                                src='/assets/images/favicon.svg'
+                                alt=''
+                                width='20'
+                                height='20'
+                            />}
+                            {condition ? <Typography
                                 text={`${data?.dotEarthHandle}.earth.eth`}
                                 fontWeight='700'
                                 fontSize='1.3rem'
                                 color={`${(homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''}`}
-                            />
+                            /> :
+                                <span style={{
+                                    fontWeight: '700',
+                                    fontSize: '1.3rem',
+                                    color: (homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''
+
+                                }}>{truncate(data?.targetAddress, 12, '....')}</span>}
                             <img
                                 src='/assets/images/👀.svg'
                                 alt=''
