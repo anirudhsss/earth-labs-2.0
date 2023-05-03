@@ -62,7 +62,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
               }}
               src={Icons.glphyLogo}
               onClick={() => {
-                navigate("/maps");
+                navigate("/discovery");
               }}
             />
           </RenderIf>
