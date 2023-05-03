@@ -69,7 +69,7 @@
 
 .eachIcon {
     cursor: pointer;
-    height: 11rem;
+    height: 9rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
