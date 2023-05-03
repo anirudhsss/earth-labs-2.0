@@ -40,7 +40,7 @@ const PostHeaderLayer = ({
     const discoveryLocation = location?.state?.icon === 'discovery';
     const { ethToUsdc, ethToUsdcYvsTPercent, difference } = useEthToUsdcConversion();
     const { data } = AxiosFetch();
-
+    // console.log('currency', currency);
     return (
         <>
             <Box className={styles.postHeader}>
@@ -71,7 +71,7 @@ const PostHeaderLayer = ({
                             >
                                 {currency?.length > 0 ?
                                     <Typography
-                                        text={`${currency[0].value}`}
+                                        text={`${currency}`}
                                         fontSize="13px"
                                         margin="0 5px 0 0"
                                     />
