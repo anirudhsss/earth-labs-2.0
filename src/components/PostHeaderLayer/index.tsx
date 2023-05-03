@@ -114,7 +114,7 @@ const PostHeaderLayer = ({
 
                                 }}
                             >
-                                {chosenCurrency?.map((item: any) => {
+                                {/* {chosenCurrency?.map((item: any) => {
                                     return (
                                         <>
                                             <MenuItem
@@ -129,6 +129,23 @@ const PostHeaderLayer = ({
                                                 }}
                                             >{item.value}</MenuItem>
                                         </>
+                                    )
+                                })} */}
+                                {chosenCurrency?.map((item: any, index: number) => {
+                                    return (
+                                        <MenuItem
+                                            key={index}
+                                            onClick={() => onValueMenuItemClicked1(index)}
+                                            sx={{
+                                                fontSize: '13px',
+                                                borderBottom: '1px solid black',
+                                                '&:last-child': {
+                                                    borderBottom: '0px',
+                                                },
+                                            }}
+                                        >
+                                            {`${item[0]?.toFixed(2)} - ${item[item?.length - 1]?.toFixed(2)} ${currName}`}
+                                        </MenuItem>
                                     )
                                 })}
                             </Menu>

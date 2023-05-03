@@ -26,7 +26,7 @@ import { Wallet } from "components/Wallet";
 import axios from "axios";
 import { Yaxis } from "components/shared/Yaxis";
 import { AnyAaaaRecord } from "dns";
-import { AxiosFetch, BackdropDuringApiLoading } from 'components/utils';
+import { AxiosFetch, BackdropDuringApiLoading, CalcRange } from 'components/utils';
 import { HelpPage } from "components/HelpPage";
 import PostHeaderLayer from "components/PostHeaderLayer";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
@@ -34,25 +34,25 @@ import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 export interface UserHomepageProps {
 
 }
-const ETH = [
-    { id: 0, value: '0.001 - 0.01 ETH' },
-    { id: 1, value: '0.01 - 0.1 ETH' },
-    { id: 2, value: '0.1 - 1 ETH' },
-    { id: 3, value: '1 - 10 ETH' },
-]
-const USDC = [
-    { id: 0, value: '< $500 USDC' },
-    { id: 1, value: '$500 - $1000 USDC' },
-    { id: 2, value: '$1000 - $5000 USDC' },
-    { id: 3, value: '$5000 - $10000 USDC' },
-    { id: 4, value: '> $10000 USDC' },
-]
+// const ETH = [
+//     { id: 0, value: '0.001 - 0.01 ETH' },
+//     { id: 1, value: '0.01 - 0.1 ETH' },
+//     { id: 2, value: '0.1 - 1 ETH' },
+//     { id: 3, value: '1 - 10 ETH' },
+// ]
+// const USDC = [
+//     { id: 0, value: '< $500 USDC' },
+//     { id: 1, value: '$500 - $1000 USDC' },
+//     { id: 2, value: '$1000 - $5000 USDC' },
+//     { id: 3, value: '$5000 - $10000 USDC' },
+//     { id: 4, value: '> $10000 USDC' },
+// ]
 
 export const UserHomepage = ({
 
 }: UserHomepageProps) => {
-    const [eth, setEth] = useState(ETH);
-    const [usdc, setUsdc] = useState(USDC);
+    // const [eth, setEth] = useState(ETH);
+    // const [usdc, setUsdc] = useState(USDC);
     const [currName, setCurrName] = useState('ETH');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
@@ -94,7 +94,7 @@ export const UserHomepage = ({
     const [isWalletConnected, setWalletConnected] = useState(false);
     const [test, setData] = useState<any>();
     const [openWalletModal, setOpenWalletModal] = useState(false);
-    const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
+    const [chosenCurrency, setChosenCurrency] = useState<any>([]);
     const [coordinates, setCoordinates] = useState<any>({
         // x: -53,
         // y: -31,
@@ -494,12 +494,9 @@ export const UserHomepage = ({
     useEffect(() => {
         const tArr = data2?.map((item: any) => item.targetValue1);
         const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
-        if (sortedTArr?.length % 4 === 0) {
-
-        } else {
-
-        }
-        console.log('sortedTArr', sortedTArr);
+        const requiredArr = CalcRange(sortedTArr);
+        // console.log('requiredArr', requiredArr);
+        setChosenCurrency(requiredArr);
     }, [data2]);
 
     const onHelpIconClicked = () => {
@@ -684,20 +681,26 @@ export const UserHomepage = ({
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
         onCloseYearMenu1();
-        const selectedItem = chosenCurrency.filter((item: any) => item.id === id);
-        setSelectedItem1(selectedItem[0].value);
-        testFunc(selectedItem[0].value)
-        setCurrency(selectedItem);
+        let a = '';
+        const selectedItem = chosenCurrency.filter((item: any, index: number) => {
+            if (index === id) {
+                a += item[0]?.toFixed(2) + ' - ' + item[item?.length - 1]?.toFixed(2) + ' ' + currName;
+            }
+        })
+        // setSelectedItem1(selectedItem[0].value);
+        testFunc(a)
+        setCurrency(a);
     }
 
-    const testFunc = (selectedItem1: any) => {
-        // console.log('selectedItem1', selectedItem1)
+    const testFunc = (selectedItem: any) => {
+        // console.log('selectedItem', selectedItem)
         let range = false;
         setRange(true);
         range = true;
         let lowerRange = 0, higherRange = 0;
         if (range) {
-            const b = selectedItem1.split(' ');
+            const b = selectedItem.split(' ');
+            console.log('b', b)
             if (b[b.length - 1] === 'ETH') {
                 lowerRange = Number(b[0]);
                 higherRange = Number(b[2]);
@@ -838,14 +841,14 @@ export const UserHomepage = ({
         if (currency === 'ETH') {
             setCurrName('ETH');
             setCurrency([]);
-            setChosenCurrency(eth);
+            // setChosenCurrency(eth);
             setYAxisItems([]);
             setYAxisItemClicked(null);
             setYAxisItemHovered(null);
         } else if (currency === 'USDC') {
             setCurrName('USDC');
             setCurrency([]);
-            setChosenCurrency(usdc);
+            // setChosenCurrency(usdc);
             setYAxisItems([]);
             setYAxisItemClicked(null);
             setYAxisItemHovered(null);
@@ -891,7 +894,8 @@ export const UserHomepage = ({
     // console.log('leastDimension', leastDimension);
     // console.log('arrOfDays', arrOfDays);
     // console.log('month', month);
-    console.log('chosenCurrency', chosenCurrency);
+    // console.log('chosenCurrency', chosenCurrency);
+    // console.log('currency', currency);
     return (
         <>
 
@@ -918,7 +922,6 @@ export const UserHomepage = ({
                 >
 
                     <PostHeaderLayer
-                        // data={data}
                         apiLoading={apiLoading}
                         openMenu1={openMenu1}
                         currency={currency}

@@ -84,3 +84,17 @@ export const BackdropDuringApiLoading = ({ show }: BackdropDuringApiLoadingProps
 
   return <>{show && backdrop} </>;
 };
+
+export const CalcRange = (arr: any[]) => {
+  const parts = 4;
+  const len = Math.ceil(arr.length / parts);
+  const arr1: any[] = [];
+  let start = 0, howMany = 0;
+
+  for (let i = 0; i < parts; i++) {
+    start = 0;
+    howMany = len;
+    arr1.push(arr.splice(start, howMany));
+  }
+  return arr1;
+}
