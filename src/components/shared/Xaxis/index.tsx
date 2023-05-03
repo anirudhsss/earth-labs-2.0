@@ -2,7 +2,6 @@ import { Box, Menu, MenuItem } from "@mui/material"
 import data1 from 'test.json';
 import { XaxisItems } from "./XaxisItems";
 import { useState, useEffect, useCallback } from "react";
-import { ApiRequest } from "components/utils";
 import moment from "moment";
 import styles from './styles.module.css';
 import { useLocation } from "react-router-dom";

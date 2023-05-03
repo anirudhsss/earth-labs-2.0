@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 import { NormalSearchField } from "components/shared/TextField";
 import { Typography } from "components/shared/Typography";
 import { Button } from "components/shared/Button";
-import { ApiRequest, AxiosFetch, truncate } from "components/utils";
+import { AxiosFetch, truncate } from "components/utils";
 import { ImageList1 } from "components/shared/ImageList";
 import { Link, useLocation } from "react-router-dom";
 import { Container } from "components/shared/Container";

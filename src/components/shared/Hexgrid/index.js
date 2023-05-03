@@ -8,7 +8,6 @@ import {
   Path,
   Hex,
 } from "react-hexgrid";
-import { ApiRequest } from "components/utils";
 import { Fragment, useEffect, useState } from "react";
 import moment from "moment";
 import sample from "../../../sample.json";
@@ -173,7 +172,7 @@ export const Hexgrid = ({
     // console.log("viewbox", viewbox);
     svg.setAttribute("viewBox", viewbox);
   }, [testArr]);
-
+  // console.log("testArr", testArr);
   return (
     <Box
       sx={{

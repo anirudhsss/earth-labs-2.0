@@ -26,7 +26,7 @@ import { Wallet } from "components/Wallet";
 import axios from "axios";
 import { Yaxis } from "components/shared/Yaxis";
 import { AnyAaaaRecord } from "dns";
-import { AxiosFetch, BackdropDuringApiLoading } from 'components/utils';
+import { AxiosFetch, BackdropDuringApiLoading, CalcRange } from 'components/utils';
 import { HelpPage } from "components/HelpPage";
 import PostHeaderLayer from "components/PostHeaderLayer";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
@@ -34,32 +34,25 @@ import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 export interface UserHomepageProps {
 
 }
-
-const YEARS = [
-    { id: 0, value: '2017' },
-    { id: 1, value: '2018' },
-    { id: 2, value: '2019' },
-    { id: 3, value: '2020' },
-]
-const ETH = [
-    { id: 0, value: '0.001 - 0.01 ETH' },
-    { id: 1, value: '0.01 - 0.1 ETH' },
-    { id: 2, value: '0.1 - 1 ETH' },
-    { id: 3, value: '1 - 10 ETH' },
-]
-const USDC = [
-    { id: 0, value: '< $500 USDC' },
-    { id: 1, value: '$500 - $1000 USDC' },
-    { id: 2, value: '$1000 - $5000 USDC' },
-    { id: 3, value: '$5000 - $10000 USDC' },
-    { id: 4, value: '> $10000 USDC' },
-]
+// const ETH = [
+//     { id: 0, value: '0.001 - 0.01 ETH' },
+//     { id: 1, value: '0.01 - 0.1 ETH' },
+//     { id: 2, value: '0.1 - 1 ETH' },
+//     { id: 3, value: '1 - 10 ETH' },
+// ]
+// const USDC = [
+//     { id: 0, value: '< $500 USDC' },
+//     { id: 1, value: '$500 - $1000 USDC' },
+//     { id: 2, value: '$1000 - $5000 USDC' },
+//     { id: 3, value: '$5000 - $10000 USDC' },
+//     { id: 4, value: '> $10000 USDC' },
+// ]
 
 export const UserHomepage = ({
 
 }: UserHomepageProps) => {
-    const [eth, setEth] = useState(ETH);
-    const [usdc, setUsdc] = useState(USDC);
+    // const [eth, setEth] = useState(ETH);
+    // const [usdc, setUsdc] = useState(USDC);
     const [currName, setCurrName] = useState('ETH');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
@@ -101,7 +94,7 @@ export const UserHomepage = ({
     const [isWalletConnected, setWalletConnected] = useState(false);
     const [test, setData] = useState<any>();
     const [openWalletModal, setOpenWalletModal] = useState(false);
-    const [chosenCurrency, setChosenCurrency] = useState<any>(eth);
+    const [chosenCurrency, setChosenCurrency] = useState<any>([]);
     const [coordinates, setCoordinates] = useState<any>({
         // x: -53,
         // y: -31,
@@ -498,6 +491,14 @@ export const UserHomepage = ({
         setData1(sortedTxnInDescOrder);
     }, [data2]);
 
+    useEffect(() => {
+        const tArr = data2?.map((item: any) => item.targetValue1);
+        const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
+        const requiredArr = CalcRange(sortedTArr);
+        // console.log('requiredArr', requiredArr);
+        setChosenCurrency(requiredArr);
+    }, [data2]);
+
     const onHelpIconClicked = () => {
         setHelpIconClicked(!helpIconClicked);
     }
@@ -680,19 +681,26 @@ export const UserHomepage = ({
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
         onCloseYearMenu1();
-        const selectedItem = chosenCurrency.filter((item: any) => item.id === id);
-        setSelectedItem1(selectedItem[0].value);
-        testFunc(selectedItem[0].value)
-        setCurrency(selectedItem);
+        let a = '';
+        const selectedItem = chosenCurrency.filter((item: any, index: number) => {
+            if (index === id) {
+                a += item[0]?.toFixed(2) + ' - ' + item[item?.length - 1]?.toFixed(2) + ' ' + currName;
+            }
+        })
+        // setSelectedItem1(selectedItem[0].value);
+        testFunc(a)
+        setCurrency(a);
     }
 
-    const testFunc = (selectedItem1: any) => {
+    const testFunc = (selectedItem: any) => {
+        // console.log('selectedItem', selectedItem)
         let range = false;
         setRange(true);
         range = true;
         let lowerRange = 0, higherRange = 0;
         if (range) {
-            const b = selectedItem1.split(' ');
+            const b = selectedItem.split(' ');
+            console.log('b', b)
             if (b[b.length - 1] === 'ETH') {
                 lowerRange = Number(b[0]);
                 higherRange = Number(b[2]);
@@ -725,33 +733,38 @@ export const UserHomepage = ({
             lengthsArr?.push(testFunc2(d2, d3))
             lengthsArr.push(testFunc2(d3, higherRange))
             let data2: any = [];
-            // if (monthOrYear === 'year') {
-            data2 = abcd;
-            // } else if (monthOrYear === 'month') {
             data2 = abcd1;
-            // }
             const arr = data2?.filter((item: any) => {
-                return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+                return item.targetValue1 >= lowerRange && item.targetValue1 <= higherRange;
             })
-            let processedArrays: any[] = [];
+            // console.log('arr', arr)
+            // let processedArrays: any[] = [];
             let processedArrays1: any[] = [];
-            // setTestData(arr);
             setMatchedMonths(arr);
+            // console.log('lengthsArr', lengthsArr)
             processedArrays1 = lengthsArr?.map((item: any) => {
+                // console.log('item', item)
                 return processedArrays1.concat(item[0])
             })
-            processedArrays = processedArrays1.flat();
+            // processedArrays = processedArrays1.flat();
+            // console.log('processedArrays', processedArrays)
             const processedInput = lengthsArr?.map((item: any) => item[0].length);
+            // console.log('processedInput', processedInput)
             const min = Math.min(...processedInput);
             const max = Math.max(...processedInput);
-            // const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
-            const rangeArr = lengthsArr?.map((item: any) => item[1])
+            // console.log(min, max);
+            const rangeArr = lengthsArr?.map((item: any) => item[1] + ' - ' + item[2])
+            // const rangeArr = lengthsArr?.map((item: any) => item[1])
+            // console.log('rangeArr', rangeArr)
             let arrOfInterest: any = [];
             processedInput.forEach((item: any) => {
+                // console.log('item', item)
                 let val1 = Math.round(((35 - 10) * invlerp(min, max, item)) + 10);
+                // console.log('val1', val1)
                 arrOfInterest = [...arrOfInterest, val1]
             })
             let yAxisItems: any = [];
+            // console.log('arrOfInterest', arrOfInterest)
             arrOfInterest.forEach((_: any, index: number) => {
                 yAxisItems.push({
                     id: index,
@@ -769,28 +782,26 @@ export const UserHomepage = ({
 
     const testFunc2 = (lowerRange: any, higherRange: any) => {
         let data2: any = [];
-        // if (monthOrYear === 'year') {
-        data2 = abcd;
-        // } else if (monthOrYear === 'month') {
+        // data2 = abcd;
         data2 = abcd1;
-        // }
         const arr = data2?.filter((item: any) => {
-            return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+            return item.targetValue1 >= lowerRange && item.targetValue1 <= higherRange;
         })
         return [arr, lowerRange, higherRange];
     }
 
-    const onYAxisItemClicked = (id: any, range: any) => {
-        let lowerRange = 0, higherRange = 0;
-        const b = range.split(' ');
-        lowerRange = Number(b[0]);
-        higherRange = Number(b[2]);
+    const onYAxisItemClicked = (id: any, lowerRange: any, higherRange: any) => {
+        // let lowerRange = 0, higherRange = 0;
+        // const b = range.split(' ');
+        // lowerRange = Number(b[0]);
+        // higherRange = Number(b[2]);
+        // console.log('test', id, lowerRange, higherRange);
         setYAxisValue({ yAxisValueMin: lowerRange, yAxisValueMax: higherRange });
         let data2: any = [];
         let idd = Number(id);
         setYAxisItemClicked(idd);
         // if (monthOrYear === 'year') {
-        data2 = abcd;
+        // data2 = abcd;
         // } else if (monthOrYear === 'month') {
         data2 = abcd1;
         // }
@@ -830,14 +841,14 @@ export const UserHomepage = ({
         if (currency === 'ETH') {
             setCurrName('ETH');
             setCurrency([]);
-            setChosenCurrency(eth);
+            // setChosenCurrency(eth);
             setYAxisItems([]);
             setYAxisItemClicked(null);
             setYAxisItemHovered(null);
         } else if (currency === 'USDC') {
             setCurrName('USDC');
             setCurrency([]);
-            setChosenCurrency(usdc);
+            // setChosenCurrency(usdc);
             setYAxisItems([]);
             setYAxisItemClicked(null);
             setYAxisItemHovered(null);
@@ -870,7 +881,7 @@ export const UserHomepage = ({
         setShowDays(true);
         setfurtherPropagation(false);
     }, []);
-
+    // console.log('data2', data2);
     // console.log('clickedElement', clickedElement)
     // console.log('clickedMonth', clickedMonth)
     // console.log('furtherPropagation', furtherPropagation);
@@ -883,6 +894,8 @@ export const UserHomepage = ({
     // console.log('leastDimension', leastDimension);
     // console.log('arrOfDays', arrOfDays);
     // console.log('month', month);
+    // console.log('chosenCurrency', chosenCurrency);
+    // console.log('currency', currency);
     return (
         <>
 
@@ -909,7 +922,6 @@ export const UserHomepage = ({
                 >
 
                     <PostHeaderLayer
-                        // data={data}
                         apiLoading={apiLoading}
                         openMenu1={openMenu1}
                         currency={currency}
