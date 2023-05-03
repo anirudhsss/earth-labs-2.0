@@ -74,6 +74,32 @@ export const Discovery = ({
                     <Box
                         className={styles.lhsBody}
                     >
+                        <Box className={styles.bwText} sx={{ marginLeft: '16rem' }}>
+                            <Box>
+                                <Typography
+                                    text="Newest Users  "
+                                    margin='3rem 0 0 12rem'
+                                    fontSize="2.5rem"
+                                    fontWeight="bold"
+                                />
+                            </Box>
+                            <Box>
+                                <Button
+                                    width='70px'
+                                    height='30px'
+                                    backgroundColor='#1C223D'
+                                    hoverBackgroundColor="#1C223D"
+                                    border='0.5px solid #000000'
+                                    borderRadius='20px'
+                                >
+                                    <Typography
+                                        text="See All"
+                                        // margin='3rem 0 0 12rem'
+                                        fontSize="1.2rem"
+                                    />
+                                </Button>
+                            </Box>
+                        </Box>
                         <Box sx={{
                             margin: '2rem 0 0 23rem',
                         }}>
@@ -84,18 +110,27 @@ export const Discovery = ({
                         <Box className={styles.bwText} sx={{ marginLeft: '16rem' }}>
                             <Box>
                                 <Typography
-                                    text="Top Digital Art Sales"
+                                    text="Largest Transactions"
                                     margin='3rem 0 0 12rem'
                                     fontSize="2.5rem"
                                     fontWeight="bold"
                                 />
                             </Box>
                             <Box>
-                                <Typography
-                                    text="show more >"
-                                    margin='3rem 0 0 12rem'
-                                    fontSize="1.1rem"
-                                />
+                                <Button
+                                    width='70px'
+                                    height='30px'
+                                    backgroundColor='#1C223D'
+                                    hoverBackgroundColor="#1C223D"
+                                    border='0.5px solid #000000'
+                                    borderRadius='20px'
+                                >
+                                    <Typography
+                                        text="See All"
+                                        // margin='3rem 0 0 12rem'
+                                        fontSize="1.2rem"
+                                    />
+                                </Button>
                             </Box>
                         </Box>
                         <Box className={styles.glyphContainerParent} sx={{
@@ -104,7 +139,7 @@ export const Discovery = ({
                             <span className={styles.glyphContainer}>
                                 <img src="./testImage.png" width="250px" />
                                 <Typography
-                                    text="Share | View Map | View collection"
+                                    text="Share | Go to Map"
                                     fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
@@ -113,7 +148,7 @@ export const Discovery = ({
                             <span className={styles.glyphContainer1}>
                                 <img src="./testImage.png" width="250px" />
                                 <Typography
-                                    text="Share | View Map | View collection"
+                                    text="Share | Go to Map"
                                     fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
@@ -122,7 +157,7 @@ export const Discovery = ({
                             <span className={styles.glyphContainer1}>
                                 <img src="./testImage.png" width="250px" />
                                 <Typography
-                                    text="Share | View Map | View collection"
+                                    text="Share | Go to Map"
                                     fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
@@ -131,7 +166,7 @@ export const Discovery = ({
                             <span className={styles.glyphContainer1}>
                                 <img src="./testImage.png" width="250px" />
                                 <Typography
-                                    text="Share | View Map | View collection"
+                                    text="Share | Go to Map"
                                     fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
@@ -140,7 +175,7 @@ export const Discovery = ({
                             <span className={styles.glyphContainer1}>
                                 <img src="./testImage.png" width="250px" />
                                 <Typography
-                                    text="Share | View Map | View collection"
+                                    text="Share | Go to Map"
                                     fontSize="1.1rem"
                                     fontWeight="bold"
                                     width="10rem"
@@ -170,7 +205,7 @@ export const Discovery = ({
                                 <span className={styles.glyphContainer}>
                                     <img src="./testImage.png" width="250px" />
                                     <Typography
-                                        text="Share | View Map | View collection"
+                                        text="Share | Go to Map"
                                         fontSize="1.1rem"
                                         fontWeight="bold"
                                         width="10rem"
@@ -179,7 +214,7 @@ export const Discovery = ({
                                 <span className={styles.glyphContainer1}>
                                     <img src="./testImage.png" width="250px" />
                                     <Typography
-                                        text="Share | View Map | View collection"
+                                        text="Share | Go to Map"
                                         fontSize="1.1rem"
                                         fontWeight="bold"
                                         width="10rem"
@@ -188,7 +223,7 @@ export const Discovery = ({
                                 <span className={styles.glyphContainer1}>
                                     <img src="./testImage.png" width="250px" />
                                     <Typography
-                                        text="Share | View Map | View collection"
+                                        text="Share | Go to Map"
                                         fontSize="1.1rem"
                                         fontWeight="bold"
                                         width="10rem"
@@ -197,7 +232,7 @@ export const Discovery = ({
                                 <span className={styles.glyphContainer1}>
                                     <img src="./testImage.png" width="250px" />
                                     <Typography
-                                        text="Share | View Map | View collection"
+                                        text="Share | Go to Map"
                                         fontSize="1.1rem"
                                         fontWeight="bold"
                                         width="10rem"
@@ -206,7 +241,7 @@ export const Discovery = ({
                                 <span className={styles.glyphContainer1}>
                                     <img src="./testImage.png" width="250px" />
                                     <Typography
-                                        text="Share | View Map | View collection"
+                                        text="Share | Go to Map"
                                         fontSize="1.1rem"
                                         fontWeight="bold"
                                         width="10rem"

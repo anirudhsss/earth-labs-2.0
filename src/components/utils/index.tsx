@@ -2,6 +2,7 @@ import { Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+export const isEmpty = (str: string) => !str?.length;
 
 export const truncate = (
   fullStr: string,
@@ -19,9 +20,9 @@ export const truncate = (
       backChars = Math.floor(charsToShow / 2);
 
     return (
-      fullStr.substr(0, frontChars) +
+      fullStr.substring(0, frontChars) +
       separator +
-      fullStr.substr(fullStr.length - backChars)
+      fullStr.substring(fullStr.length - backChars)
     );
   }
 };
