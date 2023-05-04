@@ -937,6 +937,7 @@ export const UserHomepage = ({
                     <Box className={styles.body}>
                         <Box>
                             <Yaxis
+                                currName={currName}
                                 yAxisItems={yAxisItems}
                                 onYAxisItemClicked={onYAxisItemClicked}
                                 yAxisItemClicked={yAxisItemClicked}

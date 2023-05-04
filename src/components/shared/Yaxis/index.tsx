@@ -9,6 +9,7 @@ export interface YaxisProps {
     onYAxisItemHoverOn?: any;
     onYAxisItemHoverOff?: any;
     yAxisItemHovered?: any;
+    currName?: any;
 }
 
 export const Yaxis = ({
@@ -18,6 +19,7 @@ export const Yaxis = ({
     onYAxisItemHoverOn,
     onYAxisItemHoverOff,
     yAxisItemHovered,
+    currName,
 }: YaxisProps) => {
 
     return (
@@ -68,7 +70,7 @@ export const Yaxis = ({
                                                 marginLeft: '10rem'
                                             }}>
                                                 <Typography
-                                                    text={range[0]}
+                                                    text={range[0] + ' ' + currName}
                                                     fontSize="12px"
                                                     fontWeight='bold'
                                                 />

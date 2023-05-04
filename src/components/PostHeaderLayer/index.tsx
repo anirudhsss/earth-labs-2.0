@@ -173,7 +173,7 @@ const PostHeaderLayer = ({
                     }}>
                         {currency?.length > 0 &&
                             <Typography
-                                text={`Currently Viewing: ${currency[0].value}`}
+                                text={`Currently Viewing: ${currency}`}
                                 fontSize="1.2rem"
                             />
                         }
