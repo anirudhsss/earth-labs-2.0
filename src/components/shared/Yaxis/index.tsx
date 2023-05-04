@@ -70,7 +70,7 @@ export const Yaxis = ({
                                                 marginLeft: '10rem'
                                             }}>
                                                 <Typography
-                                                    text={range[0] + ' ' + currName}
+                                                    text={range[2] + ' ' + currName}
                                                     fontSize="12px"
                                                     fontWeight='bold'
                                                 />

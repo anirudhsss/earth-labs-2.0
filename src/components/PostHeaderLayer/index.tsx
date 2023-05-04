@@ -74,7 +74,7 @@ const PostHeaderLayer = ({
                                 hoverBoxShadow="none"
                                 borderRadius={`${openMenu1 ? '2rem 2rem 0 0' : '2rem'}`}
                                 padding="5px"
-                                width={`${(currency?.length > 0 || openMenu1) ? '17rem' : '8.3rem'}`}
+                                width={`${((currency?.length > 0 || openMenu1) && currName === 'USDC') ? '19rem' : ((currency?.length > 0 || openMenu1) && currName === 'ETH') ? '17rem' : '8.3rem'}`}
                                 display="flex"
                                 justifyContent="center"
                                 alignItems="center"
@@ -120,7 +120,7 @@ const PostHeaderLayer = ({
                                 PaperProps={{
                                     elevation: 0,
                                     style: {
-                                        width: '17rem',
+                                        width: currName === 'USDC' ? '19rem' : currName === 'ETH' ? '17rem' : '',
                                         borderRadius: '0 0 20px 20px',
                                         backgroundColor: '#FFF7EE',
                                         border: '1px solid #000',
@@ -146,6 +146,13 @@ const PostHeaderLayer = ({
                                     )
                                 })} */}
                                 {chosenCurrency?.map((item: any, index: number) => {
+                                    let res;
+                                    if (currName === 'USDC') {
+                                        res = (item[0] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' - ' + (item[item?.length - 1] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' ' + currName;
+                                    } else {
+                                        res = item[0]?.toFixed(2) + ' - ' + item[item?.length - 1]?.toFixed(2) + ' ' + currName;
+                                    }
+
                                     return (
                                         <MenuItem
                                             key={index}
@@ -158,7 +165,7 @@ const PostHeaderLayer = ({
                                                 },
                                             }}
                                         >
-                                            {`${item[0]?.toFixed(2)} - ${item[item?.length - 1]?.toFixed(2)} ${currName}`}
+                                            {`${res}`}
                                         </MenuItem>
                                     )
                                 })}
