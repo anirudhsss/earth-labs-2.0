@@ -1,3 +1,4 @@
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
@@ -30,6 +31,8 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
     generateMediaId,
     tweetGlyphImageOnTwitter,
   } = useTwitterFlow();
+
+  const { openConnectModal } = useConnectModal();
 
   // Checking if state and code  is there or not
   useEffect(() => {
@@ -228,8 +231,12 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
               padding="0.5rem 3rem"
               display="flex"
               onClick={async () => {
-                const url = await initateTwitterAuth("2");
-                window.open(url, "_self");
+                if (!isAlertOpen) {
+                  const url = await initateTwitterAuth("2");
+                  window.open(url, "_self");
+                  return;
+                }
+                if (openConnectModal) openConnectModal();
                 // setOpenModal(true);
               }}
             >
@@ -274,7 +281,12 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
             <RenderIf isTrue={isAlertOpen}>
               <>
                 <img src={Icons.clock} width={30} height={25} />
-                <span>
+                <span
+                  style={{
+                    fontSize: "1.6rem",
+                    color: "#fff",
+                  }}
+                >
                   Connect your wallet and start exploring the world of Web3 on
                   Atlas!
                 </span>

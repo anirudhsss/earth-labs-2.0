@@ -31,8 +31,7 @@ const Header = ({
   const mapsLocation = location?.state?.icon === "maps";
   const discoveryLocation = location?.state?.icon === "discovery";
 
-
-  console.log('Header');
+  console.log("Header");
   const ConnectTwitter = () => {
     const { initateTwitterAuth, getTwitterUserInfo } = useTwitterFlow();
     const [twitterUserInfo, setTwitterUserInfo] = useLocalStorageState<{
@@ -41,7 +40,6 @@ const Header = ({
     }>("twitterUserInfo");
 
     useEffect(() => {
-      console.log('Calling');
       handleTwitterUserName();
     }, []);
 
@@ -60,10 +58,12 @@ const Header = ({
           console.log(user);
           setTwitterUserInfo({ user, isConnected: true });
           localStorage.removeItem("code");
+          sessionStorage.removeItem("from");
         }
       } catch (e) {
         console.error(e);
         localStorage.removeItem("code");
+        sessionStorage.removeItem("from");
       }
     };
 
