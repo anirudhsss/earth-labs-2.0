@@ -284,7 +284,7 @@ const PostHeaderLayer = ({
                                 height='20'
                             />}
                             {condition ? <Typography
-                                text={`${data?.dotEarthHandle}.earth.eth`}
+                                text={`${data?.dotEarthHandle}`}
                                 fontWeight='700'
                                 fontSize='1.3rem'
                                 color={`${(homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''}`}
