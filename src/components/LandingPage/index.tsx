@@ -26,15 +26,20 @@ export const LandingPage = ({}: LandingPageProps) => {
   const processTwitterAuthentication = async () => {
     const state = searchParams.get("state");
     const code = searchParams.get("code");
+    const from = sessionStorage.getItem("from");
     if (state && code) {
       localStorage.setItem("code", code);
-      navigate("/txn/1");
+      if (from === "maps") {
+        navigate("/maps");
+      } else {
+        navigate("/txn/1");
+      }
     }
   };
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
-      <OnboardingHeader isConnectWallet={false}/>
+      <OnboardingHeader isConnectWallet={false} />
       <section
         className={styles.landing_inner}
         style={{
@@ -42,7 +47,7 @@ export const LandingPage = ({}: LandingPageProps) => {
           backgroundImage: `url('${Icons.landingBg}')`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right bottom",
-          backgroundSize : '900px',
+          backgroundSize: "900px",
           height: "inherit",
         }}
       >

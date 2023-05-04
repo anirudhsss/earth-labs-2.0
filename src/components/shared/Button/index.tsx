@@ -30,6 +30,8 @@ export interface ButtonProps {
   textDecoration?: any;
   height?: any;
   textAlign?: any;
+  gap?: string;
+  fontWeight?: string;
 }
 
 export const Button = ({
@@ -54,6 +56,7 @@ export const Button = ({
   borderTop,
   paddingTop,
   display,
+  fontWeight,
   justifyContent,
   alignItems,
   children,
@@ -61,6 +64,7 @@ export const Button = ({
   textDecoration,
   height,
   textAlign,
+  gap
 }: ButtonProps) => {
   return (
     <MUIButton
@@ -83,6 +87,8 @@ export const Button = ({
         justifyContent: justifyContent,
         alignItems: alignItems,
         width: width,
+        gap: gap,
+        fontWeight: fontWeight,
         borderStyle: borderStyle,
         borderColor: borderColor,
         borderTop: borderTop,
