@@ -26,4 +26,5 @@ export const Icons = {
   twitter: "/./assets/images/twitter.svg",
   twitterBlack: "/./assets/images/twitter-black.svg",
   twitterGreen: "/./assets/images/twitter-green.svg",
+  clock: "/./assets/images/clock.svg",
 };

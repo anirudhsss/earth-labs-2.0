@@ -51,8 +51,7 @@ export interface UserHomepageProps {
 export const UserHomepage = ({
 
 }: UserHomepageProps) => {
-    // const [eth, setEth] = useState(ETH);
-    // const [usdc, setUsdc] = useState(USDC);
+
     const [currName, setCurrName] = useState('ETH');
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);

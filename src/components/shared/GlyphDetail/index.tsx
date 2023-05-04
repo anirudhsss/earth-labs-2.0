@@ -1,3 +1,4 @@
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
@@ -31,7 +32,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
     tweetGlyphImageOnTwitter,
   } = useTwitterFlow();
 
-  const [searchParams] = useSearchParams();
+  const { openConnectModal } = useConnectModal();
 
   // Checking if state and code  is there or not
   useEffect(() => {
@@ -230,8 +231,12 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
               padding="0.5rem 3rem"
               display="flex"
               onClick={async () => {
-                const url = await initateTwitterAuth("2");
-                window.open(url, "_self");
+                if (!isAlertOpen) {
+                  const url = await initateTwitterAuth("2");
+                  window.open(url, "_self");
+                  return;
+                }
+                if (openConnectModal) openConnectModal();
                 // setOpenModal(true);
               }}
             >
@@ -241,8 +246,15 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
                   gap: "1rem",
                 }}
               >
-                <img src={Icons.twitter} width={30} height={25} />
-                <span >Share your 1st glyph on Twitter!</span>
+                <RenderIf isTrue={isAlertOpen}>
+                  <span>Connect Your Wallet</span>
+                </RenderIf>
+                <RenderIf isTrue={!isAlertOpen}>
+                  <>
+                    <img src={Icons.twitter} width={30} height={25} />
+                    <span>Share your 1st glyph on Twitter!</span>
+                  </>
+                </RenderIf>
               </div>
             </Button>
           </div>
@@ -253,15 +265,33 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
             }}
             className="flex w-full flex-row align-items-center"
           >
-            <img src={Icons.trophy} />
-            <span
-              style={{
-                fontSize: "1.6rem",
-                color: "#fff",
-              }}
-            >
-              Connect your twitter and win future Airdrops from Earth Labs!
-            </span>
+            <RenderIf isTrue={!isAlertOpen}>
+              <>
+                <img src={Icons.trophy} />
+                <span
+                  style={{
+                    fontSize: "1.6rem",
+                    color: "#fff",
+                  }}
+                >
+                  Connect your twitter and win future Airdrops from Earth Labs!
+                </span>
+              </>
+            </RenderIf>
+            <RenderIf isTrue={isAlertOpen}>
+              <>
+                <img src={Icons.clock} width={30} height={25} />
+                <span
+                  style={{
+                    fontSize: "1.6rem",
+                    color: "#fff",
+                  }}
+                >
+                  Connect your wallet and start exploring the world of Web3 on
+                  Atlas!
+                </span>
+              </>
+            </RenderIf>
           </div>
         </div>
         <div className="flex-1 w-full">
