@@ -31,8 +31,6 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
     tweetGlyphImageOnTwitter,
   } = useTwitterFlow();
 
-  const [searchParams] = useSearchParams();
-
   // Checking if state and code  is there or not
   useEffect(() => {
     processTwitterAuthentication();
@@ -241,8 +239,15 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
                   gap: "1rem",
                 }}
               >
-                <img src={Icons.twitter} width={30} height={25} />
-                <span >Share your 1st glyph on Twitter!</span>
+                <RenderIf isTrue={isAlertOpen}>
+                  <span>Connect Your Wallet</span>
+                </RenderIf>
+                <RenderIf isTrue={!isAlertOpen}>
+                  <>
+                    <img src={Icons.twitter} width={30} height={25} />
+                    <span>Share your 1st glyph on Twitter!</span>
+                  </>
+                </RenderIf>
               </div>
             </Button>
           </div>
@@ -253,15 +258,28 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
             }}
             className="flex w-full flex-row align-items-center"
           >
-            <img src={Icons.trophy} />
-            <span
-              style={{
-                fontSize: "1.6rem",
-                color: "#fff",
-              }}
-            >
-              Connect your twitter and win future Airdrops from Earth Labs!
-            </span>
+            <RenderIf isTrue={!isAlertOpen}>
+              <>
+                <img src={Icons.trophy} />
+                <span
+                  style={{
+                    fontSize: "1.6rem",
+                    color: "#fff",
+                  }}
+                >
+                  Connect your twitter and win future Airdrops from Earth Labs!
+                </span>
+              </>
+            </RenderIf>
+            <RenderIf isTrue={isAlertOpen}>
+              <>
+                <img src={Icons.clock} width={30} height={25} />
+                <span>
+                  Connect your wallet and start exploring the world of Web3 on
+                  Atlas!
+                </span>
+              </>
+            </RenderIf>
           </div>
         </div>
         <div className="flex-1 w-full">

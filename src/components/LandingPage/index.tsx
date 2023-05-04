@@ -15,7 +15,6 @@ export interface LandingPageProps {}
 
 export const LandingPage = ({}: LandingPageProps) => {
   const location = useLocation();
-  const landingPageLocation = location?.state?.icon === "/";
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
