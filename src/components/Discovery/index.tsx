@@ -152,7 +152,7 @@ export const Discovery = ({
                             </span>
                         </Box>
                         <Box className={styles.bwText}
-                        // sx={{ marginLeft: '16rem' }}
+                            sx={{ marginTop: '6rem' }}
                         >
                             <Box>
                                 <Typography
