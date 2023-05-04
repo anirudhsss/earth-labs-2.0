@@ -1,144 +1,162 @@
-import { Box, Menu, MenuItem } from '@mui/material';
-import moment from 'moment';
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '../Button';
-import { Typography } from '../Typography';
-import styles from './styles.module.css';
+import { Box, Menu, MenuItem } from "@mui/material";
+import { Icons } from "constant";
+import moment from "moment";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "../Button";
+import { Typography } from "../Typography";
+import styles from "./styles.module.css";
 
 export interface RhsNavProps {
-    openMenu?: any;
-    onOpenYearMenu?: any;
-    years?: any;
-    anchorEl?: any;
-    onCloseYearMenu?: any;
-    arrOfYears?: any;
-    onValueMenuItemClicked?: any;
-    onWalletBtnClickOpen?: any;
-    // onWalletBtnClickClose?: any;
-    openWalletModal?: any;
-    onMoveHexes?: any;
-    coordinates?: any;
-    loading1?: any;
-    // monthOrYear?: any;
-    yAxisValue?: any;
-    xAxisValue?: any;
-    helpIconClicked?: any;
-    onHelpIconClicked?: any;
-    showDays?: any;
-    monthInLetters?: any;
-    onYearButtonClicked?: any;
-    onMonthButtonClicked?: any;
-    clickedElement?: any;
+  openMenu?: any;
+  onOpenYearMenu?: any;
+  years?: any;
+  anchorEl?: any;
+  onCloseYearMenu?: any;
+  arrOfYears?: any;
+  onValueMenuItemClicked?: any;
+  onWalletBtnClickOpen?: any;
+  // onWalletBtnClickClose?: any;
+  openWalletModal?: any;
+  onMoveHexes?: any;
+  coordinates?: any;
+  loading1?: any;
+  // monthOrYear?: any;
+  yAxisValue?: any;
+  xAxisValue?: any;
+  helpIconClicked?: any;
+  onHelpIconClicked?: any;
+  showDays?: any;
+  monthInLetters?: any;
+  onYearButtonClicked?: any;
+  onMonthButtonClicked?: any;
+  clickedElement?: any;
 }
 
 export const RhsNav = ({
-    openMenu,
-    onOpenYearMenu,
-    years,
-    anchorEl,
-    onCloseYearMenu,
-    arrOfYears,
-    onValueMenuItemClicked,
-    onWalletBtnClickOpen,
-    // onWalletBtnClickClose,
-    openWalletModal,
-    onMoveHexes,
-    coordinates,
-    loading1,
-    // monthOrYear,
-    yAxisValue,
-    xAxisValue,
-    helpIconClicked,
-    onHelpIconClicked,
-    showDays,
-    monthInLetters,
-    onYearButtonClicked,
-    onMonthButtonClicked,
-    clickedElement,
+  openMenu,
+  onOpenYearMenu,
+  years,
+  anchorEl,
+  onCloseYearMenu,
+  arrOfYears,
+  onValueMenuItemClicked,
+  onWalletBtnClickOpen,
+  // onWalletBtnClickClose,
+  openWalletModal,
+  onMoveHexes,
+  coordinates,
+  loading1,
+  // monthOrYear,
+  yAxisValue,
+  xAxisValue,
+  helpIconClicked,
+  onHelpIconClicked,
+  showDays,
+  monthInLetters,
+  onYearButtonClicked,
+  onMonthButtonClicked,
+  clickedElement,
 }: RhsNavProps) => {
-    const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
+  const location = useLocation();
+  const homeLocation = location?.state?.icon === "home";
+  const walletLocation = location?.state?.icon === "wallet";
+  const mapsLocation = location?.state?.icon === "maps";
+  const discoveryLocation = location?.state?.icon === "discovery";
 
-    return (
-        <Box
-            className={styles.rhsBody}
-            sx={{
-                height: `${walletLocation ? '75.5%' : '76%'}`
-            }}
-        >
-            <Box
-                className={styles.allIcons}
-                sx={{
-                    height: `${discoveryLocation ? '66.5vh' : '100%'}`
-                }}
+  return (
+    <Box
+      className={styles.rhsBody}
+      sx={{
+        height: `${walletLocation ? "75.5%" : "76%"}`,
+      }}
+    >
+      <Box
+        className={styles.allIcons}
+        sx={{
+          height: `${discoveryLocation ? "66.5vh" : "100%"}`,
+        }}
+      >
+        <Box className={styles.groupedIcons1}>
+          <Box className={styles.upperIcons}>
+            <Link
+              to="/maps"
+              state={{
+                icon: "home",
+              }}
             >
-                <Box className={styles.groupedIcons1}>
-                    <Box className={styles.upperIcons}>
-                        <Link
-                            to="/maps"
-                            state={{
-                                icon: 'home',
-                            }}
-                        >
-                            <span
-                                className={styles.iconOuter}
-                                style={{ backgroundColor: walletLocation ? '#FFF7EE' : '#FFF7EE' }}
-
-                            >
-                                <img
-                                    src={`${(homeLocation || mapsLocation || walletLocation) ? '/assets/images/home_highlighted.svg' : '/assets/images/home.svg'}`}
-                                    // src='/assets/images/home.svg'
-                                    alt=""
-                                    className={styles.imageAsIcon}
-                                />
-                            </span>
-                        </Link>
-                        <Link
-                            to="/discovery"
-                            state={{
-                                icon: 'discovery',
-                            }}
-                        >
-                            <span
-                                className={styles.iconOuter}
-                                style={{
-                                    backgroundColor: walletLocation ? '#FFF7EE' : '#FFF7EE',
-                                    marginTop: '1rem',
-                                }}
-                            >
-                                <img
-                                    // src='/assets/images/discovery.svg'
-                                    src={`${discoveryLocation ? '/assets/images/discovery_highlighted.svg' : '/assets/images/discovery.svg'}`}
-                                    alt=""
-                                    className={styles.imageAsIcon}
-                                />
-                            </span>
-                        </Link>
-                    </Box>
-                </Box>
-                <Box className={styles.groupedIcons2}
-                    sx={{
-                        marginBottom: `${walletLocation ? '9vh' : ''}`
-                    }}
-                >
-                    <Box className={styles.lowerIcons}>
-                        {/* <Link
+              <span
+                className={styles.iconOuter}
+                style={{
+                  backgroundColor: walletLocation ? "#FFF7EE" : "#FFF7EE",
+                }}
+              >
+                <img
+                  src={`${
+                    homeLocation || mapsLocation || walletLocation
+                      ? "/assets/images/home_highlighted.svg"
+                      : "/assets/images/home.svg"
+                  }`}
+                  // src='/assets/images/home.svg'
+                  alt=""
+                  className={styles.imageAsIcon}
+                />
+              </span>
+            </Link>
+            <Link
+              to="/discovery"
+              state={{
+                icon: "discovery",
+              }}
+            >
+              <span
+                className={styles.iconOuter}
+                style={{
+                  backgroundColor: walletLocation ? "#FFF7EE" : "#FFF7EE",
+                  marginTop: "1rem",
+                }}
+              >
+                <img
+                  // src='/assets/images/discovery.svg'
+                  src={`${
+                    discoveryLocation
+                      ? "/assets/images/discovery_highlighted.svg"
+                      : "/assets/images/discovery.svg"
+                  }`}
+                  alt=""
+                  className={styles.imageAsIcon}
+                />
+              </span>
+            </Link>
+          </Box>
+        </Box>
+        <Box
+          className={styles.groupedIcons2}
+          sx={{
+            marginBottom: `${walletLocation ? "9vh" : ""}`,
+          }}
+        >
+          <Box className={styles.lowerIcons}>
+            {/* <Link
                             to="/maps"
                             state={{
                                 icon: 'maps',
                             }}
                             style={{ textDecoration: 'none', }}
                         > */}
-                        <a style={{ cursor: 'pointer' }}>
-                            <img width="40px"
-                                src={helpIconClicked ? '/assets/images/help_highlighted.svg' : '/assets/images/help.svg'}
-                                alt="" onClick={onHelpIconClicked} />
-                        </a>
-                        {/* </Link>
+            <a style={{ cursor: "pointer" }}>
+              <img
+                width="40px"
+                src={
+                  helpIconClicked
+                    ? "/assets/images/help_highlighted.svg"
+                    : "/assets/images/help.svg"
+                }
+                alt=""
+                onClick={onHelpIconClicked}
+              />
+            </a>
+            {/* </Link>
                         <Link
                             to="/discovery"
                             state={{
@@ -146,17 +164,33 @@ export const RhsNav = ({
                             }}
                             style={{ textDecoration: 'none', }}
                         > */}
-                        <a
-                            href="https://twitter.com/AtlasXY_"
-                            target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE', }}>
-                            <img src='/assets/images/twitter.svg' alt="" className={styles.imageAsIcon} />
-                        </a>
-                        {/* </Link> */}
-                        <a href="https://discord.com/invite/dotearth" target="_blank" className={styles.iconOuter} style={{ backgroundColor: '#FFF7EE', marginTop: '0.9rem', }}>
-                            <img src='/assets/images/discord.svg' alt="" className={styles.imageAsIcon} />
-                        </a>
-                    </Box>
-                    {/* <Box sx={{ height: '9vh' }} className={styles.timeMenuBtn}>
+            <a
+              href="https://twitter.com/AtlasXY_"
+              target="_blank"
+              className={styles.iconOuter}
+              style={{ backgroundColor: "#FFF7EE" }}
+            >
+              <img
+                src={Icons.twitterBlack}
+                alt=""
+                className={styles.imageAsIcon}
+              />
+            </a>
+            {/* </Link> */}
+            <a
+              href="https://discord.com/invite/dotearth"
+              target="_blank"
+              className={styles.iconOuter}
+              style={{ backgroundColor: "#FFF7EE", marginTop: "0.9rem" }}
+            >
+              <img
+                src="/assets/images/discord.svg"
+                alt=""
+                className={styles.imageAsIcon}
+              />
+            </a>
+          </Box>
+          {/* <Box sx={{ height: '9vh' }} className={styles.timeMenuBtn}>
                         {(mapsLocation || homeLocation) && !openWalletModal &&
                             <Box>
                                 <Button
@@ -240,89 +274,101 @@ export const RhsNav = ({
                             </Box>
                         }
                     </Box> */}
-                    {(mapsLocation || homeLocation) && <Box sx={{ height: '9vh' }} className={styles.yearMonthBoxParent}>
-                        <Box className={styles.yearMonthBox}>
-                            {showDays ?
-                                <Box className={styles.test1}>
-                                    <Box className={styles.test3}>
-                                        <Button
-                                            padding="2px 0"
-                                            backgroundColor="#FE7D06"
-                                            hoverBackgroundColor="#FE7D06"
-                                            borderRadius="1rem"
-                                        // textAlign="center"
-                                        // margin="0 0.5rem"
-                                        >
-                                            <Typography
-                                                text={monthInLetters ? monthInLetters : ''}
-                                                fontSize="1.4rem"
-                                                color="#FFFDFB"
-                                            />
-                                        </Button>
-                                    </Box>
-                                    <Box className={styles.test} sx={{ paddingRight: '1rem', }}>
-                                        <span style={{
-                                            // width: '6rem',
-                                            // display: 'flex',
-                                            // justifyContent: 'center',
-                                            // alignItems: 'center',
-                                            // textAlign: "center",
-                                            cursor: 'pointer',
-                                        }}
-                                            onClick={() => onYearButtonClicked(years[0]?.month)}
-                                        >
-                                            <Typography
-                                                text={years[0]?.month}
-                                                // width="2.2rem"
-                                                // height="2rem"
-                                                // margin="0 0 0 0.5rem"
-                                                fontSize="1.4rem"
-                                                color="#FFFDFB"
-                                            />
-                                        </span>
-                                    </Box>
-                                </Box>
-                                :
-                                <Box className={styles.test1}>
-                                    <Box className={styles.test} sx={{ paddingLeft: '1rem', }}>
-                                        <span style={{
-                                            // width: '6rem',
-                                            // display: 'flex',
-                                            // justifyContent: 'center',
-                                            // alignItems: 'center',
-                                            // textAlign: "center",
-                                            cursor: 'pointer',
-                                        }}
-                                            onClick={onMonthButtonClicked}>
-                                            <Typography
-                                                text={moment().month(clickedElement - 1).format("MMM") !== 'undefined' ? moment().month(clickedElement - 1).format("MMM") : ''}
-                                                // width="2.2rem"
-                                                // height="2rem"
-                                                // margin="0 0 0 0.5rem"
-                                                fontSize="1.4rem"
-                                                color="#FFFDFB"
-                                            />
-                                        </span>
-                                    </Box>
-                                    <Box className={styles.test3}>
-                                        <Button
-                                            padding="2px 0"
-                                            backgroundColor="#FE7D06"
-                                            hoverBackgroundColor="#FE7D06"
-                                            borderRadius="1rem"
-                                        // textAlign="center"
-                                        // margin="0 0.5rem"
-                                        >
-                                            <Typography
-                                                text={years[0]?.month !== '' ? years[0]?.month : ''}
-                                                fontSize="1.4rem"
-                                                color="#FFFDFB"
-                                            />
-                                        </Button>
-                                    </Box>
-                                </Box>
-                            }
-                            {/* <span>
+          {(mapsLocation || homeLocation) && (
+            <Box sx={{ height: "9vh" }} className={styles.yearMonthBoxParent}>
+              <Box className={styles.yearMonthBox}>
+                {showDays ? (
+                  <Box className={styles.test1}>
+                    <Box className={styles.test3}>
+                      <Button
+                        padding="2px 0"
+                        backgroundColor="#FE7D06"
+                        hoverBackgroundColor="#FE7D06"
+                        borderRadius="1rem"
+                        // textAlign="center"
+                        // margin="0 0.5rem"
+                      >
+                        <Typography
+                          text={monthInLetters ? monthInLetters : ""}
+                          fontSize="1.4rem"
+                          color="#FFFDFB"
+                        />
+                      </Button>
+                    </Box>
+                    <Box className={styles.test} sx={{ paddingRight: "1rem" }}>
+                      <span
+                        style={{
+                          // width: '6rem',
+                          // display: 'flex',
+                          // justifyContent: 'center',
+                          // alignItems: 'center',
+                          // textAlign: "center",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => onYearButtonClicked(years[0]?.month)}
+                      >
+                        <Typography
+                          text={years[0]?.month}
+                          // width="2.2rem"
+                          // height="2rem"
+                          // margin="0 0 0 0.5rem"
+                          fontSize="1.4rem"
+                          color="#FFFDFB"
+                        />
+                      </span>
+                    </Box>
+                  </Box>
+                ) : (
+                  <Box className={styles.test1}>
+                    <Box className={styles.test} sx={{ paddingLeft: "1rem" }}>
+                      <span
+                        style={{
+                          // width: '6rem',
+                          // display: 'flex',
+                          // justifyContent: 'center',
+                          // alignItems: 'center',
+                          // textAlign: "center",
+                          cursor: "pointer",
+                        }}
+                        onClick={onMonthButtonClicked}
+                      >
+                        <Typography
+                          text={
+                            moment()
+                              .month(clickedElement - 1)
+                              .format("MMM") !== "undefined"
+                              ? moment()
+                                  .month(clickedElement - 1)
+                                  .format("MMM")
+                              : ""
+                          }
+                          // width="2.2rem"
+                          // height="2rem"
+                          // margin="0 0 0 0.5rem"
+                          fontSize="1.4rem"
+                          color="#FFFDFB"
+                        />
+                      </span>
+                    </Box>
+                    <Box className={styles.test3}>
+                      <Button
+                        padding="2px 0"
+                        backgroundColor="#FE7D06"
+                        hoverBackgroundColor="#FE7D06"
+                        borderRadius="1rem"
+                        // textAlign="center"
+                        // margin="0 0.5rem"
+                      >
+                        <Typography
+                          text={years[0]?.month !== "" ? years[0]?.month : ""}
+                          fontSize="1.4rem"
+                          color="#FFFDFB"
+                        />
+                      </Button>
+                    </Box>
+                  </Box>
+                )}
+                {/* <span>
                             <img
                                 src={'./assets/images/👀.svg'}
                                 alt=""
@@ -331,10 +377,11 @@ export const RhsNav = ({
 
                             />
                         </span> */}
-                        </Box>
-                    </Box>}
-                </Box>
+              </Box>
             </Box>
+          )}
         </Box>
-    )
-}
+      </Box>
+    </Box>
+  );
+};
