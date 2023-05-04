@@ -57,7 +57,7 @@ const PostHeaderLayer = ({
 
     return (
         <>
-            <Box className={styles.postHeader}>
+            <Box className={styles.postHeader} sx={{ height: discoveryLocation ? '45px' : '8%' }}>
                 <Box
                     className={styles.group1}
                 // sx={{ justifyContent: (homeLocation || mapsLocation) ? 'flex-start' : 'flex-end', }}
