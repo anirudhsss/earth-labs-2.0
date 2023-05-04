@@ -100,9 +100,10 @@ export const Hexgrid = ({
         // }
         let filteredData;
         if (valueMax > 0 && valueMin > 0) {
+          // console.log("inside1", h.targetValue1, valueMax, valueMin);
           filteredData =
-            h.targetValue <= valueMax &&
-            h.targetValue >= valueMin &&
+            h.targetValue1 <= valueMax &&
+            h.targetValue1 >= valueMin &&
             referenceDate <= dateMax &&
             referenceDate >= dateMin;
         } else {
@@ -114,9 +115,10 @@ export const Hexgrid = ({
       })
       .sort((a, b) => {
         return (
-          a.targetValue - b.targetValue || b.referenceDate - a.referenceDate
+          a.targetValue1 - b.targetValue1 || b.referenceDate - a.referenceDate
         );
       });
+    // console.log("filteredHexes", filteredHexes);
     const coords = [];
     let counter = 0;
 
@@ -141,6 +143,11 @@ export const Hexgrid = ({
       fHex.S = coords[coordIndex]?.S;
       coordIndex++;
     }
+    // console.log("mapWidth * mapHeight", mapWidth * mapHeight);
+    // console.log(
+    //   "filteredHexes.slice(0, mapWidth * mapHeight)",
+    //   filteredHexes.slice(0, mapWidth * mapHeight)
+    // );
     return filteredHexes.slice(0, mapWidth * mapHeight);
   };
 

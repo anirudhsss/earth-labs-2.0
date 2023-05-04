@@ -71,7 +71,7 @@ export const UserHomepage = ({
     const [yearViewEnabled, setYearViewEnabled] = useState<boolean>(true);
     const [backgroundColor, setBackgroundColor] = useState('#FFF7EE');
     const [hoverElementId, setHoverElementId] = useState(null);
-
+    const { ethToUsdc } = useEthToUsdcConversion();
 
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -132,7 +132,6 @@ export const UserHomepage = ({
 
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data2, apiLoading, apiError } = AxiosFetch();
-    // const { ethToUsdc, ethToUsdcYvsTPercent, difference } = useEthToUsdcConversion();
 
     const onFindingXAxisMinAndMax = useCallback(() => {
         let arr: number[] = [];
@@ -681,15 +680,19 @@ export const UserHomepage = ({
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
         onCloseYearMenu1();
-        let a = '';
+        let res = '';
         const selectedItem = chosenCurrency.filter((item: any, index: number) => {
             if (index === id) {
-                a += item[0]?.toFixed(2) + ' - ' + item[item?.length - 1]?.toFixed(2) + ' ' + currName;
+                if (currName === 'USDC') {
+                    res = (item[0] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' - ' + (item[item?.length - 1] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' ' + currName;
+                } else {
+                    res = item[0]?.toFixed(2) + ' - ' + item[item?.length - 1]?.toFixed(2) + ' ' + currName;
+                }
             }
         })
-        // setSelectedItem1(selectedItem[0].value);
-        testFunc(a)
-        setCurrency(a);
+
+        testFunc(res)
+        setCurrency(res);
     }
 
     const testFunc = (selectedItem: any) => {
@@ -700,25 +703,28 @@ export const UserHomepage = ({
         let lowerRange = 0, higherRange = 0;
         if (range) {
             const b = selectedItem.split(' ');
-            console.log('b', b)
-            if (b[b.length - 1] === 'ETH') {
-                lowerRange = Number(b[0]);
-                higherRange = Number(b[2]);
-            } else if (b[b.length - 1] === 'USDC') {
-                if (b[0] === '<') {
-                    lowerRange = 50;
-                    const newB = b[1].substr(1);
-                    higherRange = Number(newB);
-                } else if (b[0] === '>') {
-                    const newB = b[1].substr(1);
-                    lowerRange = Number(newB);
-                    higherRange = 20000;
-                } else {
-                    lowerRange = Number(b[0].substr(1));
-                    higherRange = Number(b[2].substr(1));
-                }
-            }
+
+            // if (b[b.length - 1] === 'ETH') {
+            lowerRange = Number(b[0]);
+            higherRange = Number(b[2]);
+            // } else if (b[b.length - 1] === 'USDC') {
+            // if (b[0] === '<') {
+            //     lowerRange = 50;
+            //     const newB = b[1].substr(1);
+            //     higherRange = Number(newB);
+            // } else if (b[0] === '>') {
+            //     const newB = b[1].substr(1);
+            //     lowerRange = Number(newB);
+            //     higherRange = 20000;
+            // } else {
+            //     lowerRange = Number(b[0].substr(1));
+            //     higherRange = Number(b[2].substr(1));
+            // }
+            //     lowerRange = Number(b[0]) / (ethToUsdc ? ethToUsdc : 1);
+            //     higherRange = Number(b[2]) / (ethToUsdc ? ethToUsdc : 1);
+            // }
         }
+
         if (lowerRange > 0 && higherRange > 0) {
             let c = higherRange - lowerRange;
             let d = c / 4;
@@ -735,7 +741,19 @@ export const UserHomepage = ({
             let data2: any = [];
             data2 = abcd1;
             const arr = data2?.filter((item: any) => {
-                return item.targetValue1 >= lowerRange && item.targetValue1 <= higherRange;
+                let a = 1;
+                if (currName === 'ETH') {
+                    a = 1;
+                } else if (currName === 'USDC') {
+                    if (ethToUsdc) {
+                        a = ethToUsdc;
+                    } else {
+                        a = 1;
+                    }
+                }
+                // console.log('a', a, item.targetValue1, a * item.targetValue1, lowerRange, higherRange);
+                return (a * item.targetValue1) >= lowerRange &&
+                    (a * item.targetValue1) <= higherRange;
             })
             // console.log('arr', arr)
             // let processedArrays: any[] = [];
@@ -775,6 +793,7 @@ export const UserHomepage = ({
                     higherRange: higherRange,
                 })
             })
+            // console.log('yAxisItems', yAxisItems);
             setRange(false);
             setYAxisItems(yAxisItems);
         }
@@ -785,7 +804,19 @@ export const UserHomepage = ({
         // data2 = abcd;
         data2 = abcd1;
         const arr = data2?.filter((item: any) => {
-            return item.targetValue1 >= lowerRange && item.targetValue1 <= higherRange;
+            let a = 1;
+            if (currName === 'ETH') {
+                a = 1;
+            } else if (currName === 'USDC') {
+                if (ethToUsdc) {
+                    a = ethToUsdc;
+                } else {
+                    a = 1;
+                }
+            }
+            // console.log('a', a, item.targetValue1, a * item.targetValue1, lowerRange, higherRange);
+            return (a * item.targetValue1) >= lowerRange &&
+                (a * item.targetValue1) <= higherRange;
         })
         return [arr, lowerRange, higherRange];
     }
@@ -795,7 +826,6 @@ export const UserHomepage = ({
         // const b = range.split(' ');
         // lowerRange = Number(b[0]);
         // higherRange = Number(b[2]);
-        // console.log('test', id, lowerRange, higherRange);
         setYAxisValue({ yAxisValueMin: lowerRange, yAxisValueMax: higherRange });
         let data2: any = [];
         let idd = Number(id);
@@ -806,9 +836,21 @@ export const UserHomepage = ({
         data2 = abcd1;
         // }
         const arr = data2?.filter((item: any) => {
-            return item.targetValue >= lowerRange && item.targetValue <= higherRange;
+            let a = 1;
+            if (currName === 'ETH') {
+                a = 1;
+            } else if (currName === 'USDC') {
+                if (ethToUsdc) {
+                    a = ethToUsdc;
+                } else {
+                    a = 1;
+                }
+            }
+            // console.log('a', a, item.targetValue1, a * item.targetValue1, lowerRange, higherRange);
+            return (a * item.targetValue1) >= lowerRange &&
+                (a * item.targetValue1) <= higherRange;
         })
-        // setTestData(arr);
+        // console.log('arr', arr);
         setMatchedMonths(arr);
     }
 
@@ -896,6 +938,7 @@ export const UserHomepage = ({
     // console.log('month', month);
     // console.log('chosenCurrency', chosenCurrency);
     // console.log('currency', currency);
+    // console.log('yAxisItems', yAxisItems)
     return (
         <>
 
