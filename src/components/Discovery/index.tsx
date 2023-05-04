@@ -47,7 +47,7 @@ export const Discovery = ({
     return (
         <Box sx={{
             backgroundColor: '#FFFDFB',
-            height: '100vh',
+            height: '100%',
         }}>
             <Header />
 
@@ -74,10 +74,12 @@ export const Discovery = ({
                     <Box
                         className={styles.lhsBody}
                     >
-                        <Box className={styles.bwText} sx={{ marginLeft: '16rem' }}>
+                        <Box className={styles.bwText}
+                        // sx={{ marginLeft: '16rem' }}
+                        >
                             <Box>
                                 <Typography
-                                    text="Newest Users  "
+                                    text="Newest Users"
                                     margin='3rem 0 0 12rem'
                                     fontSize="2.5rem"
                                     fontWeight="bold"
@@ -100,14 +102,58 @@ export const Discovery = ({
                                 </Button>
                             </Box>
                         </Box>
-                        <Box sx={{
-                            margin: '2rem 0 0 23rem',
+                        <Box className={styles.glyphContainerParent} sx={{
+                            margin: '0 0 0 5rem',
                         }}>
-                            <span><img src="./testImage.png" width="250px" /></span>
-                            <span style={{ marginLeft: '-80px' }}><img src="./testImage.png" width="250px" /></span>
-                            <span style={{ marginLeft: '-80px' }}><img src="./testImage.png" width="250px" /></span>
+                            <span className={styles.glyphContainer}>
+                                <img src="./testImage.png" alt="" width="350px" />
+                                <Typography
+                                    text="Share | Go to Map"
+                                    fontSize="1.2rem"
+                                    fontWeight="bold"
+                                    width="10rem"
+                                />
+                            </span>
+                            <span className={styles.glyphContainer1}>
+                                <img src="./testImage.png" alt="" width="350px" />
+                                <Typography
+                                    text="Share | Go to Map"
+                                    fontSize="1.2rem"
+                                    fontWeight="bold"
+                                    width="10rem"
+                                />
+                            </span>
+                            <span className={styles.glyphContainer1}>
+                                <img src="./testImage.png" alt="" width="350px" />
+                                <Typography
+                                    text="Share | Go to Map"
+                                    fontSize="1.2rem"
+                                    fontWeight="bold"
+                                    width="10rem"
+                                />
+                            </span>
+                            <span className={styles.glyphContainer1}>
+                                <img src="./testImage.png" alt="" width="350px" />
+                                <Typography
+                                    text="Share | Go to Map"
+                                    fontSize="1.2rem"
+                                    fontWeight="bold"
+                                    width="10rem"
+                                />
+                            </span>
+                            <span className={styles.glyphContainer1}>
+                                <img src="./testImage.png" alt="" width="350px" />
+                                <Typography
+                                    text="Share | Go to Map"
+                                    fontSize="1.2rem"
+                                    fontWeight="bold"
+                                    width="10rem"
+                                />
+                            </span>
                         </Box>
-                        <Box className={styles.bwText} sx={{ marginLeft: '16rem' }}>
+                        <Box className={styles.bwText}
+                        // sx={{ marginLeft: '16rem' }}
+                        >
                             <Box>
                                 <Typography
                                     text="Largest Transactions"
@@ -134,120 +180,54 @@ export const Discovery = ({
                             </Box>
                         </Box>
                         <Box className={styles.glyphContainerParent} sx={{
-                            margin: '2rem 0 0 23rem',
+                            margin: '0 0 0 5rem',
                         }}>
                             <span className={styles.glyphContainer}>
-                                <img src="./testImage.png" width="250px" />
+                                <img src="./testImage.png" alt="" width="350px" />
                                 <Typography
                                     text="Share | Go to Map"
-                                    fontSize="1.1rem"
+                                    fontSize="1.2rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
+                                <img src="./testImage.png" alt="" width="350px" />
                                 <Typography
                                     text="Share | Go to Map"
-                                    fontSize="1.1rem"
+                                    fontSize="1.2rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
+                                <img src="./testImage.png" alt="" width="350px" />
                                 <Typography
                                     text="Share | Go to Map"
-                                    fontSize="1.1rem"
+                                    fontSize="1.2rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
+                                <img src="./testImage.png" alt="" width="350px" />
                                 <Typography
                                     text="Share | Go to Map"
-                                    fontSize="1.1rem"
+                                    fontSize="1.2rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
                             </span>
                             <span className={styles.glyphContainer1}>
-                                <img src="./testImage.png" width="250px" />
+                                <img src="./testImage.png" alt="" width="350px" />
                                 <Typography
                                     text="Share | Go to Map"
-                                    fontSize="1.1rem"
+                                    fontSize="1.2rem"
                                     fontWeight="bold"
                                     width="10rem"
                                 />
                             </span>
                         </Box>
-                        {/* <Box className={styles.bwText} sx={{ marginTop: '3rem', marginLeft: '16rem' }}>
-                                <Box>
-                                    <Typography
-                                        text="Biggest Swaps"
-                                        margin='3rem 0 0 12rem'
-                                        fontSize="2.5rem"
-                                        fontWeight="bold"
-                                    />
-                                </Box>
-                                <Box>
-                                    <Typography
-                                        text="show more >"
-                                        margin='3rem 0 0 12rem'
-                                        fontSize="1.1rem"
-                                    />
-                                </Box>
-                            </Box>
-                            <Box className={styles.glyphContainerParent} sx={{
-                                margin: '2rem 0 0 23rem',
-                            }}>
-                                <span className={styles.glyphContainer}>
-                                    <img src="./testImage.png" width="250px" />
-                                    <Typography
-                                        text="Share | Go to Map"
-                                        fontSize="1.1rem"
-                                        fontWeight="bold"
-                                        width="10rem"
-                                    />
-                                </span>
-                                <span className={styles.glyphContainer1}>
-                                    <img src="./testImage.png" width="250px" />
-                                    <Typography
-                                        text="Share | Go to Map"
-                                        fontSize="1.1rem"
-                                        fontWeight="bold"
-                                        width="10rem"
-                                    />
-                                </span>
-                                <span className={styles.glyphContainer1}>
-                                    <img src="./testImage.png" width="250px" />
-                                    <Typography
-                                        text="Share | Go to Map"
-                                        fontSize="1.1rem"
-                                        fontWeight="bold"
-                                        width="10rem"
-                                    />
-                                </span>
-                                <span className={styles.glyphContainer1}>
-                                    <img src="./testImage.png" width="250px" />
-                                    <Typography
-                                        text="Share | Go to Map"
-                                        fontSize="1.1rem"
-                                        fontWeight="bold"
-                                        width="10rem"
-                                    />
-                                </span>
-                                <span className={styles.glyphContainer1}>
-                                    <img src="./testImage.png" width="250px" />
-                                    <Typography
-                                        text="Share | Go to Map"
-                                        fontSize="1.1rem"
-                                        fontWeight="bold"
-                                        width="10rem"
-                                    />
-                                </span>
-                            </Box> */}
                     </Box>
                     {/* } */}
                     <RhsNav />

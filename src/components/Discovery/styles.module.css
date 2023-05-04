@@ -124,14 +124,14 @@
 }
 
 .bwText {
-    width: 95rem;
+    /* width: 95rem; */
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .glyphContainerParent {
-    width: 80rem;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
