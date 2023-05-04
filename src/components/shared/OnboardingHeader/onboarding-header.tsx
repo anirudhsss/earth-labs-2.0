@@ -1,6 +1,6 @@
 import { Icons } from "constant";
 import { FC } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import ConnectWallet from "../ConnectWallet";
 import { Container } from "../Container";
@@ -56,15 +56,23 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             />
           </RenderIf>
           <RenderIf isTrue={!Boolean(isAtlasLogo)}>
-            <img
-              style={{
-                cursor: "pointer",
+            <Link
+              to="/discovery"
+              state={{
+                icon: 'discovery',
               }}
-              src={Icons.glphyLogo}
-              onClick={() => {
-                navigate("/discovery");
-              }}
-            />
+              style={{ textDecoration: 'none', }}
+            ><img
+                style={{
+                  cursor: "pointer",
+                }}
+                src={Icons.glphyLogo}
+                alt=""
+              // onClick={() => {
+              //   navigate("/discovery");
+              // }}
+              />
+            </Link>
           </RenderIf>
         </div>
         <div className="flex">
