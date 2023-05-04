@@ -679,6 +679,7 @@ export const UserHomepage = ({
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
         onCloseYearMenu1();
+        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         let res = '';
         const selectedItem = chosenCurrency.filter((item: any, index: number) => {
             if (index === id) {
@@ -938,6 +939,7 @@ export const UserHomepage = ({
     // console.log('chosenCurrency', chosenCurrency);
     // console.log('currency', currency);
     // console.log('yAxisItems', yAxisItems)
+    // console.log('yAxisValue', yAxisValue)
     return (
         <>
 
