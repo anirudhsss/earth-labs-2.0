@@ -660,6 +660,7 @@ export const UserHomepage = ({
         setAbcd2([]);
         setShowDays(false);
         setClickedElement(null);
+        setHoverElementId(null);
         setCurrency([]);
         setYAxisItems([]);
         setYAxisItemClicked(null);
