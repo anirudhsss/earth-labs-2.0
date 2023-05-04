@@ -1,5 +1,5 @@
 export const authorizeTwitter = (baseUrl: string): Promise<Response> => {
-  return fetch(`${baseUrl}/oAuthAtlas/AtlasAuthorizeURLDev`, {
+  return fetch(`${baseUrl}/oAuthAtlas/AtlasAuthorizeURLTest`, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
     },
