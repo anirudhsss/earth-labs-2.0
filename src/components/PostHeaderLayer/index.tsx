@@ -18,7 +18,7 @@ export interface PostHeaderLayerProps {
     onChosingCurrency?: any;
     currName?: any;
     apiLoading?: any;
-    // data?: any;
+    matchedMonths?: any;
 }
 
 const PostHeaderLayer = ({
@@ -32,7 +32,7 @@ const PostHeaderLayer = ({
     onChosingCurrency,
     currName,
     apiLoading,
-    // data,
+    matchedMonths,
 }: PostHeaderLayerProps) => {
     const location = useLocation();
     const homeLocation = location?.pathname === '/home';
@@ -180,8 +180,10 @@ const PostHeaderLayer = ({
                     }}>
                         {currency?.length > 0 &&
                             <Typography
-                                text={`Currently Viewing: ${currency}`}
+                                // text={`Currently Viewing: ${currency}`}
+                                text={`${matchedMonths?.length} hex`}
                                 fontSize="1.2rem"
+                                color='#FE7D06'
                             />
                         }
                     </Box>}

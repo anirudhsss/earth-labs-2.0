@@ -967,6 +967,7 @@ export const UserHomepage = ({
                 >
 
                     <PostHeaderLayer
+                        matchedMonths={matchedMonths}
                         apiLoading={apiLoading}
                         openMenu1={openMenu1}
                         currency={currency}
