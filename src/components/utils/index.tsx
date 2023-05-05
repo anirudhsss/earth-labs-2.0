@@ -16,7 +16,7 @@ export const truncate = (
 
     var sepLen = separator.length,
       charsToShow = strLen - sepLen,
-      frontChars = Math.ceil(charsToShow / 2),
+      frontChars = Math.ceil(charsToShow / 2) + 2,
       backChars = Math.floor(charsToShow / 2);
 
     return (

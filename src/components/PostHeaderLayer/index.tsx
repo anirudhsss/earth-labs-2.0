@@ -292,16 +292,21 @@ const PostHeaderLayer = ({
                                 width='20'
                                 height='20'
                             />}
-                            {condition ? <Typography
-                                text={`${data?.dotEarthHandle}`}
-                                fontWeight='700'
-                                fontSize='1.3rem'
-                                color={`${(homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''}`}
-                            /> :
+                            {condition ? <span style={{ paddingLeft: '1rem', paddingRight: '1rem', }}>
+                                <Typography
+                                    text={`${data?.dotEarthHandle}`}
+                                    // text='woigkbvjegfhwi8y8i3op1iyriohfbbcsbcsjbcjbsfihgqwpieuhihwibckjb'
+                                    fontWeight='700'
+                                    fontSize='1.3rem'
+                                    color={`${(homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''}`}
+                                />
+                            </span> :
                                 <span style={{
                                     fontWeight: '700',
                                     fontSize: '1.3rem',
-                                    color: (homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : ''
+                                    color: (homeLocation || mapsLocation) ? '#163A70' : walletLocation ? '#fffdfb' : '',
+                                    // paddingLeft: '1rem', 
+                                    paddingRight: '1rem',
 
                                 }}>{truncate(data?.targetAddress, 12, '....')}</span>}
                             <img
