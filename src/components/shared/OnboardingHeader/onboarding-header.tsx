@@ -43,24 +43,33 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
       >
         <div className="flex">
           <RenderIf isTrue={Boolean(isAtlasLogo)}>
-            <img
-              style={{
-                cursor: "pointer",
-                height: "64px",
-                width: "120px",
-              }}
-              src={Icons.atlasDark}
-              onClick={() => {
-                navigate("/maps");
-              }}
-            />
+            <Link
+              to="/discovery"
+              // state={{
+              //   icon: 'discovery',
+              // }}
+              style={{ textDecoration: 'none', }}
+            >
+              <img
+                style={{
+                  cursor: "pointer",
+                  height: "64px",
+                  width: "120px",
+                }}
+                src={Icons.atlasDark}
+                alt=""
+                onClick={() => {
+                  navigate("/maps");
+                }}
+              />
+            </Link>
           </RenderIf>
           <RenderIf isTrue={!Boolean(isAtlasLogo)}>
             <Link
               to="/discovery"
-              state={{
-                icon: 'discovery',
-              }}
+              // state={{
+              //   icon: 'discovery',
+              // }}
               style={{ textDecoration: 'none', }}
             ><img
                 style={{

@@ -3,7 +3,7 @@ import { Button } from 'components/shared/Button';
 import { Typography } from 'components/shared/Typography';
 import { AxiosFetch, truncate, isEmpty } from 'components/utils';
 import useEthToUsdcConversion from 'hooks/useEthToUsdcConversion';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 
@@ -35,10 +35,10 @@ const PostHeaderLayer = ({
     // data,
 }: PostHeaderLayerProps) => {
     const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
+    const homeLocation = location?.pathname === '/home';
+    const walletLocation = location?.pathname === '/wallet';
+    const mapsLocation = location?.pathname === '/maps';
+    const discoveryLocation = location?.pathname === '/discovery';
     const { ethToUsdc, ethToUsdcYvsTPercent, difference } = useEthToUsdcConversion();
     const { data } = AxiosFetch();
     const [condition, setCondition] = useState<boolean>(false);
@@ -326,9 +326,9 @@ const PostHeaderLayer = ({
                         }}>
                             <Link
                                 to="/maps"
-                                state={{
-                                    icon: 'maps',
-                                }}
+                                // state={{
+                                //     icon: 'maps',
+                                // }}
                                 style={{ textDecoration: 'none', }}
                             >
                                 <Button
@@ -348,9 +348,9 @@ const PostHeaderLayer = ({
                             </Link>
                             <Link
                                 to="/wallet"
-                                state={{
-                                    icon: 'wallet'
-                                }}
+                                // state={{
+                                //     icon: 'wallet'
+                                // }}
                                 style={{ textDecoration: 'none', }}
                             >
                                 <Button

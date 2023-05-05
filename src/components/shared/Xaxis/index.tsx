@@ -97,10 +97,10 @@ export const Xaxis = ({
     const whichDuration = showDays ? arrOfDays : arrOfMonths;
     const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
     const location = useLocation();
-    const homeLocation = location?.state?.icon === 'home';
-    const walletLocation = location?.state?.icon === 'wallet';
-    const mapsLocation = location?.state?.icon === 'maps';
-    const discoveryLocation = location?.state?.icon === 'discovery';
+    const homeLocation = location?.pathname === '/home';
+    const walletLocation = location?.pathname === '/wallet';
+    const mapsLocation = location?.pathname === '/maps';
+    const discoveryLocation = location?.pathname === '/discovery';
 
     const findMax = useCallback(() => {
         whichDuration?.map((item: any) => {
