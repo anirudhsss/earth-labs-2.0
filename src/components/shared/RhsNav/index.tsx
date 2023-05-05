@@ -59,10 +59,10 @@ export const RhsNav = ({
   clickedElement,
 }: RhsNavProps) => {
   const location = useLocation();
-  const homeLocation = location?.state?.icon === "home";
-  const walletLocation = location?.state?.icon === "wallet";
-  const mapsLocation = location?.state?.icon === "maps";
-  const discoveryLocation = location?.state?.icon === "discovery";
+  const homeLocation = location?.pathname === '/home';
+  const walletLocation = location?.pathname === '/wallet';
+  const mapsLocation = location?.pathname === '/maps';
+  const discoveryLocation = location?.pathname === '/discovery';
 
   return (
     <Box
@@ -81,9 +81,9 @@ export const RhsNav = ({
           <Box className={styles.upperIcons}>
             <Link
               to="/maps"
-              state={{
-                icon: "home",
-              }}
+            // state={{
+            //   icon: "home",
+            // }}
             >
               <span
                 className={styles.iconOuter}
@@ -92,11 +92,10 @@ export const RhsNav = ({
                 }}
               >
                 <img
-                  src={`${
-                    homeLocation || mapsLocation || walletLocation
-                      ? "/assets/images/home_highlighted.svg"
-                      : "/assets/images/home.svg"
-                  }`}
+                  src={`${homeLocation || mapsLocation || walletLocation
+                    ? "/assets/images/home_highlighted.svg"
+                    : "/assets/images/home.svg"
+                    }`}
                   // src='/assets/images/home.svg'
                   alt=""
                   className={styles.imageAsIcon}
@@ -105,9 +104,9 @@ export const RhsNav = ({
             </Link>
             <Link
               to="/discovery"
-              state={{
-                icon: "discovery",
-              }}
+            // state={{
+            //   icon: "discovery",
+            // }}
             >
               <span
                 className={styles.iconOuter}
@@ -118,11 +117,10 @@ export const RhsNav = ({
               >
                 <img
                   // src='/assets/images/discovery.svg'
-                  src={`${
-                    discoveryLocation
-                      ? "/assets/images/discovery_highlighted.svg"
-                      : "/assets/images/discovery.svg"
-                  }`}
+                  src={`${discoveryLocation
+                    ? "/assets/images/discovery_highlighted.svg"
+                    : "/assets/images/discovery.svg"
+                    }`}
                   alt=""
                   className={styles.imageAsIcon}
                 />
@@ -285,8 +283,8 @@ export const RhsNav = ({
                         backgroundColor="#FE7D06"
                         hoverBackgroundColor="#FE7D06"
                         borderRadius="1rem"
-                        // textAlign="center"
-                        // margin="0 0.5rem"
+                      // textAlign="center"
+                      // margin="0 0.5rem"
                       >
                         <Typography
                           text={monthInLetters ? monthInLetters : ""}
@@ -338,8 +336,8 @@ export const RhsNav = ({
                               .month(clickedElement - 1)
                               .format("MMM") !== "undefined"
                               ? moment()
-                                  .month(clickedElement - 1)
-                                  .format("MMM")
+                                .month(clickedElement - 1)
+                                .format("MMM")
                               : ""
                           }
                           // width="2.2rem"
@@ -356,8 +354,8 @@ export const RhsNav = ({
                         backgroundColor="#FE7D06"
                         hoverBackgroundColor="#FE7D06"
                         borderRadius="1rem"
-                        // textAlign="center"
-                        // margin="0 0.5rem"
+                      // textAlign="center"
+                      // margin="0 0.5rem"
                       >
                         <Typography
                           text={years[0]?.month !== "" ? years[0]?.month : ""}
