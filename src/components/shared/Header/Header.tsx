@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { Icons } from "constant";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import useLocalStorageState from "use-local-storage-state";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export interface HeaderProps {
   openWalletModal?: any;
@@ -26,10 +27,10 @@ const Header = ({
   landingPageLocation,
 }: HeaderProps) => {
   const location = useLocation();
-  const homeLocation = location?.pathname === '/home';
-  const walletLocation = location?.pathname === '/wallet';
-  const mapsLocation = location?.pathname === '/maps';
-  const discoveryLocation = location?.pathname === '/discovery';
+  const homeLocation = location?.pathname === "/home";
+  const walletLocation = location?.pathname === "/wallet";
+  const mapsLocation = location?.pathname === "/maps";
+  const discoveryLocation = location?.pathname === "/discovery";
 
   // console.log("Header");
   const ConnectTwitter = () => {
@@ -113,10 +114,11 @@ const Header = ({
       justifyContent="space-between"
       alignItems="center"
       width="100%"
-      borderBottom={`0.5px solid ${mapsLocation || homeLocation || discoveryLocation
-        ? "rgba(0, 0, 0, 0.6)"
-        : "#FFFDFB"
-        }`}
+      borderBottom={`0.5px solid ${
+        mapsLocation || homeLocation || discoveryLocation
+          ? "rgba(0, 0, 0, 0.6)"
+          : "#FFFDFB"
+      }`}
       height="7.6vh"
     >
       <Box
@@ -129,9 +131,9 @@ const Header = ({
           !openWalletModal && (
             <Link
               to="/discovery"
-            // state={{
-            //   icon: "discovery",
-            // }}
+              // state={{
+              //   icon: "discovery",
+              // }}
             >
               <span style={{ margin: "0 25px 0 15px" }}>
                 <img
@@ -149,9 +151,9 @@ const Header = ({
         {walletLocation && (
           <Link
             to="/discovery"
-          // state={{
-          //   icon: "discovery",
-          // }}
+            // state={{
+            //   icon: "discovery",
+            // }}
           >
             <span style={{ margin: "0 0 0 0px" }}>
               <img
@@ -175,27 +177,30 @@ const Header = ({
           landingPageLocation) &&
           !openWalletModal && (
             <NormalSearchField
-              placeholderColor={`${mapsLocation ||
+              placeholderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              borderColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              borderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              searchIconColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              searchIconColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
             />
           )}
         {(mapsLocation ||
@@ -248,6 +253,9 @@ const Header = ({
             </Box>
           </Link>
           <ConnectTwitter />
+          <div className="connect_wallet_button">
+            <ConnectButton />
+          </div>
         </div>
         {/* } */}
       </Box>

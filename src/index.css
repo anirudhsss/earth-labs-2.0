@@ -93,8 +93,7 @@ code {
   padding: 0rem 4rem !important;
   height: 4rem !important;
   background-color: #fff !important;
-  border-radius : 20rem !important;
-
+  border-radius: 20rem !important;
 }
 
 [data-testid="rk-connect-button"] {
@@ -102,6 +101,15 @@ code {
   padding: 0rem 4rem !important;
   height: 4rem !important;
   background-color: #fff !important;
-  border-radius : 20rem !important;
+  border-radius: 20rem !important;
+  font-size: 1.4rem !important;
+}
+
+.connect_wallet_button [data-testid="rk-connect-button"] {
+  color: #1c223d !important;
+  padding: 0rem 4rem !important;
+  height: 4rem !important;
+  background-color: transparent !important;
+  border: 1px solid #000 !important;
   font-size: 1.4rem !important;
 }
