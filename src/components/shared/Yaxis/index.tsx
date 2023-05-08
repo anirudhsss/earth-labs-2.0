@@ -46,9 +46,8 @@ export const Yaxis = ({
                             />
                         </span>
                     </Box>
-                    {yAxisItems?.map((item: any) => {
+                    {/* {yAxisItems?.map((item: any) => {
                         const range = item.range.split(' ');
-                        // console.log('item', item);
                         return (
                             <>
 
@@ -75,17 +74,13 @@ export const Yaxis = ({
                                                     fontWeight='bold'
                                                 />
                                             </span>
-                                            {/* <span>
-                                            <img src={'./assets/images/ethereum-logo.svg'} alt=""
-                                            />
-                                        </span> */}
                                         </>
                                     }
                                 </Box>
 
                             </>
                         )
-                    })}
+                    })} */}
                     <Box sx={{ position: 'relative', }}>
                         <Box sx={{
                             width: '10px',
