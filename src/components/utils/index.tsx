@@ -1,6 +1,7 @@
 import { Backdrop, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ApiUrl } from 'constant'
 
 export const isEmpty = (str: string) => !str?.length;
 
@@ -41,8 +42,7 @@ export const AxiosFetch = (address?: string) => {
   const [apiError, setApiError] = useState<any>("");
 
   useEffect(() => {
-    const url = `https://api.earth.domains/earthapi/dotEarth/GenerateMap?address=${address ? address : ""
-      }`;
+    const url = `https://api.earth.domains/earthapi/dotEarth/${address ? address : "GenerateGlyphs"}`;
 
     fetch(url)
       .then((res) => res.json())

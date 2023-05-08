@@ -242,6 +242,7 @@ export const Hexgrid = ({
               >
                 {/* {sortedData?.map((item, index) => { */}
                 {testArr?.map((item, index) => {
+                  // console.log("item?.targetValue1", item?.targetValue1);
                   return (
                     <>
                       <Fragment>

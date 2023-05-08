@@ -340,7 +340,7 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
 
     const onShowDaysInfo = useCallback((abcd: any, month: any) => {
-        // console.log('onShowDaysInfo', abcd, month)
+        // console.log('onShowDaysInfo')
         setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         setCurrency([]);
         setYAxisItems([]);
@@ -713,7 +713,8 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     );
 
     const onValueMenuItemClicked1 = (id: number) => {
-        setShowDays(false);
+        // console.log('onValueMenuItemClicked1')
+        // setShowDays(false);
         setYAxisItems([]);
         setYAxisItemClicked(null);
         setYAxisItemHovered(null);
@@ -739,7 +740,6 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                 }
             }
         });
-
         testFunc(res);
         setCurrency(res);
     };
