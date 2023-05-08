@@ -1,7 +1,7 @@
 import { Box, Menu, MenuItem } from '@mui/material';
 import { Button } from 'components/shared/Button';
 import { Typography } from 'components/shared/Typography';
-import { AxiosFetch, truncate, isEmpty } from 'components/utils';
+import { AxiosFetch, truncate, isEmpty, OrangeHexagonIcon } from 'components/utils';
 import useEthToUsdcConversion from 'hooks/useEthToUsdcConversion';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -179,12 +179,17 @@ const PostHeaderLayer = ({
                         left: '60px',
                     }}>
                         {currency?.length > 0 &&
-                            <Typography
-                                // text={`Currently Viewing: ${currency}`}
-                                text={`${matchedMonths?.length} hex`}
-                                fontSize="1.2rem"
-                                color='#FE7D06'
-                            />
+                            <Box className={styles.sameLevel}>
+                                <Typography
+                                    // text={`Currently Viewing: ${currency}`}
+                                    text={`${matchedMonths?.length}`}
+                                    fontSize="1.2rem"
+                                    color='#FE7D06'
+                                />&nbsp;
+                                <span style={{ marginTop: '-2px' }}>
+                                    {OrangeHexagonIcon}
+                                </span>
+                            </Box>
                         }
                     </Box>}
 

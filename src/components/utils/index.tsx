@@ -41,9 +41,8 @@ export const AxiosFetch = (address?: string) => {
   const [apiError, setApiError] = useState<any>("");
 
   useEffect(() => {
-    const url = `https://api.earth.domains/earthapi/dotEarth/GenerateMap?address=${
-      address ? address : ""
-    }`;
+    const url = `https://api.earth.domains/earthapi/dotEarth/GenerateMap?address=${address ? address : ""
+      }`;
 
     fetch(url)
       .then((res) => res.json())
@@ -100,4 +99,6 @@ export const CalcRange = (arr: any[]) => {
     arr1.push(arr.splice(start, howMany));
   }
   return arr1;
-};
+}
+
+export const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '25px', }}>&#x2B22;</span>

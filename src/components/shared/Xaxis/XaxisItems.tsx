@@ -5,6 +5,7 @@ import { Typography } from "../Typography";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
 import styles from './styles.module.css';
+import { OrangeHexagonIcon } from "components/utils";
 
 export interface XaxisItemsProps {
     month?: any;
@@ -88,8 +89,6 @@ export const XaxisItems = ({
         }
     }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, setClickedMonth, setdayClicked, showDaysEnabled]);
 
-    // const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '35px', }}>&#x2B22;</span>
-
     return (
         <Box sx={{
             display: 'flex',
@@ -120,12 +119,17 @@ export const XaxisItems = ({
                 width: '100px',
                 textAlign: 'center',
             }}>
-                <Typography
-                    fontSize="15px"
-                    color={`${(month === hoverElementId || month === clickedElement) && '#FE7D06'}`}
-                    text={`${whichDuration1}${(month === hoverElementId || month === clickedElement) ? `: ${noOfGlyphs} hex` : ''}`}
-                    fontWeight="bold"
-                />
+                <Box className={styles.sameLevel}>
+                    <Typography
+                        fontSize="15px"
+                        color={`${(month === hoverElementId || month === clickedElement) && '#FE7D06'}`}
+                        text={`${whichDuration1}${(month === hoverElementId || month === clickedElement) ? `: ${noOfGlyphs}` : ''}`}
+                        fontWeight="bold"
+                    />
+                    <span style={{ marginTop: '-2px' }}>
+                        &nbsp;&nbsp;{(month === hoverElementId || month === clickedElement) ? OrangeHexagonIcon : ''}
+                    </span>
+                </Box>
             </Box>
             {/* </Box> */}
         </Box>
