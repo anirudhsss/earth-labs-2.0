@@ -99,3 +99,5 @@ export const CalcRange = (arr: any[]) => {
   }
   return arr1;
 }
+
+export const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '25px', }}>&#x2B22;</span>

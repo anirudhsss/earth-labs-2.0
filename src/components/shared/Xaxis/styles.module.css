@@ -17,3 +17,9 @@
     width: 9px;
     height: 9px;
 }
+
+.sameLevel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

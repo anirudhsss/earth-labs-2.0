@@ -34,19 +34,6 @@ import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 export interface UserHomepageProps {
 
 }
-// const ETH = [
-//     { id: 0, value: '0.001 - 0.01 ETH' },
-//     { id: 1, value: '0.01 - 0.1 ETH' },
-//     { id: 2, value: '0.1 - 1 ETH' },
-//     { id: 3, value: '1 - 10 ETH' },
-// ]
-// const USDC = [
-//     { id: 0, value: '< $500 USDC' },
-//     { id: 1, value: '$500 - $1000 USDC' },
-//     { id: 2, value: '$1000 - $5000 USDC' },
-//     { id: 3, value: '$5000 - $10000 USDC' },
-//     { id: 4, value: '> $10000 USDC' },
-// ]
 
 export const UserHomepage = ({
 
