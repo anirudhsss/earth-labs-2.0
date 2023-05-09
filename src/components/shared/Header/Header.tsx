@@ -34,7 +34,7 @@ const Header = ({
   const discoveryLocation = location?.pathname === "/discovery";
   const { data } = AxiosFetch();
 
-  // console.log("Header");
+  console.log("Header");
   const ConnectTwitter = () => {
     const { initateTwitterAuth, getTwitterUserInfo } = useTwitterFlow();
     const [twitterUserInfo, setTwitterUserInfo] = useLocalStorageState<{
