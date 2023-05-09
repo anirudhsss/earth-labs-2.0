@@ -124,6 +124,16 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data2, apiLoading, apiError } = AxiosFetch(walletAddress);
 
+    const [showDays, setShowDays] = useState<boolean | undefined>(false);
+    const [furtherPropagation, setfurtherPropagation] = useState<
+        boolean | undefined
+    >(true);
+    const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
+    const [clickedDay, setClickedDay] = useState<any>();
+    const [abcd2, setAbcd2] = useState<any>([]);
+    const [abcd3, setAbcd3] = useState<any>([]);
+    const [clickedMonth, setClickedMonth] = useState<any>();
+
     useEffect(() => {
         if (address) {
             setWalletAddress(address);
@@ -207,15 +217,6 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     const invlerp = useCallback((min: number, max: number, item: number) => {
         return clamp((item - min) / (max - min)); //0.35
     }, []);
-
-    const [showDays, setShowDays] = useState<boolean | undefined>(false);
-    const [furtherPropagation, setfurtherPropagation] = useState<
-        boolean | undefined
-    >(true);
-    const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
-    const [clickedDay, setClickedDay] = useState<any>();
-    const [abcd2, setAbcd2] = useState<any>([]);
-    const [clickedMonth, setClickedMonth] = useState<any>();
 
     const showDaysEnabled = () => {
         setShowDays(true);
@@ -361,6 +362,11 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
 
     const onClickOfADay = useCallback((abcd2: any[], day: number) => {
         // console.log('onClickOfADay');
+        setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
+        setCurrency([]);
+        setYAxisItems([]);
+        setYAxisItemClicked(null);
+        setYAxisItemHovered(null);
         if (abcd2?.length > 0) {
             let filteredDays: any[];
             filteredDays = abcd2?.filter((item) => {
@@ -369,6 +375,8 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                 // console.log('Number(moment(item.timestamp).format("DD)) === day', Number(moment(item.timestamp).format('DD')) === Number(day));
                 return Number(moment.utc(item.timestamp).format("DD")) === Number(day);
             });
+            // console.log('filteredDays', filteredDays);
+            setAbcd3(filteredDays);
             setMatchedMonths(filteredDays);
         }
     }, []);
@@ -528,12 +536,20 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     }, [data2]);
 
     useEffect(() => {
-        const tArr = data2?.map((item: any) => item.targetValue1);
+        let arr: any[] = [];
+        // arr = data2;
+        if (furtherPropagation) {
+            arr = abcd1;
+        } else {
+            arr = abcd3
+        }
+        // console.log('arr', arr);
+        const tArr = arr?.map((item: any) => item.targetValue1);
         const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
         const requiredArr = CalcRange(sortedTArr);
         // console.log('requiredArr', requiredArr);
         setChosenCurrency(requiredArr);
-    }, [data2]);
+    }, [abcd1, abcd3, furtherPropagation]);
 
     const onHelpIconClicked = () => {
         setHelpIconClicked(!helpIconClicked);
@@ -788,9 +804,14 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
             lengthsArr.push(testFunc2(d1, d2));
             lengthsArr?.push(testFunc2(d2, d3));
             lengthsArr.push(testFunc2(d3, higherRange));
-            let data2: any = [];
-            data2 = abcd1;
-            const arr = data2?.filter((item: any) => {
+            let arr3: any[] = [];
+            if (furtherPropagation) {
+                arr3 = abcd1;
+            } else {
+                arr3 = abcd2
+            }
+            const arr = arr3?.filter((item: any) => {
+                // console.log('item', item);
                 let a = 1;
                 if (currName === "ETH") {
                     a = 1;
@@ -801,13 +822,13 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                         a = 1;
                     }
                 }
-                // console.log('a', a, item.targetValue1, a * item.targetValue1, lowerRange, higherRange);
+                // console.log('a', item.targetValue1.toFixed(2), lowerRange, higherRange);
                 return (
-                    a * item.targetValue1 >= lowerRange &&
-                    a * item.targetValue1 <= higherRange
+                    a * (item.targetValue1.toFixed(2)) >= lowerRange &&
+                    a * (item.targetValue1.toFixed(2)) <= higherRange
                 );
             });
-            // console.log('arr', arr)
+            console.log('arr', arr)
             // let processedArrays: any[] = [];
             let processedArrays1: any[] = [];
             setMatchedMonths(arr);
@@ -987,8 +1008,9 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     // console.log('data2', data2);
     // console.log('clickedElement', clickedElement)
     // console.log('clickedMonth', clickedMonth)
-    // console.log('furtherPropagation', furtherPropagation);
+    // console.log('abcd1', abcd1);
     // console.log('abcd2', abcd2);
+    // console.log('furtherPropagation', furtherPropagation);
     // console.log('showDays', showDays);
     // console.log('monthInLetters', monthInLetters);
     // console.log('dayClicked', dayClicked);

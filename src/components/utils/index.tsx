@@ -87,18 +87,26 @@ export const BackdropDuringApiLoading = ({
 };
 
 export const CalcRange = (arr: any[]) => {
+  // console.log('arr', arr);
   const parts = 4;
   const len = Math.ceil(arr.length / parts);
-  const arr1: any[] = [];
+  // console.log('len', len);
+  let arr1: any[] = [];
+  let arr2: any[] = [];
   let start = 0,
     howMany = 0;
 
   for (let i = 0; i < parts; i++) {
     start = 0;
     howMany = len;
-    arr1.push(arr.splice(start, howMany));
+    arr1 = arr.splice(start, howMany);
+    if (arr1?.length > 0) {
+      arr2.push(arr1);
+    }
+    // console.log('arr2', arr2);
   }
-  return arr1;
+  // console.log('arr1', arr1);
+  return arr2;
 }
 
 export const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '25px', }}>&#x2B22;</span>
