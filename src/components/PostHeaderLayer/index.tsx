@@ -146,11 +146,14 @@ const PostHeaderLayer = ({
                                     )
                                 })} */}
                                 {chosenCurrency?.map((item: any, index: number) => {
-                                    let res;
+                                    // if (item !== undefined) {
+                                    let res, actual;
                                     if (currName === 'USDC') {
                                         res = (item[0] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' - ' + (item[item?.length - 1] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' ' + currName;
+                                        // actual = (item[0] * (ethToUsdc ? ethToUsdc : 1)) + ' - ' + (item[item?.length - 1] * (ethToUsdc ? ethToUsdc : 1)) + ' ' + currName;
                                     } else {
                                         res = item[0]?.toFixed(2) + ' - ' + item[item?.length - 1]?.toFixed(2) + ' ' + currName;
+                                        // actual = item[0] + ' - ' + item[item?.length - 1] + ' ' + currName;
                                     }
 
                                     return (
@@ -168,6 +171,7 @@ const PostHeaderLayer = ({
                                             {`${res}`}
                                         </MenuItem>
                                     )
+                                    // }
                                 })}
                             </Menu>
                         </>}
