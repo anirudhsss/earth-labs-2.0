@@ -828,7 +828,7 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                     a * (item.targetValue1.toFixed(2)) <= higherRange
                 );
             });
-            console.log('arr', arr)
+            // console.log('arr', arr)
             // let processedArrays: any[] = [];
             let processedArrays1: any[] = [];
             setMatchedMonths(arr);
