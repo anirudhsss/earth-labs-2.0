@@ -121,7 +121,7 @@ export const XaxisItems = ({
             }}>
                 <Box className={styles.sameLevel}>
                     <Typography
-                        fontSize="15px"
+                        fontSize="1.2rem"
                         color={`${(month === hoverElementId || month === clickedElement) && '#FE7D06'}`}
                         text={`${whichDuration1}${(month === hoverElementId || month === clickedElement) ? `: ${noOfGlyphs}` : ''}`}
                         fontWeight="bold"

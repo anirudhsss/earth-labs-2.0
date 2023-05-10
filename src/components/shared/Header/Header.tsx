@@ -35,7 +35,7 @@ const Header = ({
     const { data } = AxiosFetch();
     const [condition, setCondition] = useState<boolean>(false);
 
-    console.log("Header");
+    // console.log("Header");
     const ConnectTwitter = () => {
         const { initateTwitterAuth, getTwitterUserInfo } = useTwitterFlow();
         const [twitterUserInfo, setTwitterUserInfo] = useLocalStorageState<{
@@ -247,11 +247,8 @@ const Header = ({
                         gap: "2rem",
                     }}
                 >
-                    <Link
+                    {/* <Link
                         to="/maps"
-                        // state={{
-                        //   icon: "maps",
-                        // }}
                         style={{ textDecoration: "none" }}
                     >
                         <Box onClick={onWalletBtnClickClose}>
@@ -262,7 +259,7 @@ const Header = ({
                                 cursor="pointer"
                             />}
                         </Box>
-                    </Link>
+                    </Link> */}
                     <ConnectTwitter />
                     <div className="connect_wallet_button">
                         <ConnectButton />
