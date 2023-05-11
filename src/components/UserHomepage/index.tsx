@@ -1081,7 +1081,7 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                             {/* {helpIconClicked && (
                                 <HelpPage />
                             )} */}
-                            {!helpIconClicked && <Hexgrid
+                            <Hexgrid
                                 matchedMonths={matchedMonths}
                                 arrOfMonths={arrOfMonths}
                                 arrOfYears={arrOfYears}
@@ -1094,7 +1094,7 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                                 xAxisValue={xAxisValue}
                                 data1={data1}
                                 data={data}
-                            />}
+                            />
                         </Box>
                         <RhsNav
                             clickedElement={clickedElement}
