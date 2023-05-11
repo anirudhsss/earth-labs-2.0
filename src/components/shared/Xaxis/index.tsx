@@ -207,7 +207,7 @@ export const Xaxis = ({
                     // bottom: '20px',
                     display: 'flex',
                     justifyContent: 'flex-end',
-                    marginTop: '-2vw',
+                    marginTop: years?.length > 0 ? '-2.5vw' : '',
                 }}
             //  className={styles.timeMenuBtn}
             >

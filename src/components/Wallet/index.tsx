@@ -178,12 +178,12 @@ export const Wallet = ({
                     {/* {helpIconClicked ?
                         <HelpPage />
                         :  */}
-                    {!helpIconClicked && <Allgrid
+                    <Allgrid
                         xAxisValue={xAxisValue}
                         yAxisValue={yAxisValue}
                         data1={data1}
                         data={data}
-                    />}
+                    />
                     {/* } */}
 
                     <RhsNav

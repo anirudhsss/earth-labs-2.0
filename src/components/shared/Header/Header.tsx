@@ -100,21 +100,26 @@ const Header = ({
                         display="flex"
                         justifyContent="center"
                         alignItems="center"
-                        border="1px solid #1C223D"
+                        border={`1px solid ${(homeLocation || mapsLocation || discoveryLocation) ? '#1C223D' : '#fffdfb'}`}
                         backgroundColor="transparent"
                         boxShadow="none"
                         borderRadius="100px"
-                        color="#000"
+                        color={`${(homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb'}`}
                         fontWeight="700"
                         size="1.6rem"
-                        hoverBackgroundColor="#fff"
+                        hoverBackgroundColor="transparent"
                         onClick={async () => {
                             sessionStorage.setItem("from", "maps");
                             const url = await initateTwitterAuth();
                             window.open(url, "_self");
                         }}
                     >
-                        <img src={Icons.twitterBlack} width={"20px"} height={"20px"} />
+                        <img
+                            src={(homeLocation || mapsLocation || discoveryLocation) ? Icons.twitterBlack : Icons.twitterWhite}
+                            alt=""
+                            width={"20px"}
+                            height={"20px"}
+                        />
                         Connect Twitter
                     </Button>
                 </RenderIf>
@@ -261,9 +266,50 @@ const Header = ({
                         </Box>
                     </Link> */}
                     <ConnectTwitter />
-                    <div className="connect_wallet_button">
+                    <Box
+                        className="connect_wallet_button"
+                        sx={{
+                            // border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
+                            // color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',
+                            // borderRadius: '20px',
+                            // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? 'white' : '#1b223d',
+                            "&:hover": {
+                                backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? 'white' : '#1b223d',
+                            },
+                            "& [data-testid='rk-connect-button']": {
+                                border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
+                                color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',
+                                borderRadius: '20px',
+                                // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? '#fffdfb' : '#1b223d',
+                                backgroundColor: 'transparent',
+                                fontSize: '1.6rem',
+                                padding: '0rem 3rem',
+                                fontFamily: 'DINAlternateBold',
+                            },
+                            "& .connect_wallet_button [data-testid='rk-connect-button']": {
+                                border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
+                                color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',
+                                borderRadius: '20px',
+                                // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? '#fffdfb' : '#1b223d',
+                                backgroundColor: 'transparent',
+                                fontSize: '1.6rem',
+                                padding: '0rem 3rem',
+                                fontFamily: 'DINAlternateBold',
+                            },
+                            "& .connectWalletWrapper > button": {
+                                border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
+                                color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',
+                                borderRadius: '20px',
+                                // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? '#fffdfb' : '#1b223d',
+                                backgroundColor: 'transparent',
+                                fontSize: '1.6rem',
+                                padding: '0rem 3rem',
+                                fontFamily: 'DINAlternateBold',
+                            },
+                        }}
+                    >
                         <ConnectButton />
-                    </div>
+                    </Box>
                 </div>
                 {/* } */}
             </Box>
