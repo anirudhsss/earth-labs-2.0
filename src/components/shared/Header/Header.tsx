@@ -88,7 +88,10 @@ const Header = ({
                 <RenderIf isTrue={twitterUserInfo?.isConnected as boolean}>
                     <div className="flex" style={{ gap: "0.5rem", alignItems: "center" }}>
                         <img src={Icons.twitterGreen} width={"20px"} height={"20px"} />
-                        <span style={{ fontSize: "1.6rem" }}>
+                        <span style={{
+                            fontSize: "1.6rem",
+                            color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',
+                        }}>
                             @{twitterUserInfo?.user?.username as string}
                         </span>
                     </div>
