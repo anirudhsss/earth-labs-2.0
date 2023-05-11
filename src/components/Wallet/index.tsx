@@ -3,7 +3,7 @@ import { Avatar, Box } from '@mui/material';
 import { Button } from 'components/shared/Button';
 import { Container } from 'components/shared/Container';
 import { Header } from 'components/shared/Header';
-import { ModalDialog } from 'components/shared/ModalDialog';
+// import { ModalDialog } from 'components/shared/ModalDialog';
 import { RhsNav } from 'components/shared/RhsNav';
 import { NormalSearchField } from 'components/shared/TextField';
 import { Typography } from 'components/shared/Typography';
@@ -31,6 +31,7 @@ import { Allgrid } from 'components/shared/Allgrid';
 import moment from 'moment';
 import { HelpPage } from 'components/HelpPage';
 import PostHeaderLayer from 'components/PostHeaderLayer';
+import { CustomizedDialogs } from 'components/shared/ModalDialog';
 
 export interface WalletProps {
     openMenu1?: any;
@@ -106,6 +107,14 @@ export const Wallet = ({
         onFindingXAxisMinAndMax();
     }, [onFindingXAxisMinAndMax]);
 
+    const onHelpSectionClose = () => {
+        setHelpIconClicked(false);
+    }
+
+    const onHelpSectionOpen = () => {
+        setHelpIconClicked(true);
+    }
+
     const onDisplayAllTimeTxnInDescOrder = useCallback(() => {
         const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {
             return +new Date(b.timestamp) - +new Date(a.timestamp);
@@ -166,14 +175,16 @@ export const Wallet = ({
                     display: 'flex',
                     justifyContent: 'center',
                 }}>
-                    {helpIconClicked ?
+                    {/* {helpIconClicked ?
                         <HelpPage />
-                        : <Allgrid
-                            xAxisValue={xAxisValue}
-                            yAxisValue={yAxisValue}
-                            data1={data1}
-                            data={data}
-                        />}
+                        :  */}
+                    {!helpIconClicked && <Allgrid
+                        xAxisValue={xAxisValue}
+                        yAxisValue={yAxisValue}
+                        data1={data1}
+                        data={data}
+                    />}
+                    {/* } */}
 
                     <RhsNav
                         helpIconClicked={helpIconClicked}
@@ -182,6 +193,13 @@ export const Wallet = ({
                 </Box>
 
             </Container>
+
+            <CustomizedDialogs
+                open={helpIconClicked}
+                onClose={onHelpSectionClose}
+                helpPageComponent={<HelpPage />}
+                borderRadius='30px'
+            />
 
             <BackdropDuringApiLoading show={apiLoading} />
         </Box>
