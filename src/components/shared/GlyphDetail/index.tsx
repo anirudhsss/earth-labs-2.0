@@ -21,7 +21,7 @@ interface IGlyphDetail {
   etherPrice?: string;
 }
 
-const GlyphDetail: FC<IGlyphDetail> = ({}) => {
+const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
   const [isAlertOpen, setAlertOpen] = useState<boolean>(false);
   const [isOpen, setOpenModal] = useState<boolean>(false);
   const [user, setUser] = useState<ITwitterUser>({});
@@ -230,6 +230,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({}) => {
               backgroundColor="#FE7D06"
               padding="0.5rem 3rem"
               display="flex"
+              hoverBackgroundColor="#FE7D06"
               onClick={async () => {
                 if (!isAlertOpen) {
                   const url = await initateTwitterAuth("2");

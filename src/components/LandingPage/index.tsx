@@ -11,9 +11,9 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 
-export interface LandingPageProps {}
+export interface LandingPageProps { }
 
-export const LandingPage = ({}: LandingPageProps) => {
+export const LandingPage = ({ }: LandingPageProps) => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -84,8 +84,9 @@ export const LandingPage = ({}: LandingPageProps) => {
                 }}
               >
                 <Button
-                  onClick={() => {}}
+                  onClick={() => { }}
                   backgroundColor="#FE7D06"
+                  hoverBackgroundColor="#FE7D06"
                   borderRadius="2rem"
                   height={"4.5rem"}
                   width={"13rem"}
