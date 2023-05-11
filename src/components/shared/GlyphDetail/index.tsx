@@ -146,6 +146,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
             size="2rem"
             borderRadius="3rem"
             backgroundColor="#FE7D06"
+            hoverBackgroundColor="#FE7D06"
             padding="0.5rem 5rem"
             display="flex"
           >
