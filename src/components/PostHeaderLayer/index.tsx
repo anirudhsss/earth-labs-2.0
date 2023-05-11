@@ -191,7 +191,14 @@ const PostHeaderLayer = ({
                                     color='#FE7D06'
                                 />&nbsp;
                                 <span style={{ marginTop: '-2px' }}>
-                                    {OrangeHexagonIcon}
+                                    <img
+                                        src="./assets/images/orange_hexagon.svg"
+                                        alt=""
+                                        style={{
+                                            width: '15px',
+                                            marginBottom: '-6px',
+                                        }}
+                                    />
                                 </span>
                             </Box>
                         }

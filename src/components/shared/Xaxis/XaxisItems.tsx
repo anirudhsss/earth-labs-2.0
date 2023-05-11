@@ -127,7 +127,15 @@ export const XaxisItems = ({
                         fontWeight="bold"
                     />
                     <span style={{ marginTop: '-2px' }}>
-                        &nbsp;&nbsp;{(month === hoverElementId || month === clickedElement) ? OrangeHexagonIcon : ''}
+                        &nbsp;&nbsp;{(month === hoverElementId || month === clickedElement) ?
+                            <img
+                                src="./assets/images/orange_hexagon.svg"
+                                alt=""
+                                style={{
+                                    width: '15px',
+                                    marginBottom: '-6px',
+                                }}
+                            /> : ''}
                     </span>
                 </Box>
             </Box>
