@@ -21,7 +21,7 @@ import { ConnectWalletModal } from "components/ConnectWalletModal";
 import sample from "../../sample.json";
 import { Header } from "components/shared/Header";
 import { RhsNav } from "components/shared/RhsNav";
-import { ModalDialog } from "components/shared/ModalDialog";
+// import { ModalDialog } from "components/shared/ModalDialog";
 import { Wallet } from "components/Wallet";
 import axios from "axios";
 import { Yaxis } from "components/shared/Yaxis";
@@ -35,6 +35,7 @@ import { HelpPage } from "components/HelpPage";
 import PostHeaderLayer from "components/PostHeaderLayer";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 import { useAccount } from "wagmi";
+import { CustomizedDialogs } from "components/shared/ModalDialog";
 
 export interface UserHomepageProps {
 
@@ -133,6 +134,14 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     const [abcd2, setAbcd2] = useState<any>([]);
     const [abcd3, setAbcd3] = useState<any>([]);
     const [clickedMonth, setClickedMonth] = useState<any>();
+
+    const onHelpSectionClose = () => {
+        setHelpIconClicked(false);
+    }
+
+    const onHelpSectionOpen = () => {
+        setHelpIconClicked(true);
+    }
 
     useEffect(() => {
         if (address) {
@@ -1069,24 +1078,23 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                             />
                         </Box>
                         <Box className={styles.midBody}>
-                            {helpIconClicked ? (
+                            {/* {helpIconClicked && (
                                 <HelpPage />
-                            ) : (
-                                <Hexgrid
-                                    matchedMonths={matchedMonths}
-                                    arrOfMonths={arrOfMonths}
-                                    arrOfYears={arrOfYears}
-                                    setArrOfYears={setArrOfYears}
-                                    coordinates={coordinates}
-                                    loading1={loading1}
-                                    chosenData={chosenData}
-                                    testData={testData}
-                                    yAxisValue={yAxisValue}
-                                    xAxisValue={xAxisValue}
-                                    data1={data1}
-                                    data={data}
-                                />
-                            )}
+                            )} */}
+                            {!helpIconClicked && <Hexgrid
+                                matchedMonths={matchedMonths}
+                                arrOfMonths={arrOfMonths}
+                                arrOfYears={arrOfYears}
+                                setArrOfYears={setArrOfYears}
+                                coordinates={coordinates}
+                                loading1={loading1}
+                                chosenData={chosenData}
+                                testData={testData}
+                                yAxisValue={yAxisValue}
+                                xAxisValue={xAxisValue}
+                                data1={data1}
+                                data={data}
+                            />}
                         </Box>
                         <RhsNav
                             clickedElement={clickedElement}
@@ -1185,6 +1193,12 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
             monthOrYear={monthOrYear}
             />
             </ModalDialog> */}
+            <CustomizedDialogs
+                open={helpIconClicked}
+                onClose={onHelpSectionClose}
+                helpPageComponent={<HelpPage />}
+                borderRadius='30px'
+            />
 
             <BackdropDuringApiLoading show={apiLoading} />
         </>

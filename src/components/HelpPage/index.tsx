@@ -3,14 +3,7 @@ import { Container } from "components/shared/Container"
 import { Typography } from "components/shared/Typography"
 import styles from './styles.module.css';
 
-
-export interface HelpPageProps {
-
-}
-
-export const HelpPage = ({
-
-}: HelpPageProps) => {
+export const HelpPage = () => {
     return (
         <Container
             width="100%"
