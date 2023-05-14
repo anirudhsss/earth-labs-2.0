@@ -8,15 +8,15 @@ import CopyContainer from "components/shared/CopyContainer";
 import { NormalSearchField } from "components/shared/TextField";
 import { Button } from "components/shared/Button";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 
-export interface LandingPageProps { }
+export interface LandingPageProps {}
 
-export const LandingPage = ({ }: LandingPageProps) => {
-  const location = useLocation();
+export const LandingPage = ({}: LandingPageProps) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [txnHash, setTxnHash] = useState<string>("");
 
   useEffect(() => {
     processTwitterAuthentication();
@@ -76,25 +76,23 @@ export const LandingPage = ({ }: LandingPageProps) => {
                 fontSize={"1.6rem"}
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
-              />
-              <Link
-                to="/txn/2"
-                style={{
-                  textDecoration: "none",
+                onChange={(value: string) => {
+                  setTxnHash(value);
                 }}
+              />
+              <Button
+                onClick={() => {
+                  navigate(`/txn/${txnHash}`);
+                }}
+                backgroundColor="#FE7D06"
+                hoverBackgroundColor="#FE7D06"
+                borderRadius="2rem"
+                height={"4.5rem"}
+                width={"13rem"}
+                size={"1.6rem"}
               >
-                <Button
-                  onClick={() => { }}
-                  backgroundColor="#FE7D06"
-                  hoverBackgroundColor="#FE7D06"
-                  borderRadius="2rem"
-                  height={"4.5rem"}
-                  width={"13rem"}
-                  size={"1.6rem"}
-                >
-                  Search
-                </Button>
-              </Link>
+                Search
+              </Button>
             </div>
           </div>
         </div>

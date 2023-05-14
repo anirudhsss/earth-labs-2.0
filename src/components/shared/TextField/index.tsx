@@ -10,6 +10,7 @@ export const NormalSearchField = ({
   placeholderFontSize,
   iconSize,
   fontSize = "1.2rem",
+  onChange
 }: TextFieldProps) => (
   <TextField
     width="67.5rem"
@@ -22,5 +23,6 @@ export const NormalSearchField = ({
     fontSize={fontSize}
     borderColor={borderColor}
     searchIconColor={searchIconColor}
+    onChange={onChange}
   />
 );

@@ -1,27 +1,16 @@
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
+import { IHexesDetail } from "hooks/useGetGlyphTxn";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
 import { FC, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
 import RenderIf from "../RenderIf";
 
-interface IGlyphDetail {
-  forHumans?: string;
-  txnHash?: string;
-  value?: string;
-  activityDetails?: {
-    from: string;
-    to: string;
-  };
-  date?: string;
-  etherPrice?: string;
-}
-
-const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
+const GlyphDetail: FC<IHexesDetail> = (props) => {
+  console.log(props);
   const [isAlertOpen, setAlertOpen] = useState<boolean>(false);
   const [isOpen, setOpenModal] = useState<boolean>(false);
   const [user, setUser] = useState<ITwitterUser>({});
@@ -164,7 +153,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
     );
   };
 
-  const ActivityDetailsContent = () => {
+  const ActivityDetailsContent = (props: { from: string; to: string }) => {
     const LabelValue = ({ label, value }: { label: string; value: string }) => {
       return (
         <div
@@ -186,14 +175,8 @@ const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
           gap: "2rem",
         }}
       >
-        <LabelValue
-          label="from:"
-          value="0x690b9a9e9aa1c9db991c7721a92d351db4fac990"
-        />
-        <LabelValue
-          label="to:"
-          value="0x388C818CA8B9251b393131C08a736A67ccB19297 (Lido: Execution Layer Rewards Vault)"
-        />
+        <LabelValue label="from:" value={props.from} />
+        <LabelValue label="to:" value={props.to} />
       </div>
     );
   };
@@ -221,7 +204,7 @@ const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
             gap: "5rem",
           }}
         >
-          <img src={Icons.glyphSample} width={"423px"} height={"489px"}></img>
+          <img src={props.glyphURL} width={"423px"} height={"489px"}></img>
           <div className="flex flex-column">
             <Button
               color="#fff"
@@ -238,7 +221,6 @@ const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
                   return;
                 }
                 if (openConnectModal) openConnectModal();
-                // setOpenModal(true);
               }}
             >
               <div
@@ -308,18 +290,20 @@ const GlyphDetail: FC<IGlyphDetail> = ({ }) => {
               text="Allen sent Kenta $4,000 in USDC on March 29th, 2023"
               label="For Humans"
             />
-            <InfoField
-              text="0x4b8e90a5465a30c54910d7c9799237bd5d7e33ab33db561c98ca69758026c055"
-              label="Transaction Hash"
-            />
-            <InfoField text="0.025024691263461272 ETH ($47.08)" label="Value" />
+            <InfoField text={props.txnHash} label="Transaction Hash" />
+            <InfoField text={`${props.cValue} ETH ($47.08)`} label="Value" />
             <InfoField
               text="GlyphDetail"
               label="Activity Details"
-              content={<ActivityDetailsContent />}
+              content={
+                <ActivityDetailsContent
+                  from={props.sAddress}
+                  to={props.tAddress}
+                />
+              }
             />
-            <InfoField text="Apr-04-2023 08:58:11 PM UTC" label="Date & Time" />
-            <InfoField text="$1,983.33 / ETH" label="Ether Price" />
+            <InfoField text={props.timeStamp} label="Date & Time" />
+            <InfoField text={`$${props.cValue} / ETH`} label="Ether Price" />
           </div>
         </div>
       </div>
