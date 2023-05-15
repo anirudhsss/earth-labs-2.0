@@ -1,15 +1,13 @@
+import { Discovery } from "components/Discovery";
+import GlyphDetailPage from "components/GlyphDetailPage";
+import { LandingPage } from "components/LandingPage";
+import { UserHomepage } from "components/UserHomepage";
+import { Wallet } from "components/Wallet";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Route,
-  Navigate,
+  Route
 } from "react-router-dom";
-import { UserHomepage } from "components/UserHomepage";
-import { Wallet } from "components/Wallet";
-import { Discovery } from "components/Discovery";
-import { LandingPage } from "components/LandingPage";
-import GlyphDetail from "components/shared/GlyphDetail";
-import GlyphDetailPage from "components/GlyphDetailPage";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

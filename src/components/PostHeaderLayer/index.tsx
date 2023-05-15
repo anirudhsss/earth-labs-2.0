@@ -1,9 +1,9 @@
 import { Box, Menu, MenuItem } from '@mui/material';
 import { Button } from 'components/shared/Button';
 import { Typography } from 'components/shared/Typography';
-import { AxiosFetch, truncate, isEmpty, OrangeHexagonIcon } from 'components/utils';
+import { AxiosFetch, isEmpty, truncate } from 'components/utils';
 import useEthToUsdcConversion from 'hooks/useEthToUsdcConversion';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.css';
 
@@ -147,7 +147,7 @@ const PostHeaderLayer = ({
                                 })} */}
                                 {chosenCurrency?.map((item: any, index: number) => {
                                     // if (item !== undefined) {
-                                    let res, actual;
+                                    let res;
                                     if (currName === 'USDC') {
                                         res = (item[0] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' - ' + (item[item?.length - 1] * (ethToUsdc ? ethToUsdc : 1))?.toFixed(2) + ' ' + currName;
                                         // actual = (item[0] * (ethToUsdc ? ethToUsdc : 1)) + ' - ' + (item[item?.length - 1] * (ethToUsdc ? ethToUsdc : 1)) + ' ' + currName;

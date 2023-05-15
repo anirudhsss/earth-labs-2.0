@@ -1,17 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { Avatar, Box, CardMedia, Divider, Menu, MenuItem } from "@mui/material"
-import styles from './styles.module.css';
-import { NormalSearchField } from "components/shared/TextField";
-import { Typography } from "components/shared/Typography";
+import { Box } from "@mui/material";
+import PostHeaderLayer from "components/PostHeaderLayer";
 import { Button } from "components/shared/Button";
-import { AxiosFetch, truncate } from "components/utils";
-import { ImageList1 } from "components/shared/ImageList";
-import { Link, useLocation } from "react-router-dom";
 import { Container } from "components/shared/Container";
 import { Header } from "components/shared/Header";
 import { RhsNav } from "components/shared/RhsNav";
-import { HelpPage } from "components/HelpPage";
-import PostHeaderLayer from "components/PostHeaderLayer";
+import { Typography } from "components/shared/Typography";
+import { AxiosFetch } from "components/utils";
+import styles from './styles.module.css';
 
 export interface DiscoveryProps {
     openMenu1?: any;
@@ -36,13 +31,8 @@ export const Discovery = ({
     onChosingCurrency,
     currName,
 }: DiscoveryProps) => {
-    const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
 
-    const { data, data2, apiLoading, apiError } = AxiosFetch();
-
-    const onHelpIconClicked = () => {
-        setHelpIconClicked(!helpIconClicked);
-    }
+    const { apiLoading } = AxiosFetch();
 
     return (
         <Box sx={{

@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import { flexbox } from "@mui/system";
 
 export interface ContainerProps {
   padding?: string;

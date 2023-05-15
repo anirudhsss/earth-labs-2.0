@@ -3,7 +3,7 @@ import { Icons } from "constant";
 import { IHexesDetail } from "hooks/useGetGlyphTxn";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
@@ -23,15 +23,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
 
   const { openConnectModal } = useConnectModal();
 
-  // Checking if state and code  is there or not
-  useEffect(() => {
-    processTwitterAuthentication();
-    return () => {
-      removeCode();
-    };
-  }, []);
-
-  const processTwitterAuthentication = async () => {
+  const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
     if (code) {
       setOpenModal(true);
@@ -42,7 +34,15 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
       );
       setUser(user);
     }
-  };
+  }, [getTwitterUserInfo]);
+
+  // Checking if state and code  is there or not
+  useEffect(() => {
+    processTwitterAuthentication();
+    return () => {
+      removeCode();
+    };
+  }, [processTwitterAuthentication]);
 
   const removeCode = () => {
     localStorage.removeItem("code");
@@ -66,7 +66,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             borderRadius: "3rem",
           }}
         >
-          <img src={Icons.glyphSample} width={500} height={350} />
+          <img src={Icons.glyphSample} alt="" width={500} height={350} />
         </div>
         <div
           style={{
@@ -204,7 +204,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             gap: "5rem",
           }}
         >
-          <img src={props.glyphURL} width={"423px"} height={"489px"}></img>
+          <img src={props.glyphURL} alt="" width={"423px"} height={"489px"}></img>
           <div className="flex flex-column">
             <Button
               color="#fff"
@@ -234,7 +234,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 </RenderIf>
                 <RenderIf isTrue={!isAlertOpen}>
                   <>
-                    <img src={Icons.twitter} width={30} height={25} />
+                    <img src={Icons.twitter} alt="" width={30} height={25} />
                     <span>Share your 1st glyph on Twitter!</span>
                   </>
                 </RenderIf>
@@ -250,7 +250,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           >
             <RenderIf isTrue={!isAlertOpen}>
               <>
-                <img src={Icons.trophy} />
+                <img src={Icons.trophy} alt="" />
                 <span
                   style={{
                     fontSize: "1.6rem",
@@ -263,7 +263,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             </RenderIf>
             <RenderIf isTrue={isAlertOpen}>
               <>
-                <img src={Icons.clock} width={30} height={25} />
+                <img src={Icons.clock} alt="" width={30} height={25} />
                 <span
                   style={{
                     fontSize: "1.6rem",

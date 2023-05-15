@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 export interface XaxisItemsProps {
     month?: any;
     year?: any;
-    backgroundColor?: string;
     hoverElementId?: number | null;
     onCircleHoverStarts: (month: any) => void;
     onCircleHoverEnds: (month: any) => void;
@@ -42,7 +41,6 @@ export interface XaxisItemsProps {
 }
 
 export const XaxisItems = ({
-    backgroundColor,
     year,
     month,
     hoverElementId,

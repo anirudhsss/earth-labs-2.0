@@ -15,6 +15,7 @@ const CopyContainer: FC<ICopyContainer> = ({ text }) => {
           cursor: 'pointer'
         }}
         src={Icons.copy}
+        alt=""
         onClick={async () => {
           await navigator.clipboard.writeText(text);
         }}

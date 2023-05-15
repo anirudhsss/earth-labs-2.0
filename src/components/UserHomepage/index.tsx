@@ -1,103 +1,49 @@
+import { Box } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { Avatar, Box, CardMedia, Divider, Menu, MenuItem } from "@mui/material";
-import { NormalSearchField } from "../shared/TextField";
-import { Typography } from "../shared/Typography";
 import styles from "./styles.module.css";
-import { Button } from "../shared/Button";
 
-import LoadingSpin from "react-loading-spin";
-import { Xaxis } from "../shared/Xaxis";
-import { Hexgrid } from "../shared/Hexgrid";
-import { Link, useLocation } from "react-router-dom";
-import moment from "moment";
 import { Container } from "components/shared/Container";
-
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import MetaMaskOnboarding from "@metamask/onboarding";
-import { CLAIM_PROCESS } from "constant";
-import { ethers, providers } from "ethers";
-import { ConnectWalletModal } from "components/ConnectWalletModal";
-import sample from "../../sample.json";
+import moment from "moment";
+import { Hexgrid } from "../shared/Hexgrid";
+import { Xaxis } from "../shared/Xaxis";
 import { Header } from "components/shared/Header";
 import { RhsNav } from "components/shared/RhsNav";
-// import { ModalDialog } from "components/shared/ModalDialog";
-import { Wallet } from "components/Wallet";
-import axios from "axios";
+import { HelpPage } from "components/HelpPage";
+import PostHeaderLayer from "components/PostHeaderLayer";
+import { CustomizedDialogs } from "components/shared/ModalDialog";
 import { Yaxis } from "components/shared/Yaxis";
-import { AnyAaaaRecord } from "dns";
 import {
     AxiosFetch,
     BackdropDuringApiLoading,
-    CalcRange,
+    CalcRange
 } from "components/utils";
-import { HelpPage } from "components/HelpPage";
-import PostHeaderLayer from "components/PostHeaderLayer";
-import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 import { useAccount } from "wagmi";
-import { CustomizedDialogs } from "components/shared/ModalDialog";
+import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 
-export interface UserHomepageProps {
-
-}
-
-export const UserHomepage = ({ }: UserHomepageProps) => {
+export const UserHomepage = () => {
     const [currName, setCurrName] = useState("ETH");
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
     const openMenu1 = Boolean(anchorEl1);
     const [data1, setData1] = useState<any>();
-    const [loading1, setLoading1] = useState(true);
-    const [months, setMonths] = useState<any>();
-    const [occurences, setOccurences] = useState<any>();
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
     const [clickedElement, setClickedElement] = useState<any>();
     const [currency, setCurrency] = useState<any>([]);
     const [years, setYears] = useState<any>([]);
-    // const [monthOrYear, setmonthOrYear] = useState<any>('year');
     const [arrOfYears, setArrOfYears] = useState<any>([]);
     const [yearViewEnabled, setYearViewEnabled] = useState<boolean>(true);
-    const [backgroundColor, setBackgroundColor] = useState("#FFF7EE");
     const [hoverElementId, setHoverElementId] = useState(null);
     const { ethToUsdc } = useEthToUsdcConversion();
-
-    const [open, setOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
-
-    const [forwarderOrigin, setForwarderOrigin] = useState(
-        "http://localhost:9010"
-    );
-    const [walletProvider, setWalletProvider] = useState<
-        "METAMASK" | "WALLETCONNECT"
-    >("METAMASK");
-    const [etherProviders, setEtherProvider] = useState<any>();
-    const [claimProcess, setClaimProcess] = useState(
-        CLAIM_PROCESS.CONNECT_WALLET
-    );
-    const [isModalOpen, setModalOpen] = useState(false);
-    const [userWalletAddress, setUserWalletAddress] = useState<any>("");
-    const [chainId, setChainId] = useState<any>(1);
-    const [signatureMessage, setSignatureMessage] = useState<any>("");
-    const [sessionToken, setSessionToken] = useState<any>();
-    const [isWalletConnected, setWalletConnected] = useState(false);
-    const [test, setData] = useState<any>();
     const [openWalletModal, setOpenWalletModal] = useState(false);
     const [chosenCurrency, setChosenCurrency] = useState<any>([]);
     const [coordinates, setCoordinates] = useState<any>({
-        // x: -53,
-        // y: -31,
         x: 0,
         y: 0,
     });
-    // const [ethToUsdc, setEthToUsdc] = useState<any>();
-    // const [ethToUsdcYvsTPercent, setEthToUsdcYvsTPercent] = useState<any>();
     const [yAxisItems, setYAxisItems] = useState<any>([]);
     const [chosenData, setChosenData] = useState([]);
     const [range, setRange] = useState(false);
-    const [newChosenData, setNewChosenData] = useState<any>(false);
-    const [lowerRange, setLowerRange] = useState<any>();
-    const [higherRange, setHigherRange] = useState<any>();
     const [yAxisValue, setYAxisValue] = useState({
         yAxisValueMin: 0,
         yAxisValueMax: 0,
@@ -112,18 +58,14 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
 
     const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
-    // const [difference, setDifference] = useState<string>('');
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
     const [arrOfDays, setArrOfDays] = useState<any>([]);
-    const [someYear, setSomeYear] = useState<any>();
-    const [selectedItem1, setSelectedItem1] = useState<any>();
-    const [testData, setTestData] = useState([]);
     const [leastDimension, setLeastDimension] = useState<number>(0);
     const [monthInLetters, setmonthInLetters] = useState<any>();
     const { address } = useAccount();
     const [walletAddress, setWalletAddress] = useState<string>();
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
-    const { data, data2, apiLoading, apiError } = AxiosFetch(walletAddress);
+    const { data, data2, apiLoading } = AxiosFetch(walletAddress);
 
     const [showDays, setShowDays] = useState<boolean | undefined>(false);
     const [furtherPropagation, setfurtherPropagation] = useState<
@@ -139,10 +81,6 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
         setHelpIconClicked(false);
     }
 
-    const onHelpSectionOpen = () => {
-        setHelpIconClicked(true);
-    }
-
     useEffect(() => {
         if (address) {
             setWalletAddress(address);
@@ -155,6 +93,7 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
         let arr: number[] = [];
         matchedMonths?.map((item: any) => {
             arr.push(Number(moment(item.timestamp).format("DD")));
+            return Number(moment(item.timestamp).format("DD"));
         });
         if (arr.length > 1) {
             let max = arr[0];
@@ -187,20 +126,11 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
         onFindingXAxisMinAndMax();
     }, [onFindingXAxisMinAndMax]);
 
-    // useEffect(() => {
-    //     const w: any = window;
-    //     if (w && w.ethereum) {
-    //         let provider = new ethers.providers.Web3Provider(w.ethereum);
-    //         setEtherProvider(provider);
-    //     }
-    // }, []);
-
     const onDisplayMonth = useCallback(
         (year: number) => {
             // console.log('onDisplayMonth', year);
             setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
             setCurrency([]);
-            setSomeYear(year);
             setYearViewEnabled(false);
             if (data1?.length > 0) {
                 const arrIndexesOfClickedYears = data1?.filter(
@@ -260,12 +190,15 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                     arrDaysPointsOfAxis: any[] = [];
                 // console.log('abcd2', abcd2)
                 arrOfDuration = abcd2?.map((item: any) => {
+                    let a;
                     // console.log('Number(moment(item.timestamp).format("MM")', Number(moment(item.timestamp).format("MM")));
                     // console.log('Number(month)', Number(month));
                     if (Number(moment(item.timestamp).format("MM")) === Number(month)) {
                         // console.log('Number(moment(item.timestamp).format("DD")', Number(moment(item.timestamp).format("DD")));
+                        a = Number(moment.utc(item.timestamp).format("DD"));
                         return Number(moment.utc(item.timestamp).format("DD"));
                     }
+                    return a;
                 });
                 freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
                     acc[item] = acc[item] ? acc[item] + 1 : 1;
@@ -491,11 +424,14 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                     noOfTxns: any[],
                     arrMonthPointsOfAxis: any[] = [];
                 arrOfDuration = abcd?.map((item: any) => {
+                    let a;
                     if (
-                        Number(moment(item.timestamp).format("YYYY")) == Number(someYear1)
+                        Number(moment(item.timestamp).format("YYYY")) === Number(someYear1)
                     ) {
+                        a = Number(moment(item.timestamp).format("MM"));
                         return Number(moment(item.timestamp).format("MM"));
                     }
+                    return a;
                 });
                 // console.log('arrOfDuration', arrOfDuration);
                 freqOfDuration = arrOfDuration.reduce((acc: any, item: any) => {
@@ -564,110 +500,6 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
         setHelpIconClicked(!helpIconClicked);
     };
 
-    const onOpenConnectWalletModal = useCallback(() => {
-        setOpen(true);
-    }, []);
-
-    const onClose = () => {
-        setOpen(false);
-    };
-
-    const openModal = () => {
-        setModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-
-    const setClaimProcessAndModel = (
-        isModalOpen: boolean,
-        claimProcess: string
-    ) => {
-        setModalOpen(isModalOpen);
-        setClaimProcess(claimProcess);
-    };
-
-    const onConnectMetamask = async () => {
-        const isMobileDevice = /Mobi/i.test(window.navigator.userAgent);
-        if (!isMobileDevice) {
-            if (!_checkIfMetaMaskIsInstalled()) {
-                _onboardUserForMetaMask();
-                return;
-            }
-        }
-        onClose();
-        setWalletProvider("METAMASK");
-        const accountAddress = await etherProviders.send("eth_requestAccounts", []);
-        setClaimProcessAndModel(true, CLAIM_PROCESS.CONNECT_WALLET_LOADING);
-        const network = await etherProviders.getNetwork();
-        // await _getSignatureMessage(accountAddress[0]);
-        setUserWalletAddress(accountAddress[0]);
-        setChainId(network.chainId);
-    };
-
-    const renderDialogContainers = (claimProcess: string): any => {
-        switch (claimProcess) {
-            case CLAIM_PROCESS.CONNECT_WALLET_LOADING:
-                setLoading(true);
-        }
-    };
-
-    const _onboardUserForMetaMask = () => {
-        const onboarding = new MetaMaskOnboarding({ forwarderOrigin });
-        onboarding.startOnboarding();
-    };
-
-    const _checkIfMetaMaskIsInstalled = (): boolean => {
-        const w: any = window;
-        return Boolean(w.ethereum && w.ethereum.isMetaMask);
-    };
-
-    const _getSignatureMessage = async (
-        accountAddress: string
-    ): Promise<void> => { };
-
-    const connectWalletConnectWallet = async () => {
-        onClose();
-        try {
-            const provider = new WalletConnectProvider({
-                infuraId: process.env.REACT_APP_INFURIA_ID, // Required
-                rpc: {
-                    137: "https://rpc-mainnet.maticvigil.com/",
-                },
-            });
-            await provider.enable();
-            const walletConnectProvider = new providers.Web3Provider(provider);
-            const { accounts, chainId } = provider;
-            // await _getSignatureMessage(accounts[0]);
-            setUserWalletAddress(accounts[0]);
-            // Subscribe to accounts change
-            provider.on("accountsChanged", (accounts: string[]) => { });
-
-            // Subscribe to chainId change
-            provider.on("chainChanged", (chainId: number) => { });
-
-            // Subscribe to session connection
-            provider.on("connect", () => { });
-
-            // Subscribe to session disconnection
-            provider.on("disconnect", (code: number, reason: string) => {
-                logoutWallet();
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    const logoutWallet = () => {
-        setChainId(null);
-        setSignatureMessage(null);
-        setUserWalletAddress(null);
-        setSessionToken(null);
-        setClaimProcessAndModel(false, CLAIM_PROCESS.CONNECT_WALLET);
-        setWalletConnected(false);
-    };
-
     const onOpenYearMenu = (e: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget);
     };
@@ -680,39 +512,6 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
     const onCloseYearMenu1 = () => {
         setAnchorEl1(null);
     };
-
-    const LogoutButton = () => {
-        return (
-            <div
-                onClick={logoutWallet}
-                style={{
-                    backgroundColor: "#000000",
-                    cursor: "pointer",
-                    width: "25px",
-                    marginLeft: "10px",
-                }}
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="#fff"
-                    className="w-5 h-5"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"
-                    />
-                </svg>
-            </div>
-        );
-    };
-    // const [valueMenuItemClicked, setValueMenuItemClicked] = useState(false);
-    // useEffect(() => {
-    //     setChosenData(matchedMonths);
-    // }, [valueMenuItemClicked]);
 
     const onValueMenuItemClicked = useCallback(
         (id: number) => {
@@ -764,6 +563,7 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                         currName;
                 }
             }
+            return selectedItem;
         });
         testFunc(res);
         setCurrency(res);
@@ -807,8 +607,6 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
             let d2 = Number((d1 + d).toFixed(3));
             let d3 = Number((d2 + d).toFixed(3));
             const lengthsArr: any[] = [];
-            setLowerRange(lowerRange);
-            setHigherRange(higherRange);
             lengthsArr.push(testFunc2(lowerRange, d1));
             lengthsArr.push(testFunc2(d1, d2));
             lengthsArr?.push(testFunc2(d2, d3));
@@ -1087,9 +885,7 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                                 arrOfYears={arrOfYears}
                                 setArrOfYears={setArrOfYears}
                                 coordinates={coordinates}
-                                loading1={loading1}
                                 chosenData={chosenData}
-                                testData={testData}
                                 yAxisValue={yAxisValue}
                                 xAxisValue={xAxisValue}
                                 data1={data1}
@@ -1112,7 +908,6 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                             onWalletBtnClickOpen={onWalletBtnClickOpen}
                             onMoveHexes={onMoveHexes}
                             coordinates={coordinates}
-                            loading1={loading1}
                             yAxisValue={yAxisValue}
                             xAxisValue={xAxisValue}
                             helpIconClicked={helpIconClicked}
@@ -1163,21 +958,12 @@ export const UserHomepage = ({ }: UserHomepageProps) => {
                             onCircleHoverStarts={onCircleHoverStarts}
                             onCircleHoverEnds={onCircleHoverEnds}
                             hoverElementId={hoverElementId}
-                            backgroundColor={backgroundColor}
-                            loading1={loading1}
                             range={range}
                             setChosenData={setChosenData}
                             chosenData={chosenData}
                         />
                     </Box>
                 </Container>
-
-                <ConnectWalletModal
-                    open={open}
-                    onClose={onClose}
-                    onConnectMetamask={onConnectMetamask}
-                    connectWalletConnectWallet={connectWalletConnectWallet}
-                />
             </Box>
             {/* <ModalDialog
                 fullScreen="fullScreen"
