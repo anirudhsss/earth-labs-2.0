@@ -1,24 +1,15 @@
 import { Box } from "@mui/material";
 import {
-  HexGrid,
-  Layout,
-  Hexagon,
-  Text,
-  Pattern,
-  Path,
-  Hex,
-} from "react-hexgrid";
-import { Fragment, useEffect, useState } from "react";
-import moment from "moment";
-import sample from "../../../sample.json";
-import styles from "./styles.module.css";
-import {
-  HEXAGON_WIDTH,
   HEXAGON_HEIGHT,
-  HEXGRID_RENDER_TOTAL_WIDTH,
+  HEXAGON_WIDTH,
   HEXGRID_RENDER_TOTAL_HEIGHT,
+  HEXGRID_RENDER_TOTAL_WIDTH,
 } from "constant";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import moment from "moment";
+import { Fragment, useEffect, useState } from "react";
+import { Hexagon, HexGrid, Layout, Pattern } from "react-hexgrid";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
+import styles from "./styles.module.css";
 
 // export interface HexgridProps {
 //     matchedMonths?: any;
@@ -63,6 +54,7 @@ export const Hexgrid = ({
         newR: item.R,
         newS: item.S,
       };
+      return reqQRSContainingArr;
     });
     // console.log("reqQRSContainingArr", reqQRSContainingArr);
     setTestArr(reqQRSContainingArr);
@@ -76,6 +68,7 @@ export const Hexgrid = ({
         pattern.setAttribute("width", "100%");
         pattern.setAttribute("height", "100%");
       }
+      return pattern;
     });
   }, [testArr]);
 

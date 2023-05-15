@@ -1,6 +1,4 @@
-import * as React from 'react';
 import MUITypography from '@mui/material/Typography';
-import { fontWeight } from '@mui/system';
 
 export interface TypographyProps {
     fontSize?: string;

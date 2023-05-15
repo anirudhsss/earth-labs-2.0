@@ -1,10 +1,9 @@
-import ReactDOM from "react-dom/client";
 import { Box } from "@mui/material";
-import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import { RouterProvider } from "react-router-dom";
-import { router } from "./Routes";
 import Web3ModalProvider from "provider/web3modal.provider";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import "./index.css";
+import { router } from "./Routes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

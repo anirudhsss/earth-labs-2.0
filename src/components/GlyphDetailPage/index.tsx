@@ -3,7 +3,6 @@ import GlyphDetail from "components/shared/GlyphDetail";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 import RenderIf from "components/shared/RenderIf";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
-import { useSearchParams } from "react-router-dom";
 
 const GlyphDetailPage = () => {
   const url = window.location.pathname;

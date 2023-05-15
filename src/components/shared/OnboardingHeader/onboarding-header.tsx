@@ -1,7 +1,6 @@
 import { Icons } from "constant";
 import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../Button";
 import ConnectWallet from "../ConnectWallet";
 import { Container } from "../Container";
 import RenderIf from "../RenderIf";

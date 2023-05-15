@@ -1,4 +1,3 @@
-import { style } from "@mui/system";
 import { FC } from "react";
 import styles from "./style.module.css";
 

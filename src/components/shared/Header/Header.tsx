@@ -1,18 +1,16 @@
-import { Avatar, Box } from "@mui/material";
+import { Box } from "@mui/material";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Icons } from "constant";
+import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
+import { useCallback, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
 import { Button } from "../Button";
 import { Container } from "../Container";
+import RenderIf from "../RenderIf";
 import { NormalSearchField } from "../TextField";
 import { Typography } from "../Typography";
 import styles from "./styles.module.css";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import RenderIf from "../RenderIf";
-import { useCallback, useEffect, useState } from "react";
-import { Icons } from "constant";
-import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
-import useLocalStorageState from "use-local-storage-state";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { AxiosFetch, isEmpty } from "components/utils";
 
 export interface HeaderProps {
     openWalletModal?: any;
@@ -32,8 +30,6 @@ const Header = ({
     const walletLocation = location?.pathname === "/wallet";
     const mapsLocation = location?.pathname === "/maps";
     const discoveryLocation = location?.pathname === "/discovery";
-    const { data } = AxiosFetch();
-    const [condition, setCondition] = useState<boolean>(false);
 
     // console.log("Header");
     const ConnectTwitter = () => {
@@ -43,11 +39,7 @@ const Header = ({
             isConnected: boolean;
         }>("twitterUserInfo");
 
-        useEffect(() => {
-            handleTwitterUserName();
-        }, []);
-
-        const handleTwitterUserName = async () => {
+        const handleTwitterUserName = useCallback(async () => {
             if (twitterUserInfo) {
                 return;
             }
@@ -69,25 +61,17 @@ const Header = ({
                 localStorage.removeItem("code");
                 sessionStorage.removeItem("from");
             }
-        };
-
-        const onChangeText = useCallback(() => {
-            if (!isEmpty(data?.dotEarthHandle) || data?.dotEarthHandle === ('' || null)) {
-                setCondition(true);
-            } else {
-                setCondition(false);
-            }
-        }, []);
+        }, [getTwitterUserInfo, setTwitterUserInfo, twitterUserInfo]);
 
         useEffect(() => {
-            onChangeText();
-        }, [onChangeText]);
+            handleTwitterUserName();
+        }, [handleTwitterUserName]);
 
         return (
             <>
                 <RenderIf isTrue={twitterUserInfo?.isConnected as boolean}>
                     <div className="flex" style={{ gap: "0.5rem", alignItems: "center" }}>
-                        <img src={Icons.twitterGreen} width={"20px"} height={"20px"} />
+                        <img src={Icons.twitterGreen} alt="" width={"20px"} height={"20px"} />
                         <span style={{
                             fontSize: "1.6rem",
                             color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',

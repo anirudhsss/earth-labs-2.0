@@ -1,12 +1,10 @@
-import { Box, Menu, MenuItem } from "@mui/material"
-import data1 from 'test.json';
-import { XaxisItems } from "./XaxisItems";
-import { useState, useEffect, useCallback } from "react";
-import moment from "moment";
-import styles from './styles.module.css';
+import { Box, Menu, MenuItem } from "@mui/material";
+import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "../Button";
 import { Typography } from "../Typography";
+import styles from './styles.module.css';
+import { XaxisItems } from "./XaxisItems";
 
 export interface XaxisProps {
     onCircleClicked: (month: any) => void;
@@ -98,9 +96,7 @@ export const Xaxis = ({
     const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
     const location = useLocation();
     const homeLocation = location?.pathname === '/home';
-    const walletLocation = location?.pathname === '/wallet';
     const mapsLocation = location?.pathname === '/maps';
-    const discoveryLocation = location?.pathname === '/discovery';
 
     const findMax = useCallback(() => {
         whichDuration?.map((item: any) => {
@@ -111,6 +107,7 @@ export const Xaxis = ({
                 min = Number(item.dimension);
             }
             setGlyphWithMaxDimension(max);
+            return false;
         })
     }, [whichDuration]);
 
