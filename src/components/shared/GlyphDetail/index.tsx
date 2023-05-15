@@ -286,10 +286,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               gap: "3rem",
             }}
           >
-            <InfoField
-              text="Allen sent Kenta $4,000 in USDC on March 29th, 2023"
-              label="For Humans"
-            />
+            <InfoField text={props.altText} label="For Humans" />
             <InfoField text={props.txnHash} label="Transaction Hash" />
             <InfoField text={`${props.cValue} ETH ($47.08)`} label="Value" />
             <InfoField
