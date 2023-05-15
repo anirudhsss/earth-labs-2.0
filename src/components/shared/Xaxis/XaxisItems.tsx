@@ -1,11 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-import { Box } from "@mui/material"
-import data from 'test.json';
-import { Typography } from "../Typography";
+import { Box } from "@mui/material";
 import moment from "moment";
-import { useLocation } from "react-router-dom";
+import { useCallback } from "react";
+import { Typography } from "../Typography";
 import styles from './styles.module.css';
-import { OrangeHexagonIcon } from "components/utils";
 
 export interface XaxisItemsProps {
     month?: any;

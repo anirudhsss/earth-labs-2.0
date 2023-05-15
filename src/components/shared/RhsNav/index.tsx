@@ -1,7 +1,6 @@
-import { Box, Menu, MenuItem } from "@mui/material";
+import { Box } from "@mui/material";
 import { Icons } from "constant";
 import moment from "moment";
-import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "../Button";
 import { Typography } from "../Typography";
@@ -142,18 +141,18 @@ export const RhsNav = ({
                             }}
                             style={{ textDecoration: 'none', }}
                         > */}
-            <a style={{ cursor: "pointer" }}>
-              <img
-                width="40px"
-                src={
-                  helpIconClicked
-                    ? "/assets/images/help_highlighted.svg"
-                    : "/assets/images/help.svg"
-                }
-                alt=""
-                onClick={onHelpIconClicked}
-              />
-            </a>
+            {/* <a style={{ cursor: "pointer" }}> */}
+            <img
+              width="40px"
+              src={
+                helpIconClicked
+                  ? "/assets/images/help_highlighted.svg"
+                  : "/assets/images/help.svg"
+              }
+              alt=""
+              onClick={onHelpIconClicked}
+            />
+            {/* </a> */}
             {/* </Link>
                         <Link
                             to="/discovery"
@@ -165,6 +164,7 @@ export const RhsNav = ({
             <a
               href="https://twitter.com/AtlasXY_"
               target="_blank"
+              rel="noreferrer"
               className={styles.iconOuter}
               style={{ backgroundColor: "#FFF7EE" }}
             >
@@ -178,6 +178,7 @@ export const RhsNav = ({
             <a
               href="https://discord.com/invite/dotearth"
               target="_blank"
+              rel="noreferrer"
               className={styles.iconOuter}
               style={{ backgroundColor: "#FFF7EE", marginTop: "0.9rem" }}
             >
