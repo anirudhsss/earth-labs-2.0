@@ -19,8 +19,6 @@ export interface XaxisProps {
     setMatchedMonths?: any;
     yearViewEnabled?: any;
     setYearViewEnabled?: any;
-    backgroundColor?: string;
-    loading1?: any;
     hoverElementId?: number | null;
     onCircleHoverStarts: (elementId: any) => void;
     onCircleHoverEnds: (elementId: any) => void;
@@ -62,7 +60,6 @@ export const Xaxis = ({
     setMatchedMonths,
     yearViewEnabled,
     setYearViewEnabled,
-    backgroundColor,
     hoverElementId,
     onCircleHoverStarts,
     onCircleHoverEnds,
@@ -173,7 +170,6 @@ export const Xaxis = ({
                                 showDays={showDays}
                                 dimension={item.dimension}
                                 month={item.month}
-                                backgroundColor={backgroundColor}
                                 hoverElementId={hoverElementId}
                                 onCircleHoverStarts={onCircleHoverStarts}
                                 onCircleHoverEnds={onCircleHoverEnds}

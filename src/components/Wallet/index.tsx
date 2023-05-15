@@ -1,37 +1,16 @@
 
-import { Avatar, Box } from '@mui/material';
-import { Button } from 'components/shared/Button';
+import { Box } from '@mui/material';
 import { Container } from 'components/shared/Container';
 import { Header } from 'components/shared/Header';
 // import { ModalDialog } from 'components/shared/ModalDialog';
-import { RhsNav } from 'components/shared/RhsNav';
-import { NormalSearchField } from 'components/shared/TextField';
-import { Typography } from 'components/shared/Typography';
-import { AxiosFetch, BackdropDuringApiLoading } from 'components/utils';
-import { Fragment, useCallback, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import styles from './styles.module.css';
-import {
-    HEXAGON_WIDTH,
-    HEXAGON_HEIGHT,
-    HEXGRID_RENDER_TOTAL_WIDTH,
-    HEXGRID_RENDER_TOTAL_HEIGHT,
-} from "constant";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import {
-    HexGrid,
-    Layout,
-    Hexagon,
-    Text,
-    Pattern,
-    Path,
-    Hex,
-} from "react-hexgrid";
-import { Allgrid } from 'components/shared/Allgrid';
-import moment from 'moment';
 import { HelpPage } from 'components/HelpPage';
 import PostHeaderLayer from 'components/PostHeaderLayer';
+import { Allgrid } from 'components/shared/Allgrid';
 import { CustomizedDialogs } from 'components/shared/ModalDialog';
+import { RhsNav } from 'components/shared/RhsNav';
+import { AxiosFetch, BackdropDuringApiLoading } from 'components/utils';
+import moment from 'moment';
+import { useCallback, useEffect, useState } from 'react';
 
 export interface WalletProps {
     openMenu1?: any;
@@ -62,7 +41,7 @@ export const Wallet = ({
     difference,
     ethToUsdcYvsTPercent,
 }: WalletProps) => {
-    const [yAxisValue, setYAxisValue] = useState({
+    const [yAxisValue] = useState({
         yAxisValueMin: 0, yAxisValueMax: 0,
     });
     const [xAxisValue, setXAxisValue] = useState({
@@ -75,7 +54,7 @@ export const Wallet = ({
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
 
-    const { data, data2, apiLoading, apiError } = AxiosFetch();
+    const { data, data2, apiLoading } = AxiosFetch();
     const [data1, setData1] = useState<any>([]);
 
     useEffect(() => {
@@ -87,6 +66,7 @@ export const Wallet = ({
         let arr: number[] = [];
         matchedMonths?.map((item: any) => {
             arr.push(Number(moment(item.timestamp).format("DD")));
+            return Number(moment(item.timestamp).format("DD"));
         });
         if (arr.length > 0) {
             let max = arr[0];
@@ -109,10 +89,6 @@ export const Wallet = ({
 
     const onHelpSectionClose = () => {
         setHelpIconClicked(false);
-    }
-
-    const onHelpSectionOpen = () => {
-        setHelpIconClicked(true);
     }
 
     const onDisplayAllTimeTxnInDescOrder = useCallback(() => {

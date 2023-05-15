@@ -1,5 +1,5 @@
-import { ReactElement, MouseEvent } from "react";
 import MUIButton from "@mui/material/Button";
+import { MouseEvent, ReactElement } from "react";
 
 export interface ButtonProps {
   onClick?: (e: MouseEvent<HTMLElement>) => void;

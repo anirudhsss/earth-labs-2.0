@@ -19,7 +19,6 @@ export interface RhsNavProps {
   openWalletModal?: any;
   onMoveHexes?: any;
   coordinates?: any;
-  loading1?: any;
   // monthOrYear?: any;
   yAxisValue?: any;
   xAxisValue?: any;
@@ -45,7 +44,6 @@ export const RhsNav = ({
   openWalletModal,
   onMoveHexes,
   coordinates,
-  loading1,
   // monthOrYear,
   yAxisValue,
   xAxisValue,

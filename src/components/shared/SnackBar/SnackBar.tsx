@@ -1,5 +1,4 @@
 import Alert from "@mui/material/Alert";
-import MaterialSnackbar from "@mui/material/Snackbar";
 import { FC } from "react";
 
 interface ISnackbar {
@@ -8,7 +7,7 @@ interface ISnackbar {
   handleClose: () => void;
 }
 
-const SnackBar: FC<ISnackbar> = ({ children ,open , handleClose}) => {
+const SnackBar: FC<ISnackbar> = ({ children, open, handleClose }) => {
   return (
     <Alert severity="error">This is an error message!</Alert>
   );

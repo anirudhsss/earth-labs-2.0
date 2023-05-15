@@ -1,4 +1,3 @@
-import Web3ModalProvider from "provider/web3modal.provider";
 import "./App.css";
 
 const App = () => {

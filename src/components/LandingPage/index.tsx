@@ -1,28 +1,20 @@
-import { Container } from "components/shared/Container";
-import { Header } from "components/shared/Header";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import styles from "./styles.module.css";
-import { Icons } from "constant";
-import InfoField from "components/shared/InfoField";
-import CopyContainer from "components/shared/CopyContainer";
-import { NormalSearchField } from "components/shared/TextField";
 import { Button } from "components/shared/Button";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Container } from "components/shared/Container";
+import CopyContainer from "components/shared/CopyContainer";
+import InfoField from "components/shared/InfoField";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
+import { NormalSearchField } from "components/shared/TextField";
+import { Icons } from "constant";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import styles from "./styles.module.css";
 
-export interface LandingPageProps {}
-
-export const LandingPage = ({}: LandingPageProps) => {
+export const LandingPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [txnHash, setTxnHash] = useState<string>("");
 
-  useEffect(() => {
-    processTwitterAuthentication();
-  }, []);
-
-  const processTwitterAuthentication = async () => {
+  const processTwitterAuthentication = useCallback(async () => {
     const state = searchParams.get("state");
     const code = searchParams.get("code");
     const from = sessionStorage.getItem("from");
@@ -34,7 +26,11 @@ export const LandingPage = ({}: LandingPageProps) => {
         navigate("/txn/1");
       }
     }
-  };
+  }, [navigate, searchParams]);
+
+  useEffect(() => {
+    processTwitterAuthentication();
+  }, [processTwitterAuthentication]);
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
@@ -50,7 +46,7 @@ export const LandingPage = ({}: LandingPageProps) => {
           height: "inherit",
         }}
       >
-        <img src={Icons.atlasWhite} width={300} height={150}></img>
+        <img src={Icons.atlasWhite} alt="" width={300} height={150}></img>
         <div className={styles.landing_inner_content}>
           <div className={styles.landing_inner_content_top}>
             <InfoField

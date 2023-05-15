@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 const ConnectWallet = () => {
   const location = useLocation();
   const homeLocation = location?.pathname === "/home";
-  const walletLocation = location?.pathname === "/wallet";
   const mapsLocation = location?.pathname === "/maps";
   const discoveryLocation = location?.pathname === "/discovery";
   return (
@@ -42,22 +41,3 @@ const ConnectWallet = () => {
 };
 
 export default ConnectWallet;
-
-{
-  /* <Button
-                  color="#1C223D"
-                  padding="0rem 4rem"
-                  height={"40px"}
-                  backgroundColor="#fff"
-                  borderRadius="200px"
-                  onClick={openConnectModal}
-                >
-                  <span
-                    style={{
-                      fontSize: "1.6rem",
-                    }}
-                  >
-                    Connect Wallet
-                  </span>
-                </Button> */
-}
