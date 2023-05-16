@@ -19,6 +19,8 @@ import {
 } from "components/utils";
 import { useAccount } from "wagmi";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
+import { ArrOfDaysProps } from "interface/UserHomepage";
+import { abcd2Props } from "interface/Utils";
 
 export const UserHomepage = () => {
     const [currName, setCurrName] = useState("ETH");
@@ -28,12 +30,12 @@ export const UserHomepage = () => {
     const openMenu1 = Boolean(anchorEl1);
     const [data1, setData1] = useState<any>();
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
-    const [clickedElement, setClickedElement] = useState<any>();
+    const [clickedElement, setClickedElement] = useState<string>('');
     const [currency, setCurrency] = useState<any>([]);
     const [years, setYears] = useState<any>([]);
     const [arrOfYears, setArrOfYears] = useState<any>([]);
     const [yearViewEnabled, setYearViewEnabled] = useState<boolean>(true);
-    const [hoverElementId, setHoverElementId] = useState(null);
+    const [hoverElementId, setHoverElementId] = useState<string | undefined>('');
     const { ethToUsdc } = useEthToUsdcConversion();
     const [openWalletModal, setOpenWalletModal] = useState(false);
     const [chosenCurrency, setChosenCurrency] = useState<any>([]);
@@ -59,21 +61,19 @@ export const UserHomepage = () => {
     const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
-    const [arrOfDays, setArrOfDays] = useState<any>([]);
-    const [leastDimension, setLeastDimension] = useState<number>(0);
-    const [monthInLetters, setmonthInLetters] = useState<any>();
+    const [arrOfDays, setArrOfDays] = useState<ArrOfDaysProps[]>([]);
+    const [leastDimension, setLeastDimension] = useState<any>(0);
+    const [monthInLetters, setmonthInLetters] = useState<string>('');
     const { address } = useAccount();
     const [walletAddress, setWalletAddress] = useState<string>();
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data2, apiLoading } = AxiosFetch(walletAddress);
 
     const [showDays, setShowDays] = useState<boolean | undefined>(false);
-    const [furtherPropagation, setfurtherPropagation] = useState<
-        boolean | undefined
-    >(true);
+    const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
     const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
     const [clickedDay, setClickedDay] = useState<any>();
-    const [abcd2, setAbcd2] = useState<any>([]);
+    const [abcd2, setAbcd2] = useState<abcd2Props[]>([]);
     const [abcd3, setAbcd3] = useState<any>([]);
     const [clickedMonth, setClickedMonth] = useState<any>();
 
@@ -150,10 +150,14 @@ export const UserHomepage = () => {
     }, [arrOfYears, onDisplayMonth]);
 
     const clamp = (a: number, min = 0, max = 1) => {
-        // console.log('test', a, min, max);
         return Math.min(max, Math.max(min, a)); //0.33
     };
     const invlerp = useCallback((min: number, max: number, item: number) => {
+        // if (item === min || max === min) {
+        //     min -= 0.01;
+        //     max += 0.01;
+        // }
+        // console.log('invlerp', min, max, item);
         return clamp((item - min) / (max - min)); //0.35
     }, []);
 
@@ -244,7 +248,7 @@ export const UserHomepage = () => {
     );
 
     const onCircleClicked = useCallback(
-        (month: any) => {
+        (month: string) => {
             // console.log('onCircleClicked', month);
             setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
             setCurrency([]);
@@ -302,7 +306,7 @@ export const UserHomepage = () => {
         setfurtherPropagation(false);
     }, []);
 
-    const onClickOfADay = useCallback((abcd2: any[], day: number) => {
+    const onClickOfADay = useCallback((abcd2: any[], day: any) => {
         // console.log('onClickOfADay');
         setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
         setCurrency([]);
@@ -438,11 +442,18 @@ export const UserHomepage = () => {
                     acc[item] = acc[item] ? acc[item] + 1 : 1;
                     return acc;
                 }, {});
+                // console.log('freqOfDuration', freqOfDuration);
                 duration = Object.keys(freqOfDuration);
                 noOfTxns = Object.values(freqOfDuration);
                 const min = Math.min(...noOfTxns);
                 const max = Math.max(...noOfTxns);
-                noOfTxns.forEach((item: number) => {
+                // console.log('', min, max, noOfTxns)
+                noOfTxns.forEach((item: number, index: number) => {
+                    if (index === 0) {
+                        item -= 0.01
+                    } else {
+                        item += 0.01;
+                    };
                     let val1 = (35 - 10) * invlerp(min, max, item) + 10;
                     arrMonthPointsOfAxis = [...arrMonthPointsOfAxis, val1]; //processed count
                 });
@@ -455,6 +466,7 @@ export const UserHomepage = () => {
                         noOfGlyphs: noOfTxns[index],
                     });
                 });
+                // console.log('arrOfMonths', arrOfMonths)
                 setArrOfMonths(arrOfMonths);
                 //setValueMenuItemClicked(false);
             }
@@ -519,8 +531,8 @@ export const UserHomepage = () => {
             furtherPropagationEnabled();
             setAbcd2([]);
             setShowDays(false);
-            setClickedElement(null);
-            setHoverElementId(null);
+            setClickedElement('');
+            setHoverElementId('');
             setCurrency([]);
             setYAxisItems([]);
             setYAxisItemClicked(null);
@@ -563,7 +575,7 @@ export const UserHomepage = () => {
                         currName;
                 }
             }
-            return selectedItem;
+            // return selectedItem;
         });
         testFunc(res);
         setCurrency(res);
@@ -748,12 +760,12 @@ export const UserHomepage = () => {
         setYAxisItemHovered(null);
     };
 
-    const onCircleHoverStarts = (elementId: any) => {
+    const onCircleHoverStarts = (elementId: string | undefined) => {
         setHoverElementId(elementId);
     };
 
-    const onCircleHoverEnds = (elementId: any) => {
-        setHoverElementId(null);
+    const onCircleHoverEnds = (elementId: string | undefined) => {
+        setHoverElementId('');
     };
 
     const onWalletBtnClickOpen = () => {
@@ -888,7 +900,6 @@ export const UserHomepage = () => {
                                 chosenData={chosenData}
                                 yAxisValue={yAxisValue}
                                 xAxisValue={xAxisValue}
-                                data1={data1}
                                 data={data}
                             />
                         </Box>
@@ -947,7 +958,6 @@ export const UserHomepage = () => {
                             onDisplayMonth={onDisplayMonth}
                             onCircleClicked={onCircleClicked}
                             clickedElement={clickedElement}
-                            data1={data1}
                             arrOfMonths={arrOfMonths}
                             arrOfYears={arrOfYears}
                             setArrOfYears={setArrOfYears}
