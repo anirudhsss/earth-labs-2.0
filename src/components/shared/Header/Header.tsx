@@ -272,6 +272,7 @@ const Header = ({
                                 fontSize: '1.6rem',
                                 padding: '0rem 3rem',
                                 fontFamily: 'DINAlternateBold',
+                                boxShadow:"none !important"
                             },
                             "& .connect_wallet_button [data-testid='rk-connect-button']": {
                                 border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
@@ -282,6 +283,7 @@ const Header = ({
                                 fontSize: '1.6rem',
                                 padding: '0rem 3rem',
                                 fontFamily: 'DINAlternateBold',
+                                boxShadow:"none !important"
                             },
                             "& .connectWalletWrapper > button": {
                                 border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
@@ -292,6 +294,7 @@ const Header = ({
                                 fontSize: '1.6rem',
                                 padding: '0rem 3rem',
                                 fontFamily: 'DINAlternateBold',
+                                boxShadow:"none !important"
                             },
                         }}
                     >
