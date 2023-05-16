@@ -507,7 +507,7 @@ export const UserHomepage = () => {
             arr = abcd3
         }
         // console.log('arr', arr);
-        const tArr = arr?.map((item: any) => item.targetValue1);
+        const tArr = arr?.map((item: any) => item.targetValue);
         const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
         const requiredArr = CalcRange(sortedTArr);
         // console.log('requiredArr', requiredArr);
@@ -643,8 +643,8 @@ export const UserHomepage = () => {
                     }
                 }
                 return (
-                    a * (item.targetValue1.toFixed(2)) >= lowerRange &&
-                    a * (item.targetValue1.toFixed(2)) <= higherRange
+                    a * (item.targetValue.toFixed(2)) >= lowerRange &&
+                    a * (item.targetValue.toFixed(2)) <= higherRange
                 );
             });
             // console.log('arr', arr)
@@ -708,8 +708,8 @@ export const UserHomepage = () => {
                 }
             }
             return (
-                a * item.targetValue1 >= lowerRange &&
-                a * item.targetValue1 <= higherRange
+                a * item.targetValue >= lowerRange &&
+                a * item.targetValue <= higherRange
             );
         });
         return [arr, lowerRange, higherRange];
@@ -741,8 +741,8 @@ export const UserHomepage = () => {
                 }
             }
             return (
-                a * item.targetValue1 >= lowerRange &&
-                a * item.targetValue1 <= higherRange
+                a * item.targetValue >= lowerRange &&
+                a * item.targetValue <= higherRange
             );
         });
         // console.log('arr', arr);

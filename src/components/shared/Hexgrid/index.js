@@ -91,8 +91,8 @@ export const Hexgrid = ({
         let filteredData;
         if (valueMax > 0 && valueMin > 0) {
           filteredData =
-            h.targetValue1 <= valueMax &&
-            h.targetValue1 >= valueMin &&
+            h.targetValue <= valueMax &&
+            h.targetValue >= valueMin &&
             referenceDate <= dateMax &&
             referenceDate >= dateMin;
         } else {
@@ -104,7 +104,7 @@ export const Hexgrid = ({
       })
       .sort((a, b) => {
         return (
-          a.targetValue1 - b.targetValue1 || b.referenceDate - a.referenceDate
+          a.targetValue - b.targetValue || b.referenceDate - a.referenceDate
         );
       });
     // console.log("filteredHexes", filteredHexes);
