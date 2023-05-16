@@ -45,7 +45,6 @@ export const UserHomepage = () => {
     });
     const [yAxisItems, setYAxisItems] = useState<any>([]);
     const [chosenData, setChosenData] = useState([]);
-    const [range, setRange] = useState(false);
     const [yAxisValue, setYAxisValue] = useState({
         yAxisValueMin: 0,
         yAxisValueMax: 0,
@@ -68,7 +67,7 @@ export const UserHomepage = () => {
     const [walletAddress, setWalletAddress] = useState<string>();
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
     const { data, data2, apiLoading } = AxiosFetch(walletAddress);
-
+    // console.log(data2)
     const [showDays, setShowDays] = useState<boolean | undefined>(false);
     const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
     const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
@@ -127,8 +126,7 @@ export const UserHomepage = () => {
     }, [onFindingXAxisMinAndMax]);
 
     const onDisplayMonth = useCallback(
-        (year: number) => {
-            // console.log('onDisplayMonth', year);
+        (year: string) => {
             setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
             setCurrency([]);
             setYearViewEnabled(false);
@@ -485,7 +483,9 @@ export const UserHomepage = () => {
     // }, [difference])
 
     useEffect(() => {
-        const a = data2?.filter((item: any) => item.isWallet === 0);
+        const a = data2?.filter((item: any) => {
+            return item.isWallet === 0;
+        });
         const sortedTxnInDescOrder = (a || [])?.sort((a: any, b: any) => {
             return +new Date(b.timestamp) - +new Date(a.timestamp);
         });
@@ -501,7 +501,7 @@ export const UserHomepage = () => {
             arr = abcd3
         }
         // console.log('arr', arr);
-        const tArr = arr?.map((item: any) => item.targetValue1);
+        const tArr = arr?.map((item: any) => item.targetValue);
         const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
         const requiredArr = CalcRange(sortedTArr);
         // console.log('requiredArr', requiredArr);
@@ -526,7 +526,7 @@ export const UserHomepage = () => {
     };
 
     const onValueMenuItemClicked = useCallback(
-        (id: number) => {
+        (id: string) => {
             showDaysDsiabled();
             furtherPropagationEnabled();
             setAbcd2([]);
@@ -583,34 +583,29 @@ export const UserHomepage = () => {
 
     const testFunc = (selectedItem: any) => {
         // console.log('selectedItem', selectedItem)
-        let range = false;
-        setRange(true);
-        range = true;
         let lowerRange = 0,
             higherRange = 0;
-        if (range) {
-            const b = selectedItem.split(" ");
+        const b = selectedItem.split(" ");
 
-            // if (b[b.length - 1] === 'ETH') {
-            lowerRange = Number(b[0]);
-            higherRange = Number(b[2]);
-            // } else if (b[b.length - 1] === 'USDC') {
-            // if (b[0] === '<') {
-            //     lowerRange = 50;
-            //     const newB = b[1].substr(1);
-            //     higherRange = Number(newB);
-            // } else if (b[0] === '>') {
-            //     const newB = b[1].substr(1);
-            //     lowerRange = Number(newB);
-            //     higherRange = 20000;
-            // } else {
-            //     lowerRange = Number(b[0].substr(1));
-            //     higherRange = Number(b[2].substr(1));
-            // }
-            //     lowerRange = Number(b[0]) / (ethToUsdc ? ethToUsdc : 1);
-            //     higherRange = Number(b[2]) / (ethToUsdc ? ethToUsdc : 1);
-            // }
-        }
+        // if (b[b.length - 1] === 'ETH') {
+        lowerRange = Number(b[0]);
+        higherRange = Number(b[2]);
+        // } else if (b[b.length - 1] === 'USDC') {
+        // if (b[0] === '<') {
+        //     lowerRange = 50;
+        //     const newB = b[1].substr(1);
+        //     higherRange = Number(newB);
+        // } else if (b[0] === '>') {
+        //     const newB = b[1].substr(1);
+        //     lowerRange = Number(newB);
+        //     higherRange = 20000;
+        // } else {
+        //     lowerRange = Number(b[0].substr(1));
+        //     higherRange = Number(b[2].substr(1));
+        // }
+        //     lowerRange = Number(b[0]) / (ethToUsdc ? ethToUsdc : 1);
+        //     higherRange = Number(b[2]) / (ethToUsdc ? ethToUsdc : 1);
+        // }
 
         if (lowerRange > 0 && higherRange > 0) {
             let c = higherRange - lowerRange;
@@ -641,10 +636,9 @@ export const UserHomepage = () => {
                         a = 1;
                     }
                 }
-                // console.log('a', item.targetValue1.toFixed(2), lowerRange, higherRange);
                 return (
-                    a * (item.targetValue1.toFixed(2)) >= lowerRange &&
-                    a * (item.targetValue1.toFixed(2)) <= higherRange
+                    a * (item.targetValue.toFixed(2)) >= lowerRange &&
+                    a * (item.targetValue.toFixed(2)) <= higherRange
                 );
             });
             // console.log('arr', arr)
@@ -688,7 +682,6 @@ export const UserHomepage = () => {
                 });
             });
             // console.log('yAxisItems', yAxisItems);
-            setRange(false);
             setYAxisItems(yAxisItems);
         }
     };
@@ -708,10 +701,9 @@ export const UserHomepage = () => {
                     a = 1;
                 }
             }
-            // console.log('a', a, item.targetValue1, a * item.targetValue1, lowerRange, higherRange);
             return (
-                a * item.targetValue1 >= lowerRange &&
-                a * item.targetValue1 <= higherRange
+                a * item.targetValue >= lowerRange &&
+                a * item.targetValue <= higherRange
             );
         });
         return [arr, lowerRange, higherRange];
@@ -742,10 +734,9 @@ export const UserHomepage = () => {
                     a = 1;
                 }
             }
-            // console.log('a', a, item.targetValue1, a * item.targetValue1, lowerRange, higherRange);
             return (
-                a * item.targetValue1 >= lowerRange &&
-                a * item.targetValue1 <= higherRange
+                a * item.targetValue >= lowerRange &&
+                a * item.targetValue <= higherRange
             );
         });
         // console.log('arr', arr);
@@ -777,7 +768,6 @@ export const UserHomepage = () => {
     };
 
     const onChosingCurrency = (currency: any) => {
-        setRange(false);
         if (currency === "ETH") {
             setCurrName("ETH");
             setCurrency([]);
@@ -841,7 +831,7 @@ export const UserHomepage = () => {
     // console.log('chosenCurrency', chosenCurrency);
     // console.log('currency', currency);
     // console.log('yAxisItems', yAxisItems)
-    // console.log('yAxisValue', yAxisValue)
+    // console.log('yearViewEnabled', yearViewEnabled, typeof yearViewEnabled)
     return (
         <>
             <Box
@@ -961,14 +951,10 @@ export const UserHomepage = () => {
                             arrOfMonths={arrOfMonths}
                             arrOfYears={arrOfYears}
                             setArrOfYears={setArrOfYears}
-                            matchedMonths={matchedMonths}
-                            setMatchedMonths={setMatchedMonths}
                             yearViewEnabled={yearViewEnabled}
-                            setYearViewEnabled={setYearViewEnabled}
                             onCircleHoverStarts={onCircleHoverStarts}
                             onCircleHoverEnds={onCircleHoverEnds}
                             hoverElementId={hoverElementId}
-                            range={range}
                             setChosenData={setChosenData}
                             chosenData={chosenData}
                         />

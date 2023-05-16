@@ -11,15 +11,11 @@ export interface XaxisItemsProps {
     onCircleHoverStarts: (month: string | undefined) => void;
     onCircleHoverEnds: (month: string | undefined) => void;
     onCircleClicked: (month: string) => void;
-    onDisplayMonth: (year: any) => void;
+    onDisplayMonth: (year: string) => void;
     dimension?: number;
     noOfGlyphs?: number;
     clickedElement?: string;
-    matchedMonths?: any;
-    setMatchedMonths?: any;
-    yearViewEnabled?: any;
-    setYearViewEnabled?: any;
-    range?: any;
+    yearViewEnabled?: boolean;
     setChosenData?: any;
     chosenData?: any;
     glyphWithMaxDimension?: number;
@@ -80,7 +76,7 @@ export const XaxisItems = ({
             onCaptureDayWhenDayClickedEnabled(month);
         }
     }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, setClickedMonth, setdayClicked, showDaysEnabled]);
-    // console.log('dimension', dimension, typeof dimension)
+
     return (
         <Box sx={{
             display: 'flex',

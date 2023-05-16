@@ -9,19 +9,15 @@ import { XaxisItems } from "./XaxisItems";
 
 export interface XaxisProps {
     onCircleClicked: (month: string) => void;
-    onDisplayMonth: (year: any) => void;
+    onDisplayMonth: (year: string) => void;
     clickedElement?: string,
     arrOfMonths?: any;
     arrOfYears?: any;
     setArrOfYears?: any;
-    matchedMonths?: any;
-    setMatchedMonths?: any;
-    yearViewEnabled?: any;
-    setYearViewEnabled?: any;
+    yearViewEnabled?: boolean;
     hoverElementId?: string;
     onCircleHoverStarts: (elementId: string | undefined) => void;
     onCircleHoverEnds: (elementId: string | undefined) => void;
-    range?: any;
     setChosenData?: any;
     chosenData?: any;
     openMenu?: any;
@@ -53,14 +49,10 @@ export const Xaxis = ({
     arrOfMonths,
     arrOfYears,
     setArrOfYears,
-    matchedMonths,
-    setMatchedMonths,
     yearViewEnabled,
-    setYearViewEnabled,
     hoverElementId,
     onCircleHoverStarts,
     onCircleHoverEnds,
-    range,
     setChosenData,
     chosenData,
     openMenu,
@@ -173,13 +165,8 @@ export const Xaxis = ({
                                 noOfGlyphs={item.noOfGlyphs}
                                 onCircleClicked={onCircleClicked}
                                 clickedElement={clickedElement}
-                                // monthOrYear={monthOrYear}
                                 onDisplayMonth={onDisplayMonth}
-                                matchedMonths={matchedMonths}
-                                setMatchedMonths={setMatchedMonths}
                                 yearViewEnabled={yearViewEnabled}
-                                setYearViewEnabled={setYearViewEnabled}
-                                range={range}
                                 setChosenData={setChosenData}
                                 chosenData={chosenData}
                                 glyphWithMaxDimension={glyphWithMaxDimension}
