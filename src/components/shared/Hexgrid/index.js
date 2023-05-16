@@ -8,6 +8,7 @@ import {
 import moment from "moment";
 import { Fragment, useEffect, useState } from "react";
 import { Hexagon, HexGrid, Layout, Pattern } from "react-hexgrid";
+import { Link } from "react-router-dom";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import styles from "./styles.module.css";
 
@@ -233,22 +234,43 @@ export const Hexgrid = ({
                   return (
                     <>
                       <Fragment>
-                        <Hexagon
-                          // q={newCoordinates?.[item.guid]?.newQ || 0}
-                          // r={newCoordinates?.[item.guid]?.newR || 0}
-                          // s={newCoordinates?.[item.guid]?.newS || 0}
-                          q={item.Q}
-                          r={item.R}
-                          s={item.S}
-                          fill={`PAT-${index}`}
-                          id={`grid-identifier-${index}`}
-                          cellStyle={{
-                            stroke: item.borderColorHex,
-                            strokeWidth: item.borderColorWidth,
-                          }}
-                        >
-                          <title id="unique-id">{item.altText}</title>
-                        </Hexagon>
+                        {item.detail.txnHash !== "" ? (
+                          <Link to={`/txn/${item.detail.txnHash}`}>
+                            <Hexagon
+                              // q={newCoordinates?.[item.guid]?.newQ || 0}
+                              // r={newCoordinates?.[item.guid]?.newR || 0}
+                              // s={newCoordinates?.[item.guid]?.newS || 0}
+                              q={item.Q}
+                              r={item.R}
+                              s={item.S}
+                              fill={`PAT-${index}`}
+                              id={`grid-identifier-${index}`}
+                              cellStyle={{
+                                stroke: item.borderColorHex,
+                                strokeWidth: item.borderColorWidth,
+                              }}
+                            >
+                              <title id="unique-id">{item.altText}</title>
+                            </Hexagon>
+                          </Link>
+                        ) : (
+                          <Hexagon
+                            // q={newCoordinates?.[item.guid]?.newQ || 0}
+                            // r={newCoordinates?.[item.guid]?.newR || 0}
+                            // s={newCoordinates?.[item.guid]?.newS || 0}
+                            q={item.Q}
+                            r={item.R}
+                            s={item.S}
+                            fill={`PAT-${index}`}
+                            id={`grid-identifier-${index}`}
+                            cellStyle={{
+                              stroke: item.borderColorHex,
+                              strokeWidth: item.borderColorWidth,
+                            }}
+                          >
+                            <title id="unique-id">{item.altText}</title>
+                          </Hexagon>
+                        )}
                         <Pattern
                           id={`PAT-${index}`}
                           link={item.fillURL}
