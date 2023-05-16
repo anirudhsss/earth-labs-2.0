@@ -24,7 +24,7 @@ export interface XaxisItemsProps {
     onClickedMonth: ((month: string | undefined) => void);
     furtherPropagation?: boolean;
     onClickedElementEnabled: (month: string | undefined) => void;
-    onSetdayClicked?: any;
+    onSetdayClicked: (dayClicked: boolean | undefined) => void;
     furtherPropagationDisabled?: any;
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
@@ -71,7 +71,7 @@ export const XaxisItems = ({
             onCaptureDayWhenDayClickedEnabled(month);
         }
     }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, onClickedMonth, onSetdayClicked, showDaysEnabled]);
-    // console.log('chosenData', chosenData, typeof chosenData)
+    // console.log('dayClicked', dayClicked, typeof dayClicked)
     return (
         <Box sx={{
             display: 'flex',

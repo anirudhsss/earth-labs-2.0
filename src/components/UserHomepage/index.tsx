@@ -75,8 +75,8 @@ export const UserHomepage = () => {
     const [abcd3, setAbcd3] = useState<any>([]);
     const [clickedMonth, setClickedMonth] = useState<string | undefined>('');
 
-    const onSetdayClicked = () => {
-        setdayClicked(!dayClicked);
+    const onSetdayClicked = (dayClicked: boolean | undefined) => {
+        setdayClicked(dayClicked);
     }
 
     const onClickedMonth = (month: string | undefined) => {
@@ -828,7 +828,7 @@ export const UserHomepage = () => {
     // console.log('furtherPropagation', furtherPropagation);
     // console.log('showDays', showDays);
     // console.log('monthInLetters', monthInLetters);
-    // console.log('dayClicked', dayClicked);
+    console.log('dayClicked', dayClicked);
     // console.log('clickedDay', clickedDay);
     // console.log('matchedMonths', matchedMonths);
     // console.log('leastDimension', leastDimension);

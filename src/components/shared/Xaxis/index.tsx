@@ -31,7 +31,7 @@ export interface XaxisProps {
     onClickedMonth: ((month: string | undefined) => void);
     furtherPropagation?: boolean;
     onClickedElementEnabled: (month: string | undefined) => void;
-    onSetdayClicked?: any;
+    onSetdayClicked: (dayClicked: boolean | undefined) => void;
     furtherPropagationDisabled?: any;
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
