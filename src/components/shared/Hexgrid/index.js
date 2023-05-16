@@ -50,7 +50,7 @@ export const Hexgrid = ({
         newR: item.R,
         newS: item.S,
       };
-      return reqQRSContainingArr;
+      // return reqQRSContainingArr;
     });
     // console.log("reqQRSContainingArr", reqQRSContainingArr);
     setTestArr(reqQRSContainingArr);
@@ -64,7 +64,7 @@ export const Hexgrid = ({
         pattern.setAttribute("width", "100%");
         pattern.setAttribute("height", "100%");
       }
-      return pattern;
+      // return pattern;
     });
   }, [testArr]);
 
