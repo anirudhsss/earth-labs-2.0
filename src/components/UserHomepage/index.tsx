@@ -30,7 +30,7 @@ export const UserHomepage = () => {
     const openMenu1 = Boolean(anchorEl1);
     const [data1, setData1] = useState<any>();
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
-    const [clickedElement, setClickedElement] = useState<string>('');
+    const [clickedElement, setClickedElement] = useState<string | undefined>('');
     const [currency, setCurrency] = useState<any>([]);
     const [years, setYears] = useState<any>([]);
     const [arrOfYears, setArrOfYears] = useState<any>([]);
@@ -44,7 +44,6 @@ export const UserHomepage = () => {
         y: 0,
     });
     const [yAxisItems, setYAxisItems] = useState<any>([]);
-    const [chosenData, setChosenData] = useState([]);
     const [yAxisValue, setYAxisValue] = useState({
         yAxisValueMin: 0,
         yAxisValueMax: 0,
@@ -74,7 +73,15 @@ export const UserHomepage = () => {
     const [clickedDay, setClickedDay] = useState<any>();
     const [abcd2, setAbcd2] = useState<abcd2Props[]>([]);
     const [abcd3, setAbcd3] = useState<any>([]);
-    const [clickedMonth, setClickedMonth] = useState<any>();
+    const [clickedMonth, setClickedMonth] = useState<string | undefined>('');
+
+    const onSetdayClicked = () => {
+        setdayClicked(!dayClicked);
+    }
+
+    const onClickedMonth = (month: string | undefined) => {
+        setClickedMonth(month);
+    }
 
     const onHelpSectionClose = () => {
         setHelpIconClicked(false);
@@ -253,7 +260,6 @@ export const UserHomepage = () => {
             setYAxisItems([]);
             setYAxisItemClicked(null);
             setYAxisItemHovered(null);
-            // onClickedElementEnabled(month);
             const arrIndexesOfClickedMonths = abcd?.filter(
                 (item: { timestamp: moment.MomentInput }) => {
                     let monthFromApi = Number(moment(item.timestamp).format("MM"));
@@ -274,13 +280,13 @@ export const UserHomepage = () => {
             // console.log('a1', a);
             onCircleClicked(a);
             onClickedElementEnabled(a);
-            setClickedMonth(a);
+            onClickedMonth(a);
         } else {
             const a = arrOfMonths[0]?.month;
             // console.log('a2', a);
             onCircleClicked(a);
             onClickedElementEnabled(a);
-            setClickedMonth(a);
+            onClickedMonth(a);
         }
     }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
 
@@ -501,7 +507,7 @@ export const UserHomepage = () => {
             arr = abcd3
         }
         // console.log('arr', arr);
-        const tArr = arr?.map((item: any) => item.targetValue);
+        const tArr = arr?.map((item: any) => item.targetValue1);
         const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
         const requiredArr = CalcRange(sortedTArr);
         // console.log('requiredArr', requiredArr);
@@ -637,8 +643,8 @@ export const UserHomepage = () => {
                     }
                 }
                 return (
-                    a * (item.targetValue.toFixed(2)) >= lowerRange &&
-                    a * (item.targetValue.toFixed(2)) <= higherRange
+                    a * (item.targetValue1.toFixed(2)) >= lowerRange &&
+                    a * (item.targetValue1.toFixed(2)) <= higherRange
                 );
             });
             // console.log('arr', arr)
@@ -702,8 +708,8 @@ export const UserHomepage = () => {
                 }
             }
             return (
-                a * item.targetValue >= lowerRange &&
-                a * item.targetValue <= higherRange
+                a * item.targetValue1 >= lowerRange &&
+                a * item.targetValue1 <= higherRange
             );
         });
         return [arr, lowerRange, higherRange];
@@ -735,8 +741,8 @@ export const UserHomepage = () => {
                 }
             }
             return (
-                a * item.targetValue >= lowerRange &&
-                a * item.targetValue <= higherRange
+                a * item.targetValue1 >= lowerRange &&
+                a * item.targetValue1 <= higherRange
             );
         });
         // console.log('arr', arr);
@@ -797,7 +803,7 @@ export const UserHomepage = () => {
         }
     };
 
-    const onClickedElementEnabled = (month: any) => {
+    const onClickedElementEnabled = (month: string | undefined) => {
         setClickedElement(month);
     };
 
@@ -887,7 +893,6 @@ export const UserHomepage = () => {
                                 arrOfYears={arrOfYears}
                                 setArrOfYears={setArrOfYears}
                                 coordinates={coordinates}
-                                chosenData={chosenData}
                                 yAxisValue={yAxisValue}
                                 xAxisValue={xAxisValue}
                                 data={data}
@@ -929,12 +934,10 @@ export const UserHomepage = () => {
                             }
                             showDaysEnabled={showDaysEnabled}
                             furtherPropagationDisabled={furtherPropagationDisabled}
-                            setdayClicked={setdayClicked}
+                            onSetdayClicked={onSetdayClicked}
                             onClickedElementEnabled={onClickedElementEnabled}
                             furtherPropagation={furtherPropagation}
-                            setClickedElement={setClickedElement}
-                            setClickedMonth={setClickedMonth}
-                            setShowDays={setShowDays}
+                            onClickedMonth={onClickedMonth}
                             arrOfDays={arrOfDays}
                             onShowDaysInfo={onShowDaysInfo}
                             showDays={showDays}
@@ -955,8 +958,6 @@ export const UserHomepage = () => {
                             onCircleHoverStarts={onCircleHoverStarts}
                             onCircleHoverEnds={onCircleHoverEnds}
                             hoverElementId={hoverElementId}
-                            setChosenData={setChosenData}
-                            chosenData={chosenData}
                         />
                     </Box>
                 </Container>
