@@ -46,15 +46,17 @@ export const AxiosFetch = (address?: string) => {
     fetch(url)
       .then((res) => res.json())
       .then((apiData) => {
+        // console.log(apiData)
         setApiError(apiData.apiError);
-        const a = apiData[0].hexes?.map((item: any) => {
-          // const a = sample[0].hexes?.map((item: any) => {
-          return {
-            ...item,
-            targetValue1: getRandomIntInclusive(0.001, 10),
-          };
-        });
-        setApiData(a);
+        // const a = sample[0].hexes?.map((item: any) => {
+        // const a = apiData[0].hexes?.map((item: any) => {
+        //   return {
+        //     ...item,
+        //     targetValue1: getRandomIntInclusive(0.001, 10),
+        //   };
+        // });
+        // setApiData(a);
+        setApiData(apiData[0].hexes);
         setApiLoading(false);
         setData(apiData[0]);
         // setData(sample[0]);
