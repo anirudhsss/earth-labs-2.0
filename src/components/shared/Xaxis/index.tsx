@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Box, Menu, MenuItem } from "@mui/material";
 import { ArrOfDaysProps } from "interface/UserHomepage";
 import { useCallback, useEffect, useState } from "react";
@@ -18,8 +19,6 @@ export interface XaxisProps {
     hoverElementId?: string;
     onCircleHoverStarts: (elementId: string | undefined) => void;
     onCircleHoverEnds: (elementId: string | undefined) => void;
-    setChosenData?: any;
-    chosenData?: any;
     openMenu?: any;
     onOpenYearMenu?: any;
     years?: any;
@@ -29,12 +28,10 @@ export interface XaxisProps {
     showDays?: boolean;
     onShowDaysInfo?: any;
     arrOfDays?: ArrOfDaysProps[];
-    setShowDays?: any;
-    setClickedMonth?: any;
-    setClickedElement?: any;
+    onClickedMonth: ((month: string | undefined) => void);
     furtherPropagation?: boolean;
-    onClickedElementEnabled?: any;
-    setdayClicked?: any;
+    onClickedElementEnabled: (month: string | undefined) => void;
+    onSetdayClicked?: any;
     furtherPropagationDisabled?: any;
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
@@ -53,8 +50,6 @@ export const Xaxis = ({
     hoverElementId,
     onCircleHoverStarts,
     onCircleHoverEnds,
-    setChosenData,
-    chosenData,
     openMenu,
     onOpenYearMenu,
     years,
@@ -64,12 +59,10 @@ export const Xaxis = ({
     showDays,
     onShowDaysInfo,
     arrOfDays,
-    setShowDays,
-    setClickedMonth,
-    setClickedElement,
+    onClickedMonth,
     furtherPropagation,
     onClickedElementEnabled,
-    setdayClicked,
+    onSetdayClicked,
     furtherPropagationDisabled,
     showDaysEnabled,
     onCaptureDayWhenDayClickedEnabled,
@@ -149,11 +142,10 @@ export const Xaxis = ({
                                 onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
                                 showDaysEnabled={showDaysEnabled}
                                 furtherPropagationDisabled={furtherPropagationDisabled}
-                                setdayClicked={setdayClicked}
+                                onSetdayClicked={onSetdayClicked}
                                 onClickedElementEnabled={onClickedElementEnabled}
                                 furtherPropagation={furtherPropagation}
-                                setClickedMonth={setClickedMonth}
-                                setShowDays={setShowDays}
+                                onClickedMonth={onClickedMonth}
                                 arrOfDays={arrOfDays}
                                 onShowDaysInfo={onShowDaysInfo}
                                 showDays={showDays}
@@ -167,8 +159,6 @@ export const Xaxis = ({
                                 clickedElement={clickedElement}
                                 onDisplayMonth={onDisplayMonth}
                                 yearViewEnabled={yearViewEnabled}
-                                setChosenData={setChosenData}
-                                chosenData={chosenData}
                                 glyphWithMaxDimension={glyphWithMaxDimension}
                             />
                         )

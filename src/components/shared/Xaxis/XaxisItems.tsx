@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Box } from "@mui/material";
 import { ArrOfDaysProps } from "interface/UserHomepage";
 import moment from "moment";
@@ -16,18 +17,14 @@ export interface XaxisItemsProps {
     noOfGlyphs?: number;
     clickedElement?: string;
     yearViewEnabled?: boolean;
-    setChosenData?: any;
-    chosenData?: any;
     glyphWithMaxDimension?: number;
     showDays?: boolean;
     onShowDaysInfo?: any;
     arrOfDays?: ArrOfDaysProps[];
-    setShowDays?: any;
-    setClickedMonth?: any;
-    setClickedElement?: any;
+    onClickedMonth: ((month: string | undefined) => void);
     furtherPropagation?: boolean;
-    onClickedElementEnabled?: any;
-    setdayClicked?: any;
+    onClickedElementEnabled: (month: string | undefined) => void;
+    onSetdayClicked?: any;
     furtherPropagationDisabled?: any;
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
@@ -49,12 +46,10 @@ export const XaxisItems = ({
     arrOfDays,
     // monthOrYear,
     glyphWithMaxDimension,
-    setShowDays,
-    setClickedMonth,
-    setClickedElement,
+    onClickedMonth,
     furtherPropagation,
     onClickedElementEnabled,
-    setdayClicked,
+    onSetdayClicked,
     furtherPropagationDisabled,
     showDaysEnabled,
     onCaptureDayWhenDayClickedEnabled,
@@ -67,16 +62,16 @@ export const XaxisItems = ({
         if (furtherPropagation) {
             // console.log('in1')
             showDaysEnabled();
-            setClickedMonth(month);
+            onClickedMonth(month);
         }
         else {
             // console.log('in2')
             onClickedElementEnabled(month);
-            setdayClicked(true);
+            onSetdayClicked(true);
             onCaptureDayWhenDayClickedEnabled(month);
         }
-    }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, setClickedMonth, setdayClicked, showDaysEnabled]);
-
+    }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, onClickedMonth, onSetdayClicked, showDaysEnabled]);
+    // console.log('chosenData', chosenData, typeof chosenData)
     return (
         <Box sx={{
             display: 'flex',
