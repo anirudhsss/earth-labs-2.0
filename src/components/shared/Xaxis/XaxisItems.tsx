@@ -1,22 +1,20 @@
 import { Box } from "@mui/material";
+import { ArrOfDaysProps } from "interface/UserHomepage";
 import moment from "moment";
 import { useCallback } from "react";
 import { Typography } from "../Typography";
 import styles from './styles.module.css';
 
 export interface XaxisItemsProps {
-    month?: any;
-    year?: any;
-    hoverElementId?: number | null;
-    onCircleHoverStarts: (month: any) => void;
-    onCircleHoverEnds: (month: any) => void;
-    onCircleClicked: (month: any) => void;
+    month?: string;
+    hoverElementId?: string;
+    onCircleHoverStarts: (month: string | undefined) => void;
+    onCircleHoverEnds: (month: string | undefined) => void;
+    onCircleClicked: (month: string) => void;
     onDisplayMonth: (year: any) => void;
     dimension?: number;
-    noOfGlyphs?: any;
-    clickedElement?: any;
-    // monthOrYear?: any;
-    data1?: any;
+    noOfGlyphs?: number;
+    clickedElement?: string;
     matchedMonths?: any;
     setMatchedMonths?: any;
     yearViewEnabled?: any;
@@ -27,21 +25,20 @@ export interface XaxisItemsProps {
     glyphWithMaxDimension?: number;
     showDays?: boolean;
     onShowDaysInfo?: any;
-    arrOfDays?: any;
+    arrOfDays?: ArrOfDaysProps[];
     setShowDays?: any;
     setClickedMonth?: any;
     setClickedElement?: any;
-    furtherPropagation?: any;
+    furtherPropagation?: boolean;
     onClickedElementEnabled?: any;
     setdayClicked?: any;
     furtherPropagationDisabled?: any;
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
-    monthInLetters?: any;
+    monthInLetters?: string;
 }
 
 export const XaxisItems = ({
-    year,
     month,
     hoverElementId,
     onCircleHoverStarts,
@@ -68,7 +65,7 @@ export const XaxisItems = ({
     monthInLetters,
 }: XaxisItemsProps) => {
     // const day = `${(moment().month(month - 1).format("MMM") / month)} / ${month}`;
-    const whichDuration1: any = showDays ? `${monthInLetters} ${month}` : moment().month(month - 1).format("MMM");
+    const whichDuration1: string = showDays ? `${monthInLetters} ${month}` : moment().month(Number(month) - 1).format("MMM");
 
     const setParams = useCallback(() => {
         if (furtherPropagation) {
@@ -83,7 +80,7 @@ export const XaxisItems = ({
             onCaptureDayWhenDayClickedEnabled(month);
         }
     }, [furtherPropagation, month, onCaptureDayWhenDayClickedEnabled, onClickedElementEnabled, setClickedMonth, setdayClicked, showDaysEnabled]);
-
+    // console.log('dimension', dimension, typeof dimension)
     return (
         <Box sx={{
             display: 'flex',

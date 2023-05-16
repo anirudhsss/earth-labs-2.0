@@ -1,4 +1,5 @@
 import { Box, Menu, MenuItem } from "@mui/material";
+import { ArrOfDaysProps } from "interface/UserHomepage";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "../Button";
@@ -7,11 +8,9 @@ import styles from './styles.module.css';
 import { XaxisItems } from "./XaxisItems";
 
 export interface XaxisProps {
-    onCircleClicked: (month: any) => void;
+    onCircleClicked: (month: string) => void;
     onDisplayMonth: (year: any) => void;
-    clickedElement?: any,
-    // monthOrYear?: any;
-    data1?: any;
+    clickedElement?: string,
     arrOfMonths?: any;
     arrOfYears?: any;
     setArrOfYears?: any;
@@ -19,9 +18,9 @@ export interface XaxisProps {
     setMatchedMonths?: any;
     yearViewEnabled?: any;
     setYearViewEnabled?: any;
-    hoverElementId?: number | null;
-    onCircleHoverStarts: (elementId: any) => void;
-    onCircleHoverEnds: (elementId: any) => void;
+    hoverElementId?: string;
+    onCircleHoverStarts: (elementId: string | undefined) => void;
+    onCircleHoverEnds: (elementId: string | undefined) => void;
     range?: any;
     setChosenData?: any;
     chosenData?: any;
@@ -33,26 +32,24 @@ export interface XaxisProps {
     onValueMenuItemClicked?: any;
     showDays?: boolean;
     onShowDaysInfo?: any;
-    arrOfDays?: any;
+    arrOfDays?: ArrOfDaysProps[];
     setShowDays?: any;
     setClickedMonth?: any;
     setClickedElement?: any;
-    furtherPropagation?: any;
+    furtherPropagation?: boolean;
     onClickedElementEnabled?: any;
     setdayClicked?: any;
     furtherPropagationDisabled?: any;
     showDaysEnabled?: any;
     onCaptureDayWhenDayClickedEnabled?: any;
     leastDimension?: any;
-    monthInLetters?: any;
+    monthInLetters?: string;
 }
 
 export const Xaxis = ({
     onCircleClicked,
     clickedElement,
-    // monthOrYear,
     onDisplayMonth,
-    data1,
     arrOfMonths,
     arrOfYears,
     setArrOfYears,
@@ -178,7 +175,6 @@ export const Xaxis = ({
                                 clickedElement={clickedElement}
                                 // monthOrYear={monthOrYear}
                                 onDisplayMonth={onDisplayMonth}
-                                data1={data1}
                                 matchedMonths={matchedMonths}
                                 setMatchedMonths={setMatchedMonths}
                                 yearViewEnabled={yearViewEnabled}

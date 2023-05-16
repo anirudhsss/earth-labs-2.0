@@ -26,7 +26,6 @@ export const Hexgrid = ({
   yAxisValue,
   xAxisValue,
   data,
-  data1,
 }) => {
   // const [data, setData] = useState();
   // const [data1, setData1] = useState();

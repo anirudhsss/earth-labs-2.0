@@ -1,5 +1,6 @@
 import { Backdrop, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
+import sample from '../../sample.json';
 
 export const isEmpty = (str: string) => !str?.length;
 
@@ -47,6 +48,7 @@ export const AxiosFetch = (address?: string) => {
       .then((apiData) => {
         setApiError(apiData.apiError);
         const a = apiData[0].hexes?.map((item: any) => {
+          // const a = sample[0].hexes?.map((item: any) => {
           return {
             ...item,
             targetValue1: getRandomIntInclusive(0.001, 10),
@@ -55,6 +57,7 @@ export const AxiosFetch = (address?: string) => {
         setApiData(a);
         setApiLoading(false);
         setData(apiData[0]);
+        // setData(sample[0]);
       })
       .catch(() => setApiLoading(false));
   }, [address]);
