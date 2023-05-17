@@ -21,8 +21,9 @@ const ConnectWallet = () => {
           // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? '#fffdfb' : '#1b223d',
           backgroundColor: 'transparent',
           fontSize: '1.6rem',
-          padding: '0rem 3rem',
+          padding: '0rem 4rem',
           fontFamily: 'DINAlternateBold',
+          boxShadow:"none !important"
         },
         "& .connect_wallet_button [data-testid='rk-connect-button']": {
           border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
@@ -31,8 +32,9 @@ const ConnectWallet = () => {
           // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? '#fffdfb' : '#1b223d',
           backgroundColor: 'transparent',
           fontSize: '1.6rem',
-          padding: '0rem 3rem',
+          padding: '0rem 4rem',
           fontFamily: 'DINAlternateBold',
+          boxShadow:"none !important"
         },
       }}
     >
