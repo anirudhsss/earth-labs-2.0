@@ -43,7 +43,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
         <div className="flex">
           <RenderIf isTrue={Boolean(isAtlasLogo)}>
             <Link
-              to="/discovery"
+              to="/"
               // state={{
               //   icon: 'discovery',
               // }}
@@ -65,7 +65,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           </RenderIf>
           <RenderIf isTrue={!Boolean(isAtlasLogo)}>
             <Link
-              to="/discovery"
+              to="/"
               // state={{
               //   icon: 'discovery',
               // }}
