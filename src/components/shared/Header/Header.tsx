@@ -136,7 +136,7 @@ const Header = ({
                 {(mapsLocation || homeLocation || discoveryLocation) &&
                     !openWalletModal && (
                         <Link
-                            to="/discovery"
+                            to="/"
                         // state={{
                         //   icon: "discovery",
                         // }}
@@ -156,7 +156,7 @@ const Header = ({
                     )}
                 {walletLocation && (
                     <Link
-                        to="/discovery"
+                        to="/"
                     // state={{
                     //   icon: "discovery",
                     // }}
