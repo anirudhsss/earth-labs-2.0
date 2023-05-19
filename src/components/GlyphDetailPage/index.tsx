@@ -4,20 +4,28 @@ import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-head
 import RenderIf from "components/shared/RenderIf";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
 
-const GlyphDetailPage = () => {
+export interface GlyphDetailPageProps {
+  altTxnHash?: string;
+}
+
+const GlyphDetailPage = ({ altTxnHash }: GlyphDetailPageProps) => {
   const url = window.location.pathname;
-  const txnHash = url.split("/txn/")[1];
+  const txnHash = altTxnHash ? altTxnHash : url.split("/txn/")[1];
   const { glphyDetails } = useGetGlyphDetails(txnHash);
+
   return (
-    <Container backgroundColor="#1C223D">
-      <OnboardingHeader isAtlasLogo={true} />
+    <Container
+      backgroundColor="#1C223D"
+    // opacity={`${altTxnHash ? '0.1' : '1'}`} 
+    >
+      <OnboardingHeader isAtlasLogo={true} altTxnHash={altTxnHash} />
 
       <RenderIf
         isTrue={
           Boolean(glphyDetails && Object.keys(glphyDetails as IHexesDetail).length > 0)
         }
       >
-        <GlyphDetail {...(glphyDetails as IHexesDetail)} />
+        <GlyphDetail {...(glphyDetails as IHexesDetail)} altTxnHash={altTxnHash} />
       </RenderIf>
       {/* <RenderIf isTrue={!glphyDetails}>
         <div className="h-100">

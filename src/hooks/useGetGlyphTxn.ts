@@ -34,6 +34,7 @@ export interface IHexesDetail {
   tokenCurrentSupply: number;
   tokenMaxSupply: number;
   txnHash: string;
+  altTxnHash?: string;
 }
 
 const useGetGlyphDetails = (txnId: string) => {

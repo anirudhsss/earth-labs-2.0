@@ -20,8 +20,6 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^18.11.18",
-    "@types/react": "^18.0.27",
-    "@types/react-dom": "^18.0.10",
     "@walletconnect/client": "^1.8.0",
     "@walletconnect/qrcode-modal": "^1.8.0",
     "@walletconnect/web3-provider": "^1.8.0",
@@ -78,6 +76,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
     "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

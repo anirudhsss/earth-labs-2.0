@@ -21,6 +21,7 @@ import { useAccount } from "wagmi";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 import { ArrOfDaysProps } from "interface/UserHomepage";
 import { abcd2Props } from "interface/Utils";
+import GlyphDetailPage from "components/GlyphDetailPage";
 
 export const UserHomepage = () => {
     const [currName, setCurrName] = useState("ETH");
@@ -74,6 +75,14 @@ export const UserHomepage = () => {
     const [abcd2, setAbcd2] = useState<abcd2Props[]>([]);
     const [abcd3, setAbcd3] = useState<any>([]);
     const [clickedMonth, setClickedMonth] = useState<string | undefined>('');
+    const [eachGlyphClicked, setEachGlyphClicked] = useState<boolean>(false);
+    const [eachTxnHash, setEachTxnHash] = useState<string>('');
+
+    const onEachGlyphClickedOpen = (txnHash: string) => {
+        setEachTxnHash(txnHash);
+        txnHash && setEachGlyphClicked(true);
+    };
+    const onEachGlyphClickedClose = () => setEachGlyphClicked(false);
 
     const onSetdayClicked = (dayClicked: boolean | undefined) => {
         setdayClicked(dayClicked);
@@ -828,7 +837,7 @@ export const UserHomepage = () => {
     // console.log('furtherPropagation', furtherPropagation);
     // console.log('showDays', showDays);
     // console.log('monthInLetters', monthInLetters);
-    console.log('dayClicked', dayClicked);
+    // console.log('dayClicked', dayClicked);
     // console.log('clickedDay', clickedDay);
     // console.log('matchedMonths', matchedMonths);
     // console.log('leastDimension', leastDimension);
@@ -838,6 +847,7 @@ export const UserHomepage = () => {
     // console.log('currency', currency);
     // console.log('yAxisItems', yAxisItems)
     // console.log('yearViewEnabled', yearViewEnabled, typeof yearViewEnabled)
+
     return (
         <>
             <Box
@@ -888,6 +898,7 @@ export const UserHomepage = () => {
                                 <HelpPage />
                             )} */}
                             <Hexgrid
+                                onEachGlyphClickedOpen={onEachGlyphClickedOpen}
                                 matchedMonths={matchedMonths}
                                 arrOfMonths={arrOfMonths}
                                 arrOfYears={arrOfYears}
@@ -979,8 +990,17 @@ export const UserHomepage = () => {
             <CustomizedDialogs
                 open={helpIconClicked}
                 onClose={onHelpSectionClose}
-                helpPageComponent={<HelpPage />}
+                componentLoaded={<HelpPage />}
                 borderRadius='30px'
+            />
+            <CustomizedDialogs
+                fullScreen={true}
+                open={eachGlyphClicked}
+                onClose={onEachGlyphClickedClose}
+                componentLoaded={<GlyphDetailPage altTxnHash={eachTxnHash} />}
+                opacity="0.8"
+                eachGlyphClicked={eachGlyphClicked}
+                onEachGlyphClickedClose={onEachGlyphClickedClose}
             />
 
             <BackdropDuringApiLoading show={apiLoading} />
