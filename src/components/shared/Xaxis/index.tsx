@@ -16,7 +16,7 @@ export interface XaxisProps {
     arrOfYears?: any;
     setArrOfYears?: any;
     yearViewEnabled?: boolean;
-    hoverElementId?: string;
+    hoverElementId?: string | undefined;
     onCircleHoverStarts: (elementId: string | undefined) => void;
     onCircleHoverEnds: (elementId: string | undefined) => void;
     openMenu?: any;
