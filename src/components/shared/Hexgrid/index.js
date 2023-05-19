@@ -26,6 +26,7 @@ export const Hexgrid = ({
   yAxisValue,
   xAxisValue,
   data,
+  onEachGlyphClickedOpen,
 }) => {
   // const [data, setData] = useState();
   // const [data1, setData1] = useState();
@@ -234,43 +235,25 @@ export const Hexgrid = ({
                   return (
                     <>
                       <Fragment>
-                        {item.detail.txnHash !== "" ? (
-                          <Link to={`/txn/${item.detail.txnHash}`}>
-                            <Hexagon
-                              // q={newCoordinates?.[item.guid]?.newQ || 0}
-                              // r={newCoordinates?.[item.guid]?.newR || 0}
-                              // s={newCoordinates?.[item.guid]?.newS || 0}
-                              q={item.Q}
-                              r={item.R}
-                              s={item.S}
-                              fill={`PAT-${index}`}
-                              id={`grid-identifier-${index}`}
-                              cellStyle={{
-                                stroke: item.borderColorHex,
-                                strokeWidth: item.borderColorWidth,
-                              }}
-                            >
-                              <title id="unique-id">{item.altText}</title>
-                            </Hexagon>
-                          </Link>
-                        ) : (
-                          <Hexagon
-                            // q={newCoordinates?.[item.guid]?.newQ || 0}
-                            // r={newCoordinates?.[item.guid]?.newR || 0}
-                            // s={newCoordinates?.[item.guid]?.newS || 0}
-                            q={item.Q}
-                            r={item.R}
-                            s={item.S}
-                            fill={`PAT-${index}`}
-                            id={`grid-identifier-${index}`}
-                            cellStyle={{
-                              stroke: item.borderColorHex,
-                              strokeWidth: item.borderColorWidth,
-                            }}
-                          >
-                            <title id="unique-id">{item.altText}</title>
-                          </Hexagon>
-                        )}
+                        <Hexagon
+                          // q={newCoordinates?.[item.guid]?.newQ || 0}
+                          // r={newCoordinates?.[item.guid]?.newR || 0}
+                          // s={newCoordinates?.[item.guid]?.newS || 0}
+                          q={item.Q}
+                          r={item.R}
+                          s={item.S}
+                          fill={`PAT-${index}`}
+                          id={`grid-identifier-${index}`}
+                          cellStyle={{
+                            stroke: item.borderColorHex,
+                            strokeWidth: item.borderColorWidth,
+                          }}
+                          onClick={() =>
+                            onEachGlyphClickedOpen(item?.detail?.txnHash)
+                          }
+                        >
+                          <title id="unique-id">{item.altText}</title>
+                        </Hexagon>
                         <Pattern
                           id={`PAT-${index}`}
                           link={item.fillURL}

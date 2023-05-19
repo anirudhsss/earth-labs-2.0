@@ -4,6 +4,9 @@ import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 // import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
+import { Box } from '@mui/material';
+import { Typography } from '../Typography';
+import { Button } from '../Button';
 // import DialogActions from '@mui/material/DialogActions';
 // import IconButton from '@mui/material/IconButton';
 // import CloseIcon from '@mui/icons-material/Close';
@@ -29,10 +32,14 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 // }
 
 export interface CustomizedDialogsProps {
+    fullScreen?: any;
     open?: any;
     onClose?: any;
-    helpPageComponent?: any;
+    componentLoaded?: any;
     borderRadius?: any;
+    opacity?: string | undefined;
+    eachGlyphClicked?: boolean;
+    onEachGlyphClickedClose?: any;
 }
 
 // function BootstrapDialogTitle(props: DialogTitleProps) {
@@ -60,10 +67,14 @@ export interface CustomizedDialogsProps {
 // }
 
 const CustomizedDialogs = ({
+    fullScreen,
     open,
     onClose,
-    helpPageComponent,
+    componentLoaded,
     borderRadius,
+    opacity,
+    eachGlyphClicked,
+    onEachGlyphClickedClose,
 }: CustomizedDialogsProps) => {
     // const [open, setOpen] = React.useState(false);
 
@@ -80,26 +91,47 @@ const CustomizedDialogs = ({
                 
             </Button> */}
             <BootstrapDialog
+                fullScreen={fullScreen}
                 onClose={onClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
-                maxWidth='lg'
+                // maxWidth='lg'
                 PaperProps={{
                     style: {
-                        borderRadius: borderRadius,
-                        position: 'absolute',
-                        right: '160px',
-                        bottom: '100px',
+                        //         borderRadius: borderRadius,
+                        //         position: 'absolute',
+                        //         right: '160px',
+                        //         bottom: '100px',
+                        opacity: opacity,
                     }
                 }}
             >
+                {eachGlyphClicked && <Box
+                    sx={{
+                        position: 'absolute',
+                        right: '20px',
+                        top: '85px',
+                    }}
+                >
+                    <Button
+                        backgroundColor='white'
+                        hoverBackgroundColor='white'
+                        borderRadius='20px'
+                        onClick={onEachGlyphClickedClose}
+                    >
+                        <Typography
+                            text='Close Glyph View'
+                            color='black'
+                        />
+                    </Button>
+                </Box>}
                 {/* <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Modal title
                 </BootstrapDialogTitle> */}
                 {open && <DialogContent
                 // dividers
                 >
-                    {helpPageComponent}
+                    {componentLoaded}
                 </DialogContent>}
                 {/* <DialogActions>
                     <Button autoFocus onClick={handleClose}>

@@ -8,11 +8,13 @@ import RenderIf from "../RenderIf";
 interface IOnboardingHeader {
   isAtlasLogo?: boolean;
   isConnectWallet?: boolean;
+  altTxnHash?: string;
 }
 
 const OnboardingHeader: FC<IOnboardingHeader> = ({
   isAtlasLogo,
   isConnectWallet = true,
+  altTxnHash,
 }) => {
   const navigate = useNavigate();
   const Item = ({ text }: { text: string }) => {
@@ -27,6 +29,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
       </li>
     );
   };
+
   return (
     <Container>
       <div
@@ -44,9 +47,6 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           <RenderIf isTrue={Boolean(isAtlasLogo)}>
             <Link
               to="/"
-              // state={{
-              //   icon: 'discovery',
-              // }}
               style={{ textDecoration: 'none', }}
             >
               <img
@@ -66,19 +66,14 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           <RenderIf isTrue={!Boolean(isAtlasLogo)}>
             <Link
               to="/"
-              // state={{
-              //   icon: 'discovery',
-              // }}
               style={{ textDecoration: 'none', }}
-            ><img
+            >
+              <img
                 style={{
                   cursor: "pointer",
                 }}
                 src={Icons.glphyLogo}
                 alt=""
-              // onClick={() => {
-              //   navigate("/discovery");
-              // }}
               />
             </Link>
           </RenderIf>
@@ -95,7 +90,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             <Item text={"About Us"} />
             <RenderIf isTrue={isConnectWallet}>
               <li>
-                <ConnectWallet />
+                <ConnectWallet altTxnHash={altTxnHash} />
               </li>
             </RenderIf>
           </ul>

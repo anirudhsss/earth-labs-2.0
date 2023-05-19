@@ -2,7 +2,11 @@ import { Box } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useLocation } from "react-router-dom";
 
-const ConnectWallet = () => {
+export interface ConnectWallretProps {
+  altTxnHash?: string;
+}
+
+const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
   const location = useLocation();
   const homeLocation = location?.pathname === "/home";
   const mapsLocation = location?.pathname === "/maps";
@@ -12,29 +16,29 @@ const ConnectWallet = () => {
       className="connectWalletWrapper"
       sx={{
         "&:hover": {
-          backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? 'white' : '#1b223d',
+          backgroundColor: (homeLocation || mapsLocation || discoveryLocation || altTxnHash) ? 'white' : '#1b223d',
         },
         "& [data-testid='rk-connect-button']": {
-          border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
-          color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',
+          border: (homeLocation || mapsLocation || discoveryLocation || altTxnHash) ? '1px solid #1C223D' : '1px solid #fffdfb',
+          color: (homeLocation || mapsLocation || discoveryLocation || altTxnHash) ? '#000' : '#fffdfb',
           borderRadius: '20px',
-          // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? '#fffdfb' : '#1b223d',
+          // backgroundColor: (homeLocation || mapsLocation || discoveryLocation || altTxnHash) ? '#fffdfb' : '#1b223d',
           backgroundColor: 'transparent',
           fontSize: '1.6rem',
           padding: '0rem 4rem',
           fontFamily: 'DINAlternateBold',
-          boxShadow:"none !important"
+          boxShadow: "none !important"
         },
         "& .connect_wallet_button [data-testid='rk-connect-button']": {
-          border: (homeLocation || mapsLocation || discoveryLocation) ? '1px solid #1C223D' : '1px solid #fffdfb',
-          color: (homeLocation || mapsLocation || discoveryLocation) ? '#000' : '#fffdfb',
+          border: (homeLocation || mapsLocation || discoveryLocation || altTxnHash) ? '1px solid #1C223D' : '1px solid #fffdfb',
+          color: (homeLocation || mapsLocation || discoveryLocation || altTxnHash) ? '#000' : '#fffdfb',
           borderRadius: '20px',
-          // backgroundColor: (homeLocation || mapsLocation || discoveryLocation) ? '#fffdfb' : '#1b223d',
+          // backgroundColor: (homeLocation || mapsLocation || discoveryLocation || altTxnHash) ? '#fffdfb' : '#1b223d',
           backgroundColor: 'transparent',
           fontSize: '1.6rem',
           padding: '0rem 4rem',
           fontFamily: 'DINAlternateBold',
-          boxShadow:"none !important"
+          boxShadow: "none !important"
         },
       }}
     >
