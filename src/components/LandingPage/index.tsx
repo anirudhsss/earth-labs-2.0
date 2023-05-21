@@ -3,16 +3,23 @@ import { Container } from "components/shared/Container";
 import CopyContainer from "components/shared/CopyContainer";
 import InfoField from "components/shared/InfoField";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
+import RenderIf from "components/shared/RenderIf";
 import { NormalSearchField } from "components/shared/TextField";
 import { Icons } from "constant";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
+import isValidTxnHash from "util/validateTx";
 import styles from "./styles.module.css";
 
 export const LandingPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [txnHash, setTxnHash] = useState<string>("");
+  const [txnHash, setTxnHash] = useLocalStorageState<string>("txnHash");
+  const [isTxnError, setTxnError] = useState<{
+    isValid: boolean;
+    message: string;
+  }>({ isValid: true, message: "" });
 
   const processTwitterAuthentication = useCallback(async () => {
     const state = searchParams.get("state");
@@ -23,7 +30,7 @@ export const LandingPage = () => {
       if (from === "maps") {
         navigate("/maps");
       } else {
-        navigate("/txn/1");
+        navigate(`/txn/${txnHash}`);
       }
     }
   }, [navigate, searchParams]);
@@ -78,7 +85,11 @@ export const LandingPage = () => {
               />
               <Button
                 onClick={() => {
-                  navigate(`/txn/${txnHash}`);
+                  const validate = isValidTxnHash(txnHash as string);
+                  setTxnError(validate);
+                  if (validate.isValid) {
+                    navigate(`/txn/${txnHash}`);
+                  }
                 }}
                 backgroundColor="#FE7D06"
                 hoverBackgroundColor="#FE7D06"
@@ -90,6 +101,42 @@ export const LandingPage = () => {
                 Search
               </Button>
             </div>
+            <RenderIf isTrue={!isTxnError?.isValid}>
+              <div
+                className="flex"
+                style={{
+                  gap: "0.5rem",
+                  justifyContent: "end",
+                  alignItems: "center",
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="#fff"
+                  style={{
+                    height: "16px",
+                    width: "16px",
+                  }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                  />
+                </svg>
+                <span
+                  style={{
+                    fontSize: "16px",
+                    color: "#fff",
+                  }}
+                >
+                  {isTxnError?.message}
+                </span>
+              </div>
+            </RenderIf>
           </div>
         </div>
       </section>

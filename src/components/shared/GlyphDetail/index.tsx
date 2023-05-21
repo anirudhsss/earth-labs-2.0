@@ -3,23 +3,24 @@ import { Icons } from "constant";
 import { IHexesDetail } from "hooks/useGetGlyphTxn";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
 import RenderIf from "../RenderIf";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
-  console.log(props);
   const [isAlertOpen, setAlertOpen] = useState<boolean>(false);
   const [isOpen, setOpenModal] = useState<boolean>(false);
-  const [user, setUser] = useState<ITwitterUser>({});
+  const [user, setUser] = useLocalStorageState<ITwitterUser>("twitterUser");
   const {
     initateTwitterAuth,
     getTwitterUserInfo,
     generateMediaId,
     tweetGlyphImageOnTwitter,
   } = useTwitterFlow();
+  const [twitterMessage, setTwitterMessage] = useState<string>();
 
   const { openConnectModal } = useConnectModal();
 
@@ -79,12 +80,17 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           }}
           className={"flex flex-column"}
         >
-          <span>
-            {" "}
-            Modify your tweet here. @allen-hena transferred @gayatri 0.585 ETH
-            at 15:22:05 on Feb 13th, 2023.{" "}
-          </span>
-          <span> #atlas #blockchain #explorer #hexagon @atlas_xyz</span>
+          <div id="contentEditable">
+            <span
+              contentEditable={true}
+              onInput={(e: any) =>
+                localStorage.setItem("message", e.target.innerText)
+              }
+            >
+              Modify your tweet here. {props.altText} at {props.timeStamp}{" "}
+              #atlas #blockchain #explorer #hexagon @atlas_xyz
+            </span>
+          </div>
         </div>
         <div
           style={{
@@ -117,13 +123,15 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             onClick={async () => {
               setOpenModal(false);
               const mediaId = await generateMediaId(
-                "https://dotearth.blob.core.windows.net/dotearthdemo/glyphs/glyph-87738138.png",
-                user.id as string,
-                user.username as string
+                props.glyphURL as string,
+                user?.id as string,
+                user?.username as string
               );
+              const message = localStorage.getItem("message");
               const data = await tweetGlyphImageOnTwitter(
                 mediaId,
-                user.id as string
+                user?.id as string,
+                message as string
               );
               if (data) {
                 setOpenModal(false);
@@ -147,7 +155,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           }}
           className="flex w-100 justify-content-center align-items-center"
         >
-          <span>signed in as @Kenta_Koga (not you?)</span>
+          <span>signed in as {user?.username}(not you?)</span>
         </div>
       </div>
     );
@@ -193,7 +201,8 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         style={{
           padding: "5rem 20rem",
           gap: "10rem",
-          height: "100vh",
+    
+          height: "calc(100vh - 68px)",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -204,7 +213,12 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             gap: "5rem",
           }}
         >
-          <img src={props.glyphURL} alt="" width={"423px"} height={"489px"}></img>
+          <img
+            src={props.glyphURL}
+            alt=""
+            width={"423px"}
+            height={"489px"}
+          ></img>
           <div className="flex flex-column">
             <Button
               color="#fff"
@@ -216,6 +230,10 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               hoverBackgroundColor="#FE7D06"
               onClick={async () => {
                 if (!isAlertOpen) {
+                  if (user) {
+                    setOpenModal(true);
+                    return;
+                  }
                   const url = await initateTwitterAuth("2");
                   window.open(url, "_self");
                   return;
