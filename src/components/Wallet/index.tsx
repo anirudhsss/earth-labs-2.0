@@ -173,7 +173,7 @@ export const Wallet = ({
             <CustomizedDialogs
                 open={helpIconClicked}
                 onClose={onHelpSectionClose}
-                helpPageComponent={<HelpPage />}
+                componentLoaded={<HelpPage />}
                 borderRadius='30px'
             />
 

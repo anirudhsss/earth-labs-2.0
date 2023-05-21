@@ -13,6 +13,7 @@ export interface ContainerProps {
   margin?: any;
   backgroundColor?: string;
   overflow?: string;
+  opacity?: string;
 }
 
 export const Container = ({
@@ -28,6 +29,7 @@ export const Container = ({
   margin,
   overflow,
   backgroundColor,
+  opacity,
 }: ContainerProps) => {
   return (
     <Box
@@ -42,7 +44,8 @@ export const Container = ({
         position: position,
         height: height,
         margin: margin,
-        backgroundColor,
+        backgroundColor: backgroundColor,
+        opacity: opacity,
       }}
     >
       {children}

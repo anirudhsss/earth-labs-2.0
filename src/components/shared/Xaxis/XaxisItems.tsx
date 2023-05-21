@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 export interface XaxisItemsProps {
     month?: string;
-    hoverElementId?: string;
+    hoverElementId?: string | undefined;
     onCircleHoverStarts: (month: string | undefined) => void;
     onCircleHoverEnds: (month: string | undefined) => void;
     onCircleClicked: (month: string) => void;

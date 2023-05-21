@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
 import { IHexesDetail } from "hooks/useGetGlyphTxn";
@@ -9,6 +10,7 @@ import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
 import RenderIf from "../RenderIf";
+import { Typography } from "../Typography";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
   const [isAlertOpen, setAlertOpen] = useState<boolean>(false);
@@ -61,7 +63,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         <div
           className="flex justify-content-center align-items-center"
           style={{
-            backgroundColor: "#1C223D",
+            // backgroundColor: "#1C223D",
             padding: "2rem",
             width: "auto",
             borderRadius: "3rem",
@@ -253,7 +255,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 <RenderIf isTrue={!isAlertOpen}>
                   <>
                     <img src={Icons.twitter} alt="" width={30} height={25} />
-                    <span>Share your 1st glyph on Twitter!</span>
+                    <span>Share your {!props.altTxnHash && '1st'} glyph on Twitter!</span>
                   </>
                 </RenderIf>
               </div>
