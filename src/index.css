@@ -88,6 +88,19 @@ code {
   height: 100%;
 }
 
+[contenteditable] {
+  outline: 0px solid transparent;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
 /* .connectWalletWrapper > button {
   color: #1c223d !important;
   padding: 0rem 4rem !important;

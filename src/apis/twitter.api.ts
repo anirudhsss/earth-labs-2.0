@@ -1,5 +1,5 @@
 export const authorizeTwitter = (baseUrl: string): Promise<Response> => {
-  return fetch(`${baseUrl}/oAuthAtlas/AtlasAuthorizeURLTest`, {
+  return fetch(`${baseUrl}/oAuthAtlas/AtlasAuthorizeURLDev`, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
     },
@@ -36,9 +36,10 @@ export const getMediaIdUsingMediaUrl = (
 export const tweetThePost = (
   baseUrl: string,
   mediaId: string,
-  twitterUserId: string
+  twitterUserId: string,
+  content: string
 ): Promise<Response> => {
   return fetch(
-    `${baseUrl}/oAuthAtlas/AtlasGenerateTweet?TwitterId=${twitterUserId}&mediaId=${mediaId}`
+    `${baseUrl}/oAuthAtlas/AtlasGenerateTweet?TwitterId=${twitterUserId}&mediaId=${mediaId}&content=${content}`
   );
 };

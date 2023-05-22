@@ -51,9 +51,10 @@ const useTwitterFlow = () => {
 
   const tweetGlyphImageOnTwitter = async (
     mediaId: string,
-    twitterUserId: string
+    twitterUserId: string,
+    content: string
   ): Promise<{ message: string; code: number; result: any }> => {
-    const response = await tweetThePost(BASE_URL, mediaId, twitterUserId);
+    const response = await tweetThePost(BASE_URL, mediaId, twitterUserId,content);
     const result = await response.json();
     return {
       result,
