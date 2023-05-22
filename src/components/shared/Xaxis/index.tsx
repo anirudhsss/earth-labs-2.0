@@ -1,7 +1,6 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Box, Menu, MenuItem } from "@mui/material";
-import { ArrOfDaysProps } from "interface/UserHomepage";
-import { useCallback, useEffect, useState } from "react";
+import { ArrOfYMDProps } from "interface/UserHomepage";
+import { useCallback, useEffect, useState, MouseEvent } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "../Button";
 import { Typography } from "../Typography";
@@ -12,30 +11,25 @@ export interface XaxisProps {
     onCircleClicked: (month: string) => void;
     onDisplayMonth: (year: string) => void;
     clickedElement?: string,
-    arrOfMonths?: any;
-    arrOfYears?: any;
-    setArrOfYears?: any;
-    yearViewEnabled?: boolean;
+    arrOfMonths?: ArrOfYMDProps[];
+    arrOfYears?: ArrOfYMDProps[];
     hoverElementId?: string | undefined;
     onCircleHoverStarts: (elementId: string | undefined) => void;
     onCircleHoverEnds: (elementId: string | undefined) => void;
-    openMenu?: any;
-    onOpenYearMenu?: any;
-    years?: any;
-    anchorEl?: any;
-    onCloseYearMenu?: any;
-    onValueMenuItemClicked?: any;
+    openMenu: boolean;
+    onOpenYearMenu?: (e: MouseEvent<HTMLElement>) => void;
+    years?: ArrOfYMDProps[] | undefined;
+    anchorEl?: (null | HTMLElement);
+    onCloseYearMenu?: () => void;
+    onValueMenuItemClicked: (id: string) => void;
     showDays?: boolean;
-    onShowDaysInfo?: any;
-    arrOfDays?: ArrOfDaysProps[];
+    arrOfDays?: ArrOfYMDProps[];
     onClickedMonth: ((month: string | undefined) => void);
     furtherPropagation?: boolean;
     onClickedElementEnabled: (month: string | undefined) => void;
     onSetdayClicked: (dayClicked: boolean | undefined) => void;
-    furtherPropagationDisabled?: any;
-    showDaysEnabled?: any;
-    onCaptureDayWhenDayClickedEnabled?: any;
-    leastDimension?: any;
+    showDaysEnabled: () => void;
+    onCaptureDayWhenDayClickedEnabled: (day: string | undefined) => void;
     monthInLetters?: string;
 }
 
@@ -45,8 +39,6 @@ export const Xaxis = ({
     onDisplayMonth,
     arrOfMonths,
     arrOfYears,
-    setArrOfYears,
-    yearViewEnabled,
     hoverElementId,
     onCircleHoverStarts,
     onCircleHoverEnds,
@@ -57,20 +49,15 @@ export const Xaxis = ({
     onCloseYearMenu,
     onValueMenuItemClicked,
     showDays,
-    onShowDaysInfo,
     arrOfDays,
     onClickedMonth,
     furtherPropagation,
     onClickedElementEnabled,
     onSetdayClicked,
-    furtherPropagationDisabled,
     showDaysEnabled,
     onCaptureDayWhenDayClickedEnabled,
-    leastDimension,
     monthInLetters,
 }: XaxisProps) => {
-
-    // const whichDuration = monthOrYear === '' ? arrOfYears : (monthOrYear === 'year' || monthOrYear === 'month') ? arrOfMonths : [];
     const whichDuration = showDays ? arrOfDays : arrOfMonths;
     const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
     const location = useLocation();
@@ -78,7 +65,7 @@ export const Xaxis = ({
     const mapsLocation = location?.pathname === '/maps';
 
     const findMax = useCallback(() => {
-        whichDuration?.map((item: any) => {
+        whichDuration?.map((item: ArrOfYMDProps) => {
             let max = 0, min = 0;
             if (Number(item.dimension) > max) {
                 max = Number(item.dimension);
@@ -132,22 +119,19 @@ export const Xaxis = ({
                     position: 'relative',
                     zIndex: 101,
                     bottom: '17.5px',
-                    // bottom: leastDimension ? leastDimension : '17.5px',
                     width: '100%',
                 }}>
-                    {whichDuration?.map((item: any) => {
+                    {whichDuration?.map((item: ArrOfYMDProps) => {
                         return (
                             <XaxisItems
                                 monthInLetters={monthInLetters}
                                 onCaptureDayWhenDayClickedEnabled={onCaptureDayWhenDayClickedEnabled}
                                 showDaysEnabled={showDaysEnabled}
-                                furtherPropagationDisabled={furtherPropagationDisabled}
                                 onSetdayClicked={onSetdayClicked}
                                 onClickedElementEnabled={onClickedElementEnabled}
                                 furtherPropagation={furtherPropagation}
                                 onClickedMonth={onClickedMonth}
                                 arrOfDays={arrOfDays}
-                                onShowDaysInfo={onShowDaysInfo}
                                 showDays={showDays}
                                 dimension={item.dimension}
                                 month={item.month}
@@ -158,7 +142,6 @@ export const Xaxis = ({
                                 onCircleClicked={onCircleClicked}
                                 clickedElement={clickedElement}
                                 onDisplayMonth={onDisplayMonth}
-                                yearViewEnabled={yearViewEnabled}
                                 glyphWithMaxDimension={glyphWithMaxDimension}
                             />
                         )
@@ -173,7 +156,7 @@ export const Xaxis = ({
                     // bottom: '20px',
                     display: 'flex',
                     justifyContent: 'flex-end',
-                    marginTop: years?.length > 0 ? '-2.5vw' : '',
+                    marginTop: (years || [])?.length > 0 ? '-2.5vw' : '',
                 }}
             //  className={styles.timeMenuBtn}
             >
@@ -197,9 +180,9 @@ export const Xaxis = ({
                             onClick={onOpenYearMenu}
                         // disabled={monthOrYear === ''}
                         >
-                            {years?.length > 0 ?
+                            {(years || [])?.length > 0 ?
                                 <Typography
-                                    text={`${years[0].month}`}
+                                    text={`${(years || [])[0].month}`}
                                     fontSize="13px"
                                     color={`${openMenu ? '#FE7D06' : '#000'}`}
                                 />
@@ -240,7 +223,7 @@ export const Xaxis = ({
 
                             }}
                         >
-                            {arrOfYears?.map((item: any) => {
+                            {arrOfYears?.map((item: ArrOfYMDProps) => {
                                 // console.log('item', item.month)
                                 return (
                                     <MenuItem
