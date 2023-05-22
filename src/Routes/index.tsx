@@ -9,6 +9,16 @@ import {
   Route
 } from "react-router-dom";
 
+<base href="/" />
+
+export interface RouterProps {
+  caseSensitive?: boolean;
+  children?: RouterProps[];
+  element?: React.ReactNode;
+  index?: boolean;
+  path?: string;
+}
+
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
