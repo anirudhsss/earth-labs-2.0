@@ -10,7 +10,6 @@
   display: flex;
   width: 100vh;
   flex-direction: column;
-  gap: 5rem;
 }
 
 .landing_inner_content_top {

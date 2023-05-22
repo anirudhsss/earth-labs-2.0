@@ -58,10 +58,10 @@ export const LandingPage = () => {
         <img src={Icons.atlasWhite} alt="" width={300} height={150}></img>
         <div className={styles.landing_inner_content}>
           <div className={styles.landing_inner_content_top}>
-            <InfoField
-              label="1. Copy the transaction # below"
-              text="Allen sent Kenta $4,000 in USDC on March 29th, 2023."
-            />
+            <span style={{
+              fontSize : '1.6rem',
+              color : '#fff'
+            }}>Copy and paste the transaction hash below.</span>
             <CopyContainer
               text={
                 "0x4b8e90a5465a30c54910d7c9799237bd5d7e33ab33db561c98ca69758026c055"
@@ -69,9 +69,6 @@ export const LandingPage = () => {
             />
           </div>
           <div className={styles.landing_inner_content_bottom}>
-            <span className={styles.landing_inner_content_bottom_label}>
-              2. Paste the transaction # and generate your first Glyph on Atlas.
-            </span>
             <div className={styles.landing_innter_content_search}>
               <NormalSearchField
                 borderColor="#fff"
