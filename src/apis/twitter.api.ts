@@ -40,6 +40,6 @@ export const tweetThePost = (
   content: string
 ): Promise<Response> => {
   return fetch(
-    `${baseUrl}/oAuthAtlas/AtlasGenerateTweet?TwitterId=${twitterUserId}&mediaId=${mediaId}&content=a`
+    `${baseUrl}/oAuthAtlas/AtlasGenerateTweet?TwitterId=${twitterUserId}&mediaId=${mediaId}&content=${content}`
   );
 };
