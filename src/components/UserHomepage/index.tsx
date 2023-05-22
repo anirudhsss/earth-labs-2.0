@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, MouseEvent } from "react";
 import styles from "./styles.module.css";
 
 import { Container } from "components/shared/Container";
@@ -19,7 +19,7 @@ import {
 } from "components/utils";
 import { useAccount } from "wagmi";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
-import { ArrOfDaysProps } from "interface/UserHomepage";
+import { ArrOfYMDProps } from "interface/UserHomepage";
 import { abcd2Props } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
 
@@ -33,9 +33,8 @@ export const UserHomepage = () => {
     const [matchedMonths, setMatchedMonths] = useState<any>([]);
     const [clickedElement, setClickedElement] = useState<string | undefined>('');
     const [currency, setCurrency] = useState<any>([]);
-    const [years, setYears] = useState<any>([]);
+    const [years, setYears] = useState<ArrOfYMDProps[] | undefined>([]);
     const [arrOfYears, setArrOfYears] = useState<any>([]);
-    const [yearViewEnabled, setYearViewEnabled] = useState<boolean>(true);
     const [hoverElementId, setHoverElementId] = useState<string | undefined>('');
     const { ethToUsdc } = useEthToUsdcConversion();
     const [openWalletModal, setOpenWalletModal] = useState(false);
@@ -60,8 +59,7 @@ export const UserHomepage = () => {
     const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
-    const [arrOfDays, setArrOfDays] = useState<ArrOfDaysProps[]>([]);
-    const [leastDimension, setLeastDimension] = useState<any>(0);
+    const [arrOfDays, setArrOfDays] = useState<ArrOfYMDProps[]>([]);
     const [monthInLetters, setmonthInLetters] = useState<string>('');
     const { address } = useAccount();
     const [walletAddress, setWalletAddress] = useState<string>();
@@ -71,7 +69,7 @@ export const UserHomepage = () => {
     const [showDays, setShowDays] = useState<boolean | undefined>(false);
     const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
     const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
-    const [clickedDay, setClickedDay] = useState<any>();
+    const [clickedDay, setClickedDay] = useState<string | undefined>('');
     const [abcd2, setAbcd2] = useState<abcd2Props[]>([]);
     const [abcd3, setAbcd3] = useState<any>([]);
     const [clickedMonth, setClickedMonth] = useState<string | undefined>('');
@@ -145,7 +143,6 @@ export const UserHomepage = () => {
         (year: string) => {
             setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
             setCurrency([]);
-            setYearViewEnabled(false);
             if (data1?.length > 0) {
                 const arrIndexesOfClickedYears = data1?.filter(
                     (item: { timestamp: moment.MomentInput }) => {
@@ -185,10 +182,6 @@ export const UserHomepage = () => {
 
     const furtherPropagationEnabled = () => {
         setfurtherPropagation(true);
-    };
-
-    const furtherPropagationDisabled = () => {
-        setfurtherPropagation(false);
     };
 
     const allEqual = (noOfTxns: any[], param: any) =>
@@ -231,10 +224,6 @@ export const UserHomepage = () => {
                     let val1;
                     if (allEqual(noOfTxns, min) || duration?.length === 1) {
                         val1 = 35;
-                        // const arr = whichDuration?.map((item: any) => item.dimension);
-                        // setLeastDimension(Math.min(...arr));
-                        const half = val1 / 2;
-                        setLeastDimension(half);
                     } else {
                         val1 = (35 - 10) * invlerp(min, max, item) + 10;
                     }
@@ -284,7 +273,7 @@ export const UserHomepage = () => {
 
     useEffect(() => {
         // console.log('useEffect ran')
-        if (years[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
+        if ((years || [])[0]?.month === arrOfYears[arrOfYears?.length - 1]?.month) {
             const a = arrOfMonths[arrOfMonths.length - 1]?.month;
             // console.log('a1', a);
             onCircleClicked(a);
@@ -361,7 +350,7 @@ export const UserHomepage = () => {
         }
     }, [showDays, abcd2, clickedMonth, anotherFunc3]);
 
-    const onCaptureDayWhenDayClickedEnabled = (day: number) => {
+    const onCaptureDayWhenDayClickedEnabled = (day: string | undefined) => {
         setClickedDay(day);
     };
 
@@ -489,7 +478,7 @@ export const UserHomepage = () => {
 
     useEffect(() => {
         // console.log('years', years);
-        const a = years[0]?.month;
+        const a = (years || [])[0]?.month;
         anotherFunc2(a);
     }, [anotherFunc2, years]);
 
@@ -527,10 +516,10 @@ export const UserHomepage = () => {
         setHelpIconClicked(!helpIconClicked);
     };
 
-    const onOpenYearMenu = (e: React.MouseEvent<HTMLElement>) => {
+    const onOpenYearMenu = (e: MouseEvent<HTMLElement>) => {
         setAnchorEl(e.currentTarget);
     };
-    const onOpenYearMenu1 = (e: React.MouseEvent<HTMLElement>) => {
+    const onOpenYearMenu1 = (e: MouseEvent<HTMLElement>) => {
         setAnchorEl1(e.currentTarget);
     };
     const onCloseYearMenu = () => {
@@ -840,13 +829,14 @@ export const UserHomepage = () => {
     // console.log('dayClicked', dayClicked);
     // console.log('clickedDay', clickedDay);
     // console.log('matchedMonths', matchedMonths);
-    // console.log('leastDimension', leastDimension);
     // console.log('arrOfDays', arrOfDays);
+    // console.log('arrOfMonths', arrOfMonths);
+    // console.log('arrOfYears', arrOfYears);
     // console.log('month', month);
     // console.log('chosenCurrency', chosenCurrency);
     // console.log('currency', currency);
     // console.log('yAxisItems', yAxisItems)
-    // console.log('yearViewEnabled', yearViewEnabled, typeof yearViewEnabled)
+    // console.log('years', years)
 
     return (
         <>
@@ -939,18 +929,15 @@ export const UserHomepage = () => {
                     >
                         <Xaxis
                             monthInLetters={monthInLetters}
-                            leastDimension={leastDimension}
                             onCaptureDayWhenDayClickedEnabled={
                                 onCaptureDayWhenDayClickedEnabled
                             }
                             showDaysEnabled={showDaysEnabled}
-                            furtherPropagationDisabled={furtherPropagationDisabled}
                             onSetdayClicked={onSetdayClicked}
                             onClickedElementEnabled={onClickedElementEnabled}
                             furtherPropagation={furtherPropagation}
                             onClickedMonth={onClickedMonth}
                             arrOfDays={arrOfDays}
-                            onShowDaysInfo={onShowDaysInfo}
                             showDays={showDays}
                             years={years}
                             anchorEl={anchorEl}
@@ -964,8 +951,6 @@ export const UserHomepage = () => {
                             clickedElement={clickedElement}
                             arrOfMonths={arrOfMonths}
                             arrOfYears={arrOfYears}
-                            setArrOfYears={setArrOfYears}
-                            yearViewEnabled={yearViewEnabled}
                             onCircleHoverStarts={onCircleHoverStarts}
                             onCircleHoverEnds={onCircleHoverEnds}
                             hoverElementId={hoverElementId}

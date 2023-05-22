@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction } from 'react';
 import { Box } from "@mui/material";
-import { ArrOfDaysProps } from "interface/UserHomepage";
+import { ArrOfYMDProps } from "interface/UserHomepage";
 import moment from "moment";
 import { useCallback } from "react";
 import { Typography } from "../Typography";
@@ -16,18 +15,15 @@ export interface XaxisItemsProps {
     dimension?: number;
     noOfGlyphs?: number;
     clickedElement?: string;
-    yearViewEnabled?: boolean;
     glyphWithMaxDimension?: number;
     showDays?: boolean;
-    onShowDaysInfo?: any;
-    arrOfDays?: ArrOfDaysProps[];
+    arrOfDays?: ArrOfYMDProps[];
     onClickedMonth: ((month: string | undefined) => void);
     furtherPropagation?: boolean;
     onClickedElementEnabled: (month: string | undefined) => void;
     onSetdayClicked: (dayClicked: boolean | undefined) => void;
-    furtherPropagationDisabled?: any;
-    showDaysEnabled?: any;
-    onCaptureDayWhenDayClickedEnabled?: any;
+    showDaysEnabled: () => void;
+    onCaptureDayWhenDayClickedEnabled: (day: string | undefined) => void;
     monthInLetters?: string;
 }
 
@@ -42,7 +38,6 @@ export const XaxisItems = ({
     onCircleClicked,
     clickedElement,
     showDays,
-    onShowDaysInfo,
     arrOfDays,
     // monthOrYear,
     glyphWithMaxDimension,
@@ -50,7 +45,6 @@ export const XaxisItems = ({
     furtherPropagation,
     onClickedElementEnabled,
     onSetdayClicked,
-    furtherPropagationDisabled,
     showDaysEnabled,
     onCaptureDayWhenDayClickedEnabled,
     monthInLetters,
