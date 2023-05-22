@@ -19,8 +19,8 @@ import {
 } from "components/utils";
 import { useAccount } from "wagmi";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
-import { ArrOfYMDProps } from "interface/UserHomepage";
-import { abcd2Props } from "interface/Utils";
+import { ArrOfYMDProps, VerticalSelectionProps } from "interface/UserHomepage";
+import { HorizontalSelectionProps } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
 
 export const UserHomepage = () => {
@@ -43,7 +43,7 @@ export const UserHomepage = () => {
         x: 0,
         y: 0,
     });
-    const [yAxisItems, setYAxisItems] = useState<any>([]);
+    const [yAxisItems, setYAxisItems] = useState<VerticalSelectionProps[] | undefined>([]);
     const [yAxisValue, setYAxisValue] = useState({
         yAxisValueMin: 0,
         yAxisValueMax: 0,
@@ -70,7 +70,7 @@ export const UserHomepage = () => {
     const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
     const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
     const [clickedDay, setClickedDay] = useState<string | undefined>('');
-    const [abcd2, setAbcd2] = useState<abcd2Props[]>([]);
+    const [abcd2, setAbcd2] = useState<HorizontalSelectionProps[]>([]);
     const [abcd3, setAbcd3] = useState<any>([]);
     const [clickedMonth, setClickedMonth] = useState<string | undefined>('');
     const [eachGlyphClicked, setEachGlyphClicked] = useState<boolean>(false);
@@ -673,7 +673,7 @@ export const UserHomepage = () => {
                 // console.log('val1', val1)
                 arrOfInterest = [...arrOfInterest, val1];
             });
-            let yAxisItems: any = [];
+            let yAxisItems: VerticalSelectionProps[] = [];
             // console.log('arrOfInterest', arrOfInterest)
             arrOfInterest.forEach((_: any, index: number) => {
                 yAxisItems.push({
@@ -690,7 +690,7 @@ export const UserHomepage = () => {
         }
     };
 
-    const testFunc2 = (lowerRange: any, higherRange: any) => {
+    const testFunc2 = (lowerRange: number, higherRange: number) => {
         let data2: any = [];
         // data2 = abcd;
         data2 = abcd1;
@@ -713,21 +713,14 @@ export const UserHomepage = () => {
         return [arr, lowerRange, higherRange];
     };
 
-    const onYAxisItemClicked = (id: any, lowerRange: any, higherRange: any) => {
-        // let lowerRange = 0, higherRange = 0;
-        // const b = range.split(' ');
-        // lowerRange = Number(b[0]);
-        // higherRange = Number(b[2]);
+    const onYAxisItemClicked = (id: number, lowerRange: number, higherRange: number) => {
         setYAxisValue({ yAxisValueMin: lowerRange, yAxisValueMax: higherRange });
         let data2: any = [];
         let idd = Number(id);
         setYAxisItemClicked(idd);
-        // if (monthOrYear === 'year') {
-        // data2 = abcd;
-        // } else if (monthOrYear === 'month') {
         data2 = abcd1;
-        // }
-        const arr = data2?.filter((item: any) => {
+        const arr = data2?.filter((item: HorizontalSelectionProps) => {
+            console.log(item)
             let a = 1;
             if (currName === "ETH") {
                 a = 1;
