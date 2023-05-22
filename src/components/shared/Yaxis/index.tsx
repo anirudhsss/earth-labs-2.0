@@ -1,10 +1,11 @@
 import { Box } from '@mui/material';
+import { VerticalSelectionProps } from 'interface/UserHomepage';
 import { Typography } from '../Typography';
 import styles from './styles.module.css';
 
 export interface YaxisProps {
-    yAxisItems?: any;
-    onYAxisItemClicked?: any;
+    yAxisItems: VerticalSelectionProps[] | undefined;
+    onYAxisItemClicked?: (id: number, lowerRange: number, higherRange: number) => void;
     yAxisItemClicked?: any;
     onYAxisItemHoverOn?: any;
     onYAxisItemHoverOff?: any;
@@ -21,7 +22,6 @@ export const Yaxis = ({
     yAxisItemHovered,
     currName,
 }: YaxisProps) => {
-
     return (
         <Box sx={{ height: '78vh', }}>
             <Box className={styles.container}>
@@ -34,16 +34,12 @@ export const Yaxis = ({
                     }}>
                         <span style={{
                             marginLeft: '10rem',
-                            // width: '10px',
-                            // height: '10px',
                         }}>
-                            <Typography
-                                text={yAxisItems?.lowerRange}
+                            {/* <Typography
+                                text={(yAxisItems || [])[0]?.lowerRange.toString()}
                                 fontSize="12px"
                                 fontWeight='bold'
-                            // width='10px'
-                            // height='10px'
-                            />
+                            /> */}
                         </span>
                     </Box>
                     {/* {yAxisItems?.map((item: any) => {
@@ -93,23 +89,15 @@ export const Yaxis = ({
                             position: 'absolute',
                             left: '10rem'
                         }}>
-                            <Typography
-                                text={yAxisItems?.higherRange}
+                            {/* <Typography
+                                text={(yAxisItems || [])[0]?.higherRange.toString()}
                                 fontSize="12px"
                                 fontWeight='bold'
-                            />
+                            /> */}
                         </span>
                     </Box>
                 </Box>
                 <Box className={styles.line}>
-                    {/* <span
-                        style={{
-                            position: 'absolute',
-                            fontSize: '1.5rem',
-                            right: '-5.5px',
-                            top: '-5.5px',
-                        }}
-                    >&#8963;</span> */}
                 </Box>
             </Box>
         </Box>

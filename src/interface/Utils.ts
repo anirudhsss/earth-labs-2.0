@@ -1,4 +1,4 @@
-export interface abcd2Props {
+export interface HorizontalSelectionProps {
   detail: Detail;
   timestamp: string;
   referenceDate: string;
