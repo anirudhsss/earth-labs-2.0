@@ -1,3 +1,5 @@
+import Typography from "@mui/material/Typography";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "components/shared/Button";
 import { Container } from "components/shared/Container";
 import CopyContainer from "components/shared/CopyContainer";
@@ -138,6 +140,29 @@ export const LandingPage = () => {
               </div>
             </RenderIf>
           </div>
+        </div>
+        <div
+          className="flex flex-row landing-button"
+          style={{
+            gap: "2rem",
+          }}
+        >
+          <div className="landing-button">
+            <ConnectButton />
+          </div>
+          <Button
+            backgroundColor="transparent"
+            color="white"
+            border="0.5px solid #fff"
+            hoverBackgroundColor="transparent"
+            borderRadius="2rem"
+            padding="0 5rem"
+            onClick={() => {
+              navigate("/discovery");
+            }}
+          >
+            <span style={{ fontSize: "1.6rem" }}>Discover</span>
+          </Button>
         </div>
       </section>
     </Container>

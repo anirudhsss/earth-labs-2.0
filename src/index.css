@@ -93,12 +93,22 @@ code {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
-    opacity: .5;
+    opacity: 0.5;
   }
+}
+
+.landing-button [data-testid="rk-connect-button"] {
+  color: #1c223d !important;
+  padding: 0rem 4rem !important;
+  height: 4rem !important;
+  background-color: #fff !important;
+  border-radius: 20rem !important;
+  font-size: 1.4rem !important;
 }
 
 /* .connectWalletWrapper > button {
@@ -109,14 +119,7 @@ code {
   border-radius: 20rem !important;
 }
 
-[data-testid="rk-connect-button"] {
-  color: #1c223d !important;
-  padding: 0rem 4rem !important;
-  height: 4rem !important;
-  background-color: #fff !important;
-  border-radius: 20rem !important;
-  font-size: 1.4rem !important;
-}
+
 
 .connect_wallet_button [data-testid="rk-connect-button"] {
   color: #1c223d !important;
