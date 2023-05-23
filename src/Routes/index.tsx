@@ -9,8 +9,6 @@ import {
   Route
 } from "react-router-dom";
 
-<base href="/" />
-
 export interface RouterProps {
   caseSensitive?: boolean;
   children?: RouterProps[];
@@ -24,15 +22,7 @@ export const router = createBrowserRouter(
     <Route>
       <Route
         path="/"
-        element={
-          <LandingPage />
-          // <Navigate
-          //   to="/landing"
-          //   replace
-          //   state={{
-          //     icon: "maps",
-          //   }}
-        }
+        element={<LandingPage />}
       />
       <Route path="/txn/:id" element={<GlyphDetailPage />} />
       <Route path="/landing" element={<LandingPage />} />
