@@ -976,7 +976,8 @@ export const UserHomepage = () => {
                 open={eachGlyphClicked}
                 onClose={onEachGlyphClickedClose}
                 componentLoaded={<GlyphDetailPage altTxnHash={eachTxnHash} />}
-                opacity="0.8"
+                // opacity="0.8"
+                backgroundColor="rgba(28, 34, 61, 0.8)"
                 eachGlyphClicked={eachGlyphClicked}
                 onEachGlyphClickedClose={onEachGlyphClickedClose}
             />

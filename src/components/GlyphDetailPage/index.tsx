@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { Container } from "components/shared/Container";
 import GlyphDetail from "components/shared/GlyphDetail";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
@@ -16,10 +17,11 @@ const GlyphDetailPage = ({ altTxnHash }: GlyphDetailPageProps) => {
 
   return (
     <Container
-      backgroundColor="#1C223D"
+      // backgroundColor="#1C223D"
+      backgroundColor={`${altTxnHash ? '' : '#1C223D'}`}
     // opacity={`${altTxnHash ? '0.1' : '1'}`} 
     >
-      <OnboardingHeader isAtlasLogo={true} altTxnHash={altTxnHash} />
+      {altTxnHash ? <Box sx={{ height: '3rem' }}></Box> : <OnboardingHeader isAtlasLogo={true} altTxnHash={altTxnHash} />}
 
       <RenderIf
         isTrue={Boolean(
@@ -32,13 +34,13 @@ const GlyphDetailPage = ({ altTxnHash }: GlyphDetailPageProps) => {
         <div
           style={{
             padding: "5rem 15rem",
-            paddingTop:'0',
+            paddingTop: '0',
             height: "calc(100vh - 68px)",
             animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
           }}
           className="animate-pulse"
         >
-          <img src={Icons.glyphDetailLoader} width={"100%"} height={"100%"} />
+          <img src={Icons.glyphDetailLoader} alt="" width={"100%"} height={"100%"} />
         </div>
       </RenderIf>
     </Container>
