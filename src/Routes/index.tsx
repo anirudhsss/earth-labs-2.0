@@ -6,7 +6,7 @@ import Wallet from "components/Wallet";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Route
+  Route,
 } from "react-router-dom";
 
 const router = createBrowserRouter(
@@ -18,6 +18,7 @@ const router = createBrowserRouter(
       />
       <Route path="/txn/:id" element={<GlyphDetailPage />} />
       <Route path="/landing" element={<LandingPage />} />
+      <Route path="/maps/:address" element={<UserHomepage />} />
       <Route path="/maps" element={<UserHomepage />} />
       <Route path="/discovery" element={<Discovery />} />
       <Route path="/wallet" element={<Wallet />} />
