@@ -30,3 +30,7 @@
     fill-opacity: 0.75;
     transition: fill-opacity .2s !important;
 }
+
+.cursor {
+    cursor: pointer;
+}

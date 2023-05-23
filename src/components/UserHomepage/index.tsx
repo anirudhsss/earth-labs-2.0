@@ -969,14 +969,19 @@ export const UserHomepage = () => {
                 open={helpIconClicked}
                 onClose={onHelpSectionClose}
                 componentLoaded={<HelpPage />}
+                maxWidth='lg'
                 borderRadius='30px'
+                position='absolute'
+                right='160px'
+                bottom='100px'
             />
             <CustomizedDialogs
                 fullScreen={true}
                 open={eachGlyphClicked}
                 onClose={onEachGlyphClickedClose}
                 componentLoaded={<GlyphDetailPage altTxnHash={eachTxnHash} />}
-                opacity="0.8"
+                // opacity="0.8"
+                backgroundColor="rgba(28, 34, 61, 0.8)"
                 eachGlyphClicked={eachGlyphClicked}
                 onEachGlyphClickedClose={onEachGlyphClickedClose}
             />

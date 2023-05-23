@@ -40,6 +40,11 @@ export interface CustomizedDialogsProps {
     opacity?: string | undefined;
     eachGlyphClicked?: boolean;
     onEachGlyphClickedClose?: any;
+    backgroundColor?: any;
+    maxWidth?: any;
+    position?: any;
+    right?: any;
+    bottom?: any;
 }
 
 // function BootstrapDialogTitle(props: DialogTitleProps) {
@@ -75,6 +80,11 @@ const CustomizedDialogs = ({
     opacity,
     eachGlyphClicked,
     onEachGlyphClickedClose,
+    backgroundColor,
+    maxWidth,
+    position,
+    right,
+    bottom,
 }: CustomizedDialogsProps) => {
     // const [open, setOpen] = React.useState(false);
 
@@ -95,35 +105,39 @@ const CustomizedDialogs = ({
                 onClose={onClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
-                // maxWidth='lg'
+                maxWidth={maxWidth}
                 PaperProps={{
                     style: {
-                        //         borderRadius: borderRadius,
-                        //         position: 'absolute',
-                        //         right: '160px',
-                        //         bottom: '100px',
+                        borderRadius: borderRadius,
+                        position: position,
+                        right: right,
+                        bottom: bottom,
                         opacity: opacity,
+                        backgroundColor: backgroundColor,
                     }
                 }}
             >
                 {eachGlyphClicked && <Box
                     sx={{
                         position: 'absolute',
-                        right: '20px',
-                        top: '85px',
+                        right: '50px',
+                        top: '30px',
+                        cursor: 'pointer'
                     }}
+                    onClick={onEachGlyphClickedClose}
                 >
-                    <Button
+                    {/* <Button
                         backgroundColor='white'
                         hoverBackgroundColor='white'
                         borderRadius='20px'
                         onClick={onEachGlyphClickedClose}
-                    >
-                        <Typography
-                            text='Close Glyph View'
-                            color='black'
-                        />
-                    </Button>
+                    > */}
+                    <Typography
+                        text='x'
+                        color='#fffdfb'
+                        fontSize='2rem'
+                    />
+                    {/* </Button> */}
                 </Box>}
                 {/* <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Modal title
