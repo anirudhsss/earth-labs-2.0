@@ -3,7 +3,7 @@ import Web3ModalProvider from "provider/web3modal.provider";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import "./index.css";
-import { router } from "./Routes";
+import router from "./Routes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

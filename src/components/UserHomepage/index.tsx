@@ -23,7 +23,7 @@ import { ArrOfYMDProps, VerticalSelectionProps } from "interface/UserHomepage";
 import { HorizontalSelectionProps } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
 
-export const UserHomepage = () => {
+const UserHomepage = () => {
     const [currName, setCurrName] = useState("ETH");
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
@@ -990,3 +990,5 @@ export const UserHomepage = () => {
         </>
     );
 };
+
+export default UserHomepage;

@@ -121,7 +121,7 @@ const CustomizedDialogs = ({
                     sx={{
                         position: 'absolute',
                         right: '50px',
-                        top: '30px',
+                        top: '70px',
                         cursor: 'pointer'
                     }}
                     onClick={onEachGlyphClickedClose}
@@ -135,7 +135,7 @@ const CustomizedDialogs = ({
                     <Typography
                         text='x'
                         color='#fffdfb'
-                        fontSize='2rem'
+                        fontSize='2.5rem'
                     />
                     {/* </Button> */}
                 </Box>}
