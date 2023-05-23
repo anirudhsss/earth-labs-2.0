@@ -7,7 +7,7 @@ import {
 } from "constant";
 import moment from "moment";
 import { Fragment, useEffect, useState } from "react";
-import { Hexagon, HexGrid, Layout, Pattern } from "react-hexgrid";
+import { Hexagon, HexGrid, Layout, Pattern, Text } from "react-hexgrid";
 import { Link } from "react-router-dom";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import styles from "./styles.module.css";
@@ -248,11 +248,19 @@ export const Hexgrid = ({
                             stroke: item.borderColorHex,
                             strokeWidth: item.borderColorWidth,
                           }}
+                          className={styles.cursor}
                           onClick={() =>
                             onEachGlyphClickedOpen(item?.detail?.txnHash)
                           }
                         >
-                          <title id="unique-id">{item.altText}</title>
+                          {item.altText && (
+                            <title id="unique-id">{item.altText}</title>
+                          )}
+                          {/* {item.fillText && ( */}
+                          <Text style={{ fontSize: "1rem" }}>
+                            {/* {item.fillText} */}
+                          </Text>
+                          {/* )} */}
                         </Hexagon>
                         <Pattern
                           id={`PAT-${index}`}

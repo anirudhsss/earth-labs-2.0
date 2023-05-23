@@ -64,6 +64,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           className="flex justify-content-center align-items-center"
           style={{
             // backgroundColor: "#1C223D",
+            // backgroundColor: props.altText ? '' : '#1C223D',
             padding: "2rem",
             width: "auto",
             borderRadius: "3rem",
@@ -203,7 +204,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         style={{
           padding: "5rem 20rem",
           gap: "10rem",
-    
+
           height: "calc(100vh - 68px)",
           justifyContent: "center",
           alignItems: "center",
@@ -223,6 +224,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           ></img>
           <div className="flex flex-column">
             <Button
+              width={`${props.altTxnHash && '30rem'}`}
               color="#fff"
               size="2rem"
               borderRadius="3rem"
@@ -255,7 +257,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 <RenderIf isTrue={!isAlertOpen}>
                   <>
                     <img src={Icons.twitter} alt="" width={30} height={25} />
-                    <span>Share your {!props.altTxnHash && '1st'} glyph on Twitter!</span>
+                    <span>Share {!props.altTxnHash && ' your 1st glyph'} on Twitter!</span>
                   </>
                 </RenderIf>
               </div>
@@ -269,17 +271,24 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             className="flex w-full flex-row align-items-center"
           >
             <RenderIf isTrue={!isAlertOpen}>
-              <>
+              <Box sx={{
+                width: '300px',
+                marginTop: '-10px!important',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }}>
                 <img src={Icons.trophy} alt="" />
                 <span
                   style={{
                     fontSize: "1.6rem",
                     color: "#fff",
+                    marginLeft: '10px'
                   }}
                 >
                   Connect your twitter and win future Airdrops from Earth Labs!
                 </span>
-              </>
+              </Box>
             </RenderIf>
             <RenderIf isTrue={isAlertOpen}>
               <>
@@ -306,9 +315,9 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               gap: "3rem",
             }}
           >
-            <InfoField text={props.altText} label="For Humans" />
-            <InfoField text={props.txnHash} label="Transaction Hash" />
-            <InfoField text={`${props.cValue} ETH ($47.08)`} label="Value" />
+            <InfoField text={props.altText} label="For Humans" hideTransparency={!!props.altTxnHash} />
+            <InfoField text={props.txnHash} label="Transaction Hash" hideTransparency={!!props.altTxnHash} />
+            <InfoField text={`${props.cValue} ETH ($47.08)`} label="Value" hideTransparency={!!props.altTxnHash} />
             <InfoField
               text="GlyphDetail"
               label="Activity Details"
@@ -318,9 +327,10 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                   to={props.tAddress}
                 />
               }
+              hideTransparency={!!props.altTxnHash}
             />
-            <InfoField text={props.timeStamp} label="Date & Time" />
-            <InfoField text={`$${props.cValue} / ETH`} label="Ether Price" />
+            <InfoField text={props.timeStamp} label="Date & Time" hideTransparency={!!props.altTxnHash} />
+            <InfoField text={`$${props.cValue} / ETH`} label="Ether Price" hideTransparency={!!props.altTxnHash} />
           </div>
         </div>
       </div>
