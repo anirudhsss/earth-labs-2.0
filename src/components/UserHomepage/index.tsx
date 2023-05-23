@@ -969,7 +969,11 @@ export const UserHomepage = () => {
                 open={helpIconClicked}
                 onClose={onHelpSectionClose}
                 componentLoaded={<HelpPage />}
+                maxWidth='lg'
                 borderRadius='30px'
+                position='absolute'
+                right='160px'
+                bottom='100px'
             />
             <CustomizedDialogs
                 fullScreen={true}

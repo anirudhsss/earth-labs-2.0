@@ -42,6 +42,9 @@ export interface CustomizedDialogsProps {
     onEachGlyphClickedClose?: any;
     backgroundColor?: any;
     maxWidth?: any;
+    position?: any;
+    right?: any;
+    bottom?: any;
 }
 
 // function BootstrapDialogTitle(props: DialogTitleProps) {
@@ -79,6 +82,9 @@ const CustomizedDialogs = ({
     onEachGlyphClickedClose,
     backgroundColor,
     maxWidth,
+    position,
+    right,
+    bottom,
 }: CustomizedDialogsProps) => {
     // const [open, setOpen] = React.useState(false);
 
@@ -102,10 +108,10 @@ const CustomizedDialogs = ({
                 maxWidth={maxWidth}
                 PaperProps={{
                     style: {
-                        //         borderRadius: borderRadius,
-                        //         position: 'absolute',
-                        //         right: '160px',
-                        //         bottom: '100px',
+                        borderRadius: borderRadius,
+                        position: position,
+                        right: right,
+                        bottom: bottom,
                         opacity: opacity,
                         backgroundColor: backgroundColor,
                     }
