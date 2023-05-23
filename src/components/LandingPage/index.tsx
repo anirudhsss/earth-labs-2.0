@@ -1,9 +1,7 @@
-import Typography from "@mui/material/Typography";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Button } from "components/shared/Button";
 import { Container } from "components/shared/Container";
 import CopyContainer from "components/shared/CopyContainer";
-import InfoField from "components/shared/InfoField";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 import RenderIf from "components/shared/RenderIf";
 import { NormalSearchField } from "components/shared/TextField";
@@ -12,6 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import isValidTxnHash from "util/validateTx";
+import { useAccount, useConnect } from "wagmi";
 import styles from "./styles.module.css";
 
 export const LandingPage = () => {
@@ -22,6 +21,13 @@ export const LandingPage = () => {
     isValid: boolean;
     message: string;
   }>({ isValid: true, message: "" });
+  const { address, isConnected } = useAccount();
+
+  useEffect(() => {
+    if (isConnected) {
+      navigate(`/maps/${address}`);
+    }
+  }, [isConnected]);
 
   const processTwitterAuthentication = useCallback(async () => {
     const state = searchParams.get("state");
@@ -58,10 +64,14 @@ export const LandingPage = () => {
         <img src={Icons.atlasWhite} alt="" width={300} height={150}></img>
         <div className={styles.landing_inner_content}>
           <div className={styles.landing_inner_content_top}>
-            <span style={{
-              fontSize : '1.6rem',
-              color : '#fff'
-            }}>Copy and paste the transaction hash below.</span>
+            <span
+              style={{
+                fontSize: "1.6rem",
+                color: "#fff",
+              }}
+            >
+              Copy and paste the transaction hash below.
+            </span>
             <CopyContainer
               text={
                 "0x4b8e90a5465a30c54910d7c9799237bd5d7e33ab33db561c98ca69758026c055"
