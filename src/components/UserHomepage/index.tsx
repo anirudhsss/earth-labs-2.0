@@ -15,7 +15,7 @@ import { Yaxis } from "components/shared/Yaxis";
 import {
     AxiosFetch,
     BackdropDuringApiLoading,
-    CalcRange
+    CalcRange,
 } from "components/utils";
 import { useAccount } from "wagmi";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
@@ -60,7 +60,7 @@ const UserHomepage = () => {
     const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
     const [arrOfMonths, setArrOfMonths] = useState<any>([]);
     const [arrOfDays, setArrOfDays] = useState<ArrOfYMDProps[]>([]);
-    const [monthInLetters, setmonthInLetters] = useState<string>('');
+    const [monthInLetters, setmonthInLetters] = useState<string>("");
     const { address } = useAccount();
     const [walletAddress, setWalletAddress] = useState<string>();
     const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
@@ -69,12 +69,12 @@ const UserHomepage = () => {
     const [showDays, setShowDays] = useState<boolean | undefined>(false);
     const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
     const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
-    const [clickedDay, setClickedDay] = useState<string | undefined>('');
+    const [clickedDay, setClickedDay] = useState<string | undefined>("");
     const [abcd2, setAbcd2] = useState<HorizontalSelectionProps[]>([]);
     const [abcd3, setAbcd3] = useState<any>([]);
-    const [clickedMonth, setClickedMonth] = useState<string | undefined>('');
+    const [clickedMonth, setClickedMonth] = useState<string | undefined>("");
     const [eachGlyphClicked, setEachGlyphClicked] = useState<boolean>(false);
-    const [eachTxnHash, setEachTxnHash] = useState<string>('');
+    const [eachTxnHash, setEachTxnHash] = useState<string>("");
 
     const onEachGlyphClickedOpen = (txnHash: string) => {
         setEachTxnHash(txnHash);
@@ -84,15 +84,15 @@ const UserHomepage = () => {
 
     const onSetdayClicked = (dayClicked: boolean | undefined) => {
         setdayClicked(dayClicked);
-    }
+    };
 
     const onClickedMonth = (month: string | undefined) => {
         setClickedMonth(month);
-    }
+    };
 
     const onHelpSectionClose = () => {
         setHelpIconClicked(false);
-    }
+    };
 
     useEffect(() => {
         if (address) {
@@ -101,6 +101,13 @@ const UserHomepage = () => {
         }
         setWalletAddress("");
     }, [address]);
+
+    useEffect(() => {
+        const pathname = window.location.pathname;
+        const arr = pathname.split("maps/");
+        const address = arr[1];
+        setWalletAddress(address);
+    }, []);
 
     const onFindingXAxisMinAndMax = useCallback(() => {
         let arr: number[] = [];
@@ -318,12 +325,9 @@ const UserHomepage = () => {
         if (abcd2?.length > 0) {
             let filteredDays: any[];
             filteredDays = abcd2?.filter((item) => {
-                // console.log('test', Number(moment.utc(item.timestamp).format("DD")))
-                // console.log('day', Number(day));
-                // console.log('Number(moment(item.timestamp).format("DD)) === day', Number(moment(item.timestamp).format('DD')) === Number(day));
                 return Number(moment.utc(item.timestamp).format("DD")) === Number(day);
             });
-            // console.log('filteredDays', filteredDays);
+
             setAbcd3(filteredDays);
             setMatchedMonths(filteredDays);
         }
@@ -452,10 +456,10 @@ const UserHomepage = () => {
                 // console.log('', min, max, noOfTxns)
                 noOfTxns.forEach((item: number, index: number) => {
                     if (index === 0) {
-                        item -= 0.01
+                        item -= 0.01;
                     } else {
                         item += 0.01;
-                    };
+                    }
                     let val1 = (35 - 10) * invlerp(min, max, item) + 10;
                     arrMonthPointsOfAxis = [...arrMonthPointsOfAxis, val1]; //processed count
                 });
@@ -502,7 +506,7 @@ const UserHomepage = () => {
         if (furtherPropagation) {
             arr = abcd1;
         } else {
-            arr = abcd3
+            arr = abcd3;
         }
         // console.log('arr', arr);
         const tArr = arr?.map((item: any) => item.targetValue);
@@ -535,8 +539,8 @@ const UserHomepage = () => {
             furtherPropagationEnabled();
             setAbcd2([]);
             setShowDays(false);
-            setClickedElement('');
-            setHoverElementId('');
+            setClickedElement("");
+            setHoverElementId("");
             setCurrency([]);
             setYAxisItems([]);
             setYAxisItemClicked(null);
@@ -626,7 +630,7 @@ const UserHomepage = () => {
             if (furtherPropagation) {
                 arr3 = abcd1;
             } else {
-                arr3 = abcd2
+                arr3 = abcd2;
             }
             const arr = arr3?.filter((item: any) => {
                 // console.log('item', item);
@@ -641,8 +645,8 @@ const UserHomepage = () => {
                     }
                 }
                 return (
-                    a * (item.targetValue.toFixed(2)) >= lowerRange &&
-                    a * (item.targetValue.toFixed(2)) <= higherRange
+                    a * item.targetValue.toFixed(2) >= lowerRange &&
+                    a * item.targetValue.toFixed(2) <= higherRange
                 );
             });
             // console.log('arr', arr)
@@ -713,14 +717,18 @@ const UserHomepage = () => {
         return [arr, lowerRange, higherRange];
     };
 
-    const onYAxisItemClicked = (id: number, lowerRange: number, higherRange: number) => {
+    const onYAxisItemClicked = (
+        id: number,
+        lowerRange: number,
+        higherRange: number
+    ) => {
         setYAxisValue({ yAxisValueMin: lowerRange, yAxisValueMax: higherRange });
         let data2: any = [];
         let idd = Number(id);
         setYAxisItemClicked(idd);
         data2 = abcd1;
         const arr = data2?.filter((item: HorizontalSelectionProps) => {
-            console.log(item)
+            console.log(item);
             let a = 1;
             if (currName === "ETH") {
                 a = 1;
@@ -753,7 +761,7 @@ const UserHomepage = () => {
     };
 
     const onCircleHoverEnds = (elementId: string | undefined) => {
-        setHoverElementId('');
+        setHoverElementId("");
     };
 
     const onWalletBtnClickOpen = () => {
@@ -811,25 +819,6 @@ const UserHomepage = () => {
         setShowDays(true);
         setfurtherPropagation(false);
     }, []);
-    // console.log('data2', data2);
-    // console.log('clickedElement', clickedElement)
-    // console.log('clickedMonth', clickedMonth)
-    // console.log('abcd1', abcd1);
-    // console.log('abcd2', abcd2);
-    // console.log('furtherPropagation', furtherPropagation);
-    // console.log('showDays', showDays);
-    // console.log('monthInLetters', monthInLetters);
-    // console.log('dayClicked', dayClicked);
-    // console.log('clickedDay', clickedDay);
-    // console.log('matchedMonths', matchedMonths);
-    // console.log('arrOfDays', arrOfDays);
-    // console.log('arrOfMonths', arrOfMonths);
-    // console.log('arrOfYears', arrOfYears);
-    // console.log('month', month);
-    // console.log('chosenCurrency', chosenCurrency);
-    // console.log('currency', currency);
-    // console.log('yAxisItems', yAxisItems)
-    // console.log('years', years)
 
     return (
         <>
@@ -969,11 +958,11 @@ const UserHomepage = () => {
                 open={helpIconClicked}
                 onClose={onHelpSectionClose}
                 componentLoaded={<HelpPage />}
-                maxWidth='lg'
-                borderRadius='30px'
-                position='absolute'
-                right='160px'
-                bottom='100px'
+                maxWidth="lg"
+                borderRadius="30px"
+                position="absolute"
+                right="160px"
+                bottom="100px"
             />
             <CustomizedDialogs
                 fullScreen={true}
