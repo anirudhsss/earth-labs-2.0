@@ -18,6 +18,7 @@ import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
 import RenderIf from "../RenderIf";
+import Spinner from "../Spinner/Spinner";
 import { Typography } from "../Typography";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
@@ -35,6 +36,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
 
   const { openConnectModal } = useConnectModal();
+  const [isLoader, setLoader] = useState<boolean>(false);
 
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
@@ -134,7 +136,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           </button>
           <Button
             onClick={async () => {
-              setOpenModal(false);
+              setLoader(true);
               const mediaId = await generateMediaId(
                 props.glyphURL as string,
                 twitterUser?.id as string,
@@ -146,6 +148,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 twitterUser?.id as string,
                 message as string
               );
+              setLoader(false);
               if (data) {
                 setOpenModal(false);
                 if (!props.isMapScreen) {
@@ -172,7 +175,10 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             padding="0.5rem 5rem"
             display="flex"
           >
-            Tweet!
+            <Spinner isLoading={isLoader} />
+            <RenderIf isTrue={!isLoader}>
+              <span>Tweet!</span>
+            </RenderIf>
           </Button>
         </div>
         <div
@@ -214,7 +220,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
       </div>
     );
   };
-  console.log(isAlertOpen);
+
   return (
     <>
       <RenderIf isTrue={isAlertOpen?.isAlert as boolean}>
@@ -268,7 +274,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 if (isAlertOpen?.isAlert && !props.isMapScreen) {
                   if (openConnectModal) openConnectModal();
                 }
-
               }}
             >
               <div
