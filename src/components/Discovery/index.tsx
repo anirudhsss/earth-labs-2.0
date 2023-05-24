@@ -20,7 +20,7 @@ export interface DiscoveryProps {
     currName?: any;
 }
 
-export const Discovery = ({
+const Discovery = ({
     openMenu1,
     currency,
     onOpenYearMenu1,
@@ -226,3 +226,5 @@ export const Discovery = ({
         </Box>
     )
 }
+
+export default Discovery;
