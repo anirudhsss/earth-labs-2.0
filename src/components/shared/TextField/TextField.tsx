@@ -102,7 +102,7 @@ const TextField: React.FC<TextFieldProps> = ({
             "&::placeholder": {
               fontSize: placeholderFontSize,
               color: { placeholderColor },
-              fontWeight: "700",
+              fontWeight: "500",
             },
           },
           fieldset: { borderColor: { borderColor } },
