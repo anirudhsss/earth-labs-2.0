@@ -1,6 +1,6 @@
 import { Backdrop, CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import sample from '../../sample.json';
+import sample from "../../sample.json";
 
 export const isEmpty = (str: string) => !str?.length;
 
@@ -41,25 +41,17 @@ export const AxiosFetch = (address?: string) => {
   const [apiError, setApiError] = useState<any>("");
 
   useEffect(() => {
-    const url = `https://api.earth.domains/earthapi/dotEarth/${address ? address : "GenerateGlyphs"}`;
+    const url = `https://api.earth.domains/earthapi/dotEarth/GenerateGlyphs${
+      address ? `?input=${address}` : ""
+    }`;
 
     fetch(url)
       .then((res) => res.json())
       .then((apiData) => {
-        // console.log(apiData)
         setApiError(apiData.apiError);
-        // const a = sample[0].hexes?.map((item: any) => {
-        // const a = apiData[0].hexes?.map((item: any) => {
-        //   return {
-        //     ...item,
-        //     targetValue1: getRandomIntInclusive(0.001, 10),
-        //   };
-        // });
-        // setApiData(a);
         setApiData(apiData[0].hexes);
         setApiLoading(false);
         setData(apiData[0]);
-        // setData(sample[0]);
       })
       .catch(() => setApiLoading(false));
   }, [address]);
@@ -110,6 +102,8 @@ export const CalcRange = (arr: any[]) => {
   }
   // console.log('arr1', arr1);
   return arr2;
-}
+};
 
-export const OrangeHexagonIcon = <span style={{ color: '#FE7D06', fontSize: '25px', }}>&#x2B22;</span>
+export const OrangeHexagonIcon = (
+  <span style={{ color: "#FE7D06", fontSize: "25px" }}>&#x2B22;</span>
+);
