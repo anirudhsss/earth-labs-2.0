@@ -970,7 +970,7 @@ export const UserHomepage = () => {
         fullScreen={true}
         open={eachGlyphClicked}
         onClose={onEachGlyphClickedClose}
-        componentLoaded={<GlyphDetailPage altTxnHash={eachTxnHash} />}
+        componentLoaded={<GlyphDetailPage isMapScreen={true} altTxnHash={eachTxnHash} />}
         // opacity="0.8"
         backgroundColor="rgba(28, 34, 61, 0.8)"
         eachGlyphClicked={eachGlyphClicked}

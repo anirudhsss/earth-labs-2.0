@@ -21,7 +21,8 @@ const Alert: FC<IAlert> = ({
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
         padding: '0.7rem 8rem',
         marginTop : '3rem',
-        gap : '2rem'
+        gap : '2rem',
+        alignItems:'center'
       }}
       className="flex flex-row"
     >
