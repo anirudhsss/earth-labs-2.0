@@ -27,7 +27,7 @@ export interface WalletProps {
     ethToUsdcYvsTPercent?: any;
 }
 
-export const Wallet = ({
+const Wallet = ({
     openMenu1,
     currency,
     onOpenYearMenu1,
@@ -182,3 +182,4 @@ export const Wallet = ({
 
     )
 }
+export default Wallet;

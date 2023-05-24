@@ -23,7 +23,7 @@ import { ArrOfYMDProps, VerticalSelectionProps } from "interface/UserHomepage";
 import { HorizontalSelectionProps } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
 
-export const UserHomepage = () => {
+const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [anchorEl1, setAnchorEl1] = useState<null | HTMLElement>(null);
@@ -103,7 +103,7 @@ export const UserHomepage = () => {
     }
     setWalletAddress("");
   }, [address]);
-  
+
   useEffect(() => {
     const pathname = window.location.pathname;
     const arr = pathname.split("maps/");
@@ -970,7 +970,10 @@ export const UserHomepage = () => {
         fullScreen={true}
         open={eachGlyphClicked}
         onClose={onEachGlyphClickedClose}
-        componentLoaded={<GlyphDetailPage isMapScreen={true} altTxnHash={eachTxnHash} />}
+        componentLoaded={
+          <GlyphDetailPage isMapScreen={true} altTxnHash={eachTxnHash} />
+        }
+        // opacity="0.8"
         // opacity="0.8"
         backgroundColor="rgba(28, 34, 61, 0.8)"
         eachGlyphClicked={eachGlyphClicked}
@@ -981,3 +984,5 @@ export const UserHomepage = () => {
     </>
   );
 };
+
+export default UserHomepage;
