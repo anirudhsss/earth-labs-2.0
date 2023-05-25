@@ -249,7 +249,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             src={props.glyphURL}
             alt=""
             width={"423px"}
-            height={"489px"}
+            height={"423px"}
           ></img>
           <div className="flex flex-column">
             <Button
