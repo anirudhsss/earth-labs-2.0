@@ -12,11 +12,11 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
+      <Route path="/" element={<LandingPage />} />
       <Route
-        path="/"
-        element={<LandingPage />}
+        path="/txn/:id"
+        element={<GlyphDetailPage isMapScreen={false} />}
       />
-      <Route path="/txn/:id" element={<GlyphDetailPage />} />
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/maps/:address" element={<UserHomepage />} />
       <Route path="/maps" element={<UserHomepage />} />

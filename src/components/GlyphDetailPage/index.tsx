@@ -11,9 +11,13 @@ import { useAccount } from "wagmi";
 
 export interface GlyphDetailPageProps {
   altTxnHash?: string;
+  isMapScreen: boolean;
 }
 
-const GlyphDetailPage = ({ altTxnHash }: GlyphDetailPageProps) => {
+const GlyphDetailPage = ({
+  altTxnHash,
+  isMapScreen = false,
+}: GlyphDetailPageProps) => {
   const url = window.location.pathname;
   const txnHash = altTxnHash ? altTxnHash : url.split("/txn/")[1];
   const { glphyDetails } = useGetGlyphDetails(txnHash);
@@ -21,7 +25,7 @@ const GlyphDetailPage = ({ altTxnHash }: GlyphDetailPageProps) => {
   const { isConnected, address } = useAccount();
 
   useEffect(() => {
-    if (isConnected) {
+    if (isConnected && !altTxnHash) {
       navigate(`/maps/${address}`);
     }
   }, [isConnected]);
@@ -45,6 +49,7 @@ const GlyphDetailPage = ({ altTxnHash }: GlyphDetailPageProps) => {
       >
         <GlyphDetail
           {...(glphyDetails as IHexesDetail)}
+          isMapScreen={isMapScreen}
           altTxnHash={altTxnHash}
         />
       </RenderIf>
