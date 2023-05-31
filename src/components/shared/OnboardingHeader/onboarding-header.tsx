@@ -1,6 +1,9 @@
 import { Icons } from "constant";
-import { FC } from "react";
+import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
+import { FC, useCallback, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
+import { Button } from "../Button";
 import ConnectWallet from "../ConnectWallet";
 import { Container } from "../Container";
 import RenderIf from "../RenderIf";
@@ -16,6 +19,38 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
   isConnectWallet = true,
   altTxnHash,
 }) => {
+  const { initateTwitterAuth, getTwitterUserInfo } = useTwitterFlow();
+  const [twitterUserInfo, setTwitterUserInfo] = useLocalStorageState<{
+    user?: ITwitterUser;
+    isConnected: boolean;
+  }>("twitterUserInfo");
+  const handleTwitterUserName = useCallback(async () => {
+    if (twitterUserInfo) {
+      return;
+    }
+    try {
+      const code = localStorage.getItem("code");
+      if (code) {
+        const user = await getTwitterUserInfo(
+          "state",
+          code as string,
+          window.location.origin
+        );
+        console.log(user);
+        setTwitterUserInfo({ user, isConnected: true });
+        localStorage.removeItem("code");
+        sessionStorage.removeItem("from");
+      }
+    } catch (e) {
+      console.error(e);
+      localStorage.removeItem("code");
+      sessionStorage.removeItem("from");
+    }
+  }, [getTwitterUserInfo, setTwitterUserInfo, twitterUserInfo]);
+
+  useEffect(() => {
+    handleTwitterUserName();
+  }, [handleTwitterUserName]);
   const navigate = useNavigate();
   const Item = ({ text }: { text: string }) => {
     return (
@@ -88,6 +123,35 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           >
             <Item text={"Documentation"} />
             <Item text={"About Us"} />
+            <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
+              <Button
+                gap="1rem"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                border='1px solid #fffdfb'
+                backgroundColor="transparent"
+                boxShadow="none"
+                borderRadius="100px"
+                color='#fffdfb'
+                fontWeight="700"
+                size="1.6rem"
+                hoverBackgroundColor="transparent"
+                onClick={async () => {
+                  sessionStorage.setItem("from", "maps");
+                  const url = await initateTwitterAuth();
+                  window.open(url, "_self");
+                }}
+              >
+                <img
+                  src={Icons.twitterWhite}
+                  alt=""
+                  width={"20px"}
+                  height={"20px"}
+                />
+                Connect Twitter
+              </Button>
+            </RenderIf>
             <RenderIf isTrue={isConnectWallet}>
               <li>
                 <ConnectWallet altTxnHash={altTxnHash} />
