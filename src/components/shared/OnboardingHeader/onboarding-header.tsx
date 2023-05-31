@@ -80,10 +80,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
       >
         <div className="flex">
           <RenderIf isTrue={Boolean(isAtlasLogo)}>
-            <Link
-              to="/"
-              style={{ textDecoration: 'none', }}
-            >
+            <Link to="/" style={{ textDecoration: "none" }}>
               <img
                 style={{
                   cursor: "pointer",
@@ -99,10 +96,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             </Link>
           </RenderIf>
           <RenderIf isTrue={!Boolean(isAtlasLogo)}>
-            <Link
-              to="/"
-              style={{ textDecoration: 'none', }}
-            >
+            <Link to="/" style={{ textDecoration: "none" }}>
               <img
                 style={{
                   cursor: "pointer",
@@ -123,7 +117,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           >
             <Item text={"Documentation"} />
             <Item text={"About Us"} />
-            <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
+            {/* <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
               <Button
                 gap="1rem"
                 display="flex"
@@ -151,7 +145,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 />
                 Connect Twitter
               </Button>
-            </RenderIf>
+            </RenderIf> */}
             <RenderIf isTrue={isConnectWallet}>
               <li>
                 <ConnectWallet altTxnHash={altTxnHash} />
