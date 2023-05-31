@@ -11,6 +11,12 @@ export interface ITwitterUser {
   username?: string;
 }
 
+interface IGenerateTweetResponse {
+  edit_history_tweet_ids: string[];
+  id: string;
+  text: string;
+}
+
 const useTwitterFlow = () => {
   // Constants
   const BASE_URL = "https://atlasapi-twitter-ms.azure-api.net";
@@ -53,13 +59,19 @@ const useTwitterFlow = () => {
     mediaId: string,
     twitterUserId: string,
     content: string
-  ): Promise<{ message: string; code: number; result: any }> => {
-    const response = await tweetThePost(BASE_URL, mediaId, twitterUserId,content);
-    const result = await response.json();
+  ): Promise<IGenerateTweetResponse> => {
+    const response = await tweetThePost(
+      BASE_URL,
+      mediaId,
+      twitterUserId,
+      content
+    );
+    const tweetResponse = await response.json();
+    const result: IGenerateTweetResponse = tweetResponse.data;
     return {
-      result,
-      code: 1,
-      message: "Successfully Tweeted",
+      edit_history_tweet_ids: result.edit_history_tweet_ids,
+      id: result.id,
+      text: result.text,
     };
   };
 

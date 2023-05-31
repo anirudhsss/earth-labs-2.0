@@ -13,17 +13,15 @@ import {
   useRef,
   useState,
 } from "react";
-import useLocalStorageState from "use-local-storage-state";
 import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
 import RenderIf from "../RenderIf";
 import Spinner from "../Spinner/Spinner";
-import { Typography } from "../Typography";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
   const [isAlertOpen, setAlertOpen] = useState<{
-    message?: string;
+    message?: JSX.Element;
     isAlert?: boolean;
   }>({});
   const [isOpen, setOpenModal] = useState<boolean>(false);
@@ -150,17 +148,23 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               );
               setLoader(false);
               if (data) {
+                console.log(data);
                 setOpenModal(false);
                 if (!props.isMapScreen) {
                   setAlertOpen({
-                    message: "First Glyph shared on Twitter!",
+                    message: (
+                      <>
+                        <span>First Glyph shared on Twitter! </span>
+                        <a href={data.text}>View your tweet !</a>
+                      </>
+                    ),
                     isAlert: true,
                   });
                 }
 
                 if (props.isMapScreen) {
                   setAlertOpen({
-                    message: "Glyph succesfully shared on twitter !",
+                    message: <span>Glyph succesfully shared on twitter !</span>,
                     isAlert: true,
                   });
                 }
@@ -225,7 +229,10 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     <>
       <RenderIf isTrue={isAlertOpen?.isAlert as boolean}>
         <div className="flex justify-content-center align-items-center ">
-          <Alert text={isAlertOpen?.message as string} icon={Icons.bells} />
+          <Alert
+            text={isAlertOpen?.message as JSX.Element}
+            icon={Icons.bells}
+          />
         </div>
       </RenderIf>
       <div
