@@ -164,7 +164,12 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
 
                 if (props.isMapScreen) {
                   setAlertOpen({
-                    message: <span>Glyph succesfully shared on twitter !</span>,
+                    message: (
+                      <>
+                        <span>Glyph succesfully shared on twitter !</span>
+                        <a href={data.text}>View your tweet !</a>
+                      </>
+                    ),
                     isAlert: true,
                   });
                 }
