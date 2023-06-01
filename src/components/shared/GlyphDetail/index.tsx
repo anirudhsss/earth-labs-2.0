@@ -279,7 +279,8 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                     setOpenModal(true);
                     return;
                   }
-                  const url = await initateTwitterAuth("2");
+                  sessionStorage.setItem("from", "maps");
+                  const url = await initateTwitterAuth();
                   window.open(url, "_self");
                   return;
                 }
