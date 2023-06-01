@@ -81,7 +81,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             borderRadius: "3rem",
           }}
         >
-          <img src={props.glyphURL} alt="" width={500} height={350} />
+          <img src={props.glyphURL} alt="" width={500} height={430} />
         </div>
         <div
           style={{
@@ -149,7 +149,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               );
               setLoader(false);
               if (data) {
-                console.log(data);
                 setOpenModal(false);
                 if (!props.isMapScreen) {
                   setAlertOpen({
@@ -167,7 +166,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                   setAlertOpen({
                     message: (
                       <>
-                        <span>Glyph succesfully shared on twitter !</span>
+                        <span>Glyph succesfully shared on twitter !</span>{" "}
                         <a href={data.text}>View your tweet !</a>
                       </>
                     ),
@@ -280,7 +279,9 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                     setOpenModal(true);
                     return;
                   }
-                  sessionStorage.setItem("from", "maps");
+                  if (props.isMapScreen) {
+                    sessionStorage.setItem("from", "maps");
+                  }
                   const url = await initateTwitterAuth();
                   window.open(url, "_self");
                   return;
@@ -377,7 +378,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               hideTransparency={!!props.altTxnHash}
             />
             <InfoField
-              text={`${props.cValue} ETH ($47.08)`}
+              text={`${props.cValue}`}
               label="Value"
               hideTransparency={!!props.altTxnHash}
             />
@@ -399,8 +400,8 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             />
             <InfoField
               text={`$${props.cValue} / ETH`}
-              label="Ether Price"
-              hideTransparency={!!props.altTxnHash}
+              label="Gas Price"
+              hideTransparency={!!props.gasPaidGwei}
             />
           </div>
         </div>
