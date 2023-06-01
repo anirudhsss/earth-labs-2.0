@@ -191,14 +191,14 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             </RenderIf>
           </Button>
         </div>
-        <div
+        {/* <div
           style={{
             fontSize: "1.6rem",
           }}
           className="flex w-100 justify-content-center align-items-center"
         >
           <span>signed in as {twitterUser?.username}(not you?)</span>
-        </div>
+        </div> */}
       </div>
     );
   };
