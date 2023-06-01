@@ -99,17 +99,19 @@ const Header = ({
             display="flex"
             justifyContent="center"
             alignItems="center"
-            border={`1px solid ${homeLocation || mapsLocation || discoveryLocation
-              ? "#1C223D"
-              : "#fffdfb"
-              }`}
+            border={`1px solid ${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#1C223D"
+                : "#fffdfb"
+            }`}
             backgroundColor="transparent"
             boxShadow="none"
             borderRadius="100px"
-            color={`${homeLocation || mapsLocation || discoveryLocation
-              ? "#000"
-              : "#fffdfb"
-              }`}
+            color={`${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#000"
+                : "#fffdfb"
+            }`}
             fontWeight="700"
             size="1.6rem"
             hoverBackgroundColor="transparent"
@@ -143,10 +145,11 @@ const Header = ({
       justifyContent="space-between"
       alignItems="center"
       width="100%"
-      borderBottom={`0.5px solid ${mapsLocation || homeLocation || discoveryLocation
-        ? "rgba(0, 0, 0, 0.6)"
-        : "#FFFDFB"
-        }`}
+      borderBottom={`0.5px solid ${
+        mapsLocation || homeLocation || discoveryLocation
+          ? "rgba(0, 0, 0, 0.6)"
+          : "#FFFDFB"
+      }`}
       height="7.6vh"
     >
       <Box
@@ -159,9 +162,9 @@ const Header = ({
           !openWalletModal && (
             <Link
               to="/"
-            // state={{
-            //   icon: "discovery",
-            // }}
+              // state={{
+              //   icon: "discovery",
+              // }}
             >
               <span style={{ margin: "0 25px 0 15px" }}>
                 <img
@@ -179,9 +182,9 @@ const Header = ({
         {walletLocation && (
           <Link
             to="/"
-          // state={{
-          //   icon: "discovery",
-          // }}
+            // state={{
+            //   icon: "discovery",
+            // }}
           >
             <span style={{ margin: "0 0 0 0px" }}>
               <img
@@ -205,27 +208,30 @@ const Header = ({
           landingPageLocation) &&
           !openWalletModal && (
             <NormalSearchField
-              placeholderColor={`${mapsLocation ||
+              placeholderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              borderColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              borderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              searchIconColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              searchIconColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
             />
           )}
         {(mapsLocation ||

@@ -20,6 +20,7 @@ import RenderIf from "../RenderIf";
 import Spinner from "../Spinner/Spinner";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
+  console.log(props);
   const [isAlertOpen, setAlertOpen] = useState<{
     message?: JSX.Element;
     isAlert?: boolean;
@@ -80,7 +81,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             borderRadius: "3rem",
           }}
         >
-          <img src={Icons.glyphSample} alt="" width={500} height={350} />
+          <img src={props.glyphURL} alt="" width={500} height={350} />
         </div>
         <div
           style={{
