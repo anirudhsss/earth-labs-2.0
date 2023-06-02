@@ -212,10 +212,10 @@ const PostHeaderLayer = ({
                         // justifyContent: (homeLocation || mapsLocation) ? 'space-evenly' : 'flex-end',
                         justifyContent: 'space-evenly',
                     }}>
-                        {(homeLocation || mapsLocation) && <>
+                        {(homeLocation || mapsLocation || walletLocation || discoveryLocation) && <>
                             <span
                                 style={{ cursor: 'pointer', }}
-                                onClick={() => onChosingCurrency('ETH')}
+                                onClick={(homeLocation || mapsLocation) ? () => onChosingCurrency('ETH') : undefined}
                             >
                                 <Typography
                                     text="ETH"
@@ -231,7 +231,7 @@ const PostHeaderLayer = ({
                             />
                             <span
                                 style={{ cursor: 'pointer', }}
-                                onClick={() => onChosingCurrency('USDC')}
+                                onClick={(homeLocation || mapsLocation) ? () => onChosingCurrency('USDC') : undefined}
                             >
                                 <Typography
                                     text=" USDC"
