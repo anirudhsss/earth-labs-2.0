@@ -821,7 +821,7 @@ const UserHomepage = () => {
     setShowDays(true);
     setfurtherPropagation(false);
   }, []);
-  console.log('testing');
+
   return (
     <>
       <Box
