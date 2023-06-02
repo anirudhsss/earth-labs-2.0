@@ -22,6 +22,7 @@ import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 import { ArrOfYMDProps, VerticalSelectionProps } from "interface/UserHomepage";
 import { HorizontalSelectionProps } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
@@ -77,6 +78,16 @@ const UserHomepage = () => {
   const [clickedMonth, setClickedMonth] = useState<string | undefined>("");
   const [eachGlyphClicked, setEachGlyphClicked] = useState<boolean>(false);
   const [eachTxnHash, setEachTxnHash] = useState<string>("");
+
+  const { openConnectModal } = useConnectModal();
+
+  useEffect(() => {
+    const isNewUser = localStorage.getItem("wallet");
+    if (isNewUser) {
+      localStorage.removeItem("wallet");
+      if (openConnectModal) openConnectModal();
+    }
+  }, []);
 
   const onEachGlyphClickedOpen = (txnHash: string) => {
     setEachTxnHash(txnHash);

@@ -13,6 +13,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
@@ -20,12 +21,13 @@ import RenderIf from "../RenderIf";
 import Spinner from "../Spinner/Spinner";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
-  console.log(props);
-  const [isAlertOpen, setAlertOpen] = useState<{
+  const [twitterShared, setTwitterShared] = useState<{
     message?: JSX.Element;
-    isAlert?: boolean;
+    isTweetShared?: boolean;
   }>({});
+
   const [isOpen, setOpenModal] = useState<boolean>(false);
+
   const {
     initateTwitterAuth,
     getTwitterUserInfo,
@@ -33,9 +35,10 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     tweetGlyphImageOnTwitter,
   } = useTwitterFlow();
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
-
-  const { openConnectModal } = useConnectModal();
   const [isLoader, setLoader] = useState<boolean>(false);
+  const [isTwitterInitLoading, setTwitterInitLoading] =
+    useState<boolean>(false);
+  const navigate = useNavigate();
 
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
@@ -50,7 +53,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     }
   }, [getTwitterUserInfo]);
 
-  // Checking if state and code  is there or not
   useEffect(() => {
     processTwitterAuthentication();
     return () => {
@@ -74,8 +76,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         <div
           className="flex justify-content-center align-items-center"
           style={{
-            // backgroundColor: "#1C223D",
-            // backgroundColor: props.altText ? '' : '#1C223D',
             padding: "2rem",
             width: "auto",
             borderRadius: "3rem",
@@ -94,16 +94,15 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           }}
           className={"flex flex-column"}
         >
-          <div id="contentEditable">
-            <span
-              contentEditable={true}
-              onInput={(e: any) =>
-                localStorage.setItem("message", e.target.innerText)
-              }
-            >
-              Modify your tweet here. {props.altText} at {props.timeStamp}{" "}
-              #atlas #blockchain #explorer #hexagon @atlas_xyz
-            </span>
+          <div
+            id="contentEditable"
+            contentEditable={true}
+            onInput={(e: any) =>
+              localStorage.setItem("message", e.target.innerText)
+            }
+          >
+            Modify your tweet here. {props.altText} at {props.timeStamp} #atlas
+            #blockchain #explorer #hexagon @atlas_xyz
           </div>
         </div>
         <div
@@ -136,45 +135,50 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           <Button
             onClick={async () => {
               setLoader(true);
-              const mediaId = await generateMediaId(
-                props.glyphURL as string,
-                twitterUser?.id as string,
-                twitterUser?.username as string
-              );
-              const message = localStorage.getItem("message");
-              const data = await tweetGlyphImageOnTwitter(
-                mediaId,
-                twitterUser?.id as string,
-                message as string
-              );
-              setLoader(false);
-              if (data) {
-                setOpenModal(false);
-                if (!props.isMapScreen) {
-                  setAlertOpen({
-                    message: (
-                      <>
-                        <span>First Glyph shared on Twitter! </span>
-                        <a href={data.text}>View your tweet !</a>
-                      </>
-                    ),
-                    isAlert: true,
-                  });
-                }
+              try {
+                const mediaId = await generateMediaId(
+                  props.glyphURL as string,
+                  twitterUser?.id as string,
+                  twitterUser?.username as string
+                );
+                const message = localStorage.getItem("message");
+                const data = await tweetGlyphImageOnTwitter(
+                  mediaId,
+                  twitterUser?.id as string,
+                  message as string
+                );
+                setLoader(false);
+                if (data) {
+                  setOpenModal(false);
 
-                if (props.isMapScreen) {
-                  setAlertOpen({
-                    message: (
-                      <>
-                        <span>Glyph succesfully shared on twitter !</span>{" "}
-                        <a href={data.text}>View your tweet !</a>
-                      </>
-                    ),
-                    isAlert: true,
-                  });
-                }
+                  if (!props.isMapScreen) {
+                    setTwitterShared({
+                      message: (
+                        <>
+                          <span>First Glyph shared on Twitter! </span>
+                          ...directing you to Maps view in{" "}
+                        </>
+                      ),
+                      isTweetShared: true,
+                    });
+                  }
 
-                removeCode();
+                  if (props.isMapScreen) {
+                    setTwitterShared({
+                      message: (
+                        <>
+                          <span>Glyph succesfully shared on twitter !</span>{" "}
+                          <a href={data.text}>View your tweet !</a>
+                        </>
+                      ),
+                      isTweetShared: true,
+                    });
+                  }
+
+                  removeCode();
+                }
+              } catch (e) {
+                setLoader(false);
               }
             }}
             color="#fff"
@@ -190,14 +194,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             </RenderIf>
           </Button>
         </div>
-        {/* <div
-          style={{
-            fontSize: "1.6rem",
-          }}
-          className="flex w-100 justify-content-center align-items-center"
-        >
-          <span>signed in as {twitterUser?.username}(not you?)</span>
-        </div> */}
       </div>
     );
   };
@@ -230,22 +226,59 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     );
   };
 
-  return (
-    <>
-      <RenderIf isTrue={isAlertOpen?.isAlert as boolean}>
+  const AlertContent = () => {
+    const [timerTime, setTimerTime] = useState<string>();
+
+    useEffect(() => {
+      if (twitterShared.isTweetShared && !props.isMapScreen) {
+        timer();
+      }
+    }, [twitterShared.isTweetShared]);
+
+    const timer = () => {
+      var sec = 3;
+      var timer = setInterval(function () {
+        setTimerTime("00:0" + sec);
+        sec--;
+        if (sec < 0) {
+          localStorage.setItem("wallet", "true");
+          navigate("/maps/");
+        }
+        if (sec < 0) {
+          clearInterval(timer);
+        }
+        return () => {
+          clearInterval(timer);
+        };
+      }, 1000);
+    };
+    console.log(timerTime);
+    return (
+      <RenderIf isTrue={twitterShared?.isTweetShared as boolean}>
         <div className="flex justify-content-center align-items-center ">
           <Alert
-            text={isAlertOpen?.message as JSX.Element}
+            text={
+              (
+                <>
+                  {twitterShared.message}
+                  <span>{timerTime}</span>
+                </>
+              ) as JSX.Element
+            }
             icon={Icons.bells}
           />
         </div>
       </RenderIf>
+    );
+  };
+
+  const DetailContent = () => {
+    return (
       <div
         className="flex w-100 h-100"
         style={{
           padding: "5rem 20rem",
           gap: "10rem",
-
           height: "calc(100vh - 68px)",
           justifyContent: "center",
           alignItems: "center",
@@ -264,52 +297,60 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             height={"423px"}
           ></img>
           <div className="flex flex-column">
-            <Button
-              width={`${props.altTxnHash && "30rem"}`}
-              color="#fff"
-              size="2rem"
-              borderRadius="3rem"
-              backgroundColor="#FE7D06"
-              padding="0.5rem 3rem"
-              display="flex"
-              hoverBackgroundColor="#FE7D06"
-              onClick={async () => {
-                if (!isAlertOpen?.isAlert) {
-                  if (twitterUser) {
-                    setOpenModal(true);
+            <RenderIf isTrue={!twitterShared.isTweetShared}>
+              <Button
+                width={`${props.altTxnHash && "30rem"}`}
+                color="#fff"
+                size="2rem"
+                borderRadius="3rem"
+                backgroundColor="#FE7D06"
+                padding="0.5rem 3rem"
+                display="flex"
+                hoverBackgroundColor="#FE7D06"
+                onClick={async () => {
+                  if (!twitterShared?.isTweetShared) {
+                    setLoader(false);
+                    if (twitterUser) {
+                      setOpenModal(true);
+                      return;
+                    }
+                    if (props.isMapScreen) {
+                      sessionStorage.setItem("from", "maps");
+                    }
+                    setTwitterInitLoading(true);
+                    const url = await initateTwitterAuth();
+                    setTwitterInitLoading(false);
+                    window.open(url, "_self");
                     return;
                   }
-                  if (props.isMapScreen) {
-                    sessionStorage.setItem("from", "maps");
-                  }
-                  const url = await initateTwitterAuth();
-                  window.open(url, "_self");
-                  return;
-                }
-                if (isAlertOpen?.isAlert && !props.isMapScreen) {
-                  if (openConnectModal) openConnectModal();
-                }
-              }}
-            >
-              <div
-                className="flex align-items-center"
-                style={{
-                  gap: "1rem",
                 }}
               >
-                <RenderIf isTrue={isAlertOpen?.isAlert as boolean}>
-                  <span>Connect Your Wallet</span>
+                <Spinner isLoading={isTwitterInitLoading} />
+                <RenderIf isTrue={!isTwitterInitLoading}>
+                  <div
+                    className="flex align-items-center"
+                    style={{
+                      gap: "1rem",
+                    }}
+                  >
+                    <RenderIf isTrue={!twitterShared?.isTweetShared as boolean}>
+                      <>
+                        <img
+                          src={Icons.twitter}
+                          alt=""
+                          width={30}
+                          height={25}
+                        />
+                        <span>
+                          Share {!props.altTxnHash && "your 1st glyph"} on
+                          Twitter!
+                        </span>
+                      </>
+                    </RenderIf>
+                  </div>
                 </RenderIf>
-                <RenderIf isTrue={!isAlertOpen?.isAlert as boolean}>
-                  <>
-                    <img src={Icons.twitter} alt="" width={30} height={25} />
-                    <span>
-                      Share {!props.altTxnHash && " your 1st glyph"} on Twitter!
-                    </span>
-                  </>
-                </RenderIf>
-              </div>
-            </Button>
+              </Button>
+            </RenderIf>
           </div>
 
           <div
@@ -318,7 +359,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             }}
             className="flex w-full flex-row align-items-center"
           >
-            <RenderIf isTrue={!isAlertOpen}>
+            <RenderIf isTrue={!twitterShared?.isTweetShared}>
               <Box
                 sx={{
                   width: "300px",
@@ -341,7 +382,9 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               </Box>
             </RenderIf>
             <RenderIf
-              isTrue={(isAlertOpen?.isAlert as boolean) && !props.isMapScreen}
+              isTrue={
+                (twitterShared?.isTweetShared as boolean) && !props.isMapScreen
+              }
             >
               <>
                 <img src={Icons.clock} alt="" width={30} height={25} />
@@ -406,6 +449,13 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           </div>
         </div>
       </div>
+    );
+  };
+
+  return (
+    <>
+      <AlertContent />
+      <DetailContent />
       <BasicModal
         width={"500px"}
         handleClose={() => {

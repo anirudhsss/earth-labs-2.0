@@ -21,6 +21,7 @@ export const LandingPage = () => {
     isValid: boolean;
     message: string;
   }>({ isValid: true, message: "" });
+
   const { address, isConnected } = useAccount();
 
   useEffect(() => {
@@ -33,7 +34,6 @@ export const LandingPage = () => {
     const state = searchParams.get("state");
     const code = searchParams.get("code");
     const from = String(sessionStorage.getItem("from"));
-    console.log(txnHash, "txnHash");
     if (state && code) {
       localStorage.setItem("code", code);
       if (from === "maps") {
