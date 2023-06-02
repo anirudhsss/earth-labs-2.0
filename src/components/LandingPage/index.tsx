@@ -32,7 +32,8 @@ export const LandingPage = () => {
   const processTwitterAuthentication = useCallback(async () => {
     const state = searchParams.get("state");
     const code = searchParams.get("code");
-    const from = sessionStorage.getItem("from");
+    const from = String(sessionStorage.getItem("from"));
+    console.log(txnHash, "txnHash");
     if (state && code) {
       localStorage.setItem("code", code);
       if (from === "maps") {

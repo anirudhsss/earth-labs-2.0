@@ -20,6 +20,7 @@ import RenderIf from "../RenderIf";
 import Spinner from "../Spinner/Spinner";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
+  console.log(props);
   const [isAlertOpen, setAlertOpen] = useState<{
     message?: JSX.Element;
     isAlert?: boolean;
@@ -80,7 +81,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             borderRadius: "3rem",
           }}
         >
-          <img src={Icons.glyphSample} alt="" width={500} height={350} />
+          <img src={props.glyphURL} alt="" width={500} height={430} />
         </div>
         <div
           style={{
@@ -148,7 +149,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               );
               setLoader(false);
               if (data) {
-                console.log(data);
                 setOpenModal(false);
                 if (!props.isMapScreen) {
                   setAlertOpen({
@@ -166,7 +166,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                   setAlertOpen({
                     message: (
                       <>
-                        <span>Glyph succesfully shared on twitter !</span>
+                        <span>Glyph succesfully shared on twitter !</span>{" "}
                         <a href={data.text}>View your tweet !</a>
                       </>
                     ),
@@ -190,14 +190,14 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             </RenderIf>
           </Button>
         </div>
-        <div
+        {/* <div
           style={{
             fontSize: "1.6rem",
           }}
           className="flex w-100 justify-content-center align-items-center"
         >
           <span>signed in as {twitterUser?.username}(not you?)</span>
-        </div>
+        </div> */}
       </div>
     );
   };
@@ -279,7 +279,10 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                     setOpenModal(true);
                     return;
                   }
-                  const url = await initateTwitterAuth("2");
+                  if (props.isMapScreen) {
+                    sessionStorage.setItem("from", "maps");
+                  }
+                  const url = await initateTwitterAuth();
                   window.open(url, "_self");
                   return;
                 }
@@ -375,7 +378,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               hideTransparency={!!props.altTxnHash}
             />
             <InfoField
-              text={`${props.cValue} ETH ($47.08)`}
+              text={`${props.cValue}`}
               label="Value"
               hideTransparency={!!props.altTxnHash}
             />
@@ -397,8 +400,8 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             />
             <InfoField
               text={`$${props.cValue} / ETH`}
-              label="Ether Price"
-              hideTransparency={!!props.altTxnHash}
+              label="Gas Price"
+              hideTransparency={!!props.gasPaidGwei}
             />
           </div>
         </div>

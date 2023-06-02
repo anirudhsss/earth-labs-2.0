@@ -31,30 +31,27 @@ const Header = ({
   const walletLocation = location?.pathname === "/wallet";
   const mapsLocation = location?.pathname === "/maps";
   const discoveryLocation = location?.pathname === "/discovery";
-
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
 
   // console.log("Header");
   const ConnectTwitter = () => {
     const { initateTwitterAuth, getTwitterUserInfo } = useTwitterFlow();
-    const [twitterUserInfo, setTwitterUserInfo] = useLocalStorageState<{
-      isConnected: boolean;
-    }>("twitterUserInfo");
 
     const handleTwitterUserName = useCallback(async () => {
-      if (twitterUserInfo) {
+      if (twitterUser) {
         return;
       }
       try {
         const code = localStorage.getItem("code");
+        console.log(code, "code");
         if (code) {
           const user = await getTwitterUserInfo(
             "state",
             code as string,
             window.location.origin
           );
+          console.log(user, "user");
           if (updateTwitterUser) updateTwitterUser(user);
-          setTwitterUserInfo({ isConnected: true });
           localStorage.removeItem("code");
           sessionStorage.removeItem("from");
         }
@@ -63,16 +60,22 @@ const Header = ({
         localStorage.removeItem("code");
         sessionStorage.removeItem("from");
       }
-    }, [getTwitterUserInfo, setTwitterUserInfo, twitterUserInfo]);
+    }, [getTwitterUserInfo]);
 
     useEffect(() => {
       handleTwitterUserName();
-    }, [handleTwitterUserName]);
+    }, [twitterUser]);
 
     return (
       <>
-        <RenderIf isTrue={twitterUserInfo?.isConnected as boolean}>
-          <div className="flex" style={{ gap: "0.5rem", alignItems: "center" }}>
+        <RenderIf isTrue={Boolean(twitterUser)}>
+          <div
+            className="flex"
+            style={{ gap: "0.5rem", alignItems: "center" , cursor : 'pointer' }}
+            onClick={() => {
+              if (updateTwitterUser) updateTwitterUser(undefined);
+            }}
+          >
             <img
               src={Icons.twitterGreen}
               alt=""
@@ -90,26 +93,56 @@ const Header = ({
             >
               @{twitterUser?.username as string}
             </span>
+            {/* <div
+              style={{
+                cursor: "pointer",
+              }}
+              className="flex"
+              onClick={() => {
+                if (updateTwitterUser) updateTwitterUser(undefined);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="#000000"
+                style={{
+                  height: "20px",
+                  width: "20px",
+                }}
+                className=""
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+                />
+              </svg>
+            </div> */}
           </div>
         </RenderIf>
 
-        <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
+        <RenderIf isTrue={!Boolean(twitterUser)}>
           <Button
             gap="1rem"
             display="flex"
             justifyContent="center"
             alignItems="center"
-            border={`1px solid ${homeLocation || mapsLocation || discoveryLocation
-              ? "#1C223D"
-              : "#fffdfb"
-              }`}
+            border={`1px solid ${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#1C223D"
+                : "#fffdfb"
+            }`}
             backgroundColor="transparent"
             boxShadow="none"
             borderRadius="100px"
-            color={`${homeLocation || mapsLocation || discoveryLocation
-              ? "#000"
-              : "#fffdfb"
-              }`}
+            color={`${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#000"
+                : "#fffdfb"
+            }`}
             fontWeight="700"
             size="1.6rem"
             hoverBackgroundColor="transparent"
@@ -143,10 +176,11 @@ const Header = ({
       justifyContent="space-between"
       alignItems="center"
       width="100%"
-      borderBottom={`0.5px solid ${mapsLocation || homeLocation || discoveryLocation
-        ? "rgba(0, 0, 0, 0.6)"
-        : "#FFFDFB"
-        }`}
+      borderBottom={`0.5px solid ${
+        mapsLocation || homeLocation || discoveryLocation
+          ? "rgba(0, 0, 0, 0.6)"
+          : "#FFFDFB"
+      }`}
       height="7.6vh"
     >
       <Box
@@ -159,9 +193,9 @@ const Header = ({
           !openWalletModal && (
             <Link
               to="/"
-            // state={{
-            //   icon: "discovery",
-            // }}
+              // state={{
+              //   icon: "discovery",
+              // }}
             >
               <span style={{ margin: "0 25px 0 15px" }}>
                 <img
@@ -179,9 +213,9 @@ const Header = ({
         {walletLocation && (
           <Link
             to="/"
-          // state={{
-          //   icon: "discovery",
-          // }}
+            // state={{
+            //   icon: "discovery",
+            // }}
           >
             <span style={{ margin: "0 0 0 0px" }}>
               <img
@@ -205,27 +239,30 @@ const Header = ({
           landingPageLocation) &&
           !openWalletModal && (
             <NormalSearchField
-              placeholderColor={`${mapsLocation ||
+              placeholderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              borderColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              borderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              searchIconColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              searchIconColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
             />
           )}
         {(mapsLocation ||

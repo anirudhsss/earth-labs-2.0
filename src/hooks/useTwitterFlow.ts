@@ -22,9 +22,8 @@ const useTwitterFlow = () => {
   const BASE_URL = "https://atlasapi-twitter-ms.azure-api.net";
 
   // Initate the Link for the twitter authO
-  const initateTwitterAuth = async (txn?: string): Promise<string> => {
+  const initateTwitterAuth = async (): Promise<string> => {
     const response = await authorizeTwitter(BASE_URL);
-    if (txn) localStorage.setItem("txn", txn as string);
     const url = await response.text();
     return url;
   };
