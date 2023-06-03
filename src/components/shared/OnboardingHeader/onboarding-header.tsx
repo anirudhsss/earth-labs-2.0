@@ -117,22 +117,22 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           >
             <Item text={"Documentation"} />
             <Item text={"About Us"} />
-            {/* <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
+            <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
               <Button
                 gap="1rem"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
-                border='1px solid #fffdfb'
+                border="1px solid #fffdfb"
                 backgroundColor="transparent"
                 boxShadow="none"
                 borderRadius="100px"
-                color='#fffdfb'
+                color="#fffdfb"
                 fontWeight="700"
                 size="1.6rem"
                 hoverBackgroundColor="transparent"
                 onClick={async () => {
-                  sessionStorage.setItem("from", "maps");
+                  sessionStorage.setItem("from", "detail");
                   const url = await initateTwitterAuth();
                   window.open(url, "_self");
                 }}
@@ -145,7 +145,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 />
                 Connect Twitter
               </Button>
-            </RenderIf> */}
+            </RenderIf>
             <RenderIf isTrue={isConnectWallet}>
               <li>
                 <ConnectWallet altTxnHash={altTxnHash} />
