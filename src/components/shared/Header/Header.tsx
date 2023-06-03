@@ -31,7 +31,7 @@ const Header = ({
   const walletLocation = location?.pathname === "/wallet";
   const mapsLocation = location?.pathname === "/maps";
   const discoveryLocation = location?.pathname === "/discovery";
-
+  // console.log('homeLocation', homeLocation)
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
 
   // console.log("Header");
