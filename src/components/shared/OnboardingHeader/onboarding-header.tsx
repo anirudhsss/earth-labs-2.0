@@ -258,7 +258,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           >
             <Item text={"Documentation"} />
             <Item text={"About Us"} />
-            <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
+            {/* <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
               <Button
                 gap="1rem"
                 display="flex"
@@ -286,7 +286,8 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 />
                 Connect Twitter
               </Button>
-            </RenderIf>
+            </RenderIf> */}
+            <ConnectTwitter />
             <RenderIf isTrue={isConnectWallet}>
               <li>
                 <ConnectWallet altTxnHash={altTxnHash} />
