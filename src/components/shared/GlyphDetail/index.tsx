@@ -14,6 +14,8 @@ import {
   useState,
 } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { convertUsdToEth } from "util/convertUsdToEth";
+import { getETHValueTo1USD } from "util/getETHValueToUsd";
 import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
@@ -273,6 +275,19 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
   };
 
   const DetailContent = () => {
+    // const [gasPrice, setGasPrice] = useState<number>();
+
+    // useEffect(() => {
+    //   getGasPrice();
+    // }, [props.gasPaidGwei]);
+
+    // const getGasPrice = async () => {
+    //   const value = await getETHValueTo1USD("USD");
+    //   const gasPrice = props.gasPaidGwei * value.ETH;
+    //   const finalGasPrice = Math.floor(gasPrice);
+    //   setGasPrice(finalGasPrice);
+    // };
+
     return (
       <div
         className="flex w-100 h-100"
@@ -422,7 +437,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             />
             <InfoField
               text={`${props.cValue}`}
-              label="Value"
+              label="Transacted Value (ETH)"
               hideTransparency={!!props.altTxnHash}
             />
             <InfoField
@@ -442,9 +457,9 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               hideTransparency={!!props.altTxnHash}
             />
             <InfoField
-              text={`$${props.cValue} / ETH`}
-              label="Gas Price"
-              hideTransparency={!!props.gasPaidGwei}
+              text={`${props.gasPaidGwei}`}
+              label="Gas Price (ETH)"
+              hideTransparency={!!props.gasPaidUSD}
             />
           </div>
         </div>
