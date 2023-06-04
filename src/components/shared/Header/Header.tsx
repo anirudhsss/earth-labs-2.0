@@ -31,6 +31,7 @@ const Header = ({
   const walletLocation = location?.pathname === "/wallet";
   const mapsLocation = location?.pathname === "/maps";
   const discoveryLocation = location?.pathname === "/discovery";
+  // console.log('homeLocation', homeLocation)
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
 
   // console.log("Header");
@@ -131,15 +132,15 @@ const Header = ({
             justifyContent="center"
             alignItems="center"
             border={`1px solid ${homeLocation || mapsLocation || discoveryLocation
-                ? "#1C223D"
-                : "#fffdfb"
+              ? "#1C223D"
+              : "#fffdfb"
               }`}
             backgroundColor="transparent"
             boxShadow="none"
             borderRadius="100px"
             color={`${homeLocation || mapsLocation || discoveryLocation
-                ? "#000"
-                : "#fffdfb"
+              ? "#000"
+              : "#fffdfb"
               }`}
             fontWeight="700"
             size="1.6rem"
@@ -176,8 +177,8 @@ const Header = ({
       alignItems="center"
       width="100%"
       borderBottom={`0.5px solid ${mapsLocation || homeLocation || discoveryLocation
-          ? "rgba(0, 0, 0, 0.6)"
-          : "#FFFDFB"
+        ? "rgba(0, 0, 0, 0.6)"
+        : "#FFFDFB"
         }`}
       height="7.6vh"
     >
@@ -238,25 +239,25 @@ const Header = ({
           !openWalletModal && (
             <NormalSearchField
               placeholderColor={`${mapsLocation ||
-                  homeLocation ||
-                  discoveryLocation ||
-                  landingPageLocation
-                  ? "rgba(0, 0, 0, 0.6)"
-                  : "#FFFDFB"
+                homeLocation ||
+                discoveryLocation ||
+                landingPageLocation
+                ? "rgba(0, 0, 0, 0.6)"
+                : "#FFFDFB"
                 }`}
               borderColor={`${mapsLocation ||
-                  homeLocation ||
-                  discoveryLocation ||
-                  landingPageLocation
-                  ? "rgba(0, 0, 0, 0.6)"
-                  : "#FFFDFB"
+                homeLocation ||
+                discoveryLocation ||
+                landingPageLocation
+                ? "rgba(0, 0, 0, 0.6)"
+                : "#FFFDFB"
                 }`}
               searchIconColor={`${mapsLocation ||
-                  homeLocation ||
-                  discoveryLocation ||
-                  landingPageLocation
-                  ? "rgba(0, 0, 0, 0.6)"
-                  : "#FFFDFB"
+                homeLocation ||
+                discoveryLocation ||
+                landingPageLocation
+                ? "rgba(0, 0, 0, 0.6)"
+                : "#FFFDFB"
                 }`}
             />
           )}
