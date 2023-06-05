@@ -22,6 +22,7 @@ export const NormalSearchField = ({
     color={placeholderColor}
     fontSize={fontSize}
     borderColor={borderColor}
+    
     searchIconColor={searchIconColor}
     onChange={onChange}
   />

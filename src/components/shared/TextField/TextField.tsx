@@ -84,7 +84,7 @@ const TextField: React.FC<TextFieldProps> = ({
             sx={{
               color: "#BABAD6",
               fontSize: "1.2rem",
-              fontFamily: "inherit",
+              fontFamily: "DINAlternateBold",
             }}
           ></Typography>
         )}
@@ -94,7 +94,8 @@ const TextField: React.FC<TextFieldProps> = ({
         variant="outlined"
         sx={{
           display: "flex",
-          fontFamily: "inherit",
+
+          fontFamily: "DINAlternateBold",
           "& .MuiOutlinedInput-root": {
             borderRadius: borderRadius,
           },
@@ -112,6 +113,7 @@ const TextField: React.FC<TextFieldProps> = ({
         placeholder={placeholder}
         InputLabelProps={{}}
         InputProps={{
+        
           startAdornment: (
             <InputAdornment sx={{}} position="start">
               <SearchRoundedIcon
@@ -121,6 +123,7 @@ const TextField: React.FC<TextFieldProps> = ({
             </InputAdornment>
           ),
           style: {
+            fontFamily: "DINAlternateBold",
             color: color,
             fontSize: fontSize,
           },

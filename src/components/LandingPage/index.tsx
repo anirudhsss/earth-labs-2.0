@@ -71,7 +71,7 @@ export const LandingPage = () => {
                 color: "#fff",
               }}
             >
-              Copy and paste the transaction hash below.
+              Discover the power of Atlas. Copy and paste the transaction hash below to get started
             </span>
             <CopyContainer
               text={
@@ -85,8 +85,9 @@ export const LandingPage = () => {
                 borderColor="#fff"
                 padding={"1rem"}
                 placeholderColor={"#fff"}
-                placeholderFontSize={"2rem"}
+                placeholderFontSize={"1.6rem"}
                 fontSize={"1.6rem"}
+                
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
                 onChange={(value: string) => {
@@ -163,13 +164,14 @@ export const LandingPage = () => {
             color="white"
             border="0.5px solid #fff"
             hoverBackgroundColor="transparent"
-            borderRadius="2rem"
-            padding="0 5rem"
+            borderRadius="10rem"
+            padding="0 6rem"
+            height={'6rem'}
             onClick={() => {
               navigate("/discovery");
             }}
           >
-            <span style={{ fontSize: "1.6rem" }}>Discover</span>
+            <span style={{ fontSize: "2rem" }}>Discover</span>
           </Button>
         </div>
       </section>
