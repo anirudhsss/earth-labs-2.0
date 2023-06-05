@@ -244,7 +244,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         sec--;
         if (sec < 0) {
           localStorage.setItem("wallet", "true");
-          navigate("/maps/");
+          navigate("/maps");
         }
         if (sec < 0) {
           clearInterval(timer);
@@ -254,7 +254,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         };
       }, 1000);
     };
-    console.log(timerTime);
+
     return (
       <RenderIf isTrue={twitterShared?.isTweetShared as boolean}>
         <div className="flex justify-content-center align-items-center ">
