@@ -6,7 +6,9 @@ import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-head
 import RenderIf from "components/shared/RenderIf";
 import { NormalSearchField } from "components/shared/TextField";
 import { Icons } from "constant";
-import { useCallback, useEffect, useState } from "react";
+import TwitterContext from "context/twitter.context";
+import useTwitterFlow from "hooks/useTwitterFlow";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import isValidTxnHash from "util/validateTx";
@@ -21,9 +23,10 @@ export const LandingPage = () => {
     isValid: boolean;
     message: string;
   }>({ isValid: true, message: "" });
+  const { getTwitterUserInfo } = useTwitterFlow();
 
   const { address, isConnected } = useAccount();
-
+  const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
   useEffect(() => {
     if (isConnected) {
       navigate(`/maps/${address}`);
@@ -37,7 +40,10 @@ export const LandingPage = () => {
     if (state && code) {
       localStorage.setItem("code", code);
       if (from === "maps") {
+        localStorage.removeItem("txnHash");
         navigate("/maps");
+      } else if (from === "landing") {
+        updateTwitterUserObject();
       } else {
         navigate(`/txn/${txnHash}`);
       }
@@ -47,6 +53,18 @@ export const LandingPage = () => {
   useEffect(() => {
     processTwitterAuthentication();
   }, [processTwitterAuthentication]);
+
+  const updateTwitterUserObject = useCallback(async () => {
+    const code = localStorage.getItem("code");
+    if (code) {
+      const user = await getTwitterUserInfo(
+        "state",
+        code,
+        window.location.origin
+      );
+      if (updateTwitterUser) updateTwitterUser(user);
+    }
+  }, [getTwitterUserInfo]);
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>

@@ -81,20 +81,17 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
       }
       try {
         const code = localStorage.getItem("code");
-        console.log(code, "code");
         if (code) {
           const user = await getTwitterUserInfo(
             "state",
             code as string,
             window.location.origin
           );
-          console.log(user, "user");
           if (updateTwitterUser) updateTwitterUser(user);
           localStorage.removeItem("code");
           sessionStorage.removeItem("from");
         }
       } catch (e) {
-        console.error(e);
         localStorage.removeItem("code");
         sessionStorage.removeItem("from");
       }
@@ -157,7 +154,8 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             size="1.6rem"
             hoverBackgroundColor="transparent"
             onClick={async () => {
-              sessionStorage.setItem("from", "maps");
+              
+              sessionStorage.setItem("from", "landing");
               const url = await initateTwitterAuth();
               window.open(url, "_self");
             }}
