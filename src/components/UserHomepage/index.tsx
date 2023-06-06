@@ -67,8 +67,8 @@ const UserHomepage = () => {
   const { address } = useAccount();
   const [walletAddress, setWalletAddress] = useState<string>();
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
-  const { data, data2, apiLoading } = AxiosFetch(walletAddress);
-  // console.log(data2)
+  const [searchTxn, setSearchTxn] = useState<string>();
+  const { data, data2, apiLoading } = AxiosFetch(walletAddress || searchTxn);
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
   const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
@@ -848,6 +848,11 @@ const UserHomepage = () => {
             openWalletModal={openWalletModal}
             onWalletBtnClickOpen={onWalletBtnClickOpen}
             onWalletBtnClickClose={onWalletBtnClickClose}
+            onSearchTxn={(searchText: string) => {
+              if (searchText.length !== 0) {
+                setSearchTxn(searchText);
+              }
+            }}
           />
         </Box>
 
@@ -879,9 +884,6 @@ const UserHomepage = () => {
               />
             </Box>
             <Box className={styles.midBody}>
-              {/* {helpIconClicked && (
-                                <HelpPage />
-                            )} */}
               <Hexgrid
                 onEachGlyphClickedOpen={onEachGlyphClickedOpen}
                 matchedMonths={matchedMonths}
@@ -940,7 +942,6 @@ const UserHomepage = () => {
               openMenu={openMenu}
               onValueMenuItemClicked={onValueMenuItemClicked}
               onOpenYearMenu={onOpenYearMenu}
-              // monthOrYear={monthOrYear}
               onDisplayMonth={onDisplayMonth}
               onCircleClicked={onCircleClicked}
               clickedElement={clickedElement}
@@ -953,20 +954,6 @@ const UserHomepage = () => {
           </Box>
         </Container>
       </Box>
-      {/* <ModalDialog
-                fullScreen="fullScreen"
-                openWalletModal={openWalletModal}
-                onWalletBtnClickClose={onWalletBtnClickClose}
-            >
-            <Wallet
-                openWalletModal={openWalletModal}
-                onWalletBtnClickClose={onWalletBtnClickClose}
-                coordinates={coordinates}
-                yAxisValue={yAxisValue}
-                xAxisValue={xAxisValue}
-            monthOrYear={monthOrYear}
-            />
-            </ModalDialog> */}
       <CustomizedDialogs
         open={helpIconClicked}
         onClose={onHelpSectionClose}
@@ -984,8 +971,6 @@ const UserHomepage = () => {
         componentLoaded={
           <GlyphDetailPage isMapScreen={true} altTxnHash={eachTxnHash} />
         }
-        // opacity="0.8"
-        // opacity="0.8"
         backgroundColor="rgba(28, 34, 61, 0.8)"
         eachGlyphClicked={eachGlyphClicked}
         onEachGlyphClickedClose={onEachGlyphClickedClose}

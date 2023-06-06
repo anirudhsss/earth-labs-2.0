@@ -10,6 +10,7 @@ export const TwitterHeader = ({
     homeLocation,
 }: TwitterHeaderProps) => {
     return (
-        <Header></Header>
+        // <Header></Header>
+        <p>Hello</p>
     )
 }

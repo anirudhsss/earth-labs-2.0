@@ -4,7 +4,7 @@ import { Icons } from "constant";
 import TwitterContext from "context/twitter.context";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { Button } from "../Button";
 import { Container } from "../Container";
@@ -18,6 +18,7 @@ export interface HeaderProps {
   onWalletBtnClickOpen?: any;
   onWalletBtnClickClose?: any;
   landingPageLocation?: any;
+  onSearchTxn: any;
 }
 
 const Header = ({
@@ -25,6 +26,7 @@ const Header = ({
   onWalletBtnClickOpen,
   onWalletBtnClickClose,
   landingPageLocation,
+  onSearchTxn,
 }: HeaderProps) => {
   const location = useLocation();
   const homeLocation = location?.pathname === "/home";
@@ -34,13 +36,14 @@ const Header = ({
   // console.log('homeLocation', homeLocation)
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
   const [svgColor, setSvgColor] = useState<string>();
-
+  const [txn, setTxn] = useState<string>("");
+  const navigate = useNavigate();
   useEffect(() => {
     if (walletLocation) {
-      setSvgColor('#ffffff')
+      setSvgColor("#ffffff");
       return;
-    };
-    setSvgColor('#000000')
+    }
+    setSvgColor("#000000");
   }, [walletLocation]);
 
   // console.log("Header");
@@ -53,14 +56,12 @@ const Header = ({
       }
       try {
         const code = localStorage.getItem("code");
-        console.log(code, "code");
         if (code) {
           const user = await getTwitterUserInfo(
             "state",
             code as string,
             window.location.origin
           );
-          console.log(user, "user");
           if (updateTwitterUser) updateTwitterUser(user);
           localStorage.removeItem("code");
           sessionStorage.removeItem("from");
@@ -103,34 +104,6 @@ const Header = ({
             >
               @{twitterUser?.username as string}
             </span>
-            {/* <div
-              style={{
-                cursor: "pointer",
-              }}
-              className="flex"
-              onClick={() => {
-                if (updateTwitterUser) updateTwitterUser(undefined);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="#000000"
-                style={{
-                  height: "20px",
-                  width: "20px",
-                }}
-                className=""
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                />
-              </svg>
-            </div> */}
           </div>
         </RenderIf>
 
@@ -250,6 +223,9 @@ const Header = ({
           landingPageLocation) &&
           !openWalletModal && (
             <NormalSearchField
+              onChange={(e) => {
+                setTxn(e);
+              }}
               placeholderColor={`${
                 mapsLocation ||
                 homeLocation ||
@@ -290,6 +266,10 @@ const Header = ({
               borderRadius="2rem"
               padding="0.2rem 2.5rem"
               margin="0 0 0 1rem"
+              onClick={() => {
+                navigate("/maps");
+                onSearchTxn(txn);
+              }}
             >
               <Typography
                 //text={userWalletAddress === null ? 'Search' : 'Search'}
