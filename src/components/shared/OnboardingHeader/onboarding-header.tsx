@@ -109,7 +109,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
         <RenderIf isTrue={Boolean(twitterUser)}>
           <div
             className="flex"
-            style={{ gap: "0.5rem", alignItems: "center", cursor: 'pointer' }}
+            style={{ gap: "0.5rem", alignItems: "center", cursor: "pointer" }}
             onClick={() => {
               if (updateTwitterUser) updateTwitterUser(undefined);
             }}
@@ -140,17 +140,19 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             display="flex"
             justifyContent="center"
             alignItems="center"
-            border={`1px solid ${homeLocation || mapsLocation || discoveryLocation
-              ? "#1C223D"
-              : "#fffdfb"
-              }`}
+            border={`1px solid ${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#1C223D"
+                : "#fffdfb"
+            }`}
             backgroundColor="transparent"
             boxShadow="none"
             borderRadius="100px"
-            color={`${homeLocation || mapsLocation || discoveryLocation
-              ? "#000"
-              : "#fffdfb"
-              }`}
+            color={`${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#000"
+                : "#fffdfb"
+            }`}
             fontWeight="700"
             size="1.6rem"
             hoverBackgroundColor="transparent"

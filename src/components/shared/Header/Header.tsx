@@ -3,7 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
 import TwitterContext from "context/twitter.context";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { Button } from "../Button";
@@ -33,6 +33,15 @@ const Header = ({
   const discoveryLocation = location?.pathname === "/discovery";
   // console.log('homeLocation', homeLocation)
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
+  const [svgColor, setSvgColor] = useState<string>();
+
+  useEffect(() => {
+    if (walletLocation) {
+      setSvgColor('#ffffff')
+      return;
+    };
+    setSvgColor('#000000')
+  }, [walletLocation]);
 
   // console.log("Header");
   const ConnectTwitter = () => {
@@ -72,7 +81,7 @@ const Header = ({
         <RenderIf isTrue={Boolean(twitterUser)}>
           <div
             className="flex"
-            style={{ gap: "0.5rem", alignItems: "center", cursor: 'pointer' }}
+            style={{ gap: "0.5rem", alignItems: "center", cursor: "pointer" }}
             onClick={() => {
               if (updateTwitterUser) updateTwitterUser(undefined);
             }}
@@ -131,17 +140,19 @@ const Header = ({
             display="flex"
             justifyContent="center"
             alignItems="center"
-            border={`1px solid ${homeLocation || mapsLocation || discoveryLocation
-              ? "#1C223D"
-              : "#fffdfb"
-              }`}
+            border={`1px solid ${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#1C223D"
+                : "#fffdfb"
+            }`}
             backgroundColor="transparent"
             boxShadow="none"
             borderRadius="100px"
-            color={`${homeLocation || mapsLocation || discoveryLocation
-              ? "#000"
-              : "#fffdfb"
-              }`}
+            color={`${
+              homeLocation || mapsLocation || discoveryLocation
+                ? "#000"
+                : "#fffdfb"
+            }`}
             fontWeight="700"
             size="1.6rem"
             hoverBackgroundColor="transparent"
@@ -168,7 +179,7 @@ const Header = ({
       </>
     );
   };
-
+  console.log(walletLocation, "walletLocation");
   return (
     <Container
       padding="0.5rem 2rem 0.5rem 0"
@@ -176,10 +187,11 @@ const Header = ({
       justifyContent="space-between"
       alignItems="center"
       width="100%"
-      borderBottom={`0.5px solid ${mapsLocation || homeLocation || discoveryLocation
-        ? "rgba(0, 0, 0, 0.6)"
-        : "#FFFDFB"
-        }`}
+      borderBottom={`0.5px solid ${
+        mapsLocation || homeLocation || discoveryLocation
+          ? "rgba(0, 0, 0, 0.6)"
+          : "#FFFDFB"
+      }`}
       height="7.6vh"
     >
       <Box
@@ -192,9 +204,9 @@ const Header = ({
           !openWalletModal && (
             <Link
               to="/"
-            // state={{
-            //   icon: "discovery",
-            // }}
+              // state={{
+              //   icon: "discovery",
+              // }}
             >
               <span style={{ margin: "0 25px 0 15px" }}>
                 <img
@@ -212,9 +224,9 @@ const Header = ({
         {walletLocation && (
           <Link
             to="/"
-          // state={{
-          //   icon: "discovery",
-          // }}
+            // state={{
+            //   icon: "discovery",
+            // }}
           >
             <span style={{ margin: "0 0 0 0px" }}>
               <img
@@ -238,27 +250,30 @@ const Header = ({
           landingPageLocation) &&
           !openWalletModal && (
             <NormalSearchField
-              placeholderColor={`${mapsLocation ||
+              placeholderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              borderColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              borderColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
-              searchIconColor={`${mapsLocation ||
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
+              searchIconColor={`${
+                mapsLocation ||
                 homeLocation ||
                 discoveryLocation ||
                 landingPageLocation
-                ? "rgba(0, 0, 0, 0.6)"
-                : "#FFFDFB"
-                }`}
+                  ? "rgba(0, 0, 0, 0.6)"
+                  : "#FFFDFB"
+              }`}
             />
           )}
         {(mapsLocation ||
@@ -374,7 +389,30 @@ const Header = ({
               },
             }}
           >
-            <ConnectButton />
+            <div
+              style={{
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "8px",
+                  left: "18px",
+                }}
+              >
+                <svg
+                  style={{ height: "20px", width: "20px" }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill={svgColor}
+                  className="w-6 h-6"
+                >
+                  <path d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z" />
+                </svg>
+              </div>
+              <ConnectButton></ConnectButton>
+            </div>
           </Box>
         </div>
         {/* } */}

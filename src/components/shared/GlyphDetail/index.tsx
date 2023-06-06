@@ -238,7 +238,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     }, [twitterShared.isTweetShared]);
 
     const timer = () => {
-      var sec = 3;
+      var sec = 5;
       var timer = setInterval(function () {
         setTimerTime("00:0" + sec);
         sec--;
