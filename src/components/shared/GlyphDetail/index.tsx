@@ -62,6 +62,12 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     };
   }, [processTwitterAuthentication]);
 
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem("message");
+    };
+  }, []);
+
   const removeCode = () => {
     localStorage.removeItem("code");
   };

@@ -154,10 +154,16 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             size="1.6rem"
             hoverBackgroundColor="transparent"
             onClick={async () => {
-              
-              sessionStorage.setItem("from", "landing");
-              const url = await initateTwitterAuth();
-              window.open(url, "_self");
+              const path = location.pathname;
+              if (path.includes("txn")) {
+                sessionStorage.setItem("from", "txn");
+                const url = await initateTwitterAuth();
+                window.open(url, "_self");
+              } else {
+                sessionStorage.setItem("from", "landing");
+                const url = await initateTwitterAuth();
+                window.open(url, "_self");
+              }
             }}
             padding="5px 20px"
           >

@@ -67,7 +67,7 @@ const UserHomepage = () => {
   const { address } = useAccount();
   const [walletAddress, setWalletAddress] = useState<string>();
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
-  const [searchTxn, setSearchTxn] = useState<string>();
+  const [searchTxn, setSearchTxn] = useState<string | undefined>();
   const { data, data2, apiLoading } = AxiosFetch(walletAddress || searchTxn);
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);

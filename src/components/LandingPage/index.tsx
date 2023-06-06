@@ -33,6 +33,10 @@ export const LandingPage = () => {
     }
   }, [isConnected]);
 
+  useEffect(() => {
+    localStorage.removeItem("txnHash");
+  }, []);
+
   const processTwitterAuthentication = useCallback(async () => {
     const state = searchParams.get("state");
     const code = searchParams.get("code");

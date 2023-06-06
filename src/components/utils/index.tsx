@@ -48,10 +48,17 @@ export const AxiosFetch = (address?: string) => {
     fetch(url)
       .then((res) => res.json())
       .then((apiData) => {
+        if (apiData.length === 0) {
+          setApiError([]);
+          setApiData([]);
+          setData([]);
+          setApiLoading(false);
+          return;
+        }
         setApiError(apiData.apiError);
         setApiData(apiData[0].hexes);
-        setApiLoading(false);
         setData(apiData[0]);
+        setApiLoading(false);
       })
       .catch(() => setApiLoading(false));
   }, [address]);
