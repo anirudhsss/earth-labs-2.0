@@ -19,6 +19,8 @@ export interface PostHeaderLayerProps {
   currName?: any;
   apiLoading?: any;
   matchedMonths?: any;
+  handleName?: string;
+  data?: any;
 }
 
 const PostHeaderLayer = ({
@@ -33,6 +35,8 @@ const PostHeaderLayer = ({
   currName,
   apiLoading,
   matchedMonths,
+  handleName,
+  data,
 }: PostHeaderLayerProps) => {
   const location = useLocation();
   const homeLocation = location?.pathname === "/home";
@@ -41,19 +45,17 @@ const PostHeaderLayer = ({
   const discoveryLocation = location?.pathname === "/discovery";
   const { ethToUsdc, ethToUsdcYvsTPercent, difference } =
     useEthToUsdcConversion();
-  const { data } = AxiosFetch();
+
+  console.log("data", data);
   const [condition, setCondition] = useState<boolean>(false);
 
   const onChangeText = useCallback(() => {
-    if (
-      !isEmpty(data?.dotEarthHandle) ||
-      data?.dotEarthHandle === ("" || null)
-    ) {
+    if (!isEmpty(handleName as string) || handleName === ("" || null)) {
       setCondition(true);
     } else {
       setCondition(false);
     }
-  }, [data?.dotEarthHandle]);
+  }, [handleName]);
 
   useEffect(() => {
     onChangeText();
@@ -392,56 +394,55 @@ const PostHeaderLayer = ({
             )}
         </Box>
         <Box className={styles.group2}>
-          {(homeLocation || mapsLocation || walletLocation) &&
-            data?.dotEarthHandle && (
-              <Box className={styles.earthIdContainer}>
-                <Box className={styles.earthIdContainerChild}>
-                  {condition && (
-                    <img
-                      src="/assets/images/favicon.svg"
-                      alt=""
-                      width="20"
-                      height="20"
+          {(homeLocation || mapsLocation || walletLocation) && handleName && (
+            <Box className={styles.earthIdContainer}>
+              <Box className={styles.earthIdContainerChild}>
+                {condition && (
+                  <img
+                    src="/assets/images/favicon.svg"
+                    alt=""
+                    width="20"
+                    height="20"
+                  />
+                )}
+                {condition ? (
+                  <span style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
+                    <Typography
+                      text={`${handleName}`}
+                      // text='woigkbvjegfhwi8y8i3op1iyriohfbbcsbcsjbcjbsfihgqwpieuhihwibckjb'
+                      fontWeight="700"
+                      fontSize="1.3rem"
+                      color={`${
+                        homeLocation || mapsLocation
+                          ? "#163A70"
+                          : walletLocation
+                          ? "#fffdfb"
+                          : ""
+                      }`}
                     />
-                  )}
-                  {condition ? (
-                    <span style={{ paddingLeft: "1rem", paddingRight: "1rem" }}>
-                      <Typography
-                        text={`${data?.dotEarthHandle}`}
-                        // text='woigkbvjegfhwi8y8i3op1iyriohfbbcsbcsjbcjbsfihgqwpieuhihwibckjb'
-                        fontWeight="700"
-                        fontSize="1.3rem"
-                        color={`${
-                          homeLocation || mapsLocation
-                            ? "#163A70"
-                            : walletLocation
-                            ? "#fffdfb"
-                            : ""
-                        }`}
-                      />
-                    </span>
-                  ) : (
-                    <span
-                      style={{
-                        fontWeight: "700",
-                        fontSize: "1.3rem",
-                        color:
-                          homeLocation || mapsLocation
-                            ? "#163A70"
-                            : walletLocation
-                            ? "#fffdfb"
-                            : "",
-                        // paddingLeft: '1rem',
-                        paddingRight: "1rem",
-                      }}
-                    >
-                      {truncate(data?.targetAddress, 12, "....")}
-                    </span>
-                  )}
-                  <img src="/assets/images/👀.svg" alt="" />
-                </Box>
+                  </span>
+                ) : (
+                  <span
+                    style={{
+                      fontWeight: "700",
+                      fontSize: "1.3rem",
+                      color:
+                        homeLocation || mapsLocation
+                          ? "#163A70"
+                          : walletLocation
+                          ? "#fffdfb"
+                          : "",
+                      // paddingLeft: '1rem',
+                      paddingRight: "1rem",
+                    }}
+                  >
+                    {truncate(data?.targetAddress, 12, "....")}
+                  </span>
+                )}
+                <img src="/assets/images/👀.svg" alt="" />
               </Box>
-            )}
+            </Box>
+          )}
         </Box>
         {!discoveryLocation && (
           <Box className={styles.group3}>

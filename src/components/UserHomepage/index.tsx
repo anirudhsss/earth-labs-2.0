@@ -23,6 +23,7 @@ import { ArrOfYMDProps, VerticalSelectionProps } from "interface/UserHomepage";
 import { HorizontalSelectionProps } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useNavigate } from "react-router-dom";
 
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
@@ -67,10 +68,7 @@ const UserHomepage = () => {
   const { address, isConnected, isDisconnected } = useAccount();
   const [walletAddress, setWalletAddress] = useState<string>();
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
-  const [searchTxn, setSearchTxn] = useState<string | undefined>();
-
-  const { data, data2, apiLoading } = AxiosFetch(walletAddress || searchTxn);
-
+  const { data, data2, apiLoading } = AxiosFetch(address);
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
   const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
@@ -82,6 +80,8 @@ const UserHomepage = () => {
   const [eachTxnHash, setEachTxnHash] = useState<string>("");
 
   const { openConnectModal } = useConnectModal();
+
+  const Navigate = useNavigate();
 
   useEffect(() => {
     const isNewUser = localStorage.getItem("wallet");
@@ -111,11 +111,13 @@ const UserHomepage = () => {
 
   useEffect(() => {
     if (isConnected) {
+      setWalletAddress(address);
     }
   }, [isConnected]);
 
   useEffect(() => {
     if (isDisconnected) {
+      setWalletAddress(undefined);
     }
   }, [isDisconnected]);
 
@@ -182,7 +184,10 @@ const UserHomepage = () => {
             return Number(monthFromApi) === Number(year);
           }
         );
+        console.log(data1, "data1");
         setAbcd(arrIndexesOfClickedYears);
+      } else {
+        setAbcd([]);
       }
     },
     [data1]
@@ -290,6 +295,7 @@ const UserHomepage = () => {
       setYAxisItems([]);
       setYAxisItemClicked(null);
       setYAxisItemHovered(null);
+      console.log(abcd, "abcd");
       const arrIndexesOfClickedMonths = abcd?.filter(
         (item: { timestamp: moment.MomentInput }) => {
           let monthFromApi = Number(moment(item.timestamp).format("MM"));
@@ -297,7 +303,6 @@ const UserHomepage = () => {
         }
       );
       setMatchedMonths(arrIndexesOfClickedMonths);
-      // console.log('arrIndexesOfClickedMonths', arrIndexesOfClickedMonths);
       setAbcd1(arrIndexesOfClickedMonths);
     },
     [abcd]
@@ -862,7 +867,7 @@ const UserHomepage = () => {
             onWalletBtnClickClose={onWalletBtnClickClose}
             onSearchTxn={(searchText: string) => {
               if (searchText.length !== 0) {
-                setSearchTxn(searchText);
+                Navigate(`/txn/${searchText}`);
               }
             }}
           />
@@ -881,6 +886,8 @@ const UserHomepage = () => {
             onValueMenuItemClicked1={onValueMenuItemClicked1}
             onChosingCurrency={onChosingCurrency}
             currName={currName}
+            handleName={data?.dotEarthHandle || address}
+            data={data}
           />
 
           <Box className={styles.body}>

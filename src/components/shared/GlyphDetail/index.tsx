@@ -102,15 +102,16 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           }}
           className={"flex flex-column"}
         >
-          <div
-            id="contentEditable"
-            contentEditable={true}
-            onInput={(e: any) =>
-              localStorage.setItem("message", e.target.innerText)
-            }
-          >
-            Modify your tweet here. {props.altText} at {props.timeStamp} #atlas
-            #blockchain #explorer #hexagon @atlas_xyz
+          <div id="contentEditable">
+            <span
+              contentEditable={true}
+              onInput={(e: any) => {
+                localStorage.setItem("message", e.target.innerText);
+              }}
+            >
+              Modify your tweet here. {props.altText} at {props.timeStamp}{" "}
+              #atlas #blockchain #explorer #hexagon @atlas_xyz
+            </span>
           </div>
         </div>
         <div
@@ -150,6 +151,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                   twitterUser?.username as string
                 );
                 const message = localStorage.getItem("message");
+                console.log(message, "message");
                 const data = await tweetGlyphImageOnTwitter(
                   mediaId,
                   twitterUser?.id as string,
@@ -281,19 +283,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
   };
 
   const DetailContent = () => {
-    // const [gasPrice, setGasPrice] = useState<number>();
-
-    // useEffect(() => {
-    //   getGasPrice();
-    // }, [props.gasPaidGwei]);
-
-    // const getGasPrice = async () => {
-    //   const value = await getETHValueTo1USD("USD");
-    //   const gasPrice = props.gasPaidGwei * value.ETH;
-    //   const finalGasPrice = Math.floor(gasPrice);
-    //   setGasPrice(finalGasPrice);
-    // };
-
     return (
       <div
         className="flex w-100 h-100"
@@ -362,10 +351,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                           width={30}
                           height={25}
                         />
-                        <span>
-                          Share {!props.altTxnHash && "your 1st glyph"} on
-                          Twitter!
-                        </span>
+                        <span>Share on Twitter</span>
                       </>
                     </RenderIf>
                   </div>
@@ -401,24 +387,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                   Connect your twitter and win future Airdrops from Earth Labs!
                 </span>
               </Box>
-            </RenderIf>
-            <RenderIf
-              isTrue={
-                (twitterShared?.isTweetShared as boolean) && !props.isMapScreen
-              }
-            >
-              <>
-                <img src={Icons.clock} alt="" width={30} height={25} />
-                <span
-                  style={{
-                    fontSize: "1.6rem",
-                    color: "#fff",
-                  }}
-                >
-                  Connect your wallet and start exploring the world of Web3 on
-                  Atlas!
-                </span>
-              </>
             </RenderIf>
           </div>
         </div>

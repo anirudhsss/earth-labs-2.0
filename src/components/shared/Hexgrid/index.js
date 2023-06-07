@@ -28,10 +28,8 @@ export const Hexgrid = ({
   data,
   onEachGlyphClickedOpen,
 }) => {
-  // const [data, setData] = useState();
-  // const [data1, setData1] = useState();
-  // const [sortedData, setSortedData] = useState([]);
-  // const [newCoordinates, setNewCoordinates] = useState({});
+  console.log(matchedMonths,"matchedMonths");
+  console.log(data, "inide Hexgrid");
   const [testArr, setTestArr] = useState(matchedMonths);
 
   useEffect(() => {
@@ -141,19 +139,6 @@ export const Hexgrid = ({
     return filteredHexes.slice(0, mapWidth * mapHeight);
   };
 
-  // useEffect(() => {
-  //   const a = document.getElementById("hexgrid");
-  //   console.log("width", a.getBoundingClientRect().width);
-  //   console.log("height", a.getBoundingClientRect().height);
-  //   let b;
-  //   testArr?.map((item) => {
-  //     return `grid-identifier-${item.guid}`;
-  //     b = item.guid;
-  //   });
-
-  //   //console.log("b", b);
-  // }, []);
-
   useEffect(() => {
     const svg = document.querySelector("svg.grid");
     const { xMin, xMax, yMin, yMax } = [...svg.children].reduce((acc, el) => {
@@ -169,13 +154,12 @@ export const Hexgrid = ({
     // console.log("viewbox", viewbox);
     svg.setAttribute("viewBox", viewbox);
   }, [testArr]);
-  // console.log("testArr", testArr);
+
   return (
     <Box
       sx={{
         width: `${HEXGRID_RENDER_TOTAL_WIDTH}vw`,
         height: `${HEXGRID_RENDER_TOTAL_HEIGHT}vh`,
-        //  position: 'absolute',
         zIndex: 100,
         overflow: "hidden",
       }}
@@ -191,29 +175,7 @@ export const Hexgrid = ({
       >
         <TransformComponent>
           <Box className={styles.gridContainer}>
-            {/* {!loading1 && <><Box sx={{
-                position: 'absolute',
-                marginRight: '184px',
-                top: 3,
-                bottom: 55,
-                left: 1400,
-                right: 0,
-                background: 'linear-gradient(90deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
-                zIndex: 98,
-            }}></Box>
-            <Box sx={{
-                position: 'absolute',
-                marginBottom: '650px',
-                top: 0,
-                bottom: 55,
-                left: 57,
-                right: 183,
-                background: 'linear-gradient(0deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
-                zIndex: 98,
-            }}></Box></>} */}
             <HexGrid
-              // width={"100%"}
-              // height={"100%"}
               viewBox={`${data?.viewboxMinX} ${data?.viewboxMinY} ${data?.viewboxWidth} ${data?.viewboxHeight}`}
               id="hexgrid"
             >
@@ -222,23 +184,15 @@ export const Hexgrid = ({
                   x: HEXAGON_WIDTH,
                   y: HEXAGON_HEIGHT,
                 }}
-                // size={{
-                //   x: data?.layoutHexagonSizeX,
-                //   y: data?.layoutHexagonSizeY,
-                // }}
                 flat={false}
                 spacing={1.1}
                 origin={coordinates}
               >
-                {/* {sortedData?.map((item, index) => { */}
                 {testArr?.map((item, index) => {
                   return (
                     <>
                       <Fragment>
                         <Hexagon
-                          // q={newCoordinates?.[item.guid]?.newQ || 0}
-                          // r={newCoordinates?.[item.guid]?.newR || 0}
-                          // s={newCoordinates?.[item.guid]?.newS || 0}
                           q={item.Q}
                           r={item.R}
                           s={item.S}
@@ -256,11 +210,7 @@ export const Hexgrid = ({
                           {item.altText && (
                             <title id="unique-id">{item.altText}</title>
                           )}
-                          {/* {item.fillText && ( */}
-                          <Text style={{ fontSize: "1rem" }}>
-                            {/* {item.fillText} */}
-                          </Text>
-                          {/* )} */}
+                          <Text style={{ fontSize: "1rem" }}></Text>
                         </Hexagon>
                         <Pattern
                           id={`PAT-${index}`}
@@ -269,10 +219,6 @@ export const Hexgrid = ({
                             x: HEXAGON_WIDTH,
                             y: HEXAGON_HEIGHT,
                           }}
-                          // size={{
-                          //   x: data?.layoutHexagonSizeX,
-                          //   y: data?.layoutHexagonSizeY,
-                          // }}
                         />
                       </Fragment>
                     </>
@@ -280,26 +226,6 @@ export const Hexgrid = ({
                 })}
               </Layout>
             </HexGrid>
-            {/* {!loading1 && <><Box sx={{
-                position: 'absolute',
-                marginTop: '650px',
-                top: 0,
-                bottom: 54,
-                left: 57,
-                right: 183,
-                background: 'linear-gradient(180deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
-                zIndex: 98,
-            }}></Box>
-            <Box sx={{
-                position: 'absolute',
-                marginLeft: '56px',
-                top: 3,
-                bottom: 55,
-                left: 0,
-                right: 1540,
-                background: 'linear-gradient(270deg, rgba(255, 253, 251, 0) 0%, rgba(255, 253, 251, 0.743281) 28.13%, rgba(255, 253, 251, 0.9) 51.56%, #FFFDFB 100%)',
-                zIndex: 98,
-            }}></Box></>} */}
           </Box>
         </TransformComponent>
       </TransformWrapper>
