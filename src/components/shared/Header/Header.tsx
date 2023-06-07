@@ -267,7 +267,6 @@ const Header = ({
               padding="0.2rem 2.5rem"
               margin="0 0 0 1rem"
               onClick={() => {
-                navigate("/maps");
                 onSearchTxn(txn);
               }}
             >

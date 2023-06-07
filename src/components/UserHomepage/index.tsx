@@ -68,7 +68,7 @@ const UserHomepage = () => {
   const { address, isConnected, isDisconnected } = useAccount();
   const [walletAddress, setWalletAddress] = useState<string>();
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
-  const { data, data2, apiLoading } = AxiosFetch(address);
+  const { data, data2, apiLoading } = AxiosFetch(walletAddress);
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
   const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
@@ -122,18 +122,13 @@ const UserHomepage = () => {
   }, [isDisconnected]);
 
   useEffect(() => {
-    if (address) {
-      setWalletAddress(address);
-      return;
-    }
-    setWalletAddress("");
-  }, [address]);
-
-  useEffect(() => {
     const pathname = window.location.pathname;
     const arr = pathname.split("maps/");
-    const address = arr[1];
-    setWalletAddress(address);
+    const txn = arr[1];
+    if (txn?.length > 0) {
+      const address = arr[1];
+      setWalletAddress(address);
+    }
   }, []);
 
   const onFindingXAxisMinAndMax = useCallback(() => {
@@ -184,7 +179,6 @@ const UserHomepage = () => {
             return Number(monthFromApi) === Number(year);
           }
         );
-        console.log(data1, "data1");
         setAbcd(arrIndexesOfClickedYears);
       } else {
         setAbcd([]);
@@ -866,8 +860,20 @@ const UserHomepage = () => {
             onWalletBtnClickOpen={onWalletBtnClickOpen}
             onWalletBtnClickClose={onWalletBtnClickClose}
             onSearchTxn={(searchText: string) => {
-              if (searchText.length !== 0) {
+              if (
+                searchText.length !== 0 &&
+                searchText.length == 66 &&
+                searchText.substring(0, 2) == "0x"
+              ) {
                 Navigate(`/txn/${searchText}`);
+              }
+              if (
+                searchText.length !== 0 &&
+                searchText.length > 40 &&
+                searchText.length < 44 &&
+                searchText.substring(0, 2) == "0x"
+              ) {
+                setWalletAddress(searchText);
               }
             }}
           />
@@ -886,7 +892,7 @@ const UserHomepage = () => {
             onValueMenuItemClicked1={onValueMenuItemClicked1}
             onChosingCurrency={onChosingCurrency}
             currName={currName}
-            handleName={data?.dotEarthHandle || address}
+            handleName={data?.dotEarthHandle || walletAddress}
             data={data}
           />
 
@@ -935,6 +941,11 @@ const UserHomepage = () => {
               xAxisValue={xAxisValue}
               helpIconClicked={helpIconClicked}
               onHelpIconClicked={onHelpIconClicked}
+              onHomeHandle={() => {
+                if (isConnected) {
+                  setWalletAddress(address);
+                }
+              }}
             />
           </Box>
 
