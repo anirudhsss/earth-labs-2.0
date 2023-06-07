@@ -7,6 +7,7 @@ import { Icons } from "constant";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
 import { useEffect, useState } from "react";
 import { useNavigate, useRoutes } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
 import { useAccount } from "wagmi";
 
 export interface GlyphDetailPageProps {
@@ -19,10 +20,10 @@ const GlyphDetailPage = ({
   isMapScreen = false,
 }: GlyphDetailPageProps) => {
   const url = window.location.pathname;
-  const [txnHash, setTxnHash] = useState(
-    altTxnHash ? altTxnHash : url.split("/txn/")[1]
-  );
-  const { glphyDetails, isLoader } = useGetGlyphDetails(txnHash);
+  const [txnHash, setTxnHash] = useLocalStorageState("txnHash", {
+    defaultValue: altTxnHash ? altTxnHash : url.split("/txn/")[1],
+  });
+  const { glphyDetails, isLoader } = useGetGlyphDetails(txnHash as string);
   const navigate = useNavigate();
   const { isConnected, address } = useAccount();
 
