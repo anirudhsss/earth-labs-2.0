@@ -72,7 +72,7 @@ export const LandingPage = () => {
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
-      <OnboardingHeader isConnectWallet={true} />
+      <OnboardingHeader isConnectWallet={true} isSearch={false} />
       <section
         className={styles.landing_inner}
         style={{

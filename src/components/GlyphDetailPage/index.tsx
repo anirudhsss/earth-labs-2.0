@@ -5,7 +5,7 @@ import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-head
 import RenderIf from "components/shared/RenderIf";
 import { Icons } from "constant";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useRoutes } from "react-router-dom";
 import { useAccount } from "wagmi";
 
@@ -19,8 +19,10 @@ const GlyphDetailPage = ({
   isMapScreen = false,
 }: GlyphDetailPageProps) => {
   const url = window.location.pathname;
-  const txnHash = altTxnHash ? altTxnHash : url.split("/txn/")[1];
-  const { glphyDetails } = useGetGlyphDetails(txnHash);
+  const [txnHash, setTxnHash] = useState(
+    altTxnHash ? altTxnHash : url.split("/txn/")[1]
+  );
+  const { glphyDetails, isLoader } = useGetGlyphDetails(txnHash);
   const navigate = useNavigate();
   const { isConnected, address } = useAccount();
 
@@ -39,21 +41,27 @@ const GlyphDetailPage = ({
       {altTxnHash ? (
         <Box sx={{ height: "3rem" }}></Box>
       ) : (
-        <OnboardingHeader isAtlasLogo={true} altTxnHash={altTxnHash} />
+        <OnboardingHeader
+          isSearch={true}
+          isAtlasLogo={true}
+          altTxnHash={altTxnHash}
+          onSearchHandle={(search: string) => {
+            console.log(search, "search");
+            if (search.length > 0) {
+              setTxnHash(search);
+            }
+          }}
+        />
       )}
 
-      <RenderIf
-        isTrue={Boolean(
-          glphyDetails && Object.keys(glphyDetails as IHexesDetail).length > 0
-        )}
-      >
+      <RenderIf isTrue={!isLoader}>
         <GlyphDetail
           {...(glphyDetails as IHexesDetail)}
           isMapScreen={isMapScreen}
           altTxnHash={altTxnHash}
         />
       </RenderIf>
-      <RenderIf isTrue={!glphyDetails}>
+      <RenderIf isTrue={isLoader}>
         <div
           style={{
             padding: "5rem 15rem",

@@ -1,6 +1,6 @@
 import { Icons } from "constant";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
-import { FC, useCallback, useContext, useEffect } from "react";
+import { FC, useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { Button } from "../Button";
@@ -8,17 +8,24 @@ import ConnectWallet from "../ConnectWallet";
 import { Container } from "../Container";
 import RenderIf from "../RenderIf";
 import TwitterContext from "context/twitter.context";
+import { NormalSearchField } from "../TextField";
+import { Typography } from "../Typography";
+import TxnSearch from "context/transactionsearch.context";
 
 interface IOnboardingHeader {
   isAtlasLogo?: boolean;
   isConnectWallet?: boolean;
   altTxnHash?: string;
+  isSearch: boolean;
+  onSearchHandle?: any;
 }
 
 const OnboardingHeader: FC<IOnboardingHeader> = ({
   isAtlasLogo,
   isConnectWallet = true,
   altTxnHash,
+  isSearch,
+  onSearchHandle,
 }) => {
   const location = useLocation();
   const homeLocation = location?.pathname === "/home";
@@ -31,6 +38,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
     user?: ITwitterUser;
     isConnected: boolean;
   }>("twitterUserInfo");
+  const [searchTxt, setSearchTxt] = useState<string>();
   const handleTwitterUserName = useCallback(async () => {
     if (twitterUserInfo) {
       return;
@@ -197,7 +205,13 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           borderBottom: "1px solid #fff",
         }}
       >
-        <div className="flex">
+        <div
+          className="flex"
+          style={{
+            alignItems: "center",
+            gap: "3rem",
+          }}
+        >
           <RenderIf isTrue={Boolean(isAtlasLogo)}>
             <Link to="/" style={{ textDecoration: "none" }}>
               <img
@@ -225,6 +239,41 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
               />
             </Link>
           </RenderIf>
+          <RenderIf isTrue={isSearch}>
+            <div
+              className="flex"
+              style={{ gap: "0.5rem", alignItems: "center" }}
+            >
+              <NormalSearchField
+                borderColor="#fff"
+                padding={"1rem"}
+                placeholderColor={"#fff"}
+                placeholderFontSize={"1.6rem"}
+                fontSize={"1.6rem"}
+                searchIconColor={"#fff"}
+                iconSize={"2rem"}
+                onChange={(value: string) => {
+                  if (value.length > 0) {
+                    setSearchTxt(value);
+                  }
+                }}
+              />
+              <Button
+                backgroundColor="#FE7D06"
+                color="white"
+                border="0.5px solid rgba(46, 52, 81, 0.58)"
+                hoverBackgroundColor="#FE7D06"
+                borderRadius="2rem"
+                padding="0.2rem 2.5rem"
+                margin="0 0 0 1rem"
+                onClick={() => {
+                  onSearchHandle(searchTxt);
+                }}
+              >
+                <Typography text="Search" fontSize="1.4rem" />
+              </Button>
+            </div>
+          </RenderIf>
         </div>
         <div className="flex">
           <ul
@@ -234,37 +283,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             }}
             className="flex flex-row align-items-center"
           >
-            <Item text={"Documentation"} />
             <Item text={"About Us"} />
-            {/* <RenderIf isTrue={!twitterUserInfo?.isConnected as boolean}>
-              <Button
-                gap="1rem"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                border="1px solid #fffdfb"
-                backgroundColor="transparent"
-                boxShadow="none"
-                borderRadius="100px"
-                color="#fffdfb"
-                fontWeight="700"
-                size="1.6rem"
-                hoverBackgroundColor="transparent"
-                onClick={async () => {
-                  sessionStorage.setItem("from", "detail");
-                  const url = await initateTwitterAuth();
-                  window.open(url, "_self");
-                }}
-              >
-                <img
-                  src={Icons.twitterWhite}
-                  alt=""
-                  width={"20px"}
-                  height={"20px"}
-                />
-                Connect Twitter
-              </Button>
-            </RenderIf> */}
             <ConnectTwitter />
             <RenderIf isTrue={isConnectWallet}>
               <li>

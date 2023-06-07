@@ -64,11 +64,13 @@ const UserHomepage = () => {
   const [arrOfMonths, setArrOfMonths] = useState<any>([]);
   const [arrOfDays, setArrOfDays] = useState<ArrOfYMDProps[]>([]);
   const [monthInLetters, setmonthInLetters] = useState<string>("");
-  const { address } = useAccount();
+  const { address, isConnected, isDisconnected } = useAccount();
   const [walletAddress, setWalletAddress] = useState<string>();
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
   const [searchTxn, setSearchTxn] = useState<string | undefined>();
+
   const { data, data2, apiLoading } = AxiosFetch(walletAddress || searchTxn);
+
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
   const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
@@ -106,6 +108,16 @@ const UserHomepage = () => {
   const onHelpSectionClose = () => {
     setHelpIconClicked(false);
   };
+
+  useEffect(() => {
+    if (isConnected) {
+    }
+  }, [isConnected]);
+
+  useEffect(() => {
+    if (isDisconnected) {
+    }
+  }, [isDisconnected]);
 
   useEffect(() => {
     if (address) {
