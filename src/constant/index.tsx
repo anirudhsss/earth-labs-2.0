@@ -23,4 +23,11 @@ export const Icons = {
   twitterGreen: "/./assets/images/twitter-green.svg",
   clock: "/./assets/images/clock.svg",
   glyphDetailLoader: "/./assets/loader/glyphdetail_loader.svg",
+  glyphWhiteLogo: "/./assets/images/light_atlas.svg",
+  orangeTriangle: "/./assets/images/orangeTriangle.svg",
+  blackTriangle: "/./assets/images/blackTriangle.svg",
+  orangeHexagon : "/./assets/images/orange_hexagon.svg",
+  ethereumLogo : "/./assets/images/ethereum_logo.svg",
+  darkAtlas : "/./assets/images/dark_atlas.svg",
+  redDownArrow : "/./assets/images/redDownArrow.svg"
 };

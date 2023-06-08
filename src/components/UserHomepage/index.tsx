@@ -118,11 +118,11 @@ const UserHomepage = () => {
     }
   }, [isConnected, address]);
 
-  // useEffect(() => {
-  //   if (isDisconnected) {
-  //     setWalletAddress(undefined);
-  //   }
-  // }, [isDisconnected]);
+  useEffect(() => {
+    if (isDisconnected) {
+      setWalletAddress(undefined);
+    }
+  }, [isDisconnected]);
 
   useEffect(() => {
     const pathname = window.location.pathname;

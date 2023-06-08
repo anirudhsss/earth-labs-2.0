@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Icon } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
 import TwitterContext from "context/twitter.context";
@@ -183,7 +183,7 @@ const Header = ({
               }}
             >
               <img
-                src="./assets/images/light_atlas.svg"
+                src={Icons.glyphWhiteLogo}
                 alt=""
                 width="80"
                 height="80"
@@ -202,7 +202,7 @@ const Header = ({
           >
             <span style={{ margin: "0 0 0 0px" }}>
               <img
-                src="./assets/images/dark_atlas.svg"
+                src={Icons.darkAtlas}
                 alt=""
                 width="120"
                 height="120"

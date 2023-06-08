@@ -2,6 +2,7 @@ import { Box, Menu, MenuItem } from "@mui/material";
 import { Button } from "components/shared/Button";
 import { Typography } from "components/shared/Typography";
 import { AxiosFetch, isEmpty, truncate } from "components/utils";
+import { Icons } from "constant";
 import useEthToUsdcConversion from "hooks/useEthToUsdcConversion";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -114,9 +115,7 @@ const PostHeaderLayer = ({
                     )}
                     <img
                       src={`${
-                        openMenu1
-                          ? "/assets/images/orangeTriangle.svg"
-                          : "/assets/images/blackTriangle.svg"
+                        openMenu1 ? Icons.orangeTriangle : Icons.blackTriangle
                       }`}
                       alt=""
                       className={styles.blackTriangle}
@@ -235,7 +234,7 @@ const PostHeaderLayer = ({
                   &nbsp;
                   <span style={{ marginTop: "-2px" }}>
                     <img
-                      src="./assets/images/orange_hexagon.svg"
+                      src={Icons.orangeHexagon}
                       alt=""
                       style={{
                         width: "15px",
@@ -333,7 +332,7 @@ const PostHeaderLayer = ({
               >
                 <span>
                   <img
-                    src={"./assets/images/ethereum_logo.svg"}
+                    src={Icons.ethereumLogo}
                     alt=""
                     style={{
                       width: "18px",
@@ -364,7 +363,7 @@ const PostHeaderLayer = ({
                 </span>
                 <span style={{}}>
                   <img
-                    src={"./assets/images/redDownArrow.svg"}
+                    src={Icons.redDownArrow}
                     alt=""
                     style={{
                       width: "12px",
