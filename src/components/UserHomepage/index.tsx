@@ -23,7 +23,7 @@ import { ArrOfYMDProps, VerticalSelectionProps } from "interface/UserHomepage";
 import { HorizontalSelectionProps } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { useNavigate } from "react-router-dom";
+import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
@@ -59,7 +59,7 @@ const UserHomepage = () => {
 
   const [abcd, setAbcd] = useState([]);
   const [abcd1, setAbcd1] = useState([]);
-
+  const { searchTxnAddress } = useSearchTxnAddress();
   const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
   const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
   const [arrOfMonths, setArrOfMonths] = useState<any>([]);
@@ -69,6 +69,7 @@ const UserHomepage = () => {
   const [walletAddress, setWalletAddress] = useState<string>();
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
   const { data, data2, apiLoading } = AxiosFetch(walletAddress);
+  console.log(data,'data');
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
   const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
@@ -80,8 +81,6 @@ const UserHomepage = () => {
   const [eachTxnHash, setEachTxnHash] = useState<string>("");
 
   const { openConnectModal } = useConnectModal();
-
-  const Navigate = useNavigate();
 
   useEffect(() => {
     const isNewUser = localStorage.getItem("wallet");
@@ -110,16 +109,20 @@ const UserHomepage = () => {
   };
 
   useEffect(() => {
+    setClickedElement("");
+  }, []);
+
+  useEffect(() => {
     if (isConnected) {
       setWalletAddress(address);
     }
-  }, [isConnected]);
+  }, [isConnected, address]);
 
-  useEffect(() => {
-    if (isDisconnected) {
-      setWalletAddress(undefined);
-    }
-  }, [isDisconnected]);
+  // useEffect(() => {
+  //   if (isDisconnected) {
+  //     setWalletAddress(undefined);
+  //   }
+  // }, [isDisconnected]);
 
   useEffect(() => {
     const pathname = window.location.pathname;
@@ -832,8 +835,6 @@ const UserHomepage = () => {
 
   const onYearButtonClicked = useCallback(
     (year: any) => {
-      // setShowDays(false);
-      // setfurtherPropagation(true);
       onValueMenuItemClicked(year);
     },
     [onValueMenuItemClicked]
@@ -860,21 +861,8 @@ const UserHomepage = () => {
             onWalletBtnClickOpen={onWalletBtnClickOpen}
             onWalletBtnClickClose={onWalletBtnClickClose}
             onSearchTxn={(searchText: string) => {
-              if (
-                searchText.length !== 0 &&
-                searchText.length == 66 &&
-                searchText.substring(0, 2) == "0x"
-              ) {
-                Navigate(`/txn/${searchText}`);
-              }
-              if (
-                searchText.length !== 0 &&
-                searchText.length > 40 &&
-                searchText.length < 44 &&
-                searchText.substring(0, 2) == "0x"
-              ) {
-                setWalletAddress(searchText);
-              }
+              setWalletAddress(searchText);
+              searchTxnAddress(searchText);
             }}
           />
         </Box>

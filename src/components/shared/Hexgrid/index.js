@@ -28,8 +28,6 @@ export const Hexgrid = ({
   data,
   onEachGlyphClickedOpen,
 }) => {
-  console.log(matchedMonths,"matchedMonths");
-  console.log(data, "inide Hexgrid");
   const [testArr, setTestArr] = useState(matchedMonths);
 
   useEffect(() => {

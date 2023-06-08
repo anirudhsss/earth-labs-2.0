@@ -11,6 +11,7 @@ import TwitterContext from "context/twitter.context";
 import { NormalSearchField } from "../TextField";
 import { Typography } from "../Typography";
 import TxnSearch from "context/transactionsearch.context";
+import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 
 interface IOnboardingHeader {
   isAtlasLogo?: boolean;
@@ -28,6 +29,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
   onSearchHandle,
 }) => {
   const location = useLocation();
+  const { searchTxnAddress } = useSearchTxnAddress();
   const homeLocation = location?.pathname === "/home";
   const walletLocation = location?.pathname === "/wallet";
   const mapsLocation = location?.pathname === "/maps";
@@ -267,6 +269,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 padding="0.2rem 2.5rem"
                 margin="0 0 0 1rem"
                 onClick={() => {
+                  searchTxnAddress(searchTxt as string);
                   onSearchHandle(searchTxt);
                 }}
               >

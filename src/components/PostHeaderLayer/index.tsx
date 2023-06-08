@@ -39,14 +39,13 @@ const PostHeaderLayer = ({
   data,
 }: PostHeaderLayerProps) => {
   const location = useLocation();
-  const homeLocation = location?.pathname === "/home";
-  const walletLocation = location?.pathname === "/wallet";
-  const mapsLocation = location?.pathname === "/maps";
-  const discoveryLocation = location?.pathname === "/discovery";
+  const homeLocation = location?.pathname.includes("/home");
+  const walletLocation = location?.pathname.includes("/wallet");
+  const mapsLocation = location?.pathname.includes("/maps");
+  const discoveryLocation = location?.pathname.includes("/discovery");
   const { ethToUsdc, ethToUsdcYvsTPercent, difference } =
     useEthToUsdcConversion();
 
-  console.log("data", data);
   const [condition, setCondition] = useState<boolean>(false);
 
   const onChangeText = useCallback(() => {
@@ -67,10 +66,7 @@ const PostHeaderLayer = ({
         className={styles.postHeader}
         sx={{ height: discoveryLocation ? "45px" : "8%" }}
       >
-        <Box
-          className={styles.group1}
-          // sx={{ justifyContent: (homeLocation || mapsLocation) ? 'flex-start' : 'flex-end', }}
-        >
+        <Box className={styles.group1}>
           {
             <Box
               className={styles.timeMenuBtn1}

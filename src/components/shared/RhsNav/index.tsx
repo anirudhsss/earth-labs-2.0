@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import { Icons } from "constant";
+import useNavigateMaps from "hooks/useNavigateMaps";
 import moment from "moment";
 import { Link, useLocation } from "react-router-dom";
 import { useAccount } from "wagmi";
@@ -59,11 +60,13 @@ export const RhsNav = ({
   onHomeHandle,
 }: RhsNavProps) => {
   const location = useLocation();
-  const homeLocation = location?.pathname === "/home";
-  const walletLocation = location?.pathname === "/wallet";
-  const mapsLocation = location?.pathname === "/maps";
-  const discoveryLocation = location?.pathname === "/discovery";
-  const { isConnected } = useAccount();
+  const homeLocation = location?.pathname.includes("/home");
+  const walletLocation = location?.pathname.includes("/wallet");
+  const mapsLocation = location?.pathname.includes("/maps");
+  const discoveryLocation = location?.pathname.includes("/discovery");
+
+  const { navigateToMaps } = useNavigateMaps();
+
   return (
     <Box
       className={styles.rhsBody}
@@ -82,7 +85,7 @@ export const RhsNav = ({
             <Link
               to="/maps"
               onClick={() => {
-                onHomeHandle();
+                navigateToMaps();
               }}
             >
               <span

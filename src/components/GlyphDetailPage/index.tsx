@@ -6,7 +6,7 @@ import RenderIf from "components/shared/RenderIf";
 import { Icons } from "constant";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
 import { useEffect, useState } from "react";
-import { useNavigate, useRoutes } from "react-router-dom";
+import { useLocation, useNavigate, useRoutes } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { useAccount } from "wagmi";
 
@@ -26,12 +26,24 @@ const GlyphDetailPage = ({
   const { glphyDetails, isLoader } = useGetGlyphDetails(txnHash as string);
   const navigate = useNavigate();
   const { isConnected, address } = useAccount();
+  const location = useLocation();
 
   useEffect(() => {
     if (isConnected && !altTxnHash) {
       navigate(`/maps/${address}`);
     }
   }, [isConnected]);
+
+  useEffect(() => {
+    const pathName = location.pathname;
+    if (pathName.includes("/txn")) {
+      const pathArr = pathName.split("/txn/");
+      const txnHash = pathArr[1];
+      if (txnHash && txnHash.length > 0) {
+        setTxnHash(txnHash);
+      }
+    }
+  }, []);
 
   return (
     <Container
@@ -47,7 +59,6 @@ const GlyphDetailPage = ({
           isAtlasLogo={true}
           altTxnHash={altTxnHash}
           onSearchHandle={(search: string) => {
-            console.log(search, "search");
             if (search.length > 0) {
               setTxnHash(search);
             }

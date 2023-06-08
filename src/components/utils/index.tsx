@@ -35,9 +35,9 @@ export const getRandomIntInclusive = (min: number, max: number) => {
 };
 
 export const AxiosFetch = (address?: string) => {
-
-  console.log(address,'address');
-
+  console.log(address, "address");
+  let controller = new AbortController();
+  let signal = controller.signal;
   const [apiData, setApiData] = useState<any>([]);
   const [data, setData] = useState<any>();
   const [apiLoading, setApiLoading] = useState<any>(true);
@@ -48,10 +48,13 @@ export const AxiosFetch = (address?: string) => {
       address ? `?input=${address}` : ""
     }`;
 
-    fetch(url)
+    fetch(url, {
+      signal: controller.signal,
+    })
       .then((res) => res.json())
       .then((apiData) => {
         if (apiData.length === 0) {
+          controller.abort();
           setApiError("");
           setApiData([]);
           setData({});

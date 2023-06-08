@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
 import TwitterContext from "context/twitter.context";
+import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -29,13 +30,13 @@ const Header = ({
   onSearchTxn,
 }: HeaderProps) => {
   const location = useLocation();
-  const homeLocation = location?.pathname === "/home";
-  const walletLocation = location?.pathname === "/wallet";
-  const mapsLocation = location?.pathname === "/maps";
-  const discoveryLocation = location?.pathname === "/discovery";
-  // console.log('homeLocation', homeLocation)
+  const homeLocation = location?.pathname.includes("/home");
+  const walletLocation = location?.pathname.includes("/wallet");
+  const mapsLocation = location?.pathname.includes("/maps");
+  const discoveryLocation = location?.pathname.includes("/discovery");
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
   const [svgColor, setSvgColor] = useState<string>();
+  const { searchTxnAddress } = useSearchTxnAddress();
   const [txn, setTxn] = useState<string>("");
   const navigate = useNavigate();
   useEffect(() => {
@@ -152,7 +153,7 @@ const Header = ({
       </>
     );
   };
-  console.log(walletLocation, "walletLocation");
+
   return (
     <Container
       padding="0.5rem 2rem 0.5rem 0"
@@ -175,24 +176,22 @@ const Header = ({
       >
         {(mapsLocation || homeLocation || discoveryLocation) &&
           !openWalletModal && (
-            <Link
-              to="/"
-              // state={{
-              //   icon: "discovery",
-              // }}
+            <span
+              style={{ margin: "0 25px 0 15px" }}
+              onClick={() => {
+                navigate("/maps");
+              }}
             >
-              <span style={{ margin: "0 25px 0 15px" }}>
-                <img
-                  src="./assets/images/light_atlas.svg"
-                  alt=""
-                  width="80"
-                  height="80"
-                  style={{
-                    backgroundColor: "transparent",
-                  }}
-                />
-              </span>
-            </Link>
+              <img
+                src="./assets/images/light_atlas.svg"
+                alt=""
+                width="80"
+                height="80"
+                style={{
+                  backgroundColor: "transparent",
+                }}
+              />
+            </span>
           )}
         {walletLocation && (
           <Link
@@ -267,6 +266,7 @@ const Header = ({
               padding="0.2rem 2.5rem"
               margin="0 0 0 1rem"
               onClick={() => {
+                searchTxnAddress(txn);
                 onSearchTxn(txn);
               }}
             >

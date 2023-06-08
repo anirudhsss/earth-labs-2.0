@@ -7,24 +7,24 @@ import RenderIf from "components/shared/RenderIf";
 import { NormalSearchField } from "components/shared/TextField";
 import { Icons } from "constant";
 import TwitterContext from "context/twitter.context";
+import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import useTwitterFlow from "hooks/useTwitterFlow";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
-import isValidTxnHash from "util/validateTx";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount } from "wagmi";
 import styles from "./styles.module.css";
 
 export const LandingPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [txnHash, setTxnHash] = useLocalStorageState<string>("txnHash");
+  const [searchTxt, setSearchTxt] = useLocalStorageState<string>("txnHash");
   const [isTxnError, setTxnError] = useState<{
     isValid: boolean;
     message: string;
   }>({ isValid: true, message: "" });
   const { getTwitterUserInfo } = useTwitterFlow();
-
+  const { searchTxnAddress } = useSearchTxnAddress();
   const { address, isConnected } = useAccount();
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
   useEffect(() => {
@@ -49,7 +49,7 @@ export const LandingPage = () => {
       } else if (from === "landing") {
         updateTwitterUserObject();
       } else {
-        navigate(`/txn/${txnHash}`);
+        navigate(`/txn/${searchTxt}`);
       }
     }
   }, [navigate, searchParams]);
@@ -113,16 +113,17 @@ export const LandingPage = () => {
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
                 onChange={(value: string) => {
-                  setTxnHash(value);
+                  setSearchTxt(value);
                 }}
               />
               <Button
                 onClick={() => {
-                  const validate = isValidTxnHash(txnHash as string);
-                  setTxnError(validate);
-                  if (validate.isValid) {
-                    navigate(`/txn/${txnHash}`);
-                  }
+                  // const validate = isValidTxnHash(txnHash as string);
+                  // setTxnError(validate);
+                  // if (validate.isValid) {
+                  //   navigate(`/txn/${txnHash}`);
+                  // }
+                  searchTxnAddress(searchTxt as string);
                 }}
                 backgroundColor="#FE7D06"
                 hoverBackgroundColor="#FE7D06"
