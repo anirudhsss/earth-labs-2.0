@@ -85,6 +85,7 @@ export const RhsNav = ({
             <Link
               to="/maps"
               onClick={() => {
+                onHomeHandle();
                 navigateToMaps();
               }}
             >
