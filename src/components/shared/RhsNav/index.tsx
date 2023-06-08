@@ -151,7 +151,7 @@ export const RhsNav = ({
               alt=""
               onClick={onHelpIconClicked}
             />
-            \
+
             <a
               href="https://twitter.com/AtlasXY_"
               target="_blank"
