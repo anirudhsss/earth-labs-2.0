@@ -292,8 +292,42 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           height: "calc(100vh - 68px)",
           justifyContent: "center",
           alignItems: "center",
+          position: "relative",
         }}
       >
+        <RenderIf isTrue={!props.isMapScreen}>
+          <div
+            onClick={() => {
+              navigate(-1);
+            }}
+            style={{
+              position: "absolute",
+              top: "40px",
+              right: "40px",
+              cursor: "pointer",
+            }}
+          >
+            <svg
+              style={{
+                height: "30px",
+                width: "30px",
+              }}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="#ffffff"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+        </RenderIf>
+
         <div
           className="flex-1 w-full flex flex-column align-items-center"
           style={{
