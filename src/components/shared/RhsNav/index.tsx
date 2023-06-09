@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 import { Button } from "../Button";
 import { Typography } from "../Typography";
 import styles from "./styles.module.css";
-import { FiHexagon } from "react-icons/fi";
+import { FiHexagon, FiGlobe } from "react-icons/fi";
 
 export interface RhsNavProps {
   openMenu?: any;
@@ -113,7 +113,10 @@ export const RhsNav = ({
                     width: "40px",
                   }}
                 >
-                  <FiHexagon size={25} color={isConnected ? "#FF494A" : '#666666'} />
+                  <FiHexagon
+                    size={25}
+                    color={isConnected ? "#FF494A" : "#666666"}
+                  />
                 </span>
               </Tooltip>
             </Link>
@@ -123,17 +126,16 @@ export const RhsNav = ({
                 style={{
                   backgroundColor: walletLocation ? "#FFF7EE" : "#FFF7EE",
                   marginTop: "1rem",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "40px",
+                  width: "40px",
                 }}
               >
-                <img
-                  // src='/assets/images/discovery.svg'
-                  src={`${
-                    discoveryLocation
-                      ? "/assets/images/discovery_highlighted.svg"
-                      : "/assets/images/discovery.svg"
-                  }`}
-                  alt=""
-                  className={styles.imageAsIcon}
+                <FiGlobe
+                  size={25}
+                  color={"#000000"}
                 />
               </span>
             </Link>
