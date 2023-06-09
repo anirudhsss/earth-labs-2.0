@@ -36,35 +36,35 @@ export const getRandomIntInclusive = (min: number, max: number) => {
 
 export const AxiosFetch = (address?: string) => {
   let controller = new AbortController();
+  let signal = controller.signal;
   const [apiData, setApiData] = useState<any>([]);
   const [data, setData] = useState<any>();
   const [apiLoading, setApiLoading] = useState<any>(true);
   const [apiError, setApiError] = useState<any>("");
 
   useEffect(() => {
-    const url = `https://api.earth.domains/earthapi/dotEarth/GenerateGlyphs${
-      address ? `?input=${address}` : ""
-    }`;
-
-    fetch(url, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((apiData) => {
-        if (apiData.length === 0) {
-          controller.abort();
-          setApiError("");
-          setApiData([]);
-          setData({});
-          setApiLoading(false);
-          return;
-        }
-        setApiError(apiData.apiError);
-        setApiData(apiData[0].hexes);
-        setData(apiData[0]);
-        setApiLoading(false);
+    const url = `https://api.earth.domains/earthapi/dotEarth/GenerateGlyphs${`?input=${address}`}`;
+    if (address) {
+      fetch(url, {
+        signal: controller.signal,
       })
-      .catch(() => setApiLoading(false));
+        .then((res) => res.json())
+        .then((apiData) => {
+          if (apiData.length === 0) {
+            controller.abort();
+            setApiError("");
+            setApiData([]);
+            setData({});
+            setApiLoading(false);
+            return;
+          }
+          setApiError(apiData.apiError);
+          setApiData(apiData[0].hexes);
+          setData(apiData[0]);
+          setApiLoading(false);
+        })
+        .catch(() => setApiLoading(false));
+    }
   }, [address]);
   return { data, data2: apiData, apiLoading, apiError };
 };
