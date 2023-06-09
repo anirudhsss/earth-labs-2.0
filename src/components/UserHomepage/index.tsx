@@ -198,11 +198,6 @@ const UserHomepage = () => {
     return Math.min(max, Math.max(min, a)); //0.33
   };
   const invlerp = useCallback((min: number, max: number, item: number) => {
-    // if (item === min || max === min) {
-    //     min -= 0.01;
-    //     max += 0.01;
-    // }
-    // console.log('invlerp', min, max, item);
     return clamp((item - min) / (max - min)); //0.35
   }, []);
 

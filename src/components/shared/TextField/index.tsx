@@ -16,6 +16,7 @@ export const NormalSearchField = ({
     width="67.5rem"
     borderRadius="2rem"
     size="small"
+    
     iconSize={iconSize}
     placeholderFontSize={placeholderFontSize}
     placeholder="enter transaction IDs, wallet addresses, etc..."

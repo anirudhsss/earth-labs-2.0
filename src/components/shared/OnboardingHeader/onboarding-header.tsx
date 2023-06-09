@@ -254,6 +254,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 fontSize={"1.6rem"}
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
+                
                 onChange={(value: string) => {
                   if (value.length > 0) {
                     setSearchTxt(value);

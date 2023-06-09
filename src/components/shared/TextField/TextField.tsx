@@ -13,6 +13,7 @@ export interface TextFieldProps {
   name?: string;
   error?: boolean | undefined;
   readOnly?: boolean;
+  autoComplete?: boolean;
   padding?: any;
   nolimit?: boolean;
   label?: string;
@@ -58,6 +59,7 @@ const TextField: React.FC<TextFieldProps> = ({
   placeholderColor,
   borderColor,
   searchIconColor,
+  autoComplete,
   ...props
 }: TextFieldProps): JSX.Element => {
   const onChangeText = useCallback(
@@ -108,12 +110,12 @@ const TextField: React.FC<TextFieldProps> = ({
           },
           fieldset: { borderColor: { borderColor } },
         }}
+        autoComplete={''}
         onChange={onChangeText}
         value={value}
         placeholder={placeholder}
         InputLabelProps={{}}
         InputProps={{
-        
           startAdornment: (
             <InputAdornment sx={{}} position="start">
               <SearchRoundedIcon

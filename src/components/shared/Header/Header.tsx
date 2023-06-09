@@ -179,7 +179,7 @@ const Header = ({
             <span
               style={{ margin: "0 25px 0 15px" }}
               onClick={() => {
-                navigate("/maps");
+                navigate("/");
               }}
             >
               <img

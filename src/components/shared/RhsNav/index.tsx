@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { Icons } from "constant";
 import useNavigateMaps from "hooks/useNavigateMaps";
 import moment from "moment";
@@ -7,6 +7,7 @@ import { useAccount } from "wagmi";
 import { Button } from "../Button";
 import { Typography } from "../Typography";
 import styles from "./styles.module.css";
+import { FiHexagon } from "react-icons/fi";
 
 export interface RhsNavProps {
   openMenu?: any;
@@ -67,6 +68,8 @@ export const RhsNav = ({
 
   const { navigateToMaps } = useNavigateMaps();
 
+  const { isConnected } = useAccount();
+
   return (
     <Box
       className={styles.rhsBody}
@@ -85,34 +88,36 @@ export const RhsNav = ({
             <Link
               to="/maps"
               onClick={() => {
+                if (!isConnected) {
+                  return;
+                }
                 onHomeHandle();
                 navigateToMaps();
               }}
             >
-              <span
-                className={styles.iconOuter}
-                style={{
-                  backgroundColor: walletLocation ? "#FFF7EE" : "#FFF7EE",
-                }}
+              <Tooltip
+                title={
+                  isConnected
+                    ? "Go to your map"
+                    : "Please connect your wallet to see your map"
+                }
               >
-                <img
-                  src={`${
-                    homeLocation || mapsLocation || walletLocation
-                      ? "/assets/images/home_highlighted.svg"
-                      : "/assets/images/home.svg"
-                  }`}
-                  // src='/assets/images/home.svg'
-                  alt=""
-                  className={styles.imageAsIcon}
-                />
-              </span>
+                <span
+                  className={styles.iconOuter}
+                  style={{
+                    backgroundColor: walletLocation ? "#FFF7EE" : "#FFF7EE",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "40px",
+                    width: "40px",
+                  }}
+                >
+                  <FiHexagon size={25} color={isConnected ? "#FF494A" : '#666666'} />
+                </span>
+              </Tooltip>
             </Link>
-            <Link
-              to="/discovery"
-              // state={{
-              //   icon: "discovery",
-              // }}
-            >
+            <Link to="/discovery">
               <span
                 className={styles.iconOuter}
                 style={{

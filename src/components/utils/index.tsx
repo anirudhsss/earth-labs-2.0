@@ -36,15 +36,15 @@ export const getRandomIntInclusive = (min: number, max: number) => {
 
 export const AxiosFetch = (address?: string) => {
   let controller = new AbortController();
-  let signal = controller.signal;
   const [apiData, setApiData] = useState<any>([]);
   const [data, setData] = useState<any>();
-  const [apiLoading, setApiLoading] = useState<any>(true);
+  const [apiLoading, setApiLoading] = useState<any>(false);
   const [apiError, setApiError] = useState<any>("");
 
   useEffect(() => {
     const url = `https://api.earth.domains/earthapi/dotEarth/GenerateGlyphs${`?input=${address}`}`;
     if (address) {
+      setApiLoading(true);
       fetch(url, {
         signal: controller.signal,
       })
