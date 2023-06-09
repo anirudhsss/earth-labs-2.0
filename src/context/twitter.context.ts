@@ -3,7 +3,7 @@ import { createContext } from "react";
 
 interface ITwitterContext {
   twitterUser?: ITwitterUser;
-  updateTwitterUser?: React.Dispatch<React.SetStateAction<ITwitterUser | undefined>>;
+  updateTwitterUser?: (user?: any) => void;
 }
 
 const TwitterContext = createContext<ITwitterContext>({});

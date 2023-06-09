@@ -1,4 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Alert from "components/shared/Alert/Alert";
 import { Button } from "components/shared/Button";
 import { Container } from "components/shared/Container";
 import CopyContainer from "components/shared/CopyContainer";
@@ -27,6 +28,8 @@ export const LandingPage = () => {
   const { searchTxnAddress } = useSearchTxnAddress();
   const { address, isConnected } = useAccount();
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
+  const [isTwitterConnected, setTwitterConnected] = useState(false);
+
   useEffect(() => {
     if (isConnected) {
       navigate(`/maps/${address}`);
@@ -43,6 +46,7 @@ export const LandingPage = () => {
     const from = String(sessionStorage.getItem("from"));
     if (state && code) {
       localStorage.setItem("code", code);
+      console.log(from,'from');
       if (from === "maps") {
         localStorage.removeItem("txnHash");
         navigate("/maps");
@@ -66,13 +70,26 @@ export const LandingPage = () => {
         code,
         window.location.origin
       );
+      setTwitterConnected(true);
       if (updateTwitterUser) updateTwitterUser(user);
+      setTimeout(() => {
+        setTwitterConnected(false);
+      }, 5000);
     }
   }, [getTwitterUserInfo]);
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
       <OnboardingHeader isConnectWallet={true} isSearch={false} />
+      <RenderIf isTrue={isTwitterConnected}>
+        <div
+          style={{ width: "100%" }}
+          className="flex justify-content-center align-items-center "
+        >
+          <Alert text={<span>You have successfully connected to twitter</span>} />
+        </div>
+      </RenderIf>
+
       <section
         className={styles.landing_inner}
         style={{
@@ -118,11 +135,6 @@ export const LandingPage = () => {
               />
               <Button
                 onClick={() => {
-                  // const validate = isValidTxnHash(txnHash as string);
-                  // setTxnError(validate);
-                  // if (validate.isValid) {
-                  //   navigate(`/txn/${txnHash}`);
-                  // }
                   searchTxnAddress(searchTxt as string);
                 }}
                 backgroundColor="#FE7D06"

@@ -30,11 +30,11 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
 }) => {
   const location = useLocation();
   const { searchTxnAddress } = useSearchTxnAddress();
-  const homeLocation = location?.pathname === "/home";
-  const walletLocation = location?.pathname === "/wallet";
-  const mapsLocation = location?.pathname === "/maps";
-  const discoveryLocation = location?.pathname === "/discovery";
-  const { initateTwitterAuth, getTwitterUserInfo } = useTwitterFlow();
+  const homeLocation = location?.pathname.includes("/home");
+  const walletLocation = location?.pathname.includes("/wallet");
+  const mapsLocation = location?.pathname.includes("/maps");
+  const discoveryLocation = location?.pathname.includes("/discovery");
+  const { getTwitterUserInfo } = useTwitterFlow();
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
   const [twitterUserInfo, setTwitterUserInfo] = useLocalStorageState<{
     user?: ITwitterUser;
@@ -254,7 +254,6 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 fontSize={"1.6rem"}
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
-                
                 onChange={(value: string) => {
                   if (value.length > 0) {
                     setSearchTxt(value);
@@ -269,7 +268,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 borderRadius="2rem"
                 padding="0.2rem 2.5rem"
                 margin="0 0 0 1rem"
-                height={'4rem'}
+                height={"4rem"}
                 onClick={() => {
                   searchTxnAddress(searchTxt as string);
                   onSearchHandle(searchTxt);

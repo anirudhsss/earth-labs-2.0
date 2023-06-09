@@ -10,10 +10,12 @@ const TwitterProvider: FC<ITwitterProvider> = ({ children }) => {
   const [twitterUser, setTwitterUser] =
     useLocalStorageState<ITwitterUser>("twitterUser");
 
+  const updateTwitterUser = (user: ITwitterUser) => {
+    setTwitterUser(user);
+  };
+
   return (
-    <TwitterContext.Provider
-      value={{ updateTwitterUser: setTwitterUser, twitterUser }}
-    >
+    <TwitterContext.Provider value={{ updateTwitterUser, twitterUser }}>
       {children}
     </TwitterContext.Provider>
   );

@@ -36,6 +36,7 @@ const useTwitterFlow = () => {
     const response = await getUserTwitterId(BASE_URL, state, code, redirectURI);
     const result = await response.json();
     const user: ITwitterUser = result.data;
+    
     return user;
   };
 
