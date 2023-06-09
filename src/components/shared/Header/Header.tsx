@@ -265,16 +265,13 @@ const Header = ({
               borderRadius="2rem"
               padding="0.2rem 2.5rem"
               margin="0 0 0 1rem"
+              height={'34.25px'}
               onClick={() => {
                 searchTxnAddress(txn);
                 onSearchTxn(txn);
               }}
             >
-              <Typography
-                //text={userWalletAddress === null ? 'Search' : 'Search'}
-                text="Search"
-                fontSize="1.4rem"
-              />
+              <Typography text="Search" fontSize="1.4rem" />
             </Button>
           )}
       </Box>

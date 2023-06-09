@@ -269,6 +269,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 borderRadius="2rem"
                 padding="0.2rem 2.5rem"
                 margin="0 0 0 1rem"
+                height={'4rem'}
                 onClick={() => {
                   searchTxnAddress(searchTxt as string);
                   onSearchHandle(searchTxt);
