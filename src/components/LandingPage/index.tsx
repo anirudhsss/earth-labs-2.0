@@ -46,7 +46,6 @@ export const LandingPage = () => {
     const from = String(sessionStorage.getItem("from"));
     if (state && code) {
       localStorage.setItem("code", code);
-      console.log(from,'from');
       if (from === "maps") {
         localStorage.removeItem("txnHash");
         navigate("/maps");
@@ -86,7 +85,9 @@ export const LandingPage = () => {
           style={{ width: "100%" }}
           className="flex justify-content-center align-items-center "
         >
-          <Alert text={<span>You have successfully connected to twitter</span>} />
+          <Alert
+            text={<span>You have successfully connected to twitter</span>}
+          />
         </div>
       </RenderIf>
 

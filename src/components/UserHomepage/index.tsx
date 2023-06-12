@@ -69,7 +69,6 @@ const UserHomepage = () => {
   const [walletAddress, setWalletAddress] = useState<string>();
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
   const { data, data2, apiLoading } = AxiosFetch(walletAddress);
-  console.log(data, "data");
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
   const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
@@ -79,6 +78,7 @@ const UserHomepage = () => {
   const [clickedMonth, setClickedMonth] = useState<string | undefined>("");
   const [eachGlyphClicked, setEachGlyphClicked] = useState<boolean>(false);
   const [eachTxnHash, setEachTxnHash] = useState<string>("");
+
 
   const { openConnectModal } = useConnectModal();
 

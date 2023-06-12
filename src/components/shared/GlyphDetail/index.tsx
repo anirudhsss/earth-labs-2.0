@@ -14,8 +14,6 @@ import {
   useState,
 } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { convertUsdToEth } from "util/convertUsdToEth";
-import { getETHValueTo1USD } from "util/getETHValueToUsd";
 import Alert from "../Alert/Alert";
 import { Button } from "../Button";
 import InfoField from "../InfoField";
@@ -27,7 +25,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     message?: JSX.Element;
     isTweetShared?: boolean;
   }>({});
-
+  const [isTwitterConnected, setTwitterConnected] = useState(false);
   const [isOpen, setOpenModal] = useState<boolean>(false);
 
   const {
@@ -46,6 +44,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     const code = localStorage.getItem("code");
     if (code) {
       setOpenModal(true);
+
       const user = await getTwitterUserInfo(
         "state",
         code,
@@ -298,6 +297,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         <RenderIf isTrue={!props.isMapScreen}>
           <div
             onClick={() => {
+              localStorage.removeItem("txnHash");
               navigate(-1);
             }}
             style={{
@@ -475,9 +475,25 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     );
   };
 
+  const AlertTwitterContent = () => {
+    return (
+      <RenderIf isTrue={isTwitterConnected}>
+        <div
+          style={{ width: "100%" }}
+          className="flex justify-content-center align-items-center "
+        >
+          <Alert
+            text={<span>You have successfully connected to twitter</span>}
+          />
+        </div>
+      </RenderIf>
+    );
+  };
+
   return (
     <>
       <AlertContent />
+      <AlertTwitterContent />
       <DetailContent />
       <BasicModal
         width={"500px"}
