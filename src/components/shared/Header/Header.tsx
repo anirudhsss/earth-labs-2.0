@@ -8,6 +8,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { Button } from "../Button";
+import ConnectWallet from "../ConnectWallet";
 import { Container } from "../Container";
 import RenderIf from "../RenderIf";
 import { NormalSearchField } from "../TextField";
@@ -265,7 +266,7 @@ const Header = ({
               borderRadius="2rem"
               padding="0.2rem 2.5rem"
               margin="0 0 0 1rem"
-              height={'34.25px'}
+              height={"34.25px"}
               onClick={() => {
                 searchTxnAddress(txn);
                 onSearchTxn(txn);
@@ -370,7 +371,7 @@ const Header = ({
                 position: "relative",
               }}
             >
-              <ConnectButton></ConnectButton>
+              <ConnectWallet />
             </div>
           </Box>
         </div>
