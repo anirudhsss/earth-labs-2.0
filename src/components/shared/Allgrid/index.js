@@ -70,6 +70,66 @@ export const Allgrid = ({
     setTestArr(reqQRSContainingArr);
   }, [xAxisValue, yAxisValue, data1]);
 
+  // const generateRectangleDynamic = (
+  //   mapWidth,
+  //   mapHeight,
+  //   valueMin,
+  //   valueMax,
+  //   dateMin,
+  //   dateMax,
+  //   targetHexes
+  // ) => {
+  //   const filteredHexes = targetHexes
+  //     .filter((h) => {
+  //       let referenceDate;
+  //       referenceDate = Number(moment(h.timestamp).format("DD"));
+  //       let filteredData;
+  //       if (valueMax > 0 && valueMin > 0) {
+  //         filteredData =
+  //           h.targetValue <= valueMax &&
+  //           h.targetValue >= valueMin &&
+  //           referenceDate <= dateMax &&
+  //           referenceDate >= dateMin;
+  //       } else {
+  //         filteredData = referenceDate <= dateMax && referenceDate >= dateMin;
+  //       }
+
+  //       return filteredData;
+  //     })
+  //     .sort((a, b) => {
+  //       return (
+  //         a.targetValue - b.targetValue || b.referenceDate - a.referenceDate
+  //       );
+  //     });
+
+  //   const coords = [];
+  //   let counter = 0;
+
+  //   for (let r = 0; r < mapHeight; r++) {
+  //     const offset = Math.floor(r / 2);
+  //     for (let q = -offset; q < mapWidth - offset; q++) {
+  //       const h = {};
+
+  //       h.Q = q;
+  //       h.R = r;
+  //       h.S = -q - r;
+  //       h.Order = counter++;
+  //       coords.push(h);
+  //     }
+  //   }
+  //   coords.sort((a, b) => a.Order - b.Order);
+  //   let coordIndex = 0;
+
+  //   for (const fHex of filteredHexes) {
+  //     fHex.Q = coords[coordIndex]?.Q;
+  //     fHex.R = coords[coordIndex]?.R;
+  //     fHex.S = coords[coordIndex]?.S;
+  //     coordIndex++;
+  //   }
+
+  //   return filteredHexes.slice(0, mapWidth * mapHeight);
+  // };
+
   const generateRectangleDynamic = (
     mapWidth,
     mapHeight,
@@ -77,13 +137,23 @@ export const Allgrid = ({
     valueMax,
     dateMin,
     dateMax,
-    targetHexes
+    targetHexes,
+    screenWidth,
+    screenHeight
   ) => {
+    const fillerArray = [
+      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-1.png",
+      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-2.png",
+      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-3.png",
+      "https://dotearth.blob.core.windows.net/dotearthdemo/dashed.png",
+      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-4.png",
+      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-5.png",
+    ];
     const filteredHexes = targetHexes
       .filter((h) => {
         let referenceDate;
         // if (monthOrYear === "") {
-        // referenceDate = Number(moment(h.timestamp).format("YYYY"));
+        //   referenceDate = Number(moment(h.timestamp).format("YYYY"));
         // } else if (monthOrYear === "year") {
         //   referenceDate = Number(moment(h.timestamp).format("MM"));
         // } else if (monthOrYear === "month") {
@@ -97,9 +167,10 @@ export const Allgrid = ({
             referenceDate <= dateMax &&
             referenceDate >= dateMin;
         } else {
+          // console.log("inside2", dateMax, dateMin);
           filteredData = referenceDate <= dateMax && referenceDate >= dateMin;
         }
-
+        // console.log("filteredData", filteredData);
         return filteredData;
       })
       .sort((a, b) => {
@@ -107,15 +178,13 @@ export const Allgrid = ({
           a.targetValue - b.targetValue || b.referenceDate - a.referenceDate
         );
       });
-
+    // console.log("filteredHexes", filteredHexes);
     const coords = [];
     let counter = 0;
-
     for (let r = 0; r < mapHeight; r++) {
       const offset = Math.floor(r / 2);
       for (let q = -offset; q < mapWidth - offset; q++) {
         const h = {};
-
         h.Q = q;
         h.R = r;
         h.S = -q - r;
@@ -125,14 +194,30 @@ export const Allgrid = ({
     }
     coords.sort((a, b) => a.Order - b.Order);
     let coordIndex = 0;
-
     for (const fHex of filteredHexes) {
       fHex.Q = coords[coordIndex]?.Q;
       fHex.R = coords[coordIndex]?.R;
       fHex.S = coords[coordIndex]?.S;
       coordIndex++;
     }
-
+    const hexesToAdd = mapWidth * mapHeight - filteredHexes.length;
+    for (let i = 0; i < hexesToAdd; i++) {
+      const h = {};
+      h.Q = coords[coordIndex]?.Q;
+      h.R = coords[coordIndex]?.R;
+      h.S = coords[coordIndex]?.S;
+      h.Order = counter++;
+      //h.fillURL = fillerArray[Math.floor(Math.random() * 6)];
+      h.fillURL = fillerArray[3];
+      h.targetValue = Math.random(); // Set 'targetValue' to a random decimal between 0 and 1
+      filteredHexes.push(h);
+      coordIndex++;
+    }
+    // console.log("mapWidth * mapHeight", mapWidth * mapHeight);
+    // console.log(
+    //   "filteredHexes.slice(0, mapWidth * mapHeight)",
+    //   filteredHexes.slice(0, mapWidth * mapHeight)
+    // );
     return filteredHexes.slice(0, mapWidth * mapHeight);
   };
 

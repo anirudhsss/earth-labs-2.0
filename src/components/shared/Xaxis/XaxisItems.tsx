@@ -92,7 +92,7 @@ export const XaxisItems = ({
             <Box className={styles.test}> */}
             <Box sx={{
                 position: 'absolute',
-                top: '35px',
+                top: '15px',
                 width: '100px',
                 textAlign: 'center',
             }}>

@@ -126,7 +126,7 @@ export const Xaxis = ({
             alignItems: "center",
             position: "relative",
             zIndex: 101,
-            bottom: "17.5px",
+            bottom: "5.5px",
             width: "100%",
           }}
         >
