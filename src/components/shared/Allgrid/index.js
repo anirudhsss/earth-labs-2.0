@@ -141,14 +141,14 @@ export const Allgrid = ({
     screenWidth,
     screenHeight
   ) => {
-    const fillerArray = [
-      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-1.png",
-      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-2.png",
-      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-3.png",
-      "https://dotearth.blob.core.windows.net/dotearthdemo/dashed.png",
-      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-4.png",
-      "https://dotearth.blob.core.windows.net/dotearthdemo/fill-5.png",
-    ];
+      const fillerArray = [
+          "https://dotearth.blob.core.windows.net/dotearthdemo/fill-1.png",
+          "https://dotearth.blob.core.windows.net/dotearthdemo/fill-2.png",
+          "https://dotearth.blob.core.windows.net/dotearthdemo/fill-3.png",
+          "https://dotearth.blob.core.windows.net/dotearthdemo/dashed.png",
+          "https://dotearth.blob.core.windows.net/dotearthdemo/fill-4.png",
+          "https://dotearth.blob.core.windows.net/dotearthdemo/fill-5.png"
+      ];
     const filteredHexes = targetHexes
       .filter((h) => {
         let referenceDate;
@@ -180,10 +180,14 @@ export const Allgrid = ({
       });
     // console.log("filteredHexes", filteredHexes);
     const coords = [];
-    let counter = 0;
-    for (let r = 0; r < mapHeight; r++) {
+      let counter = 0;
+      let calcMapWidth = screenWidth * (1 - 0.1875);
+      let calcMapHeight = screenHeight * (1 - 0.276);
+      let calcHexColumn = Math.ceil((calcMapWidth / (1660)) * 9);
+      let calcHexRow = Math.ceil((calcMapHeight / (820)) * 5);
+      for (let r = 0; r < calcHexRow; r++) {
       const offset = Math.floor(r / 2);
-      for (let q = -offset; q < mapWidth - offset; q++) {
+      for (let q = -offset; q < calcHexColumn - offset; q++) {
         const h = {};
         h.Q = q;
         h.R = r;
@@ -200,26 +204,27 @@ export const Allgrid = ({
       fHex.S = coords[coordIndex]?.S;
       coordIndex++;
     }
-    const hexesToAdd = mapWidth * mapHeight - filteredHexes.length;
+    const hexesToAdd = calcHexColumn * calcHexRow - filteredHexes.length;
     for (let i = 0; i < hexesToAdd; i++) {
-      const h = {};
-      h.Q = coords[coordIndex]?.Q;
-      h.R = coords[coordIndex]?.R;
-      h.S = coords[coordIndex]?.S;
-      h.Order = counter++;
-      //h.fillURL = fillerArray[Math.floor(Math.random() * 6)];
-      h.fillURL = fillerArray[3];
-      h.targetValue = Math.random(); // Set 'targetValue' to a random decimal between 0 and 1
-      filteredHexes.push(h);
-      coordIndex++;
+        const h = {};
+        h.Q = coords[coordIndex]?.Q;
+        h.R = coords[coordIndex]?.R;
+        h.S = coords[coordIndex]?.S;
+        h.Order = counter++;
+        //h.fillURL = fillerArray[Math.floor(Math.random() * 6)];
+        h.fillURL = fillerArray[3];
+        h.targetValue = Math.random(); // Set 'targetValue' to a random decimal between 0 and 1
+        filteredHexes.push(h);
+        coordIndex++;
     }
     // console.log("mapWidth * mapHeight", mapWidth * mapHeight);
     // console.log(
     //   "filteredHexes.slice(0, mapWidth * mapHeight)",
     //   filteredHexes.slice(0, mapWidth * mapHeight)
     // );
-    return filteredHexes.slice(0, mapWidth * mapHeight);
+    return filteredHexes.slice(0, calcHexRow * calcHexColumn);
   };
+
 
   return (
     <Box

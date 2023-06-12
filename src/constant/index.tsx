@@ -17,7 +17,7 @@ export const Icons = {
   trophy: "/./assets/images/trophy.svg",
   landingBg: "/./assets/images/landing.svg",
   bells: "/./assets/images/bell.svg",
-  glphyLogo: "/./assets/images/Hexagon.svg",
+  glphyLogo: "/./assets/images/earthHexLogo.svg",
   twitter: "/./assets/images/twitter.svg",
   twitterBlack: "/./assets/images/twitter-black.svg",
   twitterGreen: "/./assets/images/twitter-green.svg",
@@ -26,8 +26,8 @@ export const Icons = {
   glyphWhiteLogo: "/./assets/images/light_atlas.svg",
   orangeTriangle: "/./assets/images/orangeTriangle.svg",
   blackTriangle: "/./assets/images/blackTriangle.svg",
-  orangeHexagon : "/./assets/images/orange_hexagon.svg",
-  ethereumLogo : "/./assets/images/ethereum_logo.svg",
-  darkAtlas : "/./assets/images/dark_atlas.svg",
-  redDownArrow : "/./assets/images/redDownArrow.svg"
+  orangeHexagon: "/./assets/images/orange_hexagon.svg",
+  ethereumLogo: "/./assets/images/ethereum_logo.svg",
+  darkAtlas: "/./assets/images/dark_atlas.svg",
+  redDownArrow: "/./assets/images/redDownArrow.svg",
 };

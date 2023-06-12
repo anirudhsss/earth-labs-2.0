@@ -236,11 +236,18 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 style={{
                   cursor: "pointer",
                 }}
+                width={40}
+                height={40}
                 src={Icons.glphyLogo}
                 alt=""
               />
             </Link>
           </RenderIf>
+
+
+
+
+
           <RenderIf isTrue={isSearch}>
             <div
               className="flex"

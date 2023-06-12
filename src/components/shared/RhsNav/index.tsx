@@ -1,4 +1,4 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box } from "@mui/material";
 import { Icons } from "constant";
 import useNavigateMaps from "hooks/useNavigateMaps";
 import moment from "moment";
@@ -7,7 +7,8 @@ import { useAccount } from "wagmi";
 import { Button } from "../Button";
 import { Typography } from "../Typography";
 import styles from "./styles.module.css";
-import { FiHexagon, FiGlobe } from "react-icons/fi";
+import { FiHexagon, FiGlobe, FiMap } from "react-icons/fi";
+import ToolTipText from "../Tooltip";
 
 export interface RhsNavProps {
   openMenu?: any;
@@ -95,17 +96,11 @@ export const RhsNav = ({
                 navigateToMaps();
               }}
             >
-              <Tooltip
-                title={
-                  isConnected
-                    ? "Go to your map"
-                    : "Please connect your wallet to see your map"
-                }
-              >
+              <ToolTipText text={isConnected ? "Go to Map" : "Connect Wallet"}>
                 <span
                   className={styles.iconOuter}
                   style={{
-                    backgroundColor: walletLocation ? "#FFF7EE" : "#FFF7EE",
+                    backgroundColor: isConnected ? "#FFF7EE" : "#dddddd",
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
@@ -113,12 +108,13 @@ export const RhsNav = ({
                     width: "40px",
                   }}
                 >
-                  <FiHexagon
-                    size={25}
-                    color={isConnected ? "#FF494A" : "#666666"}
+                  <FiMap
+                    size={22}
+                    strokeWidth={1}
+                    color={isConnected && mapsLocation ? "#fe7d04" : "#000000"}
                   />
                 </span>
-              </Tooltip>
+              </ToolTipText>
             </Link>
             <Link to="/discovery">
               <span
@@ -133,10 +129,15 @@ export const RhsNav = ({
                   width: "40px",
                 }}
               >
-                <FiGlobe
-                  size={25}
-                  color={"#000000"}
-                />
+                <ToolTipText text={"Discover"}>
+                  <div>
+                    <FiGlobe
+                      size={25}
+                      strokeWidth={1}
+                      color={discoveryLocation ? "#fe7d04" : "#666666"}
+                    />
+                  </div>
+                </ToolTipText>
               </span>
             </Link>
           </Box>
@@ -148,128 +149,53 @@ export const RhsNav = ({
           }}
         >
           <Box className={styles.lowerIcons}>
-            <img
-              width="40px"
-              src={
-                helpIconClicked
-                  ? "/assets/images/help_highlighted.svg"
-                  : "/assets/images/help.svg"
-              }
-              alt=""
-              onClick={onHelpIconClicked}
-            />
+            <ToolTipText text="Legend">
+              <img
+                width="40px"
+                style={{ cursor: "pointer" }}
+                src={
+                  helpIconClicked
+                    ? "/assets/images/help_highlighted.svg"
+                    : "/assets/images/help.svg"
+                }
+                alt=""
+                onClick={onHelpIconClicked}
+              />
+            </ToolTipText>
 
-            <a
-              href="https://twitter.com/AtlasXY_"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.iconOuter}
-              style={{ backgroundColor: "#FFF7EE" }}
-            >
-              <img
-                src={Icons.twitterBlack}
-                alt=""
-                className={styles.imageAsIcon}
-              />
-            </a>
-            <a
-              href="https://discord.com/invite/dotearth"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.iconOuter}
-              style={{ backgroundColor: "#FFF7EE", marginTop: "0.9rem" }}
-            >
-              <img
-                src="/assets/images/discord.svg"
-                alt=""
-                className={styles.imageAsIcon}
-              />
-            </a>
+            <ToolTipText text="Twitter">
+              <a
+                href="https://twitter.com/AtlasXY_"
+                target="_blank"
+                rel="noreferrer"
+                className={styles.iconOuter}
+                style={{ backgroundColor: "#FFF7EE" }}
+              >
+                <img
+                  src={Icons.twitterBlack}
+                  alt=""
+                  className={styles.imageAsIcon}
+                />
+              </a>
+            </ToolTipText>
+
+            <ToolTipText text="Discord">
+              <a
+                href="https://discord.com/invite/dotearth"
+                target="_blank"
+                rel="noreferrer"
+                className={styles.iconOuter}
+                style={{ backgroundColor: "#FFF7EE", marginTop: "0.9rem" }}
+              >
+                <img
+                  src="/assets/images/discord.svg"
+                  alt=""
+                  className={styles.imageAsIcon}
+                />
+              </a>
+            </ToolTipText>
           </Box>
-          {/* <Box sx={{ height: '9vh' }} className={styles.timeMenuBtn}>
-                        {(mapsLocation || homeLocation) && !openWalletModal &&
-                            <Box>
-                                <Button
-                                    backgroundColor="#FFF7EE"
-                                    hoverBackgroundColor="#FFF7EE"
-                                    color="black"
-                                    boxShadow="none"
-                                    hoverBoxShadow="none"
-                                    borderRadius={`${openMenu ? '0 0 2rem 2rem' : '2rem'}`}
-                                    padding="5px 22px"
-                                    width="85px"
-                                    display="flex"
-                                    justifyContent="space-around"
-                                    alignItems="center"
-                                    border="1px solid #000"
-                                    borderTop={`${openMenu ? '0' : '1px solid #000'}`}
-                                    paddingTop={`${openMenu && '0px'}`}
-                                    onClick={onOpenYearMenu}
-                                    disabled={monthOrYear === ''}
-                                >
-                                    {years?.length > 0 ?
-                                        <Typography
-                                            text={`${years[0].month}`}
-                                            fontSize="13px"
-                                            color={`${openMenu ? '#FE7D06' : '#000'}`}
-                                        />
-                                        : <Typography
-                                            text="time"
-                                            fontSize="13px"
-                                            color={`${openMenu ? '#FE7D06' : '#000'}`}
-                                        />}
-                                    <img
-                                        src={`${openMenu ? '/assets/images/orangeTriangle.svg' : '/assets/images/blackTriangle.svg'}`}
-                                        alt=""
-                                        className={styles.blackTriangle}
-                                        style={{
-                                            transform: openMenu ? '' : 'rotate(180deg)',
-                                        }}
-                                    />
-                                </Button>
-                                <Menu
-                                    anchorEl={anchorEl}
-                                    open={openMenu}
-                                    onClose={onCloseYearMenu}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'left',
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-                                    PaperProps={{
-                                        elevation: 0,
-                                        style: {
-                                            width: '85px',
-                                            borderRadius: '20px 20px 0 0',
-                                            backgroundColor: '#FFF7EE',
-                                            border: '1px solid #000',
-                                        },
 
-                                    }}
-                                >
-                                    {arrOfYears?.map((item: any) => {
-                                        // console.log('item', item.month)
-                                        return (
-                                            <MenuItem
-                                                key={item.month}
-                                                onClick={() => onValueMenuItemClicked(item.month)}
-                                                sx={{
-                                                    fontSize: '13px',
-                                                    borderBottom: '1px solid black',
-                                                    '&:last-child': {
-                                                        borderBottom: '0px',
-                                                    },
-                                                }}
-                                            >{item.month}</MenuItem>
-                                        )
-                                    })}
-                                </Menu>
-                            </Box>
-                        }
-                    </Box> */}
           {(mapsLocation || homeLocation) && (
             <Box sx={{ height: "9vh" }} className={styles.yearMonthBoxParent}>
               {years[0]?.month !== undefined && (
@@ -282,8 +208,6 @@ export const RhsNav = ({
                           backgroundColor="#FE7D06"
                           hoverBackgroundColor="#FE7D06"
                           borderRadius="1rem"
-                          // textAlign="center"
-                          // margin="0 0.5rem"
                         >
                           <Typography
                             text={monthInLetters ? monthInLetters : ""}
@@ -298,20 +222,12 @@ export const RhsNav = ({
                       >
                         <span
                           style={{
-                            // width: '6rem',
-                            // display: 'flex',
-                            // justifyContent: 'center',
-                            // alignItems: 'center',
-                            // textAlign: "center",
                             cursor: "pointer",
                           }}
                           onClick={() => onYearButtonClicked(years[0]?.month)}
                         >
                           <Typography
                             text={years[0]?.month}
-                            // width="2.2rem"
-                            // height="2rem"
-                            // margin="0 0 0 0.5rem"
                             fontSize="1.4rem"
                             color="#FFFDFB"
                           />
@@ -323,11 +239,6 @@ export const RhsNav = ({
                       <Box className={styles.test} sx={{ paddingLeft: "1rem" }}>
                         <span
                           style={{
-                            // width: '6rem',
-                            // display: 'flex',
-                            // justifyContent: 'center',
-                            // alignItems: 'center',
-                            // textAlign: "center",
                             cursor: "pointer",
                           }}
                           onClick={onMonthButtonClicked}
@@ -342,9 +253,6 @@ export const RhsNav = ({
                                     .format("MMM")
                                 : ""
                             }
-                            // width="2.2rem"
-                            // height="2rem"
-                            // margin="0 0 0 0.5rem"
                             fontSize="1.4rem"
                             color="#FFFDFB"
                           />
@@ -356,8 +264,6 @@ export const RhsNav = ({
                           backgroundColor="#FE7D06"
                           hoverBackgroundColor="#FE7D06"
                           borderRadius="1rem"
-                          // textAlign="center"
-                          // margin="0 0.5rem"
                         >
                           <Typography
                             text={years[0]?.month !== "" ? years[0]?.month : ""}
@@ -368,15 +274,6 @@ export const RhsNav = ({
                       </Box>
                     </Box>
                   )}
-                  {/* <span>
-                            <img
-                                src={'./assets/images/👀.svg'}
-                                alt=""
-                                width="20px"
-                                height="20px"
-
-                            />
-                        </span> */}
                 </Box>
               )}
             </Box>

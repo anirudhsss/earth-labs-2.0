@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useLocation } from "react-router-dom";
-
+import { FaWallet } from "react-icons/fa";
 export interface ConnectWallretProps {
   altTxnHash?: string;
 }
@@ -23,8 +23,6 @@ const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
         authenticationStatus,
         mounted,
       }) => {
-        // Note: If your app doesn't use authentication, you
-        // can remove all 'authenticationStatus' checks
         const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
@@ -48,7 +46,7 @@ const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
                 return (
                   <button
                     className={
-                      mapsLocation
+                      mapsLocation || discoveryLocation
                         ? "connect_wallet_button_black"
                         : "connect_wallet_button_white"
                     }
@@ -56,19 +54,15 @@ const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      fontFamily: "DINAlternateBold",
                     }}
                     onClick={openConnectModal}
                     type="button"
                   >
-                    <svg
-                      style={{ height: "20px", width: "20px" }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill={mapsLocation ? "#000000" : "#ffffff"}
-                      className="w-6 h-6"
-                    >
-                      <path d="M2.273 5.625A4.483 4.483 0 015.25 4.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 3H5.25a3 3 0 00-2.977 2.625zM2.273 8.625A4.483 4.483 0 015.25 7.5h13.5c1.141 0 2.183.425 2.977 1.125A3 3 0 0018.75 6H5.25a3 3 0 00-2.977 2.625zM5.25 9a3 3 0 00-3 3v6a3 3 0 003 3h13.5a3 3 0 003-3v-6a3 3 0 00-3-3H15a.75.75 0 00-.75.75 2.25 2.25 0 01-4.5 0A.75.75 0 009 9H5.25z" />
-                    </svg>
+                    <FaWallet
+                      size={18}
+                      color={mapsLocation ? "#000000" : "#ffffff"}
+                    />
                     Connect Wallet
                   </button>
                 );
