@@ -5,7 +5,8 @@ import { AxiosFetch, isEmpty, truncate } from "components/utils";
 import { Icons } from "constant";
 import useEthToUsdcConversion from "hooks/useEthToUsdcConversion";
 import { useCallback, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useAccount } from "wagmi";
 import styles from "./styles.module.css";
 
 export interface PostHeaderLayerProps {
@@ -46,9 +47,9 @@ const PostHeaderLayer = ({
   const discoveryLocation = location?.pathname.includes("/discovery");
   const { ethToUsdc, ethToUsdcYvsTPercent, difference } =
     useEthToUsdcConversion();
-
+  const navigate = useNavigate();
   const [condition, setCondition] = useState<boolean>(false);
-
+  const { isDisconnected } = useAccount();
   const onChangeText = useCallback(() => {
     if (!isEmpty(handleName as string) || handleName === ("" || null)) {
       setCondition(true);
@@ -60,6 +61,35 @@ const PostHeaderLayer = ({
   useEffect(() => {
     onChangeText();
   }, [onChangeText]);
+
+  const getBackgroundColor = (isPage: boolean) => {
+    if (isDisconnected) {
+      return "#dddddd";
+    }
+    if (isPage) {
+      return "#FE7D06";
+    }
+
+    return "#FFF7EE";
+  };
+
+  const getTextColor = (isPage: boolean) => {
+    if (isDisconnected) {
+      return "#000";
+    }
+    if (isPage) {
+      return "#fff";
+    }
+    return "#000";
+  };
+
+  const getHoverColor = () => {
+    if (isDisconnected) {
+      return "#ddd";
+    }
+
+    return "#FE7D06";
+  };
 
   return (
     <>
@@ -456,46 +486,43 @@ const PostHeaderLayer = ({
                   alignItems: "center",
                 }}
               >
-                <Link to="/maps" style={{ textDecoration: "none" }}>
-                  <Button
-                    backgroundColor={`${
-                      mapsLocation || homeLocation ? "#FE7D06" : "#FFF7EE"
-                    }`}
-                    color={`${mapsLocation || homeLocation ? "#fff" : "#000"}`}
-                    border="0.5px solid rgba(46, 52, 81, 0.58)"
-                    hoverBackgroundColor={`${
-                      mapsLocation || homeLocation ? "#FE7D06" : "#FFF7EE"
-                    }`}
-                    borderRadius="0.5rem"
-                    padding="0.4rem 0.2rem"
-                    width="75px"
-                  >
-                    <Typography text="Activities" fontSize="1.3rem" />
-                  </Button>
-                </Link>
-                <Link
-                  to="/wallet"
-                  // state={{
-                  //     icon: 'wallet'
-                  // }}
-                  style={{ textDecoration: "none" }}
+                <Button
+                  onClick={() => {
+                    if (isDisconnected) {
+                      return;
+                    }
+                    navigate("/maps");
+                  }}
+                  backgroundColor={getBackgroundColor(
+                    mapsLocation || homeLocation
+                  )}
+                  color={getTextColor(mapsLocation || homeLocation)}
+                  border="0.5px solid rgba(46, 52, 81, 0.58)"
+                  hoverBackgroundColor={getHoverColor()}
+                  borderRadius="0.5rem"
+                  padding="0.4rem 0.2rem"
+                  width="75px"
                 >
-                  <Button
-                    backgroundColor={`${
-                      walletLocation ? "#FE7D06" : "#FFF7EE"
-                    }`}
-                    color={`${walletLocation ? "#fff" : "#000"}`}
-                    border="0.5px solid rgba(46, 52, 81, 0.58)"
-                    hoverBackgroundColor={`${
-                      walletLocation ? "#FE7D06" : "#FFF7EE"
-                    }`}
-                    borderRadius="0.5rem"
-                    padding="0.4rem 1.8rem"
-                    margin="0 0 0 10px"
-                  >
-                    <Typography text="Assets" fontSize="1.3rem" />
-                  </Button>
-                </Link>
+                  <Typography text="Activities" fontSize="1.3rem" />
+                </Button>
+
+                <Button
+                  onClick={() => {
+                    if (isDisconnected) {
+                      return;
+                    }
+                    navigate("/wallet");
+                  }}
+                  backgroundColor={getBackgroundColor(walletLocation)}
+                  color={getTextColor(walletLocation)}
+                  border="0.5px solid rgba(46, 52, 81, 0.58)"
+                  hoverBackgroundColor={getHoverColor()}
+                  borderRadius="0.5rem"
+                  padding="0.4rem 1.8rem"
+                  margin="0 0 0 10px"
+                >
+                  <Typography text="Assets" fontSize="1.3rem" />
+                </Button>
               </Box>
               {/* } */}
             </Box>

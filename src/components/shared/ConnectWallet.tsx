@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useLocation } from "react-router-dom";
 import { FaWallet } from "react-icons/fa";
+import { useAccount } from "wagmi";
 export interface ConnectWallretProps {
   altTxnHash?: string;
 }
@@ -11,6 +12,21 @@ const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
   const homeLocation = location?.pathname.includes("/home");
   const mapsLocation = location?.pathname.includes("/maps");
   const discoveryLocation = location?.pathname.includes("/discovery");
+  const walletLocation = location?.pathname.includes("/wallet");
+  const { isConnected, isDisconnected } = useAccount();
+
+  const getBorder = () => {
+    if (isDisconnected) {
+      if (walletLocation) {
+        return "1px solid #fff";
+      }
+      return "1px solid #000";
+    }
+
+    if (isConnected) {
+      return "none";
+    }
+  };
 
   return (
     <ConnectButton.Custom>
@@ -61,7 +77,11 @@ const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
                   >
                     <FaWallet
                       size={18}
-                      color={mapsLocation ? "#000000" : "#ffffff"}
+                      color={
+                        mapsLocation || discoveryLocation
+                          ? "#000000"
+                          : "#ffffff"
+                      }
                     />
                     Connect Wallet
                   </button>
@@ -108,16 +128,22 @@ const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
 
                   <button
                     style={{
-                      border: "1px solid #000",
+                      border: getBorder(),
                       background: "transparent",
                       padding: "0 20px",
                       height: "4rem",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "1rem",
                       borderRadius: "20px",
                       cursor: "pointer",
+                      color: walletLocation ? "#fff" : "#000",
                     }}
                     onClick={openAccountModal}
                     type="button"
                   >
+                    <FaWallet size={18} color={"#569561"} />
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`

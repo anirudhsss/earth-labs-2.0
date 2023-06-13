@@ -67,10 +67,13 @@
 
 .iconOuter {
     width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     /* background-color: #FFF7EE; */
     box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.25);
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .timeMenuBtn {

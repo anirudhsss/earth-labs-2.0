@@ -1,21 +1,29 @@
-import { Tooltip as MaterialToopTip, Tooltip } from "@mui/material";
+import {
+  Tooltip as MaterialToopTip,
+  Tooltip,
+  TooltipProps,
+} from "@mui/material";
 
 const ToolTipText = ({
   text,
   children,
+  placement,
 }: {
   text: string;
   children: JSX.Element;
+  placement: TooltipProps["placement"];
 }) => {
   const Text = ({ text }: { text: string }) => {
     return (
-      <span style={{ fontSize: "1.6rem", fontFamily: "DINAlternateBold" }}>
+      <span style={{ fontSize: "1.4rem", fontFamily: "DINAlternateBold" }}>
         {text}
       </span>
     );
   };
   return (
-    <MaterialToopTip title={<Text text={text} />}>{children}</MaterialToopTip>
+    <MaterialToopTip placement={placement} title={<Text text={text} />}>
+      {children}
+    </MaterialToopTip>
   );
 };
 

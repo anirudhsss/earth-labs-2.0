@@ -96,7 +96,7 @@ export const RhsNav = ({
                 navigateToMaps();
               }}
             >
-              <ToolTipText text={isConnected ? "Go to Map" : "Connect Wallet"}>
+              <ToolTipText placement={'left'} text={isConnected ? "Go to Map" : "Connect Wallet"}>
                 <span
                   className={styles.iconOuter}
                   style={{
@@ -129,7 +129,7 @@ export const RhsNav = ({
                   width: "40px",
                 }}
               >
-                <ToolTipText text={"Discover"}>
+                <ToolTipText placement={'left'} text={"Discover"}>
                   <div>
                     <FiGlobe
                       size={25}
@@ -149,7 +149,7 @@ export const RhsNav = ({
           }}
         >
           <Box className={styles.lowerIcons}>
-            <ToolTipText text="Legend">
+            <ToolTipText placement={'left'} text="Legend">
               <img
                 width="40px"
                 style={{ cursor: "pointer" }}
@@ -163,7 +163,7 @@ export const RhsNav = ({
               />
             </ToolTipText>
 
-            <ToolTipText text="Twitter">
+            <ToolTipText  placement={'left'} text="Twitter">
               <a
                 href="https://twitter.com/AtlasXY_"
                 target="_blank"
@@ -179,7 +179,7 @@ export const RhsNav = ({
               </a>
             </ToolTipText>
 
-            <ToolTipText text="Discord">
+            <ToolTipText placement={'left'} text="Discord">
               <a
                 href="https://discord.com/invite/dotearth"
                 target="_blank"
