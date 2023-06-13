@@ -144,7 +144,7 @@ const ConnectWallet = ({ altTxnHash }: ConnectWallretProps) => {
                     type="button"
                   >
                     <FaWallet size={18} color={"#569561"} />
-                    <span style={{fontWeight : '700',fontFamily:'DINAlternateBold'}}>
+                    <span style={{fontWeight : '700',fontFamily:'DINAlternateBold',fontSize : '1.6rem'}}>
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`
