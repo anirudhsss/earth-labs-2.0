@@ -106,10 +106,10 @@ code {
 .landing-button [data-testid="rk-connect-button"] {
   color: #1c223d;
   padding: 0rem 4rem;
-  height: 6rem;
+  height: 5rem;
   background-color: #fff;
   border-radius: 20rem;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 [aria-labelledby="rk_connect_title"] {

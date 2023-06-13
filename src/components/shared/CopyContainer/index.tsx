@@ -12,7 +12,9 @@ const CopyContainer: FC<ICopyContainer> = ({ text }) => {
       <span className={styles.copy_container_text}>{text}</span>
       <img
         style={{
-          cursor: 'pointer'
+          cursor: "pointer",
+          width: "20px",
+          height: "20px",
         }}
         src={Icons.copy}
         alt=""

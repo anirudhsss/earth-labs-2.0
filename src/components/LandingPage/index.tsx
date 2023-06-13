@@ -98,7 +98,7 @@ export const LandingPage = () => {
           backgroundImage: `url('${Icons.landingBg}')`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right bottom",
-          backgroundSize: "900px",
+          backgroundSize: '60%',
           height: "inherit",
         }}
       >
@@ -109,10 +109,11 @@ export const LandingPage = () => {
               style={{
                 fontSize: "1.6rem",
                 color: "#fff",
+                marginLeft : '20px'
               }}
             >
               Discover the power of Atlas. Copy and paste the transaction hash
-              below to get started
+              below to get started.
             </span>
             <CopyContainer
               text={
@@ -201,13 +202,13 @@ export const LandingPage = () => {
             border="0.5px solid #fff"
             hoverBackgroundColor="transparent"
             borderRadius="10rem"
-            padding="0 6rem"
-            height={"6rem"}
+            padding="0 4rem"
+            height={"5rem"}
             onClick={() => {
               navigate("/discovery");
             }}
           >
-            <span style={{ fontSize: "2rem" }}>Discover</span>
+            <span style={{ fontSize: "1.4rem" }}>Discover</span>
           </Button>
         </div>
       </section>
