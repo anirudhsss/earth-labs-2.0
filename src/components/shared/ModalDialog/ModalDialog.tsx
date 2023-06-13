@@ -122,7 +122,8 @@ const CustomizedDialogs = ({
                         position: 'absolute',
                         right: '50px',
                         top: '70px',
-                        cursor: 'pointer'
+                        cursor: 'pointer',
+                        zIndex :'9999'
                     }}
                     onClick={onEachGlyphClickedClose}
                 >

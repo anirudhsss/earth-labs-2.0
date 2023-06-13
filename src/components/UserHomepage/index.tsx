@@ -79,7 +79,6 @@ const UserHomepage = () => {
   const [eachGlyphClicked, setEachGlyphClicked] = useState<boolean>(false);
   const [eachTxnHash, setEachTxnHash] = useState<string>("");
 
-
   const { openConnectModal } = useConnectModal();
 
   useEffect(() => {
@@ -94,7 +93,10 @@ const UserHomepage = () => {
     setEachTxnHash(txnHash);
     txnHash && setEachGlyphClicked(true);
   };
-  const onEachGlyphClickedClose = () => setEachGlyphClicked(false);
+  const onEachGlyphClickedClose = () => {
+    console.log("Hello");
+    setEachGlyphClicked(false);
+  };
 
   const onSetdayClicked = (dayClicked: boolean | undefined) => {
     setdayClicked(dayClicked);
