@@ -15,17 +15,10 @@ const useSearchTxnAddress = () => {
       }
       Navigate(`/txn/${searchText}`);
     }
-    if (
-      searchText.length !== 0 &&
-      searchText.length > 40 &&
-      searchText.length < 44 &&
-      searchText.substring(0, 2) == "0x"
-    ) {
-      if (pathName.includes("maps")) {
-        return;
-      }
-      Navigate(`/maps/${searchText}`);
+    if (pathName.includes("maps")) {
+      return;
     }
+    Navigate(`/maps/${searchText}`);
   };
 
   return { searchTxnAddress };
