@@ -108,16 +108,7 @@ export const Xaxis = ({
             position: "relative",
           }}
           className="line"
-        >
-          {/* <span
-                        style={{
-                            position: 'absolute',
-                            fontSize: '1.5rem',
-                            right: '-3px',
-                            top: '-5px',
-                        }}
-                    >&#x2C3;</span> */}
-        </Box>
+        ></Box>
         <Box
           sx={{
             display: "flex",
@@ -126,7 +117,7 @@ export const Xaxis = ({
             alignItems: "center",
             position: "relative",
             zIndex: 101,
-            bottom: "5.5px",
+            bottom: "17.5px",
             width: "100%",
           }}
         >
@@ -162,14 +153,10 @@ export const Xaxis = ({
       <Box
         sx={{
           width: "9%",
-          // position: 'absolute',
-          // right: '0',
-          // bottom: '20px',
           display: "flex",
           justifyContent: "flex-end",
           marginTop: (years || [])?.length > 0 ? "-2.5vw" : "",
         }}
-        //  className={styles.timeMenuBtn}
       >
         {(mapsLocation || homeLocation) && (
           <Box>
