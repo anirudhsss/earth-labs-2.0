@@ -97,8 +97,8 @@ export const LandingPage = () => {
           overflow: "hidden",
           backgroundImage: `url('${Icons.landingBg}')`,
           backgroundRepeat: "no-repeat",
-          backgroundPosition: "right bottom",
-          backgroundSize: "60%",
+          backgroundPosition: "right 0px bottom 69px",
+          backgroundSize: "65%",
           height: "inherit",
         }}
       >
