@@ -256,6 +256,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
               <NormalSearchField
                 borderColor="#fff"
                 padding={"1rem"}
+                color={'#ffffff'}
                 placeholderColor={"#fff"}
                 placeholderFontSize={"1.6rem"}
                 fontSize={"1.6rem"}
