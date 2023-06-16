@@ -117,7 +117,7 @@ export const Xaxis = ({
             alignItems: "center",
             position: "relative",
             zIndex: 101,
-            bottom: "17.5px",
+            bottom: whichDuration?.length === 1 ? "5.5px" : "17.5px",
             width: "100%",
           }}
         >
@@ -145,6 +145,7 @@ export const Xaxis = ({
                 clickedElement={clickedElement}
                 onDisplayMonth={onDisplayMonth}
                 glyphWithMaxDimension={glyphWithMaxDimension}
+                durationLength={whichDuration.length}
               />
             );
           })}

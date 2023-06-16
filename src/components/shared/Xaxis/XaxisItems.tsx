@@ -25,6 +25,7 @@ export interface XaxisItemsProps {
   showDaysEnabled: () => void;
   onCaptureDayWhenDayClickedEnabled: (day: string | undefined) => void;
   monthInLetters?: string;
+  durationLength: number;
 }
 
 export const XaxisItems = ({
@@ -48,6 +49,7 @@ export const XaxisItems = ({
   showDaysEnabled,
   onCaptureDayWhenDayClickedEnabled,
   monthInLetters,
+  durationLength,
 }: XaxisItemsProps) => {
   // const day = `${(moment().month(month - 1).format("MMM") / month)} / ${month}`;
   const whichDuration1: string = showDays
@@ -104,12 +106,12 @@ export const XaxisItems = ({
       <Box
         sx={{
           position: "absolute",
-          top: "35px",
+          top: durationLength === 1 ? "30px" : "35px",
           width: "100px",
           textAlign: "center",
         }}
       >
-        <Box  className={styles.sameLevel}>
+        <Box className={styles.sameLevel}>
           <Typography
             fontSize="1.2rem"
             color={`${
