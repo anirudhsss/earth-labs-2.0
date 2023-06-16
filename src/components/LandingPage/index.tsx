@@ -206,11 +206,12 @@ export const LandingPage = () => {
             borderRadius="10rem"
             padding="0 4rem"
             height={"5rem"}
+            width={'178px'}
             onClick={() => {
               navigate("/discovery");
             }}
           >
-            <span style={{ fontSize: "1.4rem" }}>Discover</span>
+            <span style={{ fontSize: "1.6rem" }}>Discover</span>
           </Button>
         </div>
       </section>
