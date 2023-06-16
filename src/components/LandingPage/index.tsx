@@ -98,7 +98,7 @@ export const LandingPage = () => {
           backgroundImage: `url('${Icons.landingBg}')`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "right bottom",
-          backgroundSize: '60%',
+          backgroundSize: "60%",
           height: "inherit",
         }}
       >
@@ -109,7 +109,7 @@ export const LandingPage = () => {
               style={{
                 fontSize: "1.6rem",
                 color: "#fff",
-                marginLeft : '20px'
+                marginLeft: "20px",
               }}
             >
               Discover the power of Atlas. Copy and paste the transaction hash
@@ -124,6 +124,7 @@ export const LandingPage = () => {
           <div className={styles.landing_inner_content_bottom}>
             <div className={styles.landing_innter_content_search}>
               <NormalSearchField
+                width="100%"
                 borderColor="#fff"
                 padding={"1rem"}
                 placeholderColor={"#fff"}
@@ -131,6 +132,7 @@ export const LandingPage = () => {
                 fontSize={"1.6rem"}
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
+                color={'#ffffff'}
                 onChange={(value: string) => {
                   setSearchTxt(value);
                 }}

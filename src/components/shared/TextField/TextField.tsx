@@ -62,6 +62,8 @@ const TextField: React.FC<TextFieldProps> = ({
   autoComplete,
   ...props
 }: TextFieldProps): JSX.Element => {
+
+
   const onChangeText = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) =>
       onChange?.(e?.target?.value, name ?? ""),
@@ -96,7 +98,9 @@ const TextField: React.FC<TextFieldProps> = ({
         variant="outlined"
         sx={{
           display: "flex",
+          ":hover": {
 
+          },
           fontFamily: "DINAlternateBold",
           "& .MuiOutlinedInput-root": {
             borderRadius: borderRadius,
@@ -104,13 +108,13 @@ const TextField: React.FC<TextFieldProps> = ({
           input: {
             "&::placeholder": {
               fontSize: placeholderFontSize,
-              color: { placeholderColor },
+              color: { color },
               fontWeight: "500",
             },
           },
           fieldset: { borderColor: { borderColor } },
         }}
-        autoComplete={''}
+        autoComplete="off"
         onChange={onChangeText}
         value={value}
         placeholder={placeholder}
@@ -130,12 +134,6 @@ const TextField: React.FC<TextFieldProps> = ({
             fontSize: fontSize,
           },
         }}
-        // inputProps={inputProps ?? {
-        //     readOnly,
-        //     style: {
-        //         padding: padding ? padding : '16.5px 14px'
-        //     }
-        // }}
         disabled={disabled}
         label={label}
         error={error}

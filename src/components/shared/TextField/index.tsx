@@ -10,20 +10,20 @@ export const NormalSearchField = ({
   placeholderFontSize,
   iconSize,
   fontSize = "1.2rem",
-  onChange
+  onChange,
+  width = "67.5rem",
+  color,
 }: TextFieldProps) => (
   <TextField
-    width="67.5rem"
+    width={width}
     borderRadius="2rem"
     size="small"
-    
     iconSize={iconSize}
     placeholderFontSize={placeholderFontSize}
     placeholder="enter transaction IDs, wallet addresses, etc..."
-    color={placeholderColor}
+    color={color}
     fontSize={fontSize}
     borderColor={borderColor}
-    
     searchIconColor={searchIconColor}
     onChange={onChange}
   />
