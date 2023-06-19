@@ -59,6 +59,7 @@ export const Xaxis = ({
   monthInLetters,
 }: XaxisProps) => {
   const whichDuration = showDays ? arrOfDays : arrOfMonths;
+  console.log(whichDuration,'whichDuraction');
   const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
   const location = useLocation();
   const homeLocation = location?.pathname.includes("/home");
@@ -177,7 +178,6 @@ export const Xaxis = ({
               borderTop={`${openMenu ? "0" : "1px solid #000"}`}
               paddingTop={`${openMenu && "0px"}`}
               onClick={onOpenYearMenu}
-              // disabled={monthOrYear === ''}
             >
               {(years || [])?.length > 0 ? (
                 <Typography
@@ -228,7 +228,6 @@ export const Xaxis = ({
               }}
             >
               {arrOfYears?.map((item: ArrOfYMDProps) => {
-                // console.log('item', item.month)
                 return (
                   <MenuItem
                     key={item.month}
