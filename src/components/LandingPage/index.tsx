@@ -6,6 +6,7 @@ import CopyContainer from "components/shared/CopyContainer";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 import RenderIf from "components/shared/RenderIf";
 import { NormalSearchField } from "components/shared/TextField";
+import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import { Icons } from "constant";
 import TwitterContext from "context/twitter.context";
 import useSearchTxnAddress from "hooks/useSearchTxnAddress";
@@ -24,10 +25,10 @@ export const LandingPage = () => {
     isValid: boolean;
     message: string;
   }>({ isValid: true, message: "" });
-  const { getTwitterUserInfo } = useTwitterFlow();
+  const { getTwitterUserInfo, setTwitterConnectFlag } = useTwitterFlow();
   const { searchTxnAddress } = useSearchTxnAddress();
   const { address, isConnected } = useAccount();
-  const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
+  const { updateTwitterUser } = useContext(TwitterContext);
   const [isTwitterConnected, setTwitterConnected] = useState(false);
 
   useEffect(() => {
@@ -48,10 +49,12 @@ export const LandingPage = () => {
       localStorage.setItem("code", code);
       if (from === "maps") {
         localStorage.removeItem("txnHash");
+        setTwitterConnectFlag();
         navigate("/maps");
       } else if (from === "landing") {
         updateTwitterUserObject();
       } else {
+        setTwitterConnectFlag();
         navigate(`/txn/${searchTxt}`);
       }
     }
@@ -80,16 +83,7 @@ export const LandingPage = () => {
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
       <OnboardingHeader isConnectWallet={true} isSearch={false} />
-      <RenderIf isTrue={isTwitterConnected}>
-        <div
-          style={{ width: "100%" }}
-          className="flex justify-content-center align-items-center "
-        >
-          <Alert
-            text={<span>You have successfully connected to twitter</span>}
-          />
-        </div>
-      </RenderIf>
+      <TwitterConnectAlert isShow={isTwitterConnected} />
 
       <section
         className={styles.landing_inner}
@@ -132,7 +126,7 @@ export const LandingPage = () => {
                 fontSize={"1.6rem"}
                 searchIconColor={"#fff"}
                 iconSize={"2rem"}
-                color={'#ffffff'}
+                color={"#ffffff"}
                 onChange={(value: string) => {
                   setSearchTxt(value);
                 }}
@@ -206,7 +200,7 @@ export const LandingPage = () => {
             borderRadius="10rem"
             padding="0 4rem"
             height={"5rem"}
-            width={'178px'}
+            width={"178px"}
             onClick={() => {
               navigate("/discovery");
             }}

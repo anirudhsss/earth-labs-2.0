@@ -4,11 +4,13 @@ import {
   getUserTwitterId,
   tweetThePost,
 } from "apis/twitter.api";
+import { useEffect } from "react";
 
 export interface ITwitterUser {
   id?: string;
   name?: string;
   username?: string;
+  isConnected?: boolean;
 }
 
 interface IGenerateTweetResponse {
@@ -36,7 +38,7 @@ const useTwitterFlow = () => {
     const response = await getUserTwitterId(BASE_URL, state, code, redirectURI);
     const result = await response.json();
     const user: ITwitterUser = result.data;
-    
+
     return user;
   };
 
@@ -75,11 +77,29 @@ const useTwitterFlow = () => {
     };
   };
 
+  const isTwitterConnectedFlagFromLandingPage = () => {
+    const isFlag = JSON.parse(
+      sessionStorage.getItem("connectedFlag") as string
+    );
+    return isFlag;
+  };
+
+  const setTwitterConnectFlag = () => {
+    sessionStorage.setItem("connectedFlag", "true");
+  };
+
+  const removeTwitterConnectFlag = () => {
+    sessionStorage.removeItem("connectedFlag");
+  };
+
   return {
     initateTwitterAuth,
     getTwitterUserInfo,
     generateMediaId,
     tweetGlyphImageOnTwitter,
+    isTwitterConnectedFlagFromLandingPage,
+    setTwitterConnectFlag,
+    removeTwitterConnectFlag,
   };
 };
 

@@ -24,6 +24,8 @@ import { HorizontalSelectionProps } from "interface/Utils";
 import GlyphDetailPage from "components/GlyphDetailPage";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import useSearchTxnAddress from "hooks/useSearchTxnAddress";
+import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
+import useTwitterFlow from "hooks/useTwitterFlow";
 
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
@@ -94,6 +96,21 @@ const UserHomepage = () => {
   const [eachTxnHash, setEachTxnHash] = useState<string>("");
 
   const { openConnectModal } = useConnectModal();
+
+  const { isTwitterConnectedFlagFromLandingPage, removeTwitterConnectFlag } =
+    useTwitterFlow();
+
+  const [isTwitterConnectedAlert, setTwitterConnectedAlert] = useState(false);
+
+  useEffect(() => {
+    if (isTwitterConnectedFlagFromLandingPage()) {
+      setTwitterConnectedAlert(true);
+      setTimeout(() => {
+        removeTwitterConnectFlag();
+        setTwitterConnectedAlert(false);
+      }, 5000);
+    }
+  }, []);
 
   const onDisplayMonth = useCallback(
     (year: string) => {
@@ -880,6 +897,8 @@ const UserHomepage = () => {
             }}
           />
         </Box>
+
+        <TwitterConnectAlert isShow={isTwitterConnectedAlert} />
 
         <Container height="88.5%" padding="0 3rem 0 2rem" position="relative">
           <PostHeaderLayer

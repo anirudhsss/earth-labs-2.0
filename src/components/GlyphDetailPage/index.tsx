@@ -1,14 +1,18 @@
 import { Box } from "@mui/material";
+import Alert from "components/shared/Alert/Alert";
 import { Container } from "components/shared/Container";
 import GlyphDetail from "components/shared/GlyphDetail";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 import RenderIf from "components/shared/RenderIf";
+import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import { Icons } from "constant";
+import TwitterContext from "context/twitter.context";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
-import { useEffect, useState } from "react";
+import useTwitterFlow from "hooks/useTwitterFlow";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useRoutes } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
-import { useAccount } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
 
 export interface GlyphDetailPageProps {
   altTxnHash?: string;
@@ -27,6 +31,10 @@ const GlyphDetailPage = ({
   const navigate = useNavigate();
   const { isConnected, address } = useAccount();
   const location = useLocation();
+  const { isTwitterConnectedFlagFromLandingPage, removeTwitterConnectFlag } =
+    useTwitterFlow();
+  const { twitterUser } = useContext(TwitterContext);
+  const [isTwitterConnectedAlert, setTwitterConnectedAlert] = useState(false);
 
   useEffect(() => {
     if (isConnected && !altTxnHash) {
@@ -34,6 +42,17 @@ const GlyphDetailPage = ({
     }
   }, [isConnected]);
 
+  useEffect(() => {
+    if (isTwitterConnectedFlagFromLandingPage()) {
+      setTwitterConnectedAlert(true);
+      setTimeout(() => {
+        removeTwitterConnectFlag();
+        setTwitterConnectedAlert(false);
+      }, 5000);
+    }
+  }, []);
+
+  // Getting the txn hash from the url and setting the state
   useEffect(() => {
     const pathName = location.pathname;
     if (pathName.includes("/txn")) {
@@ -46,11 +65,7 @@ const GlyphDetailPage = ({
   }, []);
 
   return (
-    <Container
-      // backgroundColor="#1C223D"
-      backgroundColor={`${altTxnHash ? "" : "#1C223D"}`}
-      // opacity={`${altTxnHash ? '0.1' : '1'}`}
-    >
+    <Container backgroundColor={`${altTxnHash ? "" : "#1C223D"}`}>
       {altTxnHash ? (
         <Box sx={{ height: "3rem" }}></Box>
       ) : (
@@ -65,7 +80,7 @@ const GlyphDetailPage = ({
           }}
         />
       )}
-
+      <TwitterConnectAlert isShow={isTwitterConnectedAlert} />
       <RenderIf isTrue={!isLoader}>
         <GlyphDetail
           {...(glphyDetails as IHexesDetail)}
