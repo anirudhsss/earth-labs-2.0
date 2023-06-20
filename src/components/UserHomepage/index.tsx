@@ -376,7 +376,7 @@ const UserHomepage = () => {
       setYAxisItems([]);
       setYAxisItemClicked(null);
       setYAxisItemHovered(null);
-
+      console.log(arrIndexesOfClickedDays, "arrIndexesOfClickedDays");
       if (arrIndexesOfClickedDays?.length > 0) {
         let filteredDays: any[];
         filteredDays = arrIndexesOfClickedDays?.filter((item) => {
@@ -384,8 +384,10 @@ const UserHomepage = () => {
             Number(moment.utc(item.timestamp).format("DD")) === Number(day)
           );
         });
-        setFilteredDays(filteredDays);
-        setMatchedMonths(filteredDays); // Automatically clicking the day here
+        if (filteredDays.length > 0) {
+          setFilteredDays(filteredDays);
+          setMatchedMonths(filteredDays); // Automatically clicking the day here
+        }
       }
     },
     []
