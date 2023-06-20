@@ -29,7 +29,7 @@ export const Hexgrid = ({
   onEachGlyphClickedOpen,
 }) => {
 
-  console.log(matchedMonths,'matchedMonths');
+  //console.log(matchedMonths,'matchedMonths');
 
   const [testArr, setTestArr] = useState(matchedMonths);
 

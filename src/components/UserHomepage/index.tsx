@@ -299,13 +299,11 @@ const UserHomepage = () => {
             noOfGlyphs: noOfTxns[index],
           });
         });
-        // console.log('arrOfDays', arrOfDays);
         setmonthInLetters(
           moment()
             .month(month - 1)
             .format("MMM")
         );
-        console.log(arrOfDays, "arrOfDays");
         setArrOfDays(arrOfDays);
       }
       setfurtherPropagation(false);
@@ -337,8 +335,9 @@ const UserHomepage = () => {
   );
 
   const getHexDataBasedOnYear = () => {
-    setMatchedMonths(arrIndexesOfClickedYears);
-    if (arrIndexesOfClickedYears.length === 0) {
+    console.log("getHexDataBasedOnYear", arrIndexesOfClickedYears);
+    if (arrIndexesOfClickedYears.length > 0) {
+      setMatchedMonths(arrIndexesOfClickedYears);
     }
   };
 
@@ -347,47 +346,68 @@ const UserHomepage = () => {
     getHexDataBasedOnYear();
   }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
 
-  const onShowDaysInfo = useCallback((abcd: any, month: any) => {
+  const onShowDaysInfo = useCallback(
+    (arrIndexesOfClickedYears: any, month: any) => {
+      resetYAxis();
+      const arrIndexesOfClickedDays = arrIndexesOfClickedYears?.filter(
+        (item: any) => {
+          let monthsFromApi = Number(moment(item.timestamp).format("MM"));
+          return monthsFromApi === Number(month);
+        }
+      );
+      setArrIndexesOfClickedDays(arrIndexesOfClickedDays);
+      setfurtherPropagation(false);
+    },
+    []
+  );
+
+  const resetYAxis = () => {
     setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
     setCurrency([]);
     setYAxisItems([]);
     setYAxisItemClicked(null);
     setYAxisItemHovered(null);
+  };
 
-    const arrIndexesOfClickedDays = abcd?.filter((item: any) => {
-      let monthsFromApi = Number(moment(item.timestamp).format("MM"));
-      return monthsFromApi === Number(month);
-    });
+  const onClickOfADay = useCallback(
+    (arrIndexesOfClickedDays: any[], day: any) => {
+      setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
+      setCurrency([]);
+      setYAxisItems([]);
+      setYAxisItemClicked(null);
+      setYAxisItemHovered(null);
 
-    setArrIndexesOfClickedDays(arrIndexesOfClickedDays);
-    setfurtherPropagation(false);
-  }, []);
+      if (arrIndexesOfClickedDays?.length > 0) {
+        let filteredDays: any[];
+        filteredDays = arrIndexesOfClickedDays?.filter((item) => {
+          return (
+            Number(moment.utc(item.timestamp).format("DD")) === Number(day)
+          );
+        });
+        setFilteredDays(filteredDays);
+        setMatchedMonths(filteredDays); // Automatically clicking the day here
+      }
+    },
+    []
+  );
 
-  const onClickOfADay = useCallback((abcd2: any[], day: any) => {
-    setYAxisValue({ yAxisValueMin: 0, yAxisValueMax: 0 });
-    setCurrency([]);
-    setYAxisItems([]);
-    setYAxisItemClicked(null);
-    setYAxisItemHovered(null);
-
-    if (abcd2?.length > 0) {
-      let filteredDays: any[];
-      filteredDays = abcd2?.filter((item) => {
-        return Number(moment.utc(item.timestamp).format("DD")) === Number(day);
-      });
-      console.log(filteredDays, "filteredDays");
-      setFilteredDays(filteredDays);
-      setMatchedMonths(filteredDays); //
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (showDays) {
+  //     const a = arrOfDays[0]?.month;
+  //     onClickedElementEnabled(a);
+  //     onClickOfADay(arrIndexesOfClickedDays, arrOfDays[0]?.month);
+  //   }
+  // }, [arrIndexesOfClickedDays, arrOfDays, onClickOfADay, showDays]);
 
   useEffect(() => {
-    if (showDays) {
-      const a = arrOfDays[0]?.month;
-      onClickedElementEnabled(a);
-      onClickOfADay(arrIndexesOfClickedDays, arrOfDays[0]?.month);
+    if (arrIndexesOfClickedDays.length > 0 && showDays) {
+      setMatchedMonths(arrIndexesOfClickedDays);
     }
-  }, [arrIndexesOfClickedDays, arrOfDays, onClickOfADay, showDays]);
+  }, [arrIndexesOfClickedDays]);
+
+  useEffect(() => {
+    console.log(matchedMonths, "matchedMonths");
+  }, [matchedMonths]);
 
   useEffect(() => {
     if (showDays) {
@@ -489,7 +509,6 @@ const UserHomepage = () => {
 
   const calculateArrOfMonthsForXAxis = useCallback(
     (year: string) => {
-      console.log(arrIndexesOfClickedYears, "arrIndexesOfClickedYears");
       if (arrIndexesOfClickedYears?.length > 0) {
         let arrOfDuration,
           freqOfDuration,

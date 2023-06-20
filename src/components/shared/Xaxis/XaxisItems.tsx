@@ -59,12 +59,13 @@ export const XaxisItems = ({
         .format("MMM");
 
   const setParams = useCallback(() => {
+    // Further Propogation checks if we need to drill down inside
+    // Year to day
+    debugger;
     if (furtherPropagation) {
-      // console.log('in1')
       showDaysEnabled();
       onClickedMonth(month);
     } else {
-      // console.log('in2')
       onClickedElementEnabled(month);
       onSetdayClicked(true);
       onCaptureDayWhenDayClickedEnabled(month);
@@ -78,6 +79,7 @@ export const XaxisItems = ({
     onSetdayClicked,
     showDaysEnabled,
   ]);
+
   return (
     <Box
       sx={{

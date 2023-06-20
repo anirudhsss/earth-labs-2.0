@@ -59,7 +59,6 @@ export const Xaxis = ({
   monthInLetters,
 }: XaxisProps) => {
   const whichDuration = showDays ? arrOfDays : arrOfMonths;
-  console.log(whichDuration,'whichDuraction');
   const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
   const location = useLocation();
   const homeLocation = location?.pathname.includes("/home");
