@@ -108,7 +108,7 @@ export const XaxisItems = ({
       <Box
         sx={{
           position: "absolute",
-          top: durationLength === 1 ? "30px" : "35px",
+          top: durationLength === 1 && !showDays ? "30px" : "35px",
           width: "100px",
           textAlign: "center",
         }}
