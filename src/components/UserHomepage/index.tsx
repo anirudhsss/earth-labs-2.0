@@ -62,11 +62,13 @@ const UserHomepage = () => {
     xAxisDateMax: 0,
   });
 
-  const [arrIndexesOfClickedYears, setArrIndexesOfClickedYears] = useState([]); // data for the year selected
+  const [arrIndexesOfClickedYears, setArrIndexesOfClickedYears] = useState<
+    any[]
+  >([]); // data for the year selected
 
-  const [arrIndexesOfClickedMonths, setArrIndexesOfClickedMonths] = useState(
-    []
-  ); //
+  const [arrIndexesOfClickedMonths, setArrIndexesOfClickedMonths] = useState<
+    any[]
+  >([]); //
 
   const [arrIndexesOfClickedDays, setArrIndexesOfClickedDays] = useState<
     HorizontalSelectionProps[]
@@ -322,7 +324,7 @@ const UserHomepage = () => {
   const onCircleClicked = useCallback(
     (month: string) => {
       resetXAxis();
-      const arrIndexesOfClickedMonths = arrIndexesOfClickedYears?.filter(
+      const arrIndexesOfClickedMonths: any[] = arrIndexesOfClickedYears?.filter(
         (item: { timestamp: moment.MomentInput }) => {
           let monthFromApi = Number(moment(item.timestamp).format("MM"));
           return monthFromApi === Number(month);
@@ -334,8 +336,13 @@ const UserHomepage = () => {
     [arrIndexesOfClickedYears]
   );
 
+  useEffect(() => {
+    // if (matchedMonths.length > 0) {
+    //   setMatchedMonths(matchedMonths.reverse());
+    // }
+  }, [matchedMonths]);
+
   const getHexDataBasedOnYear = () => {
-    console.log("getHexDataBasedOnYear", arrIndexesOfClickedYears);
     if (arrIndexesOfClickedYears.length > 0) {
       setMatchedMonths(arrIndexesOfClickedYears);
     }

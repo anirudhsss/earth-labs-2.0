@@ -9,6 +9,7 @@ import { Typography } from "../Typography";
 import styles from "./styles.module.css";
 import { FiHexagon, FiGlobe, FiMap } from "react-icons/fi";
 import ToolTipText from "../Tooltip";
+import RenderIf from "../RenderIf";
 
 export interface RhsNavProps {
   openMenu?: any;
@@ -96,7 +97,10 @@ export const RhsNav = ({
                 navigateToMaps();
               }}
             >
-              <ToolTipText placement={'left'} text={isConnected ? "Go to Map" : "Connect Wallet"}>
+              <ToolTipText
+                placement={"left"}
+                text={isConnected ? "Go to Map" : "Connect Wallet"}
+              >
                 <span
                   className={styles.iconOuter}
                   style={{
@@ -129,7 +133,7 @@ export const RhsNav = ({
                   width: "40px",
                 }}
               >
-                <ToolTipText placement={'left'} text={"Discover"}>
+                <ToolTipText placement={"left"} text={"Discover"}>
                   <div>
                     <FiGlobe
                       size={25}
@@ -149,7 +153,7 @@ export const RhsNav = ({
           }}
         >
           <Box className={styles.lowerIcons}>
-            <ToolTipText placement={'left'} text="Legend">
+            <ToolTipText placement={"left"} text="Legend">
               <img
                 width="40px"
                 style={{ cursor: "pointer" }}
@@ -163,7 +167,7 @@ export const RhsNav = ({
               />
             </ToolTipText>
 
-            <ToolTipText  placement={'left'} text="Twitter">
+            <ToolTipText placement={"left"} text="Twitter">
               <a
                 href="https://twitter.com/AtlasXY_"
                 target="_blank"
@@ -179,7 +183,7 @@ export const RhsNav = ({
               </a>
             </ToolTipText>
 
-            <ToolTipText placement={'left'} text="Discord">
+            <ToolTipText placement={"left"} text="Discord">
               <a
                 href="https://discord.com/invite/dotearth"
                 target="_blank"
@@ -196,88 +200,102 @@ export const RhsNav = ({
             </ToolTipText>
           </Box>
 
-          {(mapsLocation || homeLocation) && (
-            <Box sx={{ height: "9vh" }} className={styles.yearMonthBoxParent}>
-              {years[0]?.month !== undefined && (
-                <Box className={styles.yearMonthBox}>
-                  {showDays ? (
-                    <Box className={styles.test1}>
-                      <Box className={styles.test3}>
-                        <Button
-                          padding="2px 0"
-                          backgroundColor="#FE7D06"
-                          hoverBackgroundColor="#FE7D06"
-                          borderRadius="1rem"
-                        >
-                          <Typography
-                            text={monthInLetters ? monthInLetters : ""}
-                            fontSize="1.4rem"
-                            color="#FFFDFB"
-                          />
-                        </Button>
-                      </Box>
-                      <Box
-                        className={styles.test}
-                        sx={{ paddingRight: "1rem" }}
-                      >
-                        <span
-                          style={{
-                            cursor: "pointer",
-                          }}
-                          onClick={() => onYearButtonClicked(years[0]?.month)}
-                        >
-                          <Typography
-                            text={years[0]?.month}
-                            fontSize="1.4rem"
-                            color="#FFFDFB"
-                          />
-                        </span>
-                      </Box>
-                    </Box>
-                  ) : (
-                    <Box className={styles.test1}>
-                      <Box className={styles.test} sx={{ paddingLeft: "1rem" }}>
-                        <span
-                          style={{
-                            cursor: "pointer",
-                          }}
-                          onClick={onMonthButtonClicked}
-                        >
-                          <Typography
-                            text={
-                              moment()
-                                .month(clickedElement - 1)
-                                .format("MMM") !== "undefined"
-                                ? moment()
+          <RenderIf isTrue={Boolean(showDays)}>
+            <>
+              {(mapsLocation || homeLocation) && (
+                <Box
+                  sx={{ height: "9vh" }}
+                  className={styles.yearMonthBoxParent}
+                >
+                  {years[0]?.month !== undefined && (
+                    <Box className={styles.yearMonthBox}>
+                      {showDays ? (
+                        <Box className={styles.test1}>
+                          <Box className={styles.test3}>
+                            <Button
+                              padding="2px 0"
+                              backgroundColor="#FE7D06"
+                              hoverBackgroundColor="#FE7D06"
+                              borderRadius="1rem"
+                            >
+                              <Typography
+                                text={monthInLetters ? monthInLetters : ""}
+                                fontSize="1.4rem"
+                                color="#FFFDFB"
+                              />
+                            </Button>
+                          </Box>
+                          <Box
+                            className={styles.test}
+                            sx={{ paddingRight: "1rem" }}
+                          >
+                            <span
+                              style={{
+                                cursor: "pointer",
+                              }}
+                              onClick={() =>
+                                onYearButtonClicked(years[0]?.month)
+                              }
+                            >
+                              <Typography
+                                text={years[0]?.month}
+                                fontSize="1.4rem"
+                                color="#FFFDFB"
+                              />
+                            </span>
+                          </Box>
+                        </Box>
+                      ) : (
+                        <Box className={styles.test1}>
+                          <Box
+                            className={styles.test}
+                            sx={{ paddingLeft: "1rem" }}
+                          >
+                            <span
+                              style={{
+                                cursor: "pointer",
+                              }}
+                              onClick={onMonthButtonClicked}
+                            >
+                              <Typography
+                                text={
+                                  moment()
                                     .month(clickedElement - 1)
-                                    .format("MMM")
-                                : ""
-                            }
-                            fontSize="1.4rem"
-                            color="#FFFDFB"
-                          />
-                        </span>
-                      </Box>
-                      <Box className={styles.test3}>
-                        <Button
-                          padding="2px 0"
-                          backgroundColor="#FE7D06"
-                          hoverBackgroundColor="#FE7D06"
-                          borderRadius="1rem"
-                        >
-                          <Typography
-                            text={years[0]?.month !== "" ? years[0]?.month : ""}
-                            fontSize="1.4rem"
-                            color="#FFFDFB"
-                          />
-                        </Button>
-                      </Box>
+                                    .format("MMM") !== "undefined"
+                                    ? moment()
+                                        .month(clickedElement - 1)
+                                        .format("MMM")
+                                    : ""
+                                }
+                                fontSize="1.4rem"
+                                color="#FFFDFB"
+                              />
+                            </span>
+                          </Box>
+                          <Box className={styles.test3}>
+                            <Button
+                              padding="2px 0"
+                              backgroundColor="#FE7D06"
+                              hoverBackgroundColor="#FE7D06"
+                              borderRadius="1rem"
+                            >
+                              <Typography
+                                text={
+                                  years[0]?.month !== "" ? years[0]?.month : ""
+                                }
+                                fontSize="1.4rem"
+                                color="#FFFDFB"
+                              />
+                            </Button>
+                          </Box>
+                        </Box>
+                      )}
                     </Box>
                   )}
                 </Box>
               )}
-            </Box>
-          )}
+            </>
+          </RenderIf>
         </Box>
       </Box>
     </Box>
