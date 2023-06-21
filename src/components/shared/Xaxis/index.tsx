@@ -113,11 +113,12 @@ export const Xaxis = ({
           sx={{
             display: "flex",
             justifyContent:
-              whichDuration?.length === 1  ? "center" : "space-between",
+              whichDuration?.length === 1 ? "center" : "space-between",
             alignItems: "center",
             position: "relative",
             zIndex: 101,
-            bottom: whichDuration?.length === 1 && !showDays ? "5.5px" : "17.5px",
+            bottom:
+              whichDuration?.length === 1 && !showDays ? "5.5px" : "17.5px",
             width: "100%",
           }}
         >
