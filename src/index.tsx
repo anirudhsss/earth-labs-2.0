@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import SnackBarProvider from "provider/snackbar.provider";
 import TwitterProvider from "provider/twitter.provider";
 import Web3ModalProvider from "provider/web3modal.provider";
 import ReactDOM from "react-dom/client";
@@ -12,10 +13,12 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Box sx={{ display: { xs: "none", md: "block" } }}>
-    <Web3ModalProvider>
-      <TwitterProvider>
-        <RouterProvider router={router} />
-      </TwitterProvider>
-    </Web3ModalProvider>
+    <SnackBarProvider>
+      <Web3ModalProvider>
+        <TwitterProvider>
+          <RouterProvider router={router} />
+        </TwitterProvider>
+      </Web3ModalProvider>
+    </SnackBarProvider>
   </Box>
 );

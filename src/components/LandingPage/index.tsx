@@ -8,6 +8,7 @@ import RenderIf from "components/shared/RenderIf";
 import { NormalSearchField } from "components/shared/TextField";
 import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import { Icons } from "constant";
+import SnackbarContext from "context/snackbar.context";
 import TwitterContext from "context/twitter.context";
 import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import useTwitterFlow from "hooks/useTwitterFlow";
@@ -30,7 +31,7 @@ export const LandingPage = () => {
   const { address, isConnected } = useAccount();
   const { updateTwitterUser } = useContext(TwitterContext);
   const [isTwitterConnected, setTwitterConnected] = useState(false);
-
+  const { openSnackBar } = useContext(SnackbarContext);
   useEffect(() => {
     if (isConnected) {
       navigate(`/maps/${address}`);
@@ -96,7 +97,16 @@ export const LandingPage = () => {
           height: "inherit",
         }}
       >
-        <img src={Icons.atlasWhite} alt="" width={300} height={150}></img>
+        <img
+          src={Icons.atlasWhite}
+          alt=""
+          width={300}
+          height={150}
+          onClick={() => {
+            console.log('Hello')
+            if (openSnackBar) openSnackBar("Hello", 6000);
+          }}
+        ></img>
         <div className={styles.landing_inner_content}>
           <div className={styles.landing_inner_content_top}>
             <span
