@@ -26,6 +26,7 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import useTwitterFlow from "hooks/useTwitterFlow";
+import { XaxisItems } from "components/shared/Xaxis/XaxisItems";
 
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
@@ -61,7 +62,6 @@ const UserHomepage = () => {
     xAxisDateMin: 0,
     xAxisDateMax: 0,
   });
-
   const [arrIndexesOfClickedYears, setArrIndexesOfClickedYears] = useState<
     any[]
   >([]); // data for the year selected
@@ -79,7 +79,7 @@ const UserHomepage = () => {
   const { searchTxnAddress } = useSearchTxnAddress();
   const [yAxisItemClicked, setYAxisItemClicked] = useState<any>();
   const [yAxisItemHovered, setYAxisItemHovered] = useState<any>();
-  const [arrOfMonths, setArrOfMonths] = useState<any>([]);
+  const [arrOfMonths, setArrOfMonths] = useState<ArrOfYMDProps[]>([]);
   const [arrOfDays, setArrOfDays] = useState<ArrOfYMDProps[]>([]);
   const [monthInLetters, setmonthInLetters] = useState<string>("");
   const { address, isConnected, isDisconnected } = useAccount();
@@ -89,6 +89,15 @@ const UserHomepage = () => {
   const { data, data2, apiLoading } = AxiosFetch(walletAddress);
 
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
+
+  const [xAxisItem, setXAxisItem] = useState<{
+    items: ArrOfYMDProps[];
+    current: string;
+  }>({
+    items: [],
+    current: "YEAR",
+  });
+
   const [furtherPropagation, setfurtherPropagation] = useState<boolean>(true);
   const [dayClicked, setdayClicked] = useState<boolean | undefined>(false);
   const [clickedDay, setClickedDay] = useState<string | undefined>("");
@@ -103,6 +112,8 @@ const UserHomepage = () => {
     useTwitterFlow();
 
   const [isTwitterConnectedAlert, setTwitterConnectedAlert] = useState(false);
+
+  // Get all the years content for the x axis
 
   useEffect(() => {
     if (isTwitterConnectedFlagFromLandingPage()) {
@@ -125,6 +136,7 @@ const UserHomepage = () => {
             return Number(monthFromApi) === Number(year);
           }
         );
+        setMatchedMonths(arrIndexesOfClickedYears);
         setArrIndexesOfClickedYears(arrIndexesOfClickedYears);
       } else {
         setArrIndexesOfClickedYears([]);
@@ -159,6 +171,12 @@ const UserHomepage = () => {
   }, [isDisconnected]);
 
   useEffect(() => {
+    if (arrOfYears.length > 0) {
+      setXAxisItem({ items: arrOfYears, current: "YEAR" });
+    }
+  }, [arrOfYears]);
+
+  useEffect(() => {
     const pathname = window.location.pathname;
     const arr = pathname.split("maps/");
     const txn = arr[1];
@@ -167,10 +185,6 @@ const UserHomepage = () => {
       setWalletAddress(address);
     }
   }, []);
-
-  useEffect(() => {
-    onDisplayMonth(arrOfYears[arrOfYears?.length - 1]?.month);
-  }, [arrOfYears, onDisplayMonth]);
 
   const onEachGlyphClickedOpen = (txnHash: string) => {
     setEachTxnHash(txnHash);
@@ -255,15 +269,12 @@ const UserHomepage = () => {
 
   const anotherFunc3 = useCallback(
     (abcd2: any, month: any) => {
-      // console.log('anotherFunc3', abcd2, month);
       if (abcd2?.length > 0) {
-        // console.log('month', month);
         let arrOfDuration,
           freqOfDuration,
           duration: string | any[],
           noOfTxns: any[],
           arrDaysPointsOfAxis: any[] = [];
-        // console.log('abcd2', abcd2)
         arrOfDuration = abcd2?.map((item: any) => {
           let a;
           // console.log('Number(moment(item.timestamp).format("MM")', Number(moment(item.timestamp).format("MM")));
@@ -307,6 +318,10 @@ const UserHomepage = () => {
             .format("MMM")
         );
         setArrOfDays(arrOfDays);
+        setXAxisItem({
+          items: arrOfDays,
+          current: "DAY",
+        });
       }
       setfurtherPropagation(false);
     },
@@ -336,22 +351,12 @@ const UserHomepage = () => {
     [arrIndexesOfClickedYears]
   );
 
+  // This is setting the data for all the years combined
   useEffect(() => {
-    // if (matchedMonths.length > 0) {
-    //   setMatchedMonths(matchedMonths.reverse());
-    // }
-  }, [matchedMonths]);
-
-  const getHexDataBasedOnYear = () => {
-    if (arrIndexesOfClickedYears.length > 0) {
-      setMatchedMonths(arrIndexesOfClickedYears);
+    if (data1 && data1.length > 0) {
+      setMatchedMonths(data1);
     }
-  };
-
-  // Here taking the last month of the year and selecting it on the inital load
-  useEffect(() => {
-    getHexDataBasedOnYear();
-  }, [arrOfMonths, arrOfYears, onCircleClicked, years]);
+  }, [data1]);
 
   const onShowDaysInfo = useCallback(
     (arrIndexesOfClickedYears: any, month: any) => {
@@ -363,6 +368,7 @@ const UserHomepage = () => {
         }
       );
       setArrIndexesOfClickedDays(arrIndexesOfClickedDays);
+      setMatchedMonths(arrIndexesOfClickedDays);
       setfurtherPropagation(false);
     },
     []
@@ -400,24 +406,6 @@ const UserHomepage = () => {
     []
   );
 
-  // useEffect(() => {
-  //   if (showDays) {
-  //     const a = arrOfDays[0]?.month;
-  //     onClickedElementEnabled(a);
-  //     onClickOfADay(arrIndexesOfClickedDays, arrOfDays[0]?.month);
-  //   }
-  // }, [arrIndexesOfClickedDays, arrOfDays, onClickOfADay, showDays]);
-
-  useEffect(() => {
-    if (arrIndexesOfClickedDays.length > 0 && showDays) {
-      setMatchedMonths(arrIndexesOfClickedDays);
-    }
-  }, [arrIndexesOfClickedDays]);
-
-  useEffect(() => {
-    console.log(matchedMonths, "matchedMonths");
-  }, [matchedMonths]);
-
   useEffect(() => {
     if (showDays) {
       onShowDaysInfo(arrIndexesOfClickedYears, clickedMonth);
@@ -429,6 +417,21 @@ const UserHomepage = () => {
     onCircleClicked,
     onShowDaysInfo,
   ]);
+
+  useEffect(() => {
+    if (xAxisItem.current === "MONTH") {
+      const year = clickedMonth;
+      onDisplayMonth(year as string);
+    }
+  }, [clickedMonth]);
+
+  useEffect(() => {
+    if (arrIndexesOfClickedYears.length > 0) {
+      const year = clickedMonth;
+      console.log(year, "year");
+      calculateArrOfMonthsForXAxis(year as string);
+    }
+  }, [arrIndexesOfClickedYears]);
 
   useEffect(() => {
     if (showDays) {
@@ -512,12 +515,9 @@ const UserHomepage = () => {
     calculateMonthDimensionNoOfGlyphs();
   }, [calculateMonthDimensionNoOfGlyphs]);
 
-  useEffect(() => {
-    setYears(arrOfYears.slice(-1));
-  }, [arrOfYears]);
-
   const calculateArrOfMonthsForXAxis = useCallback(
     (year: string) => {
+      debugger;
       if (arrIndexesOfClickedYears?.length > 0) {
         let arrOfDuration,
           freqOfDuration,
@@ -562,6 +562,10 @@ const UserHomepage = () => {
           });
         });
         setArrOfMonths(arrOfMonths);
+        setXAxisItem({
+          items: arrOfMonths,
+          current: "MONTH",
+        });
         //setValueMenuItemClicked(false);
       } else {
         setArrOfMonths([]);
@@ -569,11 +573,6 @@ const UserHomepage = () => {
     },
     [invlerp, arrIndexesOfClickedYears]
   );
-
-  useEffect(() => {
-    const year = (years || [])[0]?.month;
-    calculateArrOfMonthsForXAxis(year);
-  }, [calculateArrOfMonthsForXAxis, years]);
 
   useEffect(() => {
     const a = data2?.filter((item: any) => {
@@ -636,14 +635,13 @@ const UserHomepage = () => {
       const selectedItem = arrOfYears.filter((item: any) => {
         return Number(item.month) === Number(id);
       });
+      setClickedMonth(id);
       setYears(selectedItem);
     },
     [arrOfYears, onDisplayMonth]
   );
 
   const onValueMenuItemClicked1 = (id: number) => {
-    // console.log('onValueMenuItemClicked1')
-    // setShowDays(false);
     setYAxisItems([]);
     setYAxisItemClicked(null);
     setYAxisItemHovered(null);
@@ -1004,10 +1002,13 @@ const UserHomepage = () => {
             }}
           >
             <Xaxis
+              currentFrame={xAxisItem.current}
+              whichDuration={xAxisItem.items}
               monthInLetters={monthInLetters}
               onCaptureDayWhenDayClickedEnabled={
                 onCaptureDayWhenDayClickedEnabled
               }
+              setXAxisItem={setXAxisItem}
               showDaysEnabled={showDaysEnabled}
               onSetdayClicked={onSetdayClicked}
               onClickedElementEnabled={onClickedElementEnabled}

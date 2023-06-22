@@ -31,13 +31,15 @@ export interface XaxisProps {
   showDaysEnabled: () => void;
   onCaptureDayWhenDayClickedEnabled: (day: string | undefined) => void;
   monthInLetters?: string;
+  whichDuration: any[];
+  currentFrame: string;
+  setXAxisItem: any;
 }
 
 export const Xaxis = ({
   onCircleClicked,
   clickedElement,
   onDisplayMonth,
-  arrOfMonths,
   arrOfYears,
   hoverElementId,
   onCircleHoverStarts,
@@ -47,6 +49,7 @@ export const Xaxis = ({
   years,
   anchorEl,
   onCloseYearMenu,
+  setXAxisItem,
   onValueMenuItemClicked,
   showDays,
   arrOfDays,
@@ -57,8 +60,10 @@ export const Xaxis = ({
   showDaysEnabled,
   onCaptureDayWhenDayClickedEnabled,
   monthInLetters,
+  whichDuration,
+  currentFrame,
+  arrOfMonths,
 }: XaxisProps) => {
-  const whichDuration = showDays ? arrOfDays : arrOfMonths;
   const [glyphWithMaxDimension, setGlyphWithMaxDimension] = useState<number>(0);
   const location = useLocation();
   const homeLocation = location?.pathname.includes("/home");
@@ -77,6 +82,8 @@ export const Xaxis = ({
       return false;
     });
   }, [whichDuration]);
+
+  console.log(whichDuration, "whichDuration");
 
   useEffect(() => {
     findMax();
@@ -125,6 +132,8 @@ export const Xaxis = ({
           {whichDuration?.map((item: ArrOfYMDProps) => {
             return (
               <XaxisItems
+                setXAxisItem={setXAxisItem}
+                currentFrame={currentFrame}
                 monthInLetters={monthInLetters}
                 onCaptureDayWhenDayClickedEnabled={
                   onCaptureDayWhenDayClickedEnabled
@@ -135,6 +144,7 @@ export const Xaxis = ({
                 furtherPropagation={furtherPropagation}
                 onClickedMonth={onClickedMonth}
                 arrOfDays={arrOfDays}
+                arrOfMonths={arrOfMonths as ArrOfYMDProps[]}
                 showDays={showDays}
                 dimension={item.dimension}
                 month={item.month}
@@ -187,7 +197,7 @@ export const Xaxis = ({
                 />
               ) : (
                 <Typography
-                  text="time"
+                  text="All"
                   fontSize="13px"
                   color={`${openMenu ? "#FE7D06" : "#000"}`}
                 />
@@ -227,6 +237,19 @@ export const Xaxis = ({
                 },
               }}
             >
+              <MenuItem
+                key={1}
+                onClick={() => {}}
+                sx={{
+                  fontSize: "13px",
+                  borderBottom: "1px solid black",
+                  "&:last-child": {
+                    borderBottom: "0px",
+                  },
+                }}
+              >
+                All
+              </MenuItem>
               {arrOfYears?.map((item: ArrOfYMDProps) => {
                 return (
                   <MenuItem

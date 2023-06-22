@@ -26,6 +26,9 @@ export interface XaxisItemsProps {
   onCaptureDayWhenDayClickedEnabled: (day: string | undefined) => void;
   monthInLetters?: string;
   durationLength: number;
+  currentFrame: string;
+  setXAxisItem: any;
+  arrOfMonths: ArrOfYMDProps[];
 }
 
 export const XaxisItems = ({
@@ -36,6 +39,7 @@ export const XaxisItems = ({
   onDisplayMonth,
   dimension,
   noOfGlyphs,
+  arrOfMonths,
   onCircleClicked,
   clickedElement,
   showDays,
@@ -50,25 +54,54 @@ export const XaxisItems = ({
   onCaptureDayWhenDayClickedEnabled,
   monthInLetters,
   durationLength,
+  currentFrame,
+  setXAxisItem,
 }: XaxisItemsProps) => {
-  // const day = `${(moment().month(month - 1).format("MMM") / month)} / ${month}`;
-  const whichDuration1: string = showDays
-    ? `${monthInLetters} ${month}`
-    : moment()
-        .month(Number(month) - 1)
-        .format("MMM");
+
+  console.log(month,'month');
+
+  const getText = (): string => {
+    switch (currentFrame) {
+      case "YEAR":
+        return month as string;
+      case "MONTH":
+        return moment()
+          .month(Number(month) - 1)
+          .format("MMM");
+      case "DAY":
+        return `${monthInLetters} ${month}`;
+      default:
+        return month as string;
+    }
+  };
+
+  const whichDuration1: string = getText();
 
   const setParams = useCallback(() => {
-    // Further Propogation checks if we need to drill down inside
-    // Year to day
-    debugger;
-    if (furtherPropagation) {
+    if (currentFrame === "YEAR") {
+      setXAxisItem({
+        items: arrOfMonths,
+        current: "MONTH",
+      });
+      onClickedMonth(month);
+      return;
+    }
+
+    if (currentFrame === "MONTH") {
+      setXAxisItem({
+        items: arrOfDays,
+        current: "DAY",
+      });
       showDaysEnabled();
       onClickedMonth(month);
-    } else {
+      return;
+    }
+
+    if (currentFrame === "DAY") {
       onClickedElementEnabled(month);
       onSetdayClicked(true);
       onCaptureDayWhenDayClickedEnabled(month);
+      return;
     }
   }, [
     furtherPropagation,
