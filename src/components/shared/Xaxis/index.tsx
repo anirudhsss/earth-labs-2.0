@@ -239,7 +239,7 @@ export const Xaxis = ({
             >
               <MenuItem
                 key={1}
-                onClick={() => {}}
+                onClick={() => onValueMenuItemClicked('All')}
                 sx={{
                   fontSize: "13px",
                   borderBottom: "1px solid black",

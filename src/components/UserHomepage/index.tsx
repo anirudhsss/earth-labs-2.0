@@ -26,7 +26,6 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import useTwitterFlow from "hooks/useTwitterFlow";
-import { XaxisItems } from "components/shared/Xaxis/XaxisItems";
 
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
@@ -635,8 +634,16 @@ const UserHomepage = () => {
       const selectedItem = arrOfYears.filter((item: any) => {
         return Number(item.month) === Number(id);
       });
-      setClickedMonth(id);
       setYears(selectedItem);
+      if (id === "All") {
+        setMatchedMonths(data1);
+        setXAxisItem({
+          items: arrOfYears,
+          current: "YEAR",
+        });
+        return;
+      }
+      setClickedMonth(id);
     },
     [arrOfYears, onDisplayMonth]
   );
