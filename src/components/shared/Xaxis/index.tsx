@@ -83,8 +83,6 @@ export const Xaxis = ({
     });
   }, [whichDuration]);
 
-  console.log(whichDuration, "whichDuration");
-
   useEffect(() => {
     findMax();
   }, [findMax]);

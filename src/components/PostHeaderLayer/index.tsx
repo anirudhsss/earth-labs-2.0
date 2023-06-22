@@ -90,7 +90,7 @@ const PostHeaderLayer = ({
 
     return "#FE7D06";
   };
-
+console.log(chosenCurrency,'chosenCurrency');
   return (
     <>
       <Box

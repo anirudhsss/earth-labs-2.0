@@ -420,7 +420,8 @@ const UserHomepage = () => {
   useEffect(() => {
     if (xAxisItem.current === "MONTH") {
       const year = clickedMonth;
-      onDisplayMonth(year as string);
+      // onDisplayMonth(year as string);
+      onValueMenuItemClicked(year as string);
     }
   }, [clickedMonth]);
 
@@ -591,6 +592,7 @@ const UserHomepage = () => {
     } else {
       arr = filteredDays;
     }
+    console.log(arrIndexesOfClickedMonths, "arrIndexesOfClickedMonths");
     // console.log('arr', arr);
     const tArr = arr?.map((item: any) => item.targetValue);
     const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
