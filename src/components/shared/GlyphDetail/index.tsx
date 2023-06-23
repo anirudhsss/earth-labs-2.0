@@ -42,17 +42,28 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
 
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
+    debugger;
     if (code) {
-      setOpenModal(true);
-
-      const user = await getTwitterUserInfo(
-        "state",
-        code,
-        window.location.origin
-      );
-      if (updateTwitterUser) updateTwitterUser(user);
+      localStorage.setItem("fromTwitter", "twitter");
+      try {
+        const user = await getTwitterUserInfo(
+          "state",
+          code,
+          window.location.origin
+        );
+        if (updateTwitterUser) updateTwitterUser(user);
+      } catch (e) {
+        setOpenModal(true);
+      }
     }
   }, [getTwitterUserInfo]);
+
+  useEffect(() => {
+    const flag = localStorage.getItem("fromTwitter");
+    if (twitterUser && flag) {
+      setOpenModal(true);
+    }
+  }, [twitterUser]);
 
   useEffect(() => {
     processTwitterAuthentication();
@@ -123,6 +134,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
             onClick={() => {
               setOpenModal(false);
               removeCode();
+              localStorage.removeItem("fromTwitter");
             }}
             style={{
               color: "#000",
@@ -142,6 +154,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           </button>
           <Button
             onClick={async () => {
+              localStorage.removeItem("fromTwitter");
               setLoader(true);
               try {
                 const mediaId = await generateMediaId(
@@ -150,7 +163,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                   twitterUser?.username as string
                 );
                 const message = localStorage.getItem("message");
-                console.log(message, "message");
                 const data = await tweetGlyphImageOnTwitter(
                   mediaId,
                   twitterUser?.id as string,

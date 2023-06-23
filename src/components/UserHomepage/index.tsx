@@ -337,7 +337,6 @@ const UserHomepage = () => {
 
   const onCircleClicked = useCallback(
     (month: string) => {
-      console.log("Hello");
       resetXAxis();
       const arrIndexesOfClickedMonths: any[] = arrIndexesOfClickedYears?.filter(
         (item: { timestamp: moment.MomentInput }) => {
@@ -345,7 +344,6 @@ const UserHomepage = () => {
           return monthFromApi === Number(month);
         }
       );
-      console.log("hELLO");
       setMatchedMonths(arrIndexesOfClickedMonths);
       setArrIndexesOfClickedMonths(arrIndexesOfClickedMonths);
     },
@@ -702,6 +700,7 @@ const UserHomepage = () => {
       lengthsArr.push(testFunc2(d3, higherRange));
       let arr3: any[] = [];
       arr3 = matchedMonths;
+      console.log(arrIndexesOfClickedDays,arrIndexesOfClickedMonths,arrIndexesOfClickedYears);
       const arr = arr3?.filter((item: any) => {
         // console.log('item', item);
         let a = 1;

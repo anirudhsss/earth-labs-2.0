@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import Alert from "components/shared/Alert/Alert";
 import { Container } from "components/shared/Container";
 import GlyphDetail from "components/shared/GlyphDetail";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
@@ -10,9 +9,9 @@ import TwitterContext from "context/twitter.context";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
 import useTwitterFlow from "hooks/useTwitterFlow";
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate, useRoutes } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
-import { useAccount, useConnect } from "wagmi";
+import { useAccount } from "wagmi";
 
 export interface GlyphDetailPageProps {
   altTxnHash?: string;
@@ -33,7 +32,6 @@ const GlyphDetailPage = ({
   const location = useLocation();
   const { isTwitterConnectedFlagFromLandingPage, removeTwitterConnectFlag } =
     useTwitterFlow();
-  const { twitterUser } = useContext(TwitterContext);
   const [isTwitterConnectedAlert, setTwitterConnectedAlert] = useState(false);
 
   useEffect(() => {
