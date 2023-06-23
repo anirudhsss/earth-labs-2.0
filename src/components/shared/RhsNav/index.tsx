@@ -205,6 +205,7 @@ export const RhsNav = ({
               {(mapsLocation || homeLocation) && (
                 <Box
                   sx={{ height: "9vh" }}
+       
                   className={styles.yearMonthBoxParent}
                 >
                   {years[0]?.month !== undefined && (

@@ -165,7 +165,7 @@ export const Xaxis = ({
           width: "9%",
           display: "flex",
           justifyContent: "flex-end",
-          marginTop: (years || [])?.length > 0 ? "-2.5vw" : "",
+
         }}
       >
         {(mapsLocation || homeLocation) && (
@@ -183,8 +183,7 @@ export const Xaxis = ({
               justifyContent="space-around"
               alignItems="center"
               border="1px solid #000"
-              borderTop={`${openMenu ? "0" : "1px solid #000"}`}
-              paddingTop={`${openMenu && "0px"}`}
+
               onClick={onOpenYearMenu}
             >
               {(years || [])?.length > 0 ? (
