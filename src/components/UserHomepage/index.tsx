@@ -337,6 +337,7 @@ const UserHomepage = () => {
 
   const onCircleClicked = useCallback(
     (month: string) => {
+      console.log("Hello");
       resetXAxis();
       const arrIndexesOfClickedMonths: any[] = arrIndexesOfClickedYears?.filter(
         (item: { timestamp: moment.MomentInput }) => {
@@ -344,6 +345,7 @@ const UserHomepage = () => {
           return monthFromApi === Number(month);
         }
       );
+      console.log("hELLO");
       setMatchedMonths(arrIndexesOfClickedMonths);
       setArrIndexesOfClickedMonths(arrIndexesOfClickedMonths);
     },
@@ -420,7 +422,6 @@ const UserHomepage = () => {
   useEffect(() => {
     if (xAxisItem.current === "MONTH") {
       const year = clickedMonth;
-      // onDisplayMonth(year as string);
       onValueMenuItemClicked(year as string);
     }
   }, [clickedMonth]);
@@ -428,7 +429,6 @@ const UserHomepage = () => {
   useEffect(() => {
     if (arrIndexesOfClickedYears.length > 0) {
       const year = clickedMonth;
-      console.log(year, "year");
       calculateArrOfMonthsForXAxis(year as string);
     }
   }, [arrIndexesOfClickedYears]);
@@ -585,21 +585,17 @@ const UserHomepage = () => {
   }, [data2]);
 
   useEffect(() => {
-    let arr: any[] = [];
-    // arr = data2;
-    if (furtherPropagation) {
-      arr = arrIndexesOfClickedMonths;
-    } else {
-      arr = filteredDays;
+    if (matchedMonths.length > 0) {
+      calculateTheCurrencyArr(matchedMonths);
     }
-    console.log(arrIndexesOfClickedMonths, "arrIndexesOfClickedMonths");
-    // console.log('arr', arr);
+  }, [matchedMonths]);
+
+  const calculateTheCurrencyArr = (arr: any[]) => {
     const tArr = arr?.map((item: any) => item.targetValue);
     const sortedTArr = tArr?.sort((a: any, b: any) => a - b);
     const requiredArr = CalcRange(sortedTArr);
-    // console.log('requiredArr', requiredArr);
     setChosenCurrency(requiredArr);
-  }, [arrIndexesOfClickedMonths, filteredDays, furtherPropagation]);
+  };
 
   const onHelpIconClicked = () => {
     setHelpIconClicked(!helpIconClicked);
@@ -678,10 +674,11 @@ const UserHomepage = () => {
       // return selectedItem;
     });
     testFunc(res);
-    setCurrency(res);
+    //setCurrency(res);
   };
 
   const testFunc = (selectedItem: any) => {
+    console.log(selectedItem, "selectedItem");
     // console.log('selectedItem', selectedItem)
     let lowerRange = 0,
       higherRange = 0;
@@ -690,24 +687,9 @@ const UserHomepage = () => {
     // if (b[b.length - 1] === 'ETH') {
     lowerRange = Number(b[0]);
     higherRange = Number(b[2]);
-    // } else if (b[b.length - 1] === 'USDC') {
-    // if (b[0] === '<') {
-    //     lowerRange = 50;
-    //     const newB = b[1].substr(1);
-    //     higherRange = Number(newB);
-    // } else if (b[0] === '>') {
-    //     const newB = b[1].substr(1);
-    //     lowerRange = Number(newB);
-    //     higherRange = 20000;
-    // } else {
-    //     lowerRange = Number(b[0].substr(1));
-    //     higherRange = Number(b[2].substr(1));
-    // }
-    //     lowerRange = Number(b[0]) / (ethToUsdc ? ethToUsdc : 1);
-    //     higherRange = Number(b[2]) / (ethToUsdc ? ethToUsdc : 1);
-    // }
 
     if (lowerRange > 0 && higherRange > 0) {
+      console.log("Hello");
       let c = higherRange - lowerRange;
       let d = c / 4;
       let d1 = Number((lowerRange + d).toFixed(3));
@@ -719,11 +701,7 @@ const UserHomepage = () => {
       lengthsArr?.push(testFunc2(d2, d3));
       lengthsArr.push(testFunc2(d3, higherRange));
       let arr3: any[] = [];
-      if (furtherPropagation) {
-        arr3 = arrIndexesOfClickedMonths;
-      } else {
-        arr3 = arrIndexesOfClickedDays;
-      }
+      arr3 = matchedMonths;
       const arr = arr3?.filter((item: any) => {
         // console.log('item', item);
         let a = 1;

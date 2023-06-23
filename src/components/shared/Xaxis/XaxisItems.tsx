@@ -58,8 +58,6 @@ export const XaxisItems = ({
   setXAxisItem,
 }: XaxisItemsProps) => {
 
-  console.log(month,'month');
-
   const getText = (): string => {
     switch (currentFrame) {
       case "YEAR":
