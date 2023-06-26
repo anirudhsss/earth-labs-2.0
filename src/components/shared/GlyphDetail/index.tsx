@@ -191,7 +191,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               borderRadius: "3rem",
             }}
           >
-            <img src={props.glyphURL} alt="" width={500} height={430} />
+            <img src={props.glyphURL} alt="" width={500} height={350} />
           </div>
           <div style={{ fontSize: "2rem", textAlign: "center" }}>
             Modify your Tweet here.
@@ -537,7 +537,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     );
   };
 
-  const ModalContent = () => {};
 
   return (
     <>
