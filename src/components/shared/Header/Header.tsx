@@ -226,7 +226,7 @@ const Header = ({
               onChange={(e) => {
                 setTxn(e);
               }}
-              color={'#000000'}
+              color={"#000000"}
               placeholderColor={`${
                 mapsLocation ||
                 homeLocation ||

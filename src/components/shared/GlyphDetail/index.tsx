@@ -312,6 +312,14 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
               </RenderIf>
             </Button>
           </div>
+          <div
+            style={{
+              fontSize: "1.6rem",
+            }}
+            className="flex w-100 justify-content-center align-items-center"
+          >
+            <span>signed in as @{twitterUser?.name}</span>
+          </div>
         </div>
       );
     };
@@ -536,7 +544,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
       </>
     );
   };
-
 
   return (
     <>

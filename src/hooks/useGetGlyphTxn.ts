@@ -43,8 +43,11 @@ const useGetGlyphDetails = (txnId: string) => {
     "https://api.earth.domains/earthapi/dotEarth/GenerateGlyphs?input=";
   const [glphyDetails, setGlyphDetails] = useState<IHexesDetail>();
   const [isLoader, setLoader] = useState(false);
+
   useEffect(() => {
-    getTxnDetails(txnId);
+    if (txnId.length > 60) {
+      getTxnDetails(txnId);
+    }
   }, [txnId]);
 
   const getTxnDetails = async (txnId: string): Promise<void> => {
