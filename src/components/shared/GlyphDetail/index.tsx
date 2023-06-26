@@ -35,6 +35,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
   const [isTwitterInitLoading, setTwitterInitLoading] =
     useState<boolean>(false);
   const navigate = useNavigate();
+  const { openSnackBar } = useContext(SnackbarContext);
 
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");

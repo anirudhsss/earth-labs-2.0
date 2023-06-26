@@ -6,6 +6,7 @@ import RenderIf from "components/shared/RenderIf";
 import Spinner from "components/shared/Spinner/Spinner";
 import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import { Icons } from "constant";
+import SnackbarContext from "context/snackbar.context";
 import TwitterContext from "context/twitter.context";
 import useGetGlyphDetails, { IHexesDetail } from "hooks/useGetGlyphTxn";
 import useTwitterFlow from "hooks/useTwitterFlow";
@@ -33,7 +34,8 @@ const GlyphDetailPage = ({
   const location = useLocation();
   const { isTwitterConnectedFlagFromLandingPage, removeTwitterConnectFlag } =
     useTwitterFlow();
-  const [isTwitterConnectedAlert, setTwitterConnectedAlert] = useState(false);
+  const { openSnackBar } = useContext(SnackbarContext);
+  const { twitterUser } = useContext(TwitterContext);
 
   useEffect(() => {
     if (isConnected && !altTxnHash) {
@@ -42,14 +44,13 @@ const GlyphDetailPage = ({
   }, [isConnected]);
 
   useEffect(() => {
-    if (isTwitterConnectedFlagFromLandingPage()) {
-      setTwitterConnectedAlert(true);
+    if (isTwitterConnectedFlagFromLandingPage() && twitterUser) {
+      if (openSnackBar) openSnackBar("Twitter is successfuly connected !", 5000);
       setTimeout(() => {
         removeTwitterConnectFlag();
-        setTwitterConnectedAlert(false);
       }, 5000);
     }
-  }, []);
+  }, [twitterUser]);
 
   // Getting the txn hash from the url and setting the state
   useEffect(() => {
@@ -81,15 +82,6 @@ const GlyphDetailPage = ({
       )}
       <RenderIf isTrue={!isLoader}>
         <>
-          <div
-            style={{
-              width: "100%",
-              height: "62px",
-            }}
-          >
-            <TwitterConnectAlert isShow={isTwitterConnectedAlert} />
-          </div>
-
           <GlyphDetail
             {...(glphyDetails as IHexesDetail)}
             isMapScreen={isMapScreen}
