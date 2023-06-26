@@ -3,6 +3,7 @@ import { Container } from "components/shared/Container";
 import GlyphDetail from "components/shared/GlyphDetail";
 import OnboardingHeader from "components/shared/OnboardingHeader/onboarding-header";
 import RenderIf from "components/shared/RenderIf";
+import Spinner from "components/shared/Spinner/Spinner";
 import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import { Icons } from "constant";
 import TwitterContext from "context/twitter.context";
@@ -98,19 +99,14 @@ const GlyphDetailPage = ({
       <RenderIf isTrue={isLoader}>
         <div
           style={{
-            padding: "5rem 15rem",
-            paddingTop: "0",
-            height: "calc(100vh - 68px)",
-            animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "calc(100vh - 75px)",
           }}
-          className="animate-pulse"
         >
-          <img
-            src={Icons.glyphDetailLoader}
-            alt=""
-            width={"100%"}
-            height={"100%"}
-          />
+          <Spinner isLoading={isLoader} />
         </div>
       </RenderIf>
     </Container>

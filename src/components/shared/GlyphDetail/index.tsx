@@ -5,6 +5,7 @@ import TwitterContext from "context/twitter.context";
 import { IHexesDetail } from "hooks/useGetGlyphTxn";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
 import BasicModal from "modals/Modal";
+import React from "react";
 import {
   FC,
   useCallback,
@@ -42,7 +43,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
 
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
- 
+
     if (code) {
       localStorage.setItem("fromTwitter", "twitter");
       try {
@@ -263,6 +264,18 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     );
   };
 
+  const MemoImage = React.memo(function Image({
+    src,
+    width,
+    height,
+  }: {
+    src: string;
+    width: string;
+    height: string;
+  }) {
+    return <img src={src} width={width} height={height} />;
+  });
+
   const AlertContent = () => {
     const [timerTime, setTimerTime] = useState<string>();
 
@@ -289,6 +302,8 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         };
       }, 1000);
     };
+
+
 
     return (
       <RenderIf isTrue={twitterShared?.isTweetShared as boolean}>
@@ -370,12 +385,12 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 gap: "5rem",
               }}
             >
-              <img
+              <MemoImage
                 src={props.glyphURL}
-                alt=""
                 width={"423px"}
                 height={"423px"}
-              ></img>
+              />
+
               <div className="flex flex-column">
                 <RenderIf isTrue={!twitterShared.isTweetShared}>
                   <Button

@@ -93,7 +93,8 @@ export const RhsNav = ({
                 if (!isConnected) {
                   return;
                 }
-                onHomeHandle();
+                console.log(onHomeHandle, "onHomeHandle");
+                if (onHomeHandle) onHomeHandle();
                 navigateToMaps();
               }}
             >
@@ -205,7 +206,6 @@ export const RhsNav = ({
               {(mapsLocation || homeLocation) && (
                 <Box
                   sx={{ height: "9vh" }}
-       
                   className={styles.yearMonthBoxParent}
                 >
                   {years[0]?.month !== undefined && (

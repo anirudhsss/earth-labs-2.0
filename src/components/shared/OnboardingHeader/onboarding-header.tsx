@@ -34,6 +34,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
   const walletLocation = location?.pathname.includes("/wallet");
   const mapsLocation = location?.pathname.includes("/maps");
   const discoveryLocation = location?.pathname.includes("/discovery");
+  const txnLocation = location?.pathname.includes("/txn");
   const { getTwitterUserInfo } = useTwitterFlow();
   const { updateTwitterUser, twitterUser } = useContext(TwitterContext);
   const [twitterUserInfo, setTwitterUserInfo] = useLocalStorageState<{
@@ -203,6 +204,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           justifyContent: "space-between",
           alignItems: "center",
           padding: "0 2rem",
+          paddingLeft: txnLocation ? "0rem" : "2rem",
           height: "7.5rem",
           borderBottom: "1px solid #fff",
         }}
@@ -244,10 +246,6 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
             </Link>
           </RenderIf>
 
-
-
-
-
           <RenderIf isTrue={isSearch}>
             <div
               className="flex"
@@ -256,7 +254,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
               <NormalSearchField
                 borderColor="#fff"
                 padding={"1rem"}
-                color={'#ffffff'}
+                color={"#ffffff"}
                 placeholderColor={"#fff"}
                 placeholderFontSize={"1.6rem"}
                 fontSize={"1.6rem"}
