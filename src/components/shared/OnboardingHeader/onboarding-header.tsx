@@ -203,7 +203,7 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
           justifyContent: "space-between",
           alignItems: "center",
           padding: "0 2rem",
-          height: "10rem",
+          height: "7.5rem",
           borderBottom: "1px solid #fff",
         }}
       >
