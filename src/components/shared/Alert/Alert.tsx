@@ -1,5 +1,6 @@
 import { FC } from "react";
-
+import { GrCircleInformation } from "react-icons/gr/index";
+import RenderIf from "../RenderIf";
 interface IAlert {
   color?: string;
   text: JSX.Element;
@@ -27,22 +28,30 @@ const Alert: FC<IAlert> = ({
         marginTop: "3rem",
         gap: "2rem",
         alignItems: "center",
+        justifyContent: "center",
         height,
-        textAlign:'center'
+        textAlign: "center",
       }}
       className="flex flex-row"
     >
+      {icon ? <img src={icon as string} alt={"icon"} /> : null}
       <span
         style={{
           color: textColor,
-          width:'100%',
+          width: "100%",
           fontSize: "1.6rem",
-          textAlign : 'center'
+          textAlign: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1rem",
         }}
       >
+        <RenderIf isTrue={!Boolean(icon)}>
+          <GrCircleInformation size={"1.6rem"} color={textColor} />
+        </RenderIf>
         {text}
       </span>
-      {icon ? <img src={icon as string} alt={"icon"} /> : null}
     </div>
   );
 };

@@ -39,6 +39,7 @@ export interface IHexesDetail {
 }
 
 const useGetGlyphDetails = (txnId: string) => {
+  console.log(txnId,'txnId');
   const baseURL =
     "https://api.earth.domains/earthapi/dotEarth/GenerateGlyphs?input=";
   const [glphyDetails, setGlyphDetails] = useState<IHexesDetail>();

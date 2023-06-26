@@ -8,6 +8,7 @@ import Alert from "components/shared/Alert/Alert";
 import RenderIf from "components/shared/RenderIf";
 import { textAlign } from "@mui/system";
 
+
 interface IServiceProvider {
   children: JSX.Element;
 }
@@ -56,7 +57,7 @@ const SnackBarProvider: FC<IServiceProvider> = ({ children }) => {
             style={{
               top: "60px",
               left: "0",
-              maxWidth:'450px',
+              maxWidth: "450px",
               right: "0",
               margin: "0 auto",
               position: "fixed",
@@ -65,7 +66,7 @@ const SnackBarProvider: FC<IServiceProvider> = ({ children }) => {
             }}
           >
             <Alert
-              height={"40px"}
+              height={"30px"}
               padding={"0px 2rem"}
               text={<p>{snackbar.message}</p>}
             />

@@ -58,7 +58,9 @@ export const LandingPage = () => {
         updateTwitterUserObject();
       } else {
         setTwitterConnectFlag();
-        navigate(`/txn/${searchTxt}`);
+        if (searchTxt) {
+          navigate(`/txn/${searchTxt}`);
+        }
       }
     }
   }, [navigate, searchParams]);

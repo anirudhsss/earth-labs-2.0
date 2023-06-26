@@ -37,9 +37,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
   const navigate = useNavigate();
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
-
     if (code) {
-      localStorage.setItem("fromTwitter", "twitter");
       try {
         const user = await getTwitterUserInfo(
           "state",
@@ -48,6 +46,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         );
         if (updateTwitterUser) updateTwitterUser(user);
       } catch (e) {
+        console.log(e, "error");
         //setOpenModal(true);
       }
     }
@@ -152,6 +151,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
       <RenderIf isTrue={twitterShared?.isTweetShared as boolean}>
         <div className="flex justify-content-center align-items-center ">
           <Alert
+            height="3rem"
             text={
               (
                 <>
@@ -185,140 +185,160 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           <div
             className="flex justify-content-center align-items-center"
             style={{
-              padding: "2rem",
-              width: "auto",
+              width: "100%",
               borderRadius: "3rem",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
-            <img src={props.glyphURL} alt="" width={500} height={350} />
+            <img src={props.glyphURL} alt="" width={400} height={400} />
           </div>
-          <div style={{ fontSize: "2rem", textAlign: "center" }}>
-            Modify your Tweet here.
-          </div>
+
           <div
             style={{
-              backgroundColor: "#D9D9D9",
-              borderRadius: "2rem",
-              padding: "2.5rem",
-              fontSize: "2rem",
-              gap: "2rem",
-              color: "#4E4E4E",
-            }}
-            className={"flex flex-column"}
-          >
-            <div id="contentEditable">
-              <span
-                contentEditable={true}
-                onInput={(e: any) => {
-                  localStorage.setItem(
-                    "message",
-                    String(e.target.innerText).replace("\\n", "\n")
-                  );
-                }}
-              >
-                {text}
-              </span>
-            </div>
-          </div>
-          <div
-            style={{
+              display: "flex",
+              flexDirection: "column",
               gap: "1rem",
             }}
-            className="flex flex-row w-100 justify-content-center align-items-center"
           >
-            <button
-              onClick={() => {
-                setOpenModal(false);
-                removeCode();
-                localStorage.removeItem("fromTwitter");
-              }}
+            <div style={{ fontSize: "1.6rem", textAlign: "center" }}>
+              Modify your Tweet here.
+            </div>
+            <div
               style={{
-                color: "#000",
-                fontSize: "2rem",
-                border: "1px solid #000",
-                borderRadius: "3rem",
-                backgroundColor: "transparent",
-                padding: "0.5rem 5rem",
+                gap: "2rem",
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "4.5rem",
-                cursor: "pointer",
-                fontFamily : 'DINAlternateBold'
+                flexDirection: "column",
               }}
             >
-              Cancel
-            </button>
-            <Button
-              onClick={async () => {
-                localStorage.removeItem("fromTwitter");
-                setLoader(true);
-                try {
-                  const mediaId = await generateMediaId(
-                    props.glyphURL as string,
-                    twitterUser?.id as string,
-                    twitterUser?.username as string
-                  );
-                  const message = localStorage.getItem("message");
-                  const data = await tweetGlyphImageOnTwitter(
-                    mediaId,
-                    twitterUser?.id as string,
-                    message as string
-                  );
-                  setLoader(false);
-                  if (data) {
+              <div
+                style={{
+                  backgroundColor: "#D9D9D9",
+                  borderRadius: "2rem",
+                  padding: "2.5rem",
+                  fontSize: "1.6rem",
+                  gap: "2rem",
+                  color: "#4E4E4E",
+                }}
+                className={"flex flex-column"}
+              >
+                <div id="contentEditable">
+                  <span
+                    contentEditable={true}
+                    onInput={(e: any) => {
+                      localStorage.setItem(
+                        "message",
+                        String(e.target.innerText).replace("\\n", "\n")
+                      );
+                    }}
+                  >
+                    {text}
+                  </span>
+                </div>
+              </div>
+              <div
+                style={{
+                  gap: "1rem",
+                }}
+                className="flex flex-row w-100 justify-content-center align-items-center"
+              >
+                <button
+                  onClick={() => {
                     setOpenModal(false);
-
-                    if (!props.isMapScreen) {
-                      setTwitterShared({
-                        message: (
-                          <>
-                            <span>First Glyph shared on Twitter! </span>
-                            ...directing you to Maps view in{" "}
-                          </>
-                        ),
-                        isTweetShared: true,
-                      });
-                    }
-
-                    if (props.isMapScreen) {
-                      setTwitterShared({
-                        message: (
-                          <>
-                            <span>Glyph succesfully shared on Twitter !</span>{" "}
-                            <a href={data.text}>View your tweet !</a>
-                          </>
-                        ),
-                        isTweetShared: true,
-                      });
-                    }
-
                     removeCode();
-                  }
-                } catch (e) {
-                  setLoader(false);
-                }
-              }}
-              color="#fff"
-              size="2rem"
-              borderRadius="3rem"
-              backgroundColor="#FE7D06"
-              padding="0.5rem 5rem"
-              display="flex"
-            >
-              <Spinner isLoading={isLoader} />
-              <RenderIf isTrue={!isLoader}>
-                <span>Tweet!</span>
-              </RenderIf>
-            </Button>
-          </div>
-          <div
-            style={{
-              fontSize: "1.6rem",
-            }}
-            className="flex w-100 justify-content-center align-items-center"
-          >
-            <span>signed in as @{twitterUser?.name}</span>
+                    localStorage.removeItem("fromTwitter");
+                  }}
+                  style={{
+                    color: "#000",
+                    fontSize: "1.6rem",
+                    border: "1px solid #000",
+                    borderRadius: "3rem",
+                    backgroundColor: "transparent",
+                    padding: "0.5rem 5rem",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "4.5rem",
+                    cursor: "pointer",
+                    fontFamily: "DINAlternateBold",
+                  }}
+                >
+                  Cancel
+                </button>
+                <Button
+                  onClick={async () => {
+                    localStorage.removeItem("fromTwitter");
+                    setLoader(true);
+                    try {
+                      const mediaId = await generateMediaId(
+                        props.glyphURL as string,
+                        twitterUser?.id as string,
+                        twitterUser?.username as string
+                      );
+                      const message = localStorage.getItem("message");
+                      const data = await tweetGlyphImageOnTwitter(
+                        mediaId,
+                        twitterUser?.id as string,
+                        message as string
+                      );
+                      setLoader(false);
+                      if (data) {
+                        setOpenModal(false);
+
+                        if (!props.isMapScreen) {
+                          setTwitterShared({
+                            message: (
+                              <>
+                                <span>First Glyph shared on Twitter! </span>
+                                ...directing you to Maps view in{" "}
+                              </>
+                            ),
+                            isTweetShared: true,
+                          });
+                        }
+
+                        if (props.isMapScreen) {
+                          setTwitterShared({
+                            message: (
+                              <>
+                                <span>
+                                  Glyph succesfully shared on Twitter !
+                                </span>{" "}
+                                <a href={data.text}>View your tweet !</a>
+                              </>
+                            ),
+                            isTweetShared: true,
+                          });
+                        }
+
+                        removeCode();
+                      }
+                    } catch (e) {
+                      setLoader(false);
+                    }
+                  }}
+                  color="#fff"
+                  size="1.6rem"
+                  borderRadius="3rem"
+                  backgroundColor="#FE7D06"
+                  padding="0.5rem 5rem"
+                  display="flex"
+                >
+                  <Spinner isLoading={isLoader} />
+                  <RenderIf isTrue={!isLoader}>
+                    <span>Tweet!</span>
+                  </RenderIf>
+                </Button>
+              </div>
+              <div
+                style={{
+                  fontSize: "1.6rem",
+                }}
+                className="flex w-100 justify-content-center align-items-center"
+              >
+                <span>signed in as @{twitterUser?.name}</span>
+              </div>
+            </div>
           </div>
         </div>
       );
@@ -419,6 +439,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                           sessionStorage.setItem("from", "maps");
                         }
                         setTwitterInitLoading(true);
+                        localStorage.setItem("fromTwitter", "twitter");
                         const url = await initateTwitterAuth();
                         setTwitterInitLoading(false);
                         window.open(url, "_self");

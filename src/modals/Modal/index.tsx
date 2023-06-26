@@ -29,7 +29,7 @@ const BasicModal: FC<IBasicModal> = ({ open, handleClose, content, width }) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style, width: width }}>{content}</Box>
+      <Box sx={{ ...style, width: width , height : 'auto' }}>{content}</Box>
     </Modal>
   );
 };
