@@ -188,7 +188,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                     setTwitterShared({
                       message: (
                         <>
-                          <span>Glyph succesfully shared on twitter !</span>{" "}
+                          <span>Glyph succesfully shared on Twitter !</span>{" "}
                           <a href={data.text}>View your tweet !</a>
                         </>
                       ),
