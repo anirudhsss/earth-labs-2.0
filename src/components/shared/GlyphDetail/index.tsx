@@ -101,6 +101,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         >
           <img src={props.glyphURL} alt="" width={500} height={430} />
         </div>
+        <div style={{fontSize: '1.6rem'}}>Modify your tweet here.</div>
         <div
           style={{
             backgroundColor: "#D9D9D9",
@@ -112,6 +113,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           }}
           className={"flex flex-column"}
         >
+      
           <div id="contentEditable">
             <span
               contentEditable={true}
@@ -119,8 +121,8 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 localStorage.setItem("message", e.target.innerText);
               }}
             >
-              Modify your tweet here. {props.altText} at {props.timeStamp}{" "}
-              #atlas #blockchain #explorer #hexagon @atlas_xyz
+              {props.altText} at {props.timeStamp} #atlas #blockchain #explorer
+              #hexagon @atlas_xyz
             </span>
           </div>
         </div>
