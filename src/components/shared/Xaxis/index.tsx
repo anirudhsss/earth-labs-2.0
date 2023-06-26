@@ -165,7 +165,8 @@ export const Xaxis = ({
           width: "9%",
           display: "flex",
           justifyContent: "flex-end",
-
+          position: "relative",
+          bottom: "0px",
         }}
       >
         {(mapsLocation || homeLocation) && (
@@ -183,7 +184,6 @@ export const Xaxis = ({
               justifyContent="space-around"
               alignItems="center"
               border="1px solid #000"
-
               onClick={onOpenYearMenu}
             >
               {(years || [])?.length > 0 ? (
@@ -236,7 +236,7 @@ export const Xaxis = ({
             >
               <MenuItem
                 key={1}
-                onClick={() => onValueMenuItemClicked('All')}
+                onClick={() => onValueMenuItemClicked("All")}
                 sx={{
                   fontSize: "13px",
                   borderBottom: "1px solid black",
