@@ -1,6 +1,8 @@
+import { SnackbarContent } from "@mui/material";
+import SnackbarContext from "context/snackbar.context";
 import TwitterContext from "context/twitter.context";
 import { ITwitterUser } from "hooks/useTwitterFlow";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import useLocalStorageState from "use-local-storage-state";
 
 interface ITwitterProvider {
@@ -9,8 +11,12 @@ interface ITwitterProvider {
 const TwitterProvider: FC<ITwitterProvider> = ({ children }) => {
   const [twitterUser, setTwitterUser] =
     useLocalStorageState<ITwitterUser>("twitterUser");
+  const { openSnackBar } = useContext(SnackbarContext);
 
   const updateTwitterUser = (user: ITwitterUser) => {
+    if (user) {
+      if (openSnackBar) openSnackBar("Twitter Succesfully Connected", 5000);
+    }
     setTwitterUser(user);
   };
 

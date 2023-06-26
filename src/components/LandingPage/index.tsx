@@ -30,11 +30,10 @@ export const LandingPage = () => {
   const { searchTxnAddress } = useSearchTxnAddress();
   const { address, isConnected } = useAccount();
   const { updateTwitterUser } = useContext(TwitterContext);
-  const [isTwitterConnected, setTwitterConnected] = useState(false);
   const { openSnackBar } = useContext(SnackbarContext);
   const location = useLocation();
   const landingLocation = location?.pathname === "/";
-  
+
   useEffect(() => {
     if (isConnected && landingLocation) {
       navigate(`/maps/${address}`);
@@ -76,19 +75,13 @@ export const LandingPage = () => {
         code,
         window.location.origin
       );
-      setTwitterConnected(true);
       if (updateTwitterUser) updateTwitterUser(user);
-      setTimeout(() => {
-        setTwitterConnected(false);
-      }, 5000);
     }
   }, [getTwitterUserInfo]);
 
   return (
     <Container backgroundColor="#1C223D" height={"100vh"} overflow={"hidden"}>
       <OnboardingHeader isConnectWallet={true} isSearch={false} />
-      <TwitterConnectAlert isShow={isTwitterConnected} />
-
       <section
         className={styles.landing_inner}
         style={{

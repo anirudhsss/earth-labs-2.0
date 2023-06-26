@@ -35,8 +35,6 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
   const [isTwitterInitLoading, setTwitterInitLoading] =
     useState<boolean>(false);
   const navigate = useNavigate();
-  const { openSnackBar } = useContext(SnackbarContext);
-
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
 
@@ -246,6 +244,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 alignItems: "center",
                 height: "4.5rem",
                 cursor: "pointer",
+                fontFamily : 'DINAlternateBold'
               }}
             >
               Cancel
