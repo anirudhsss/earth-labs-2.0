@@ -166,7 +166,7 @@ export const Xaxis = ({
           display: "flex",
           justifyContent: "flex-end",
           position: "relative",
-          bottom: "18px",
+          bottom:whichDuration.length === 0 ? "0px" :  "18px",
         }}
       >
         {(mapsLocation || homeLocation) && (

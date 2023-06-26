@@ -13,7 +13,7 @@ const TwitterConnectAlert: FC<ITwitterConnectAlert> = ({ isShow }) => {
         style={{ width: "100%" }}
         className="flex justify-content-center align-items-center "
       >
-        <Alert text={<span>You have successfully connected to twitter</span>} />
+        <Alert text={<span>You have successfully connected to Twitter</span>} />
       </div>
     </RenderIf>
   );

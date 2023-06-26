@@ -13,7 +13,7 @@ import TwitterContext from "context/twitter.context";
 import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import useTwitterFlow from "hooks/useTwitterFlow";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { useAccount } from "wagmi";
 import styles from "./styles.module.css";
@@ -32,8 +32,11 @@ export const LandingPage = () => {
   const { updateTwitterUser } = useContext(TwitterContext);
   const [isTwitterConnected, setTwitterConnected] = useState(false);
   const { openSnackBar } = useContext(SnackbarContext);
+  const location = useLocation();
+  const landingLocation = location?.pathname === "/";
+  
   useEffect(() => {
-    if (isConnected) {
+    if (isConnected && landingLocation) {
       navigate(`/maps/${address}`);
     }
   }, [isConnected]);
@@ -103,7 +106,7 @@ export const LandingPage = () => {
           width={300}
           height={150}
           onClick={() => {
-            console.log('Hello')
+            console.log("Hello");
             if (openSnackBar) openSnackBar("Hello", 6000);
           }}
         ></img>

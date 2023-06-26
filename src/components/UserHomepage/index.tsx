@@ -515,7 +515,7 @@ const UserHomepage = () => {
 
   const calculateArrOfMonthsForXAxis = useCallback(
     (year: string) => {
-      debugger;
+
       if (arrIndexesOfClickedYears?.length > 0) {
         let arrOfDuration,
           freqOfDuration,

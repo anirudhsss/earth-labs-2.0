@@ -5,7 +5,7 @@ const useSearchTxnAddress = () => {
   const location = useLocation();
   const pathName = location.pathname;
   const searchTxnAddress = (searchText: string) => {
-    debugger;
+
     if (
       searchText.length !== 0 &&
       searchText.length == 66 &&

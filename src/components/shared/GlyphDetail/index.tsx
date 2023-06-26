@@ -19,13 +19,13 @@ import { Button } from "../Button";
 import InfoField from "../InfoField";
 import RenderIf from "../RenderIf";
 import Spinner from "../Spinner/Spinner";
+import TwitterConnectAlert from "../TwitterConnectAlert";
 
 const GlyphDetail: FC<IHexesDetail> = (props) => {
   const [twitterShared, setTwitterShared] = useState<{
     message?: JSX.Element;
     isTweetShared?: boolean;
   }>({});
-  const [isTwitterConnected, setTwitterConnected] = useState(false);
   const [isOpen, setOpenModal] = useState<boolean>(false);
 
   const {
@@ -42,7 +42,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
 
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
-    debugger;
+ 
     if (code) {
       localStorage.setItem("fromTwitter", "twitter");
       try {
@@ -82,6 +82,17 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
     localStorage.removeItem("code");
   };
 
+  const text = `${props.altText} at
+  ${new Date(props.timeStamp).toLocaleDateString()}
+  Check it out on Atlas: ${window.location?.href} 
+  by @atlasxy_ #atlas`;
+
+  useEffect(() => {
+    if (props) {
+      localStorage.setItem("message", text);
+    }
+  }, [props]);
+
   const ShareTwitterGlyphContent = () => {
     return (
       <div
@@ -101,7 +112,9 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
         >
           <img src={props.glyphURL} alt="" width={500} height={430} />
         </div>
-        <div style={{fontSize: '1.6rem'}}>Modify your tweet here.</div>
+        <div style={{ fontSize: "2rem", textAlign: "center" }}>
+          Modify your Tweet here.
+        </div>
         <div
           style={{
             backgroundColor: "#D9D9D9",
@@ -113,16 +126,17 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
           }}
           className={"flex flex-column"}
         >
-      
           <div id="contentEditable">
             <span
               contentEditable={true}
               onInput={(e: any) => {
-                localStorage.setItem("message", e.target.innerText);
+                localStorage.setItem(
+                  "message",
+                  String(e.target.innerText).replace("\\n", "\n")
+                );
               }}
             >
-              {props.altText} at {props.timeStamp} #atlas #blockchain #explorer
-              #hexagon @atlas_xyz
+              {text}
             </span>
           </div>
         </div>
@@ -297,217 +311,214 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
 
   const DetailContent = () => {
     return (
-      <div
-        className="flex w-100 h-100"
-        style={{
-          padding: "5rem 20rem",
-          gap: "10rem",
-          height: "calc(100vh - 68px)",
-          justifyContent: "center",
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
-        <RenderIf isTrue={!props.isMapScreen}>
-          <div
-            onClick={() => {
-              localStorage.removeItem("txnHash");
-              navigate(-1);
-            }}
-            style={{
-              position: "absolute",
-              top: "40px",
-              right: "40px",
-              cursor: "pointer",
-            }}
-          >
-            <svg
-              style={{
-                height: "30px",
-                width: "30px",
-              }}
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="#ffffff"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </div>
-        </RenderIf>
-
+      <>
         <div
-          className="flex-1 w-full flex flex-column align-items-center"
           style={{
-            gap: "5rem",
+            display: "flex",
+            justifyContent: "",
+            flexDirection: "column",
           }}
         >
-          <img
-            src={props.glyphURL}
-            alt=""
-            width={"423px"}
-            height={"423px"}
-          ></img>
-          <div className="flex flex-column">
-            <RenderIf isTrue={!twitterShared.isTweetShared}>
-              <Button
-                width={`${props.altTxnHash && "30rem"}`}
-                color="#fff"
-                size="2rem"
-                borderRadius="3rem"
-                backgroundColor="#FE7D06"
-                padding="0.5rem 3rem"
-                display="flex"
-                hoverBackgroundColor="#FE7D06"
-                onClick={async () => {
-                  if (!twitterShared?.isTweetShared) {
-                    setLoader(false);
-                    if (twitterUser) {
-                      setOpenModal(true);
-                      return;
-                    }
-                    if (props.isMapScreen) {
-                      sessionStorage.setItem("from", "maps");
-                    }
-                    setTwitterInitLoading(true);
-                    const url = await initateTwitterAuth();
-                    setTwitterInitLoading(false);
-                    window.open(url, "_self");
-                    return;
-                  }
+          <div
+            className="flex w-100 h-100"
+            style={{
+              padding: "5rem 20rem",
+              gap: "10rem",
+              height: "calc(100vh - 68px)",
+              justifyContent: "center",
+              alignItems: "start",
+              position: "relative",
+            }}
+          >
+            <RenderIf isTrue={!props.isMapScreen}>
+              <div
+                onClick={() => {
+                  localStorage.removeItem("txnHash");
+                  navigate(-1);
+                }}
+                style={{
+                  position: "absolute",
+                  top: "0px",
+                  right: "80px",
+                  cursor: "pointer",
                 }}
               >
-                <Spinner isLoading={isTwitterInitLoading} />
-                <RenderIf isTrue={!isTwitterInitLoading}>
-                  <div
-                    className="flex align-items-center"
-                    style={{
-                      gap: "1rem",
+                <svg
+                  style={{
+                    height: "30px",
+                    width: "30px",
+                  }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="#ffffff"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+            </RenderIf>
+
+            <div
+              className="flex-1 w-full flex flex-column align-items-center"
+              style={{
+                gap: "5rem",
+              }}
+            >
+              <img
+                src={props.glyphURL}
+                alt=""
+                width={"423px"}
+                height={"423px"}
+              ></img>
+              <div className="flex flex-column">
+                <RenderIf isTrue={!twitterShared.isTweetShared}>
+                  <Button
+                    width={`${props.altTxnHash && "30rem"}`}
+                    color="#fff"
+                    size="2rem"
+                    borderRadius="3rem"
+                    backgroundColor="#FE7D06"
+                    padding="0.5rem 3rem"
+                    display="flex"
+                    hoverBackgroundColor="#FE7D06"
+                    onClick={async () => {
+                      if (!twitterShared?.isTweetShared) {
+                        setLoader(false);
+                        if (twitterUser) {
+                          setOpenModal(true);
+                          return;
+                        }
+                        if (props.isMapScreen) {
+                          sessionStorage.setItem("from", "maps");
+                        }
+                        setTwitterInitLoading(true);
+                        const url = await initateTwitterAuth();
+                        setTwitterInitLoading(false);
+                        window.open(url, "_self");
+                        return;
+                      }
                     }}
                   >
-                    <RenderIf isTrue={!twitterShared?.isTweetShared as boolean}>
-                      <>
-                        <img
-                          src={Icons.twitter}
-                          alt=""
-                          width={30}
-                          height={25}
-                        />
-                        <span>Share on Twitter</span>
-                      </>
+                    <Spinner isLoading={isTwitterInitLoading} />
+                    <RenderIf isTrue={!isTwitterInitLoading}>
+                      <div
+                        className="flex align-items-center"
+                        style={{
+                          gap: "1rem",
+                        }}
+                      >
+                        <RenderIf
+                          isTrue={!twitterShared?.isTweetShared as boolean}
+                        >
+                          <>
+                            <img
+                              src={Icons.twitter}
+                              alt=""
+                              width={30}
+                              height={25}
+                            />
+                            <span>Share on Twitter</span>
+                          </>
+                        </RenderIf>
+                      </div>
                     </RenderIf>
-                  </div>
+                  </Button>
                 </RenderIf>
-              </Button>
-            </RenderIf>
-          </div>
+              </div>
 
-          <div
-            style={{
-              gap: "1rem",
-            }}
-            className="flex w-full flex-row align-items-center"
-          >
-            <RenderIf isTrue={!twitterShared?.isTweetShared}>
-              <Box
-                sx={{
-                  width: "300px",
-                  marginTop: "-10px!important",
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
+              <div
+                style={{
+                  gap: "1rem",
+                }}
+                className="flex w-full flex-row align-items-center"
+              >
+                <RenderIf isTrue={!twitterShared?.isTweetShared}>
+                  <Box
+                    sx={{
+                      width: "300px",
+                      marginTop: "-10px!important",
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img src={Icons.trophy} alt="" />
+                    <span
+                      style={{
+                        fontSize: "1.6rem",
+                        color: "#fff",
+                        marginLeft: "10px",
+                      }}
+                    >
+                      Connect your twitter and win future Airdrops from Earth
+                      Labs!
+                    </span>
+                  </Box>
+                </RenderIf>
+              </div>
+            </div>
+            <div className="flex-1 w-full">
+              <div
+                className="flex w-100 flex-column"
+                style={{
+                  listStyle: "none",
+                  padding: "0px",
+                  gap: "3rem",
                 }}
               >
-                <img src={Icons.trophy} alt="" />
-                <span
-                  style={{
-                    fontSize: "1.6rem",
-                    color: "#fff",
-                    marginLeft: "10px",
-                  }}
-                >
-                  Connect your twitter and win future Airdrops from Earth Labs!
-                </span>
-              </Box>
-            </RenderIf>
-          </div>
-        </div>
-        <div className="flex-1 w-full">
-          <div
-            className="flex w-100 flex-column"
-            style={{
-              listStyle: "none",
-              padding: "0px",
-              gap: "3rem",
-            }}
-          >
-            <InfoField
-              text={props.altText}
-              label="For Humans"
-              hideTransparency={!!props.altTxnHash}
-            />
-            <InfoField
-              text={props.txnHash}
-              label="Transaction Hash"
-              hideTransparency={!!props.altTxnHash}
-            />
-            <InfoField
-              text={`${props.cValue}`}
-              label="Transacted Value (ETH)"
-              hideTransparency={!!props.altTxnHash}
-            />
-            <InfoField
-              text="GlyphDetail"
-              label="Activity Details"
-              content={
-                <ActivityDetailsContent
-                  from={props.sAddress}
-                  to={props.tAddress}
+                <InfoField
+                  text={props.altText}
+                  label="For Humans"
+                  hideTransparency={!!props.altTxnHash}
                 />
-              }
-              hideTransparency={!!props.altTxnHash}
-            />
-            <InfoField
-              text={props.timeStamp}
-              label="Date & Time"
-              hideTransparency={!!props.altTxnHash}
-            />
-            <InfoField
-              text={`${props.gasPaidGwei}`}
-              label="Gas Price (ETH)"
-              hideTransparency={!!props.gasPaidUSD}
-            />
+                <InfoField
+                  text={props.txnHash}
+                  label="Transaction Hash"
+                  hideTransparency={!!props.altTxnHash}
+                />
+                <InfoField
+                  text={`${props.cValue}`}
+                  label="Transacted Value (ETH)"
+                  hideTransparency={!!props.altTxnHash}
+                />
+                <InfoField
+                  text="GlyphDetail"
+                  label="Activity Details"
+                  content={
+                    <ActivityDetailsContent
+                      from={props.sAddress}
+                      to={props.tAddress}
+                    />
+                  }
+                  hideTransparency={!!props.altTxnHash}
+                />
+                <InfoField
+                  text={new Date(props.timeStamp).toLocaleDateString()}
+                  label="Date & Time"
+                  hideTransparency={!!props.altTxnHash}
+                />
+                <InfoField
+                  text={`${props.gasPaidGwei}`}
+                  label="Gas Price (ETH)"
+                  hideTransparency={!!props.gasPaidUSD}
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    );
-  };
-
-  const AlertTwitterContent = () => {
-    return (
-      <RenderIf isTrue={isTwitterConnected}>
-        <div
-          style={{ width: "100%" }}
-          className="flex justify-content-center align-items-center "
-        >
-          <Alert
-            text={<span>You have successfully connected to twitter</span>}
-          />
-        </div>
-      </RenderIf>
+      </>
     );
   };
 
   return (
     <>
       <AlertContent />
-      <AlertTwitterContent />
       <DetailContent />
       <BasicModal
         width={"500px"}

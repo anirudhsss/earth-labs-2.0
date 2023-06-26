@@ -78,13 +78,22 @@ const GlyphDetailPage = ({
           }}
         />
       )}
-      <TwitterConnectAlert isShow={isTwitterConnectedAlert} />
       <RenderIf isTrue={!isLoader}>
-        <GlyphDetail
-          {...(glphyDetails as IHexesDetail)}
-          isMapScreen={isMapScreen}
-          altTxnHash={altTxnHash}
-        />
+        <>
+          <div
+            style={{
+              width: "100%",
+              height: "62px",
+            }}
+          >
+            <TwitterConnectAlert isShow={isTwitterConnectedAlert} />
+          </div>
+          <GlyphDetail
+            {...(glphyDetails as IHexesDetail)}
+            isMapScreen={isMapScreen}
+            altTxnHash={altTxnHash}
+          />
+        </>
       </RenderIf>
       <RenderIf isTrue={isLoader}>
         <div

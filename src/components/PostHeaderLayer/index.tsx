@@ -502,7 +502,7 @@ const PostHeaderLayer = ({
                   padding="0.4rem 0.2rem"
                   width="75px"
                 >
-                  <Typography text="Activities" fontSize="1.3rem" />
+                  <Typography text="Activity" fontSize="1.3rem" />
                 </Button>
 
                 <Button
