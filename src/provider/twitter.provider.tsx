@@ -15,7 +15,8 @@ const TwitterProvider: FC<ITwitterProvider> = ({ children }) => {
 
   const updateTwitterUser = (user: ITwitterUser) => {
     if (user) {
-      if (openSnackBar) openSnackBar("Twitter Succesfully Connected", 5000);
+      if (openSnackBar)
+        openSnackBar("You have successfully connected to Twitter", 5000);
     }
     setTwitterUser(user);
   };
