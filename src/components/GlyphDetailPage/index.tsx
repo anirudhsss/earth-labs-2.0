@@ -89,6 +89,7 @@ const GlyphDetailPage = ({
           >
             <TwitterConnectAlert isShow={isTwitterConnectedAlert} />
           </div>
+
           <GlyphDetail
             {...(glphyDetails as IHexesDetail)}
             isMapScreen={isMapScreen}

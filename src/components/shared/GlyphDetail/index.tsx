@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { Icons } from "constant";
+import SnackbarContext from "context/snackbar.context";
 import TwitterContext from "context/twitter.context";
 import { IHexesDetail } from "hooks/useGetGlyphTxn";
 import useTwitterFlow, { ITwitterUser } from "hooks/useTwitterFlow";
@@ -40,7 +41,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
   const [isTwitterInitLoading, setTwitterInitLoading] =
     useState<boolean>(false);
   const navigate = useNavigate();
-
+  const {openSnackBar} = useContext(SnackbarContext);
   const processTwitterAuthentication = useCallback(async () => {
     const code = localStorage.getItem("code");
 
@@ -278,6 +279,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
 
   const AlertContent = () => {
     const [timerTime, setTimerTime] = useState<string>();
+  
 
     useEffect(() => {
       if (twitterShared.isTweetShared && !props.isMapScreen) {
@@ -353,7 +355,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 }}
                 style={{
                   position: "absolute",
-                  top: "0px",
+                  top: "30px",
                   right: "80px",
                   cursor: "pointer",
                 }}
@@ -391,7 +393,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                 height={"423px"}
               />
 
-              <div className="flex flex-column">
+              <div className="flex flex-column" >
                 <RenderIf isTrue={!twitterShared.isTweetShared}>
                   <Button
                     width={`${props.altTxnHash && "30rem"}`}
@@ -403,21 +405,7 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                     display="flex"
                     hoverBackgroundColor="#FE7D06"
                     onClick={async () => {
-                      if (!twitterShared?.isTweetShared) {
-                        setLoader(false);
-                        if (twitterUser) {
-                          setOpenModal(true);
-                          return;
-                        }
-                        if (props.isMapScreen) {
-                          sessionStorage.setItem("from", "maps");
-                        }
-                        setTwitterInitLoading(true);
-                        const url = await initateTwitterAuth();
-                        setTwitterInitLoading(false);
-                        window.open(url, "_self");
-                        return;
-                      }
+
                     }}
                   >
                     <Spinner isLoading={isTwitterInitLoading} />
