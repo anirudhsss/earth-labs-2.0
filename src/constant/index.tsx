@@ -30,4 +30,5 @@ export const Icons = {
   ethereumLogo: "/./assets/images/ethereum_logo.svg",
   darkAtlas: "/./assets/images/dark_atlas.svg",
   redDownArrow: "/./assets/images/redDownArrow.svg",
+  orangeHexcon: '/./assets/images/orange_hexagon.svg'
 };

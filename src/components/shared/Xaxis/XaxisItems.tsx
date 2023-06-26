@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { Icons } from "constant";
 import { ArrOfYMDProps } from "interface/UserHomepage";
 import moment from "moment";
 import { useCallback } from "react";
@@ -57,7 +58,6 @@ export const XaxisItems = ({
   currentFrame,
   setXAxisItem,
 }: XaxisItemsProps) => {
-
   const getText = (): string => {
     switch (currentFrame) {
       case "YEAR":
@@ -162,11 +162,11 @@ export const XaxisItems = ({
             &nbsp;&nbsp;
             {month === hoverElementId || month === clickedElement ? (
               <img
-                src="./assets/images/orange_hexagon.svg"
+                src={Icons.orangeHexagon}
                 alt=""
                 style={{
-                  width: "15px",
-                  marginBottom: "-6px",
+                  width: "12px",
+                  marginBottom: "-4px",
                 }}
               />
             ) : (
