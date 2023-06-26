@@ -405,7 +405,21 @@ const GlyphDetail: FC<IHexesDetail> = (props) => {
                     display="flex"
                     hoverBackgroundColor="#FE7D06"
                     onClick={async () => {
-
+                      if (!twitterShared?.isTweetShared) {
+                        setLoader(false);
+                        if (twitterUser) {
+                          setOpenModal(true);
+                          return;
+                        }
+                        if (props.isMapScreen) {
+                          sessionStorage.setItem("from", "maps");
+                        }
+                        setTwitterInitLoading(true);
+                        const url = await initateTwitterAuth();
+                        setTwitterInitLoading(false);
+                        window.open(url, "_self");
+                        return;
+                      }
                     }}
                   >
                     <Spinner isLoading={isTwitterInitLoading} />
