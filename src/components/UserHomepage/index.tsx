@@ -1,7 +1,12 @@
 import { Box } from "@mui/material";
-import { useCallback, useEffect, useState, MouseEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  MouseEvent,
+  useContext,
+} from "react";
 import styles from "./styles.module.css";
-
 import { Container } from "components/shared/Container";
 import moment from "moment";
 import { Hexgrid } from "../shared/Hexgrid";
@@ -17,7 +22,7 @@ import {
   BackdropDuringApiLoading,
   CalcRange,
 } from "components/utils";
-import { useAccount } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
 import useEthToUsdcConversion from "../../hooks/useEthToUsdcConversion";
 import { ArrOfYMDProps, VerticalSelectionProps } from "interface/UserHomepage";
 import { HorizontalSelectionProps } from "interface/Utils";
@@ -26,6 +31,7 @@ import { useConnectModal } from "@rainbow-me/rainbowkit";
 import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import useTwitterFlow from "hooks/useTwitterFlow";
+import SnackbarContext from "context/snackbar.context";
 
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
@@ -86,7 +92,8 @@ const UserHomepage = () => {
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
 
   const { data, data2, apiLoading } = AxiosFetch(walletAddress);
-
+  console.log(data);
+  console.log(data2);
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
 
   const [xAxisItem, setXAxisItem] = useState<{
@@ -111,8 +118,17 @@ const UserHomepage = () => {
     useTwitterFlow();
 
   const [isTwitterConnectedAlert, setTwitterConnectedAlert] = useState(false);
-
+  const { openSnackBar } = useContext(SnackbarContext);
   // Get all the years content for the x axis
+
+  useEffect(() => {
+    console.log(data2, "data2");
+    if (data2 && data2.length === 0) {
+      if (openSnackBar) {
+        openSnackBar("Please enter a valid txn or ens name", 5000);
+      }
+    }
+  }, [data2]);
 
   useEffect(() => {
     if (isTwitterConnectedFlagFromLandingPage()) {
@@ -515,7 +531,6 @@ const UserHomepage = () => {
 
   const calculateArrOfMonthsForXAxis = useCallback(
     (year: string) => {
-
       if (arrIndexesOfClickedYears?.length > 0) {
         let arrOfDuration,
           freqOfDuration,
@@ -700,7 +715,11 @@ const UserHomepage = () => {
       lengthsArr.push(testFunc2(d3, higherRange));
       let arr3: any[] = [];
       arr3 = matchedMonths;
-      console.log(arrIndexesOfClickedDays,arrIndexesOfClickedMonths,arrIndexesOfClickedYears);
+      console.log(
+        arrIndexesOfClickedDays,
+        arrIndexesOfClickedMonths,
+        arrIndexesOfClickedYears
+      );
       const arr = arr3?.filter((item: any) => {
         // console.log('item', item);
         let a = 1;

@@ -8,7 +8,6 @@ import Alert from "components/shared/Alert/Alert";
 import RenderIf from "components/shared/RenderIf";
 import { textAlign } from "@mui/system";
 
-
 interface IServiceProvider {
   children: JSX.Element;
 }
@@ -36,19 +35,6 @@ const SnackBarProvider: FC<IServiceProvider> = ({ children }) => {
     }, autoHideDuration);
   };
 
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
-
   return (
     <SnackbarContext.Provider value={{ openSnackBar: handleOpen }}>
       <>
@@ -63,6 +49,7 @@ const SnackBarProvider: FC<IServiceProvider> = ({ children }) => {
               position: "fixed",
               textAlign: "center",
               whiteSpace: "nowrap",
+              zIndex:'9999'
             }}
           >
             <Alert
