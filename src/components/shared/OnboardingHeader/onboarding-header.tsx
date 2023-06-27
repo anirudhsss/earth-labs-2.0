@@ -238,8 +238,8 @@ const OnboardingHeader: FC<IOnboardingHeader> = ({
                 style={{
                   cursor: "pointer",
                 }}
-                width={40}
-                height={40}
+                width={35}
+                height={35}
                 src={Icons.glphyLogo}
                 alt=""
               />
