@@ -17,8 +17,14 @@ import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { useAccount } from "wagmi";
 import styles from "./styles.module.css";
-
+import ReactGA from 'react-ga';
 export const LandingPage = () => {
+
+  useEffect(() => {
+    // Track page view for the home page
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [searchTxt, setSearchTxt] = useLocalStorageState<string>("txnHash");

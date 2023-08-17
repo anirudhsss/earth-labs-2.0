@@ -6,10 +6,18 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import "./index.css";
 import router from "./Routes";
+import ReactGA from 'react-ga';
+
+
+ReactGA.initialize('G-MC3TET664D');
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+
+ReactGA.pageview(window.location.pathname + window.location.search);
+
 
 root.render(
   <Box sx={{ display: { xs: "none", md: "block" } }}>

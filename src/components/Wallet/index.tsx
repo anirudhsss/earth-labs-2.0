@@ -10,7 +10,7 @@ import { RhsNav } from "components/shared/RhsNav";
 import { AxiosFetch, BackdropDuringApiLoading } from "components/utils";
 import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
-
+import ReactGA from 'react-ga';
 export interface WalletProps {
   openMenu1?: any;
   currency?: any;
@@ -91,6 +91,11 @@ const Wallet = ({
   const onHelpSectionClose = () => {
     setHelpIconClicked(false);
   };
+
+  useEffect(() => {
+    // Track page view for the home page
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
 
   const onDisplayAllTimeTxnInDescOrder = useCallback(() => {
     const sortedTxnInDescOrder = (data1 || [])?.sort((a: any, b: any) => {

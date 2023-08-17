@@ -32,7 +32,7 @@ import useSearchTxnAddress from "hooks/useSearchTxnAddress";
 import TwitterConnectAlert from "components/shared/TwitterConnectAlert";
 import useTwitterFlow from "hooks/useTwitterFlow";
 import SnackbarContext from "context/snackbar.context";
-
+import ReactGA from 'react-ga';
 const UserHomepage = () => {
   const [currName, setCurrName] = useState("ETH");
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -92,8 +92,7 @@ const UserHomepage = () => {
   const [helpIconClicked, setHelpIconClicked] = useState<Boolean>(false);
 
   const { data, data2, apiLoading } = AxiosFetch(walletAddress);
-  console.log(data);
-  console.log(data2);
+
   const [showDays, setShowDays] = useState<boolean | undefined>(false);
 
   const [xAxisItem, setXAxisItem] = useState<{
@@ -121,9 +120,14 @@ const UserHomepage = () => {
   const { openSnackBar } = useContext(SnackbarContext);
   // Get all the years content for the x axis
 
+
   useEffect(() => {
-    console.log(data2, "data2");
-    if (data2 && data2.length === 0) {
+    // Track page view for the home page
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
+  useEffect(() => {
+    if (data && Object.keys(data).length === 0) {
       if (openSnackBar) {
         openSnackBar("Please enter a valid txn or ens name", 5000);
       }

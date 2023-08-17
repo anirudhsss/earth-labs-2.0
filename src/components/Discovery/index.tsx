@@ -6,8 +6,9 @@ import { Header } from "components/shared/Header";
 import { RhsNav } from "components/shared/RhsNav";
 import { Typography } from "components/shared/Typography";
 import { AxiosFetch } from "components/utils";
+import { useEffect } from "react";
 import styles from "./styles.module.css";
-
+import ReactGA from 'react-ga';
 export interface DiscoveryProps {
   openMenu1?: any;
   currency?: any;
@@ -31,6 +32,14 @@ const Discovery = ({
   onChosingCurrency,
   currName,
 }: DiscoveryProps) => {
+
+
+  useEffect(() => {
+    // Track page view for the home page
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
+  
   const { apiLoading } = AxiosFetch();
 
   return (

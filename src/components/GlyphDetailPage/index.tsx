@@ -14,7 +14,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 import { useAccount } from "wagmi";
-
+import ReactGA from 'react-ga';
 export interface GlyphDetailPageProps {
   altTxnHash?: string;
   isMapScreen: boolean;
@@ -24,11 +24,18 @@ const GlyphDetailPage = ({
   altTxnHash,
   isMapScreen = false,
 }: GlyphDetailPageProps) => {
+
+  useEffect(() => {
+    // Track page view for the home page
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   const url = window.location.pathname;
   const [txnHash, setTxnHash] = useLocalStorageState("txnHash", {
     defaultValue: altTxnHash ? altTxnHash : url.split("/txn/")[1],
   });
   const { glphyDetails, isLoader } = useGetGlyphDetails(txnHash as string);
+
   const navigate = useNavigate();
   const { isConnected, address } = useAccount();
   const location = useLocation();
@@ -36,7 +43,6 @@ const GlyphDetailPage = ({
     useTwitterFlow();
   const { openSnackBar } = useContext(SnackbarContext);
   const { twitterUser } = useContext(TwitterContext);
-
   useEffect(() => {
     if (isConnected && !altTxnHash) {
       navigate(`/maps/${address}`);
@@ -45,7 +51,8 @@ const GlyphDetailPage = ({
 
   useEffect(() => {
     if (isTwitterConnectedFlagFromLandingPage() && twitterUser) {
-      if (openSnackBar) openSnackBar("Twitter is successfuly connected !", 5000);
+      if (openSnackBar)
+        openSnackBar("Twitter is successfuly connected !", 5000);
       setTimeout(() => {
         removeTwitterConnectFlag();
       }, 5000);
