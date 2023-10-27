@@ -5332,10 +5332,10 @@ axios@^0.21.0:
   dependencies:
     follow-redirects "^1.14.0"
 
-axios@^1.2.6:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.4.0.tgz#38a7bf1224cd308de271146038b551d725f0be1f"
-  integrity sha512-S4XCWMEmzvo64T9GfvQDOXgYRDJ/wsSZc7Jvdgx5u1sd0JwsuPLqb3SYmusag+edF6ziyMensPVqLTSc1PiSEA==
+axios@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.0.tgz#f1e5292f26b2fd5c2e66876adc5b06cdbd7d2102"
+  integrity sha512-EZ1DYihju9pwVB+jg67ogm+Tmqc6JmhamRN6I4Zt8DfZu5lbcQGw3ozH9lFejSJgs/ibaef3A9PMXPLeefFGJg==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -12200,10 +12200,9 @@ react-focus-lock@2.5.2:
     use-callback-ref "^1.2.5"
     use-sidecar "^1.0.5"
 
-react-hexgrid@^2.0.1:
+"react-hexgrid@https://dotearth.blob.core.windows.net/dotearthdemo/react-hexgrid-2.0.1.tgz":
   version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-hexgrid/-/react-hexgrid-2.0.1.tgz#295abbca4575338304e602f94161ac2aadeb7472"
-  integrity sha512-5yBYUAhagw3SNeqgyzcRblxtQQHZFabCaNHufX1q6eXwaGHQx2wEaX+gNgBjB4RpC6VIMOBCjGE7AUK43k2rkg==
+  resolved "https://dotearth.blob.core.windows.net/dotearthdemo/react-hexgrid-2.0.1.tgz#927bc13d9461dceef3dbf3637436f6f188dcb7fe"
   dependencies:
     classnames "^2.3.1"
   optionalDependencies:
@@ -12213,6 +12212,11 @@ react-icons@^4.3.1:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.8.0.tgz#621e900caa23b912f737e41be57f27f6b2bff445"
   integrity sha512-N6+kOLcihDiAnj5Czu637waJqSnwlMNROzVZMhfX68V/9bu9qHaMIJC4UdozWoOk57gahFCNHwVvWzm0MTzRjg==
+
+react-icons@^4.9.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.11.0.tgz#4b0e31c9bfc919608095cc429c4f1846f4d66c65"
+  integrity sha512-V+4khzYcE5EBk/BvcuYRq6V/osf11ODUM2J8hg2FDSswRrGvqiYUYPRy4OdrWaQOBj4NcpJfmHZLNaD+VH0TyA==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
