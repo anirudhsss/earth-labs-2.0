@@ -6,7 +6,7 @@
     "@3rdweb/hooks": "^1.9.2",
     "@3rdweb/react": "^1.9.3",
     "@3rdweb/sdk": "^1.42.1",
-    "@coinbase/wallet-sdk": "^3.6.3",
+    "@coinbase/wallet-sdk": "^3.9.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@ethersproject/abstract-signer": "^5.7.0",
